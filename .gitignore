@@ -1,0 +1,24 @@
+# Data files - don't push to repo
+*.csv
+*.html
+*.json
+*.png
+
+# git repo
+cayleypy/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE/Editor
+.vscode/
+
+# Virtual environment
+.venv/
