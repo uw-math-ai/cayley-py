@@ -3,6 +3,7 @@
 *.html
 *.json
 *.png
+*.pdf
 
 # git repo
 cayleypy/
