@@ -1,0 +1,11 @@
+numpy
+torch
+scipy
+scikit-learn
+pandas
+plotly
+tqdm
+numba
+h5py
+kagglehub
+pytest
