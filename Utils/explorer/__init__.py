@@ -20,6 +20,7 @@ from .config import (
     WRAPPED_K_CYCLES,
     CONSECUTIVE_K_CYCLES_INV,
     WRAPPED_K_CYCLES_INV,
+    CUBIC_PANCAKE,
     GENERATOR_REGISTRY,
 )
 from .coset_groups import (
@@ -42,6 +43,7 @@ __all__ = [
     "WRAPPED_K_CYCLES",
     "CONSECUTIVE_K_CYCLES_INV",
     "WRAPPED_K_CYCLES_INV",
+    "CUBIC_PANCAKE",
     "GENERATOR_REGISTRY",
     "COSET_GROUPS",
     "CosetFunc",

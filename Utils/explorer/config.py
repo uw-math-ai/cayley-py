@@ -91,6 +91,10 @@ def _wrapped_k_cycles_factory(n: int, k: int = 2) -> Any:
     return PermutationGroups.wrapped_k_cycles(n, k)
 
 
+def _cubic_pancake_factory(n: int, subset: int = 1) -> Any:
+    return PermutationGroups.cubic_pancake(n, subset)
+
+
 # =========================================================================
 # Built-in generator configs
 # =========================================================================
@@ -158,6 +162,16 @@ WRAPPED_K_CYCLES_INV = GeneratorConfig(
     description="Wrapped consecutive k-cycles generator (inverse closed).",
 )
 
+CUBIC_PANCAKE = GeneratorConfig(
+    name="cubic_pancake",
+    factory=_cubic_pancake_factory,
+    params=[
+        ParamSpec(name="subset", default_min=1, default_max=7),
+    ],
+    is_valid=lambda n, p: n >= 2 and 1 <= p["subset"] <= 7,
+    description="Cubic pancake: S_n with exactly 3 prefix reversal generators. subset (1-7) selects which three.",
+)
+
 # Registry for lookup by name
 GENERATOR_REGISTRY: Dict[str, GeneratorConfig] = {
     "koltsov3_perm1": KOLTSOV3_PERM1,
@@ -166,4 +180,5 @@ GENERATOR_REGISTRY: Dict[str, GeneratorConfig] = {
     "wrapped_k_cycles": WRAPPED_K_CYCLES,
     "consecutive_k_cycles_inv": CONSECUTIVE_K_CYCLES_INV,
     "wrapped_k_cycles_inv": WRAPPED_K_CYCLES_INV,
+    "cubic_pancake": CUBIC_PANCAKE,
 }
