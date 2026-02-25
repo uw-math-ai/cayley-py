@@ -96,6 +96,27 @@ def _cubic_pancake_factory(n: int, subset: int = 1) -> Any:
 
 
 # =========================================================================
+# Validation functions (must be named module-level functions, not lambdas,
+# so that multiprocessing can pickle them for child processes)
+# =========================================================================
+
+def _koltsov3_perm1_valid(n: int, p: Dict[str, int]) -> bool:
+    return p["k"] >= 0 and p["d"] >= 1 and p["k"] + p["d"] < n
+
+
+def _koltsov3_perm2_valid(n: int, p: Dict[str, int]) -> bool:
+    return p["k"] >= 0 and p["k"] + 3 < n
+
+
+def _k_cycles_valid(n: int, p: Dict[str, int]) -> bool:
+    return p["k"] >= 2 and p["k"] < n
+
+
+def _cubic_pancake_valid(n: int, p: Dict[str, int]) -> bool:
+    return n >= 2 and 1 <= p["subset"] <= 7
+
+
+# =========================================================================
 # Built-in generator configs
 # =========================================================================
 
@@ -106,7 +127,7 @@ KOLTSOV3_PERM1 = GeneratorConfig(
         ParamSpec(name="k", default_min=0),
         ParamSpec(name="d", default_min=1),
     ],
-    is_valid=lambda n, p: p["k"] >= 0 and p["d"] >= 1 and p["k"] + p["d"] < n,
+    is_valid=_koltsov3_perm1_valid,
     description="Koltsov3 perm_type=1: S generator is transposition (k, k+d).",
 )
 
@@ -116,7 +137,7 @@ KOLTSOV3_PERM2 = GeneratorConfig(
     params=[
         ParamSpec(name="k", default_min=0, default_max=None),
     ],
-    is_valid=lambda n, p: p["k"] >= 0 and p["k"] + 3 < n,
+    is_valid=_koltsov3_perm2_valid,
     description="Koltsov3 perm_type=2: S generator is (k,k+3)(k+1,k+2).",
 )
 
@@ -126,7 +147,7 @@ CONSECUTIVE_K_CYCLES = GeneratorConfig(
     params=[
         ParamSpec(name="k", default_min=2, default_max=None),
     ],
-    is_valid=lambda n, p: p["k"] >= 2 and p["k"] < n,
+    is_valid=_k_cycles_valid,
     description="Consecutive k-cycles generator.",
 )
 
@@ -136,7 +157,7 @@ WRAPPED_K_CYCLES = GeneratorConfig(
     params=[
         ParamSpec(name="k", default_min=2, default_max=None),
     ],
-    is_valid=lambda n, p: p["k"] >= 2 and p["k"] < n,
+    is_valid=_k_cycles_valid,
     description="Wrapped consecutive k-cycles generator.",
 )
 
@@ -146,7 +167,7 @@ CONSECUTIVE_K_CYCLES_INV = GeneratorConfig(
     params=[
         ParamSpec(name="k", default_min=2, default_max=None),
     ],
-    is_valid=lambda n, p: p["k"] >= 2 and p["k"] < n,
+    is_valid=_k_cycles_valid,
     make_inverse_closed=True,
     description="Consecutive k-cycles generator (inverse closed).",
 )
@@ -157,7 +178,7 @@ WRAPPED_K_CYCLES_INV = GeneratorConfig(
     params=[
         ParamSpec(name="k", default_min=2, default_max=None),
     ],
-    is_valid=lambda n, p: p["k"] >= 2 and p["k"] < n,
+    is_valid=_k_cycles_valid,
     make_inverse_closed=True,
     description="Wrapped consecutive k-cycles generator (inverse closed).",
 )
@@ -168,7 +189,7 @@ CUBIC_PANCAKE = GeneratorConfig(
     params=[
         ParamSpec(name="subset", default_min=1, default_max=7),
     ],
-    is_valid=lambda n, p: n >= 2 and 1 <= p["subset"] <= 7,
+    is_valid=_cubic_pancake_valid,
     description="Cubic pancake: S_n with exactly 3 prefix reversal generators. subset (1-7) selects which three.",
 )
 

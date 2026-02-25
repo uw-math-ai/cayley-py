@@ -110,15 +110,20 @@ class Explorer:
         n: int,
         params: Dict[str, int],
         coset_name: str,
-        coset_func: CosetFunc,
+        group_name: str,
     ) -> Optional[ExperimentResult]:
-        """Run a single BFS experiment."""
+        """Run a single BFS experiment.
+
+        Accepts group_name (str) instead of coset_func so that this method
+        is picklable for use with ProcessPoolExecutor.
+        """
         try:
             defn = self.config.factory(n, **params)
 
             if self.config.make_inverse_closed:
                 defn = defn.make_inverse_closed()
 
+            coset_func = COSET_GROUPS[group_name][coset_name]
             central = coset_func(n)
             if coset_name != "FullGraph":
                 if central is None or len(np.unique(central)) <= 1:
@@ -254,7 +259,7 @@ class Explorer:
         all_results: List[ExperimentResult] = []
         unsaved: List[ExperimentResult] = []
 
-        for coset_name, coset_func in cosets.items():
+        for coset_name in cosets:
             skipped = 0
 
             combos = list(self._iterate_params(min_n, max_n, runtime_overrides))
@@ -269,7 +274,7 @@ class Explorer:
                     skipped += 1
                     continue
 
-                result = self.run_single_experiment(n, params, coset_name, coset_func)
+                result = self.run_single_experiment(n, params, coset_name, group_name)
                 if result is not None:
                     all_results.append(result)
                     unsaved.append(result)
@@ -342,13 +347,14 @@ class Explorer:
             if key.endswith("_range"):
                 runtime_overrides[key[:-6]] = val
 
-        # Build flat list of all work items: (n, params, coset_name, coset_func)
+        # Build flat list of all work items: (n, params, coset_name, group_name)
+        # group_name is a plain string (picklable); the worker looks up coset_func itself.
         work_items = []
-        for coset_name, coset_func in cosets.items():
+        for coset_name in cosets:
             for n, params in self._iterate_params(min_n, max_n, runtime_overrides):
                 cache_key = self._make_cache_key(coset_name, params, n)
                 if cache_key not in computed:
-                    work_items.append((n, params, coset_name, coset_func))
+                    work_items.append((n, params, coset_name, group_name))
 
         # Sort by n descending so expensive items start first
         work_items.sort(key=lambda x: x[0], reverse=True)
@@ -360,8 +366,8 @@ class Explorer:
 
         with ProcessPoolExecutor(max_workers=max_workers) as pool:
             futures = {
-                pool.submit(self.run_single_experiment, n, params, coset_name, coset_func): i
-                for i, (n, params, coset_name, coset_func) in enumerate(work_items)
+                pool.submit(self.run_single_experiment, n, params, coset_name, grp_name): i
+                for i, (n, params, coset_name, grp_name) in enumerate(work_items)
             }
             pbar = tqdm(total=len(futures), desc="Parallel BFS", leave=True)
 
