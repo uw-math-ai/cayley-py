@@ -379,7 +379,8 @@ class Explorer:
         if num_gpus > 0:
             print(f"Dispatching {len(work_items)} experiments across {max_workers} workers "
                   f"({num_gpus} GPU{'s' if num_gpus > 1 else ''}, round-robin assigned)")
-            gpu_queue: multiprocessing.Queue = multiprocessing.Queue()
+            _spawn_ctx = multiprocessing.get_context("spawn")
+            gpu_queue: multiprocessing.Queue = _spawn_ctx.Queue()
             for i in range(max_workers):
                 gpu_queue.put(i % num_gpus)
             pool_kwargs = dict(
