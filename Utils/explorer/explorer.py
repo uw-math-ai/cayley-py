@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import multiprocessing
 import os
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from dataclasses import dataclass
@@ -364,7 +365,10 @@ class Explorer:
         all_results: List[ExperimentResult] = []
         unsaved: List[ExperimentResult] = []
 
-        with ProcessPoolExecutor(max_workers=max_workers) as pool:
+        with ProcessPoolExecutor(
+            max_workers=max_workers,
+            mp_context=multiprocessing.get_context("spawn"),
+        ) as pool:
             futures = {
                 pool.submit(self.run_single_experiment, n, params, coset_name, grp_name): i
                 for i, (n, params, coset_name, grp_name) in enumerate(work_items)
