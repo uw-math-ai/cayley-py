@@ -10,6 +10,7 @@ from typing import Dict, List, Optional, Tuple, Union
 
 import numpy as np
 import pandas as pd
+import torch
 from tqdm.auto import tqdm
 
 from cayleypy import CayleyGraph
@@ -18,6 +19,20 @@ from .config import GeneratorConfig
 from .coset_groups import COSET_GROUPS, CosetFunc
 from .storage import get_computed_combinations, load_results, save_results
 from .plotting import plot_group_results
+
+
+def _init_gpu_worker(gpu_queue: "multiprocessing.Queue") -> None:
+    """Assign each spawned worker process a dedicated GPU.
+
+    Called once per worker at startup. Sets CUDA_VISIBLE_DEVICES before any
+    CUDA initialization so that device="auto" in CayleyGraph sees only the
+    assigned GPU. Workers with index >= num_gpus share GPUs round-robin.
+    """
+    gpu_id = gpu_queue.get()
+    if gpu_id >= 0:
+        os.environ["CUDA_VISIBLE_DEVICES"] = str(gpu_id)
+    else:
+        os.environ["CUDA_VISIBLE_DEVICES"] = ""
 
 
 @dataclass
@@ -360,15 +375,30 @@ class Explorer:
         # Sort by n descending so expensive items start first
         work_items.sort(key=lambda x: x[0], reverse=True)
 
-        print(f"Dispatching {len(work_items)} experiments across {max_workers} workers")
+        num_gpus = torch.cuda.device_count() if torch.cuda.is_available() else 0
+        if num_gpus > 0:
+            print(f"Dispatching {len(work_items)} experiments across {max_workers} workers "
+                  f"({num_gpus} GPU{'s' if num_gpus > 1 else ''}, round-robin assigned)")
+            gpu_queue: multiprocessing.Queue = multiprocessing.Queue()
+            for i in range(max_workers):
+                gpu_queue.put(i % num_gpus)
+            pool_kwargs = dict(
+                max_workers=max_workers,
+                mp_context=multiprocessing.get_context("spawn"),
+                initializer=_init_gpu_worker,
+                initargs=(gpu_queue,),
+            )
+        else:
+            print(f"Dispatching {len(work_items)} experiments across {max_workers} workers (CPU)")
+            pool_kwargs = dict(
+                max_workers=max_workers,
+                mp_context=multiprocessing.get_context("spawn"),
+            )
 
         all_results: List[ExperimentResult] = []
         unsaved: List[ExperimentResult] = []
 
-        with ProcessPoolExecutor(
-            max_workers=max_workers,
-            mp_context=multiprocessing.get_context("spawn"),
-        ) as pool:
+        with ProcessPoolExecutor(**pool_kwargs) as pool:
             futures = {
                 pool.submit(self.run_single_experiment, n, params, coset_name, grp_name): i
                 for i, (n, params, coset_name, grp_name) in enumerate(work_items)
