@@ -148,6 +148,7 @@ class Explorer:
 
             graph = CayleyGraph(defn)
             result = graph.bfs(return_all_edges=False, return_all_hashes=False)
+            graph.free_memory()
 
             return ExperimentResult(
                 n=n,
