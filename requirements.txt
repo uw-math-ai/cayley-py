@@ -12,3 +12,4 @@ pytest
 cayleypy @ git+https://github.com/cayleypy/cayleypy 
 ipywidgets
 nbstripout
+matplotlib
