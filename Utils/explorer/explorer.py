@@ -72,6 +72,7 @@ class Explorer:
         min_n: int = 4,
         max_n: int = 30,
         param_overrides: Optional[Dict[str, Tuple[int, int]]] = None,
+        graph_kwargs: Optional[Dict[str, object]] = None,
     ):
         """
         Args:
@@ -81,12 +82,14 @@ class Explorer:
             max_n: Default maximum n value.
             param_overrides: Dict mapping param names to (min, max) tuples,
                 overriding the defaults in config. E.g. {"d": (1, 5)}.
+            graph_kwargs: Optional kwargs passed through to CayleyGraph.
         """
         self.config = config
         self.output_dir = output_dir
         self.min_n = min_n
         self.max_n = max_n
         self.param_overrides = param_overrides or {}
+        self.graph_kwargs = graph_kwargs or {}
         self._ensure_output_dir()
 
     def _ensure_output_dir(self) -> None:
@@ -146,7 +149,7 @@ class Explorer:
                     return None
                 defn = defn.with_central_state(central)
 
-            graph = CayleyGraph(defn)
+            graph = CayleyGraph(defn, **self.graph_kwargs)
             result = graph.bfs(return_all_edges=False, return_all_hashes=False)
             graph.free_memory()
 
@@ -473,6 +476,19 @@ class Explorer:
             **kwargs: Additional arguments passed to run_group/run_group_parallel.
         """
         if parallel:
+            num_gpus = self.graph_kwargs.get("num_gpus")
+            specific_devices = self.graph_kwargs.get("specific_devices")
+            if (
+                (isinstance(num_gpus, int) and num_gpus > 1)
+                or specific_devices is not None
+            ):
+                raise ValueError(
+                    "Explorer parallel=True uses one GPU per worker. "
+                    "Use parallel=False when requesting CayleyPy multi-GPU "
+                    "execution via graph_kwargs."
+                )
+
+        if parallel:
             self.run_group_parallel(group_name, max_workers=max_workers, **kwargs)
         else:
             self.run_group(group_name, **kwargs)
@@ -488,8 +504,11 @@ class Explorer:
             overrides = ", " + ", ".join(
                 f"{k}={v}" for k, v in self.param_overrides.items()
             )
+        graph_kwargs = ""
+        if self.graph_kwargs:
+            graph_kwargs = f", graph_kwargs={self.graph_kwargs}"
         return (
             f"Explorer(config='{self.config.name}', "
             f"output_dir='{self.output_dir}', "
-            f"n=[{self.min_n}, {self.max_n}]{overrides})"
+            f"n=[{self.min_n}, {self.max_n}]{overrides}{graph_kwargs})"
         )
