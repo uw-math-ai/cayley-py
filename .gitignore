@@ -1,5 +1,4 @@
 # Data files - don't push to repo
-*.csv
 *.html
 *.json
 *.png
