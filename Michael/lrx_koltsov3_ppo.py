@@ -10,16 +10,25 @@ from __future__ import annotations
 import argparse
 import random
 from dataclasses import dataclass
-from typing import Optional
+from typing import TYPE_CHECKING, Any, Optional
 
 import numpy as np
 
+if TYPE_CHECKING:
+    from torch import Tensor
+    from torch.nn import Module as ActorCriticBase
+else:
+    Tensor = Any
+
 try:
-    import torch
-    from torch import nn
+    import torch as _torch
+    import torch.nn as _nn
 except ModuleNotFoundError:  # pragma: no cover - exercised only in minimal envs
-    torch = None
-    nn = None
+    _torch = None
+    _nn = None
+
+if not TYPE_CHECKING:
+    ActorCriticBase = _nn.Module if _nn is not None else object
 
 
 # -----------------------------------------------------------------------------
@@ -120,47 +129,46 @@ class PPOConfig:
             )
 
 
-if nn is not None:
-    class ActorCritic(nn.Module):
-        """One-hot permutation encoder + shared trunk + policy/value heads."""
+class ActorCritic(ActorCriticBase):
+    """One-hot permutation encoder + shared trunk + policy/value heads."""
 
-        def __init__(self, n: int, hidden_dim: int):
-            super().__init__()
-            self.n = n
-            input_dim = n * n
-            self.trunk = nn.Sequential(
-                nn.Linear(input_dim, hidden_dim),
-                nn.ReLU(),
-                nn.Linear(hidden_dim, hidden_dim),
-                nn.ReLU(),
-            )
-            self.policy_head = nn.Linear(hidden_dim, 3)
-            self.value_head = nn.Linear(hidden_dim, 1)
+    def __init__(self, n: int, hidden_dim: int):
+        _, nn = _require_torch()
+        super().__init__()
+        self.n = n
+        input_dim = n * n
+        self.trunk = nn.Sequential(
+            nn.Linear(input_dim, hidden_dim),
+            nn.ReLU(),
+            nn.Linear(hidden_dim, hidden_dim),
+            nn.ReLU(),
+        )
+        self.policy_head = nn.Linear(hidden_dim, 3)
+        self.value_head = nn.Linear(hidden_dim, 1)
 
-        def _encode(self, obs: torch.Tensor) -> torch.Tensor:
-            x = nn.functional.one_hot(obs, num_classes=self.n).to(torch.float32)
-            return x.flatten(start_dim=-2)
+    def _encode(self, obs: Tensor) -> Tensor:
+        torch, nn = _require_torch()
+        x = nn.functional.one_hot(obs, num_classes=self.n).to(torch.float32)
+        return x.flatten(start_dim=-2)
 
-        def forward(self, obs: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
-            x = self._encode(obs)
-            h = self.trunk(x)
-            logits = self.policy_head(h)
-            values = self.value_head(h).squeeze(-1)
-            return logits, values
-else:
-    class ActorCritic:  # pragma: no cover - used only when torch is unavailable
-        def __init__(self, *_args, **_kwargs):
-            _require_torch()
+    def forward(self, obs: Tensor) -> tuple[Tensor, Tensor]:
+        x = self._encode(obs)
+        h = self.trunk(x)
+        logits = self.policy_head(h)
+        values = self.value_head(h).squeeze(-1)
+        return logits, values
 
 
-def _require_torch() -> None:
-    if torch is None:
+def _require_torch() -> tuple[Any, Any]:
+    if _torch is None or _nn is None:
         raise ImportError(
             "PyTorch is required for PPO training. Install dependencies first."
         )
+    return _torch, _nn
 
 
 def _select_device(device: str) -> str:
+    torch, _ = _require_torch()
     if device == "auto":
         return "cuda" if torch.cuda.is_available() else "cpu"
     return device
@@ -168,7 +176,11 @@ def _select_device(device: str) -> str:
 
 def train_ppo(config: PPOConfig) -> ActorCritic:
     """Train a PPO policy on Koltsov3 traversal with dense distance shaping."""
-    _require_torch()
+    torch, nn = _require_torch()
+    max_episode_steps = config.max_episode_steps
+    max_scramble_steps = config.max_scramble_steps
+    if max_episode_steps is None or max_scramble_steps is None:
+        raise ValueError("PPOConfig step limits must be initialized before training")
 
     random.seed(config.seed)
     np.random.seed(config.seed)
@@ -213,12 +225,12 @@ def train_ppo(config: PPOConfig) -> ActorCritic:
             done = next_dist == 0
 
             episode_step += 1
-            truncated = episode_step >= config.max_episode_steps
+            truncated = episode_step >= max_episode_steps
             if done:
                 reward += config.success_bonus
 
             if done or truncated:
-                scramble_steps = np.random.randint(1, config.max_scramble_steps + 1)
+                scramble_steps = np.random.randint(1, max_scramble_steps + 1)
                 new_state = identity.copy()
                 for _ in range(scramble_steps):
                     a = np.random.randint(0, 3)
