@@ -1,4 +1,5 @@
 import numpy as np
+import pytest
 
 from Michael.lrx_koltsov3_ppo import (
     PPOConfig,
@@ -30,7 +31,7 @@ def test_apply_generator_reorders_state():
 def test_compute_gae_terminal_steps_match_reward_minus_value():
     rewards = np.array([1.0, -0.5, 2.0], dtype=np.float32)
     values = np.array([0.2, 0.1, -0.3], dtype=np.float32)
-    dones = np.array([True, True, True], dtype=np.bool_)
+    dones = np.array([True, True, True], dtype=bool)
 
     adv, returns = compute_gae(
         rewards=rewards,
@@ -50,3 +51,8 @@ def test_ppo_config_defaults_scale_with_n():
     cfg = PPOConfig(n=21)
     assert cfg.max_episode_steps == 84
     assert cfg.max_scramble_steps == 63
+
+
+def test_ppo_config_rejects_non_divisible_rollout_minibatch():
+    with pytest.raises(ValueError):
+        PPOConfig(rollout_steps=1000, minibatch_size=256)

@@ -114,6 +114,10 @@ class PPOConfig:
             self.max_episode_steps = 4 * self.n
         if self.max_scramble_steps is None:
             self.max_scramble_steps = 3 * self.n
+        if self.rollout_steps % self.minibatch_size != 0:
+            raise ValueError(
+                "rollout_steps must be divisible by minibatch_size for stable minibatches"
+            )
 
 
 if nn is not None:
@@ -134,7 +138,7 @@ if nn is not None:
             self.value_head = nn.Linear(hidden_dim, 1)
 
         def _encode(self, obs: torch.Tensor) -> torch.Tensor:
-            x = torch.nn.functional.one_hot(obs, num_classes=self.n).to(torch.float32)
+            x = nn.functional.one_hot(obs, num_classes=self.n).to(torch.float32)
             return x.flatten(start_dim=-2)
 
         def forward(self, obs: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
@@ -188,7 +192,7 @@ def train_ppo(config: PPOConfig) -> ActorCritic:
         act_buf = np.zeros(config.rollout_steps, dtype=np.int64)
         logp_buf = np.zeros(config.rollout_steps, dtype=np.float32)
         rew_buf = np.zeros(config.rollout_steps, dtype=np.float32)
-        done_buf = np.zeros(config.rollout_steps, dtype=np.bool_)
+        done_buf = np.zeros(config.rollout_steps, dtype=bool)
         val_buf = np.zeros(config.rollout_steps, dtype=np.float32)
 
         for t in range(config.rollout_steps):
@@ -253,14 +257,14 @@ def train_ppo(config: PPOConfig) -> ActorCritic:
 
         n_steps = config.rollout_steps
         for _ in range(config.update_epochs):
-            shuffled_indices = np.random.permutation(n_steps)
+            step_indices = np.random.permutation(n_steps)
             for start in range(0, n_steps, config.minibatch_size):
-                minibatch_indices = shuffled_indices[start : start + config.minibatch_size]
-                mb_obs = obs_t[minibatch_indices]
-                mb_act = act_t[minibatch_indices]
-                mb_old_logp = old_logp_t[minibatch_indices]
-                mb_adv = adv_t[minibatch_indices]
-                mb_ret = ret_t[minibatch_indices]
+                mb_indices = step_indices[start : start + config.minibatch_size]
+                mb_obs = obs_t[mb_indices]
+                mb_act = act_t[mb_indices]
+                mb_old_logp = old_logp_t[mb_indices]
+                mb_adv = adv_t[mb_indices]
+                mb_ret = ret_t[mb_indices]
 
                 logits, values = model(mb_obs)
                 dist = torch.distributions.Categorical(logits=logits)
@@ -273,7 +277,7 @@ def train_ppo(config: PPOConfig) -> ActorCritic:
                     ratio, 1.0 - config.clip_coef, 1.0 + config.clip_coef
                 )
                 policy_loss = torch.max(pg_loss1, pg_loss2).mean()
-                value_loss = torch.nn.functional.mse_loss(values, mb_ret)
+                value_loss = nn.functional.mse_loss(values, mb_ret)
 
                 loss = (
                     policy_loss
@@ -283,7 +287,7 @@ def train_ppo(config: PPOConfig) -> ActorCritic:
 
                 optimizer.zero_grad()
                 loss.backward()
-                torch.nn.utils.clip_grad_norm_(model.parameters(), config.grad_clip_norm)
+                nn.utils.clip_grad_norm_(model.parameters(), config.grad_clip_norm)
                 optimizer.step()
 
         if update_idx % config.log_every_updates == 0:
