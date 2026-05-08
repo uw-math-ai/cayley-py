@@ -91,8 +91,8 @@ class PPOConfig:
     k: int = 0
     total_steps: int = 50_000
     rollout_steps: int = 1024
-    max_episode_steps: int = 4 * 16
-    max_scramble_steps: int = 3 * 16
+    max_episode_steps: Optional[int] = None
+    max_scramble_steps: Optional[int] = None
     hidden_dim: int = 512
     policy_lr: float = 3e-4
     value_coef: float = 0.5
@@ -103,10 +103,17 @@ class PPOConfig:
     update_epochs: int = 4
     minibatch_size: int = 256
     grad_clip_norm: float = 0.5
+    success_bonus: float = 5.0
     seed: int = 42
     device: str = "auto"
     checkpoint_path: Optional[str] = None
     log_every_updates: int = 10
+
+    def __post_init__(self) -> None:
+        if self.max_episode_steps is None:
+            self.max_episode_steps = 4 * self.n
+        if self.max_scramble_steps is None:
+            self.max_scramble_steps = 3 * self.n
 
 
 if nn is not None:
@@ -127,7 +134,7 @@ if nn is not None:
             self.value_head = nn.Linear(hidden_dim, 1)
 
         def _encode(self, obs: torch.Tensor) -> torch.Tensor:
-            x = torch.nn.functional.one_hot(obs.long(), num_classes=self.n).float()
+            x = torch.nn.functional.one_hot(obs, num_classes=self.n).to(torch.float32)
             return x.flatten(start_dim=-2)
 
         def forward(self, obs: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
@@ -204,7 +211,7 @@ def train_ppo(config: PPOConfig) -> ActorCritic:
             episode_step += 1
             truncated = episode_step >= config.max_episode_steps
             if done:
-                reward += 5.0
+                reward += config.success_bonus
 
             if done or truncated:
                 scramble_steps = np.random.randint(1, config.max_scramble_steps + 1)
@@ -246,14 +253,14 @@ def train_ppo(config: PPOConfig) -> ActorCritic:
 
         n_steps = config.rollout_steps
         for _ in range(config.update_epochs):
-            idx = np.random.permutation(n_steps)
+            shuffled_indices = np.random.permutation(n_steps)
             for start in range(0, n_steps, config.minibatch_size):
-                mb_idx = idx[start : start + config.minibatch_size]
-                mb_obs = obs_t[mb_idx]
-                mb_act = act_t[mb_idx]
-                mb_old_logp = old_logp_t[mb_idx]
-                mb_adv = adv_t[mb_idx]
-                mb_ret = ret_t[mb_idx]
+                minibatch_indices = shuffled_indices[start : start + config.minibatch_size]
+                mb_obs = obs_t[minibatch_indices]
+                mb_act = act_t[minibatch_indices]
+                mb_old_logp = old_logp_t[minibatch_indices]
+                mb_adv = adv_t[minibatch_indices]
+                mb_ret = ret_t[minibatch_indices]
 
                 logits, values = model(mb_obs)
                 dist = torch.distributions.Categorical(logits=logits)
@@ -280,7 +287,10 @@ def train_ppo(config: PPOConfig) -> ActorCritic:
                 optimizer.step()
 
         if update_idx % config.log_every_updates == 0:
-            explained_var = 1.0 - np.var(ret_buf - val_buf) / (np.var(ret_buf) + 1e-8)
+            ret_var = np.var(ret_buf)
+            explained_var = (
+                0.0 if ret_var < 1e-8 else 1.0 - np.var(ret_buf - val_buf) / ret_var
+            )
             print(
                 f"update={update_idx:04d}/{updates:04d} "
                 f"mean_reward={rew_buf.mean():+.4f} "
@@ -320,22 +330,20 @@ def parse_args() -> PPOConfig:
     parser.add_argument("--update-epochs", type=int, default=4)
     parser.add_argument("--minibatch-size", type=int, default=256)
     parser.add_argument("--grad-clip-norm", type=float, default=0.5)
+    parser.add_argument("--success-bonus", type=float, default=5.0)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--device", type=str, default="auto", choices=["auto", "cpu", "cuda"])
     parser.add_argument("--checkpoint-path", type=str, default=None)
     parser.add_argument("--log-every-updates", type=int, default=10)
     args = parser.parse_args()
 
-    max_episode_steps = args.max_episode_steps or (4 * args.n)
-    max_scramble_steps = args.max_scramble_steps or (3 * args.n)
-
     return PPOConfig(
         n=args.n,
         k=args.k,
         total_steps=args.total_steps,
         rollout_steps=args.rollout_steps,
-        max_episode_steps=max_episode_steps,
-        max_scramble_steps=max_scramble_steps,
+        max_episode_steps=args.max_episode_steps,
+        max_scramble_steps=args.max_scramble_steps,
         hidden_dim=args.hidden_dim,
         policy_lr=args.policy_lr,
         value_coef=args.value_coef,
@@ -346,6 +354,7 @@ def parse_args() -> PPOConfig:
         update_epochs=args.update_epochs,
         minibatch_size=args.minibatch_size,
         grad_clip_norm=args.grad_clip_norm,
+        success_bonus=args.success_bonus,
         seed=args.seed,
         device=args.device,
         checkpoint_path=args.checkpoint_path,

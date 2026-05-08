@@ -1,6 +1,7 @@
 import numpy as np
 
 from Michael.lrx_koltsov3_ppo import (
+    PPOConfig,
     apply_generator,
     compute_gae,
     get_koltsov3_generators,
@@ -43,3 +44,9 @@ def test_compute_gae_terminal_steps_match_reward_minus_value():
     expected_adv = rewards - values
     assert np.allclose(adv, expected_adv)
     assert np.allclose(returns, rewards)
+
+
+def test_ppo_config_defaults_scale_with_n():
+    cfg = PPOConfig(n=21)
+    assert cfg.max_episode_steps == 84
+    assert cfg.max_scramble_steps == 63
