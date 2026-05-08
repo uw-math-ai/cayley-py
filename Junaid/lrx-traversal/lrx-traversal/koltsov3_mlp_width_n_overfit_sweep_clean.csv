@@ -1,0 +1,2 @@
+n_permutations_length,width,layers,model,final_train_loss,train_r2,train_rmse,train_spearman,test_r2,test_rmse,test_spearman,rmse_gap,spearman_gap,fit_time_sec,predict_time_sec,n_epochs,n_random_walks_to_generate,n_random_walk_length,graph_family,koltsov3_k
+8,64,[64],MLP_64_epochs25_rwlen64_n_rw20000,0.22099237591028215,0.0,0.45949864387512207,,0.0,0.4461074471473694,,-0.013391196727752686,,1391.461085319519,0.002142190933227539,25,20000,64,koltsov3,0

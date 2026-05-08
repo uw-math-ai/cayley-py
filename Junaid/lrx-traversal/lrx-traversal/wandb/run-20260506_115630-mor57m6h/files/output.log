@@ -1,0 +1,466 @@
+Resuming: 414 completed runs found
+
+============================================================
+STARTING SWEEP
+============================================================
+
+
+############################################################
+# n = 8
+############################################################
+  Generating test data...
+  Test data: 32,000 samples (0.1s)
+  [lgb 1/48] {'num_leaves': 31, 'max_depth': 6, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 2/48] {'num_leaves': 31, 'max_depth': 6, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 3/48] {'num_leaves': 31, 'max_depth': 6, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 4/48] {'num_leaves': 31, 'max_depth': 8, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 5/48] {'num_leaves': 31, 'max_depth': 8, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 6/48] {'num_leaves': 31, 'max_depth': 8, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 7/48] {'num_leaves': 31, 'max_depth': 10, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 8/48] {'num_leaves': 31, 'max_depth': 10, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 9/48] {'num_leaves': 31, 'max_depth': 10, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 10/48] {'num_leaves': 31, 'max_depth': 12, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 11/48] {'num_leaves': 31, 'max_depth': 12, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 12/48] {'num_leaves': 31, 'max_depth': 12, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 13/48] {'num_leaves': 63, 'max_depth': 6, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 14/48] {'num_leaves': 63, 'max_depth': 6, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 15/48] {'num_leaves': 63, 'max_depth': 6, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 16/48] {'num_leaves': 63, 'max_depth': 8, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 17/48] {'num_leaves': 63, 'max_depth': 8, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 18/48] {'num_leaves': 63, 'max_depth': 8, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 19/48] {'num_leaves': 63, 'max_depth': 10, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 20/48] {'num_leaves': 63, 'max_depth': 10, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 21/48] {'num_leaves': 63, 'max_depth': 10, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 22/48] {'num_leaves': 63, 'max_depth': 12, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 23/48] {'num_leaves': 63, 'max_depth': 12, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 24/48] {'num_leaves': 63, 'max_depth': 12, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 25/48] {'num_leaves': 127, 'max_depth': 6, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 26/48] {'num_leaves': 127, 'max_depth': 6, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 27/48] {'num_leaves': 127, 'max_depth': 6, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 28/48] {'num_leaves': 127, 'max_depth': 8, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 29/48] {'num_leaves': 127, 'max_depth': 8, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 30/48] {'num_leaves': 127, 'max_depth': 8, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 31/48] {'num_leaves': 127, 'max_depth': 10, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 32/48] {'num_leaves': 127, 'max_depth': 10, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 33/48] {'num_leaves': 127, 'max_depth': 10, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 34/48] {'num_leaves': 127, 'max_depth': 12, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 35/48] {'num_leaves': 127, 'max_depth': 12, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 36/48] {'num_leaves': 127, 'max_depth': 12, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 37/48] {'num_leaves': 255, 'max_depth': 6, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 38/48] {'num_leaves': 255, 'max_depth': 6, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 39/48] {'num_leaves': 255, 'max_depth': 6, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 40/48] {'num_leaves': 255, 'max_depth': 8, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 41/48] {'num_leaves': 255, 'max_depth': 8, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 42/48] {'num_leaves': 255, 'max_depth': 8, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 43/48] {'num_leaves': 255, 'max_depth': 10, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 44/48] {'num_leaves': 255, 'max_depth': 10, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 45/48] {'num_leaves': 255, 'max_depth': 10, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 46/48] {'num_leaves': 255, 'max_depth': 12, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 47/48] {'num_leaves': 255, 'max_depth': 12, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 48/48] {'num_leaves': 255, 'max_depth': 12, 'learning_rate': 0.2} — SKIPPED (already done)
+  [mlp 1/6] {'hidden_dim': 128, 'epochs': 15, 'learning_rate': 0.001} — SKIPPED (already done)
+  [mlp 2/6] {'hidden_dim': 128, 'epochs': 25, 'learning_rate': 0.001} — SKIPPED (already done)
+  [mlp 3/6] {'hidden_dim': 256, 'epochs': 15, 'learning_rate': 0.001} — SKIPPED (already done)
+  [mlp 4/6] {'hidden_dim': 256, 'epochs': 25, 'learning_rate': 0.001} — SKIPPED (already done)
+  [mlp 5/6] {'hidden_dim': 512, 'epochs': 15, 'learning_rate': 0.001} — SKIPPED (already done)
+  [mlp 6/6] {'hidden_dim': 512, 'epochs': 25, 'learning_rate': 0.001} — SKIPPED (already done)
+
+############################################################
+# n = 16
+############################################################
+  Generating test data...
+  Test data: 64,000 samples (0.3s)
+  [lgb 1/48] {'num_leaves': 31, 'max_depth': 6, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 2/48] {'num_leaves': 31, 'max_depth': 6, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 3/48] {'num_leaves': 31, 'max_depth': 6, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 4/48] {'num_leaves': 31, 'max_depth': 8, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 5/48] {'num_leaves': 31, 'max_depth': 8, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 6/48] {'num_leaves': 31, 'max_depth': 8, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 7/48] {'num_leaves': 31, 'max_depth': 10, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 8/48] {'num_leaves': 31, 'max_depth': 10, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 9/48] {'num_leaves': 31, 'max_depth': 10, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 10/48] {'num_leaves': 31, 'max_depth': 12, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 11/48] {'num_leaves': 31, 'max_depth': 12, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 12/48] {'num_leaves': 31, 'max_depth': 12, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 13/48] {'num_leaves': 63, 'max_depth': 6, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 14/48] {'num_leaves': 63, 'max_depth': 6, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 15/48] {'num_leaves': 63, 'max_depth': 6, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 16/48] {'num_leaves': 63, 'max_depth': 8, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 17/48] {'num_leaves': 63, 'max_depth': 8, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 18/48] {'num_leaves': 63, 'max_depth': 8, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 19/48] {'num_leaves': 63, 'max_depth': 10, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 20/48] {'num_leaves': 63, 'max_depth': 10, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 21/48] {'num_leaves': 63, 'max_depth': 10, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 22/48] {'num_leaves': 63, 'max_depth': 12, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 23/48] {'num_leaves': 63, 'max_depth': 12, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 24/48] {'num_leaves': 63, 'max_depth': 12, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 25/48] {'num_leaves': 127, 'max_depth': 6, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 26/48] {'num_leaves': 127, 'max_depth': 6, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 27/48] {'num_leaves': 127, 'max_depth': 6, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 28/48] {'num_leaves': 127, 'max_depth': 8, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 29/48] {'num_leaves': 127, 'max_depth': 8, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 30/48] {'num_leaves': 127, 'max_depth': 8, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 31/48] {'num_leaves': 127, 'max_depth': 10, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 32/48] {'num_leaves': 127, 'max_depth': 10, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 33/48] {'num_leaves': 127, 'max_depth': 10, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 34/48] {'num_leaves': 127, 'max_depth': 12, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 35/48] {'num_leaves': 127, 'max_depth': 12, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 36/48] {'num_leaves': 127, 'max_depth': 12, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 37/48] {'num_leaves': 255, 'max_depth': 6, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 38/48] {'num_leaves': 255, 'max_depth': 6, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 39/48] {'num_leaves': 255, 'max_depth': 6, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 40/48] {'num_leaves': 255, 'max_depth': 8, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 41/48] {'num_leaves': 255, 'max_depth': 8, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 42/48] {'num_leaves': 255, 'max_depth': 8, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 43/48] {'num_leaves': 255, 'max_depth': 10, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 44/48] {'num_leaves': 255, 'max_depth': 10, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 45/48] {'num_leaves': 255, 'max_depth': 10, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 46/48] {'num_leaves': 255, 'max_depth': 12, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 47/48] {'num_leaves': 255, 'max_depth': 12, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 48/48] {'num_leaves': 255, 'max_depth': 12, 'learning_rate': 0.2} — SKIPPED (already done)
+  [mlp 1/6] {'hidden_dim': 128, 'epochs': 15, 'learning_rate': 0.001} — SKIPPED (already done)
+  [mlp 2/6] {'hidden_dim': 128, 'epochs': 25, 'learning_rate': 0.001} — SKIPPED (already done)
+  [mlp 3/6] {'hidden_dim': 256, 'epochs': 15, 'learning_rate': 0.001} — SKIPPED (already done)
+  [mlp 4/6] {'hidden_dim': 256, 'epochs': 25, 'learning_rate': 0.001} — SKIPPED (already done)
+  [mlp 5/6] {'hidden_dim': 512, 'epochs': 15, 'learning_rate': 0.001} — SKIPPED (already done)
+  [mlp 6/6] {'hidden_dim': 512, 'epochs': 25, 'learning_rate': 0.001} — SKIPPED (already done)
+
+############################################################
+# n = 24
+############################################################
+  Generating test data...
+  Test data: 96,000 samples (0.7s)
+  [lgb 1/48] {'num_leaves': 31, 'max_depth': 6, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 2/48] {'num_leaves': 31, 'max_depth': 6, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 3/48] {'num_leaves': 31, 'max_depth': 6, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 4/48] {'num_leaves': 31, 'max_depth': 8, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 5/48] {'num_leaves': 31, 'max_depth': 8, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 6/48] {'num_leaves': 31, 'max_depth': 8, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 7/48] {'num_leaves': 31, 'max_depth': 10, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 8/48] {'num_leaves': 31, 'max_depth': 10, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 9/48] {'num_leaves': 31, 'max_depth': 10, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 10/48] {'num_leaves': 31, 'max_depth': 12, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 11/48] {'num_leaves': 31, 'max_depth': 12, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 12/48] {'num_leaves': 31, 'max_depth': 12, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 13/48] {'num_leaves': 63, 'max_depth': 6, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 14/48] {'num_leaves': 63, 'max_depth': 6, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 15/48] {'num_leaves': 63, 'max_depth': 6, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 16/48] {'num_leaves': 63, 'max_depth': 8, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 17/48] {'num_leaves': 63, 'max_depth': 8, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 18/48] {'num_leaves': 63, 'max_depth': 8, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 19/48] {'num_leaves': 63, 'max_depth': 10, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 20/48] {'num_leaves': 63, 'max_depth': 10, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 21/48] {'num_leaves': 63, 'max_depth': 10, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 22/48] {'num_leaves': 63, 'max_depth': 12, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 23/48] {'num_leaves': 63, 'max_depth': 12, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 24/48] {'num_leaves': 63, 'max_depth': 12, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 25/48] {'num_leaves': 127, 'max_depth': 6, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 26/48] {'num_leaves': 127, 'max_depth': 6, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 27/48] {'num_leaves': 127, 'max_depth': 6, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 28/48] {'num_leaves': 127, 'max_depth': 8, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 29/48] {'num_leaves': 127, 'max_depth': 8, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 30/48] {'num_leaves': 127, 'max_depth': 8, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 31/48] {'num_leaves': 127, 'max_depth': 10, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 32/48] {'num_leaves': 127, 'max_depth': 10, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 33/48] {'num_leaves': 127, 'max_depth': 10, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 34/48] {'num_leaves': 127, 'max_depth': 12, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 35/48] {'num_leaves': 127, 'max_depth': 12, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 36/48] {'num_leaves': 127, 'max_depth': 12, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 37/48] {'num_leaves': 255, 'max_depth': 6, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 38/48] {'num_leaves': 255, 'max_depth': 6, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 39/48] {'num_leaves': 255, 'max_depth': 6, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 40/48] {'num_leaves': 255, 'max_depth': 8, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 41/48] {'num_leaves': 255, 'max_depth': 8, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 42/48] {'num_leaves': 255, 'max_depth': 8, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 43/48] {'num_leaves': 255, 'max_depth': 10, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 44/48] {'num_leaves': 255, 'max_depth': 10, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 45/48] {'num_leaves': 255, 'max_depth': 10, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 46/48] {'num_leaves': 255, 'max_depth': 12, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 47/48] {'num_leaves': 255, 'max_depth': 12, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 48/48] {'num_leaves': 255, 'max_depth': 12, 'learning_rate': 0.2} — SKIPPED (already done)
+  [mlp 1/6] {'hidden_dim': 128, 'epochs': 15, 'learning_rate': 0.001} — SKIPPED (already done)
+  [mlp 2/6] {'hidden_dim': 128, 'epochs': 25, 'learning_rate': 0.001} — SKIPPED (already done)
+  [mlp 3/6] {'hidden_dim': 256, 'epochs': 15, 'learning_rate': 0.001} — SKIPPED (already done)
+  [mlp 4/6] {'hidden_dim': 256, 'epochs': 25, 'learning_rate': 0.001} — SKIPPED (already done)
+  [mlp 5/6] {'hidden_dim': 512, 'epochs': 15, 'learning_rate': 0.001} — SKIPPED (already done)
+  [mlp 6/6] {'hidden_dim': 512, 'epochs': 25, 'learning_rate': 0.001} — SKIPPED (already done)
+
+############################################################
+# n = 32
+############################################################
+  Generating test data...
+  Test data: 128,000 samples (1.1s)
+  [lgb 1/48] {'num_leaves': 31, 'max_depth': 6, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 2/48] {'num_leaves': 31, 'max_depth': 6, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 3/48] {'num_leaves': 31, 'max_depth': 6, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 4/48] {'num_leaves': 31, 'max_depth': 8, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 5/48] {'num_leaves': 31, 'max_depth': 8, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 6/48] {'num_leaves': 31, 'max_depth': 8, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 7/48] {'num_leaves': 31, 'max_depth': 10, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 8/48] {'num_leaves': 31, 'max_depth': 10, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 9/48] {'num_leaves': 31, 'max_depth': 10, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 10/48] {'num_leaves': 31, 'max_depth': 12, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 11/48] {'num_leaves': 31, 'max_depth': 12, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 12/48] {'num_leaves': 31, 'max_depth': 12, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 13/48] {'num_leaves': 63, 'max_depth': 6, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 14/48] {'num_leaves': 63, 'max_depth': 6, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 15/48] {'num_leaves': 63, 'max_depth': 6, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 16/48] {'num_leaves': 63, 'max_depth': 8, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 17/48] {'num_leaves': 63, 'max_depth': 8, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 18/48] {'num_leaves': 63, 'max_depth': 8, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 19/48] {'num_leaves': 63, 'max_depth': 10, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 20/48] {'num_leaves': 63, 'max_depth': 10, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 21/48] {'num_leaves': 63, 'max_depth': 10, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 22/48] {'num_leaves': 63, 'max_depth': 12, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 23/48] {'num_leaves': 63, 'max_depth': 12, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 24/48] {'num_leaves': 63, 'max_depth': 12, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 25/48] {'num_leaves': 127, 'max_depth': 6, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 26/48] {'num_leaves': 127, 'max_depth': 6, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 27/48] {'num_leaves': 127, 'max_depth': 6, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 28/48] {'num_leaves': 127, 'max_depth': 8, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 29/48] {'num_leaves': 127, 'max_depth': 8, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 30/48] {'num_leaves': 127, 'max_depth': 8, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 31/48] {'num_leaves': 127, 'max_depth': 10, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 32/48] {'num_leaves': 127, 'max_depth': 10, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 33/48] {'num_leaves': 127, 'max_depth': 10, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 34/48] {'num_leaves': 127, 'max_depth': 12, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 35/48] {'num_leaves': 127, 'max_depth': 12, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 36/48] {'num_leaves': 127, 'max_depth': 12, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 37/48] {'num_leaves': 255, 'max_depth': 6, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 38/48] {'num_leaves': 255, 'max_depth': 6, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 39/48] {'num_leaves': 255, 'max_depth': 6, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 40/48] {'num_leaves': 255, 'max_depth': 8, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 41/48] {'num_leaves': 255, 'max_depth': 8, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 42/48] {'num_leaves': 255, 'max_depth': 8, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 43/48] {'num_leaves': 255, 'max_depth': 10, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 44/48] {'num_leaves': 255, 'max_depth': 10, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 45/48] {'num_leaves': 255, 'max_depth': 10, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 46/48] {'num_leaves': 255, 'max_depth': 12, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 47/48] {'num_leaves': 255, 'max_depth': 12, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 48/48] {'num_leaves': 255, 'max_depth': 12, 'learning_rate': 0.2} — SKIPPED (already done)
+  [mlp 1/6] {'hidden_dim': 128, 'epochs': 15, 'learning_rate': 0.001} — SKIPPED (already done)
+  [mlp 2/6] {'hidden_dim': 128, 'epochs': 25, 'learning_rate': 0.001} — SKIPPED (already done)
+  [mlp 3/6] {'hidden_dim': 256, 'epochs': 15, 'learning_rate': 0.001} — SKIPPED (already done)
+  [mlp 4/6] {'hidden_dim': 256, 'epochs': 25, 'learning_rate': 0.001} — SKIPPED (already done)
+  [mlp 5/6] {'hidden_dim': 512, 'epochs': 15, 'learning_rate': 0.001} — SKIPPED (already done)
+  [mlp 6/6] {'hidden_dim': 512, 'epochs': 25, 'learning_rate': 0.001} — SKIPPED (already done)
+
+############################################################
+# n = 40
+############################################################
+  Generating test data...
+  Test data: 160,000 samples (1.8s)
+  [lgb 1/48] {'num_leaves': 31, 'max_depth': 6, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 2/48] {'num_leaves': 31, 'max_depth': 6, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 3/48] {'num_leaves': 31, 'max_depth': 6, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 4/48] {'num_leaves': 31, 'max_depth': 8, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 5/48] {'num_leaves': 31, 'max_depth': 8, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 6/48] {'num_leaves': 31, 'max_depth': 8, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 7/48] {'num_leaves': 31, 'max_depth': 10, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 8/48] {'num_leaves': 31, 'max_depth': 10, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 9/48] {'num_leaves': 31, 'max_depth': 10, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 10/48] {'num_leaves': 31, 'max_depth': 12, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 11/48] {'num_leaves': 31, 'max_depth': 12, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 12/48] {'num_leaves': 31, 'max_depth': 12, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 13/48] {'num_leaves': 63, 'max_depth': 6, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 14/48] {'num_leaves': 63, 'max_depth': 6, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 15/48] {'num_leaves': 63, 'max_depth': 6, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 16/48] {'num_leaves': 63, 'max_depth': 8, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 17/48] {'num_leaves': 63, 'max_depth': 8, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 18/48] {'num_leaves': 63, 'max_depth': 8, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 19/48] {'num_leaves': 63, 'max_depth': 10, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 20/48] {'num_leaves': 63, 'max_depth': 10, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 21/48] {'num_leaves': 63, 'max_depth': 10, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 22/48] {'num_leaves': 63, 'max_depth': 12, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 23/48] {'num_leaves': 63, 'max_depth': 12, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 24/48] {'num_leaves': 63, 'max_depth': 12, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 25/48] {'num_leaves': 127, 'max_depth': 6, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 26/48] {'num_leaves': 127, 'max_depth': 6, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 27/48] {'num_leaves': 127, 'max_depth': 6, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 28/48] {'num_leaves': 127, 'max_depth': 8, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 29/48] {'num_leaves': 127, 'max_depth': 8, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 30/48] {'num_leaves': 127, 'max_depth': 8, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 31/48] {'num_leaves': 127, 'max_depth': 10, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 32/48] {'num_leaves': 127, 'max_depth': 10, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 33/48] {'num_leaves': 127, 'max_depth': 10, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 34/48] {'num_leaves': 127, 'max_depth': 12, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 35/48] {'num_leaves': 127, 'max_depth': 12, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 36/48] {'num_leaves': 127, 'max_depth': 12, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 37/48] {'num_leaves': 255, 'max_depth': 6, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 38/48] {'num_leaves': 255, 'max_depth': 6, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 39/48] {'num_leaves': 255, 'max_depth': 6, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 40/48] {'num_leaves': 255, 'max_depth': 8, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 41/48] {'num_leaves': 255, 'max_depth': 8, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 42/48] {'num_leaves': 255, 'max_depth': 8, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 43/48] {'num_leaves': 255, 'max_depth': 10, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 44/48] {'num_leaves': 255, 'max_depth': 10, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 45/48] {'num_leaves': 255, 'max_depth': 10, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 46/48] {'num_leaves': 255, 'max_depth': 12, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 47/48] {'num_leaves': 255, 'max_depth': 12, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 48/48] {'num_leaves': 255, 'max_depth': 12, 'learning_rate': 0.2} — SKIPPED (already done)
+  [mlp 1/6] {'hidden_dim': 128, 'epochs': 15, 'learning_rate': 0.001} — SKIPPED (already done)
+  [mlp 2/6] {'hidden_dim': 128, 'epochs': 25, 'learning_rate': 0.001} — SKIPPED (already done)
+  [mlp 3/6] {'hidden_dim': 256, 'epochs': 15, 'learning_rate': 0.001} — SKIPPED (already done)
+  [mlp 4/6] {'hidden_dim': 256, 'epochs': 25, 'learning_rate': 0.001} — SKIPPED (already done)
+  [mlp 5/6] {'hidden_dim': 512, 'epochs': 15, 'learning_rate': 0.001} — SKIPPED (already done)
+  [mlp 6/6] {'hidden_dim': 512, 'epochs': 25, 'learning_rate': 0.001} — SKIPPED (already done)
+
+############################################################
+# n = 48
+############################################################
+  Generating test data...
+  Test data: 192,000 samples (2.5s)
+  [lgb 1/48] {'num_leaves': 31, 'max_depth': 6, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 2/48] {'num_leaves': 31, 'max_depth': 6, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 3/48] {'num_leaves': 31, 'max_depth': 6, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 4/48] {'num_leaves': 31, 'max_depth': 8, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 5/48] {'num_leaves': 31, 'max_depth': 8, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 6/48] {'num_leaves': 31, 'max_depth': 8, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 7/48] {'num_leaves': 31, 'max_depth': 10, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 8/48] {'num_leaves': 31, 'max_depth': 10, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 9/48] {'num_leaves': 31, 'max_depth': 10, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 10/48] {'num_leaves': 31, 'max_depth': 12, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 11/48] {'num_leaves': 31, 'max_depth': 12, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 12/48] {'num_leaves': 31, 'max_depth': 12, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 13/48] {'num_leaves': 63, 'max_depth': 6, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 14/48] {'num_leaves': 63, 'max_depth': 6, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 15/48] {'num_leaves': 63, 'max_depth': 6, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 16/48] {'num_leaves': 63, 'max_depth': 8, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 17/48] {'num_leaves': 63, 'max_depth': 8, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 18/48] {'num_leaves': 63, 'max_depth': 8, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 19/48] {'num_leaves': 63, 'max_depth': 10, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 20/48] {'num_leaves': 63, 'max_depth': 10, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 21/48] {'num_leaves': 63, 'max_depth': 10, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 22/48] {'num_leaves': 63, 'max_depth': 12, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 23/48] {'num_leaves': 63, 'max_depth': 12, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 24/48] {'num_leaves': 63, 'max_depth': 12, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 25/48] {'num_leaves': 127, 'max_depth': 6, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 26/48] {'num_leaves': 127, 'max_depth': 6, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 27/48] {'num_leaves': 127, 'max_depth': 6, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 28/48] {'num_leaves': 127, 'max_depth': 8, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 29/48] {'num_leaves': 127, 'max_depth': 8, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 30/48] {'num_leaves': 127, 'max_depth': 8, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 31/48] {'num_leaves': 127, 'max_depth': 10, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 32/48] {'num_leaves': 127, 'max_depth': 10, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 33/48] {'num_leaves': 127, 'max_depth': 10, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 34/48] {'num_leaves': 127, 'max_depth': 12, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 35/48] {'num_leaves': 127, 'max_depth': 12, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 36/48] {'num_leaves': 127, 'max_depth': 12, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 37/48] {'num_leaves': 255, 'max_depth': 6, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 38/48] {'num_leaves': 255, 'max_depth': 6, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 39/48] {'num_leaves': 255, 'max_depth': 6, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 40/48] {'num_leaves': 255, 'max_depth': 8, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 41/48] {'num_leaves': 255, 'max_depth': 8, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 42/48] {'num_leaves': 255, 'max_depth': 8, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 43/48] {'num_leaves': 255, 'max_depth': 10, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 44/48] {'num_leaves': 255, 'max_depth': 10, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 45/48] {'num_leaves': 255, 'max_depth': 10, 'learning_rate': 0.2} — SKIPPED (already done)
+  [lgb 46/48] {'num_leaves': 255, 'max_depth': 12, 'learning_rate': 0.05} — SKIPPED (already done)
+  [lgb 47/48] {'num_leaves': 255, 'max_depth': 12, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 48/48] {'num_leaves': 255, 'max_depth': 12, 'learning_rate': 0.2} — SKIPPED (already done)
+  [mlp 1/6] {'hidden_dim': 128, 'epochs': 15, 'learning_rate': 0.001}
+    Epoch 1/15: train=10841.7, val=9166.8
+    Epoch 2/15: train=8636.3, val=7960.8
+    Epoch 3/15: train=7556.4, val=7383.7
+    Epoch 4/15: train=6723.4, val=6173.9
+    Epoch 5/15: train=5692.1, val=5418.1
+    Epoch 6/15: train=4956.3, val=4804.7
+    Epoch 7/15: train=4535.7, val=4419.8
+    Epoch 8/15: train=4315.7, val=4465.0
+    Epoch 9/15: train=4248.1, val=4231.8
+    Epoch 10/15: train=4201.5, val=4319.5
+    Epoch 11/15: train=4150.9, val=4146.8
+    Epoch 12/15: train=4082.3, val=4159.8
+    Epoch 13/15: train=4030.8, val=4025.6
+    Epoch 14/15: train=4019.9, val=4114.3
+    Epoch 15/15: train=4014.0, val=4170.3
+    FAILED: CUDA out of memory. Tried to allocate 3.30 GiB. GPU 0 has a total capacity of 3.63 GiB of which 3.10 GiB is free. Including non-PyTorch memory, this process has 458.00 MiB memory in use. Of the allocated memory 320.86 MiB is allocated by PyTorch, and 47.14 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+  [mlp 2/6] {'hidden_dim': 128, 'epochs': 25, 'learning_rate': 0.001}
+    Epoch 1/25: train=10838.0, val=9421.0
+    Epoch 2/25: train=9366.0, val=9194.0
+    Epoch 3/25: train=9106.1, val=8914.9
+    Epoch 4/25: train=8558.8, val=7746.5
+    Epoch 5/25: train=7222.3, val=6544.1
+    Epoch 6/25: train=6053.1, val=5492.1
+    Epoch 7/25: train=5136.8, val=4916.4
+    Epoch 8/25: train=4743.6, val=4525.3
+    Epoch 9/25: train=4481.1, val=4467.5
+    Epoch 10/25: train=4371.5, val=4387.0
+    Epoch 11/25: train=4282.1, val=4338.4
+    Epoch 12/25: train=4225.9, val=4288.4
+    Epoch 13/25: train=4203.2, val=4214.2
+    Epoch 14/25: train=4154.2, val=4157.1
+    Epoch 15/25: train=4054.5, val=4114.7
+    Epoch 16/25: train=4055.9, val=4149.0
+    Epoch 17/25: train=4084.6, val=4219.6
+    Epoch 18/25: train=4004.7, val=4096.6
+    Epoch 19/25: train=3986.2, val=4068.9
+    Epoch 20/25: train=4074.0, val=4000.0
+    Epoch 21/25: train=3999.8, val=4155.9
+    Epoch 22/25: train=4005.6, val=4140.5
+    Epoch 23/25: train=3984.6, val=4034.9
+    Epoch 24/25: train=3983.2, val=4210.7
+    Epoch 25/25: train=3947.6, val=4001.3
+    FAILED: CUDA out of memory. Tried to allocate 3.30 GiB. GPU 0 has a total capacity of 3.63 GiB of which 3.12 GiB is free. Including non-PyTorch memory, this process has 438.00 MiB memory in use. Of the allocated memory 320.86 MiB is allocated by PyTorch, and 27.14 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+  [mlp 3/6] {'hidden_dim': 256, 'epochs': 15, 'learning_rate': 0.001}
+    Epoch 1/15: train=10381.7, val=8830.9
+    Epoch 2/15: train=7600.5, val=6633.9
+    Epoch 3/15: train=5876.9, val=5346.2
+    Epoch 4/15: train=4999.9, val=4793.8
+    Epoch 5/15: train=4531.6, val=4497.3
+    Epoch 6/15: train=4361.5, val=4312.2
+    Epoch 7/15: train=4250.0, val=4385.2
+    Epoch 8/15: train=4153.1, val=4212.5
+    Epoch 9/15: train=4073.8, val=4223.0
+    Epoch 10/15: train=4012.9, val=4114.0
+    Epoch 11/15: train=3981.4, val=4166.5
+    Epoch 12/15: train=3990.3, val=4131.2
+    Epoch 13/15: train=3909.2, val=4066.4
+    Epoch 14/15: train=3966.6, val=4044.3
+    Epoch 15/15: train=3933.2, val=4086.1
+    FAILED: CUDA out of memory. Tried to allocate 3.30 GiB. GPU 0 has a total capacity of 3.63 GiB of which 3.12 GiB is free. Including non-PyTorch memory, this process has 438.00 MiB memory in use. Of the allocated memory 325.36 MiB is allocated by PyTorch, and 22.64 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+  [mlp 4/6] {'hidden_dim': 256, 'epochs': 25, 'learning_rate': 0.001}
+    Epoch 1/25: train=8631.2, val=5876.5
+    Epoch 2/25: train=5338.4, val=4948.0
+    Epoch 3/25: train=4560.4, val=4574.7
+    Epoch 4/25: train=4417.4, val=4365.8
+    Epoch 5/25: train=4239.5, val=4331.4
+    Epoch 6/25: train=4166.1, val=4230.3
+    Epoch 7/25: train=4128.4, val=4186.9
+    Epoch 8/25: train=4044.0, val=4220.3
+    Epoch 9/25: train=4053.7, val=4110.6
+    Epoch 10/25: train=4061.6, val=4120.8
+    Epoch 11/25: train=3979.4, val=4087.3
+    Epoch 12/25: train=4085.5, val=4006.9
+    Epoch 13/25: train=3952.1, val=4064.8
+    Epoch 14/25: train=3939.7, val=4003.8
+    Epoch 15/25: train=3959.3, val=4118.7
+    Epoch 16/25: train=3930.9, val=4114.8
+    Epoch 17/25: train=3910.7, val=4079.2
+    Epoch 18/25: train=3911.1, val=3974.0
+    Epoch 19/25: train=3870.7, val=3958.0
+    Epoch 20/25: train=3931.3, val=4040.2
+    Epoch 21/25: train=3881.8, val=4042.6
+    Epoch 22/25: train=3914.0, val=4113.0
+    Epoch 23/25: train=3847.1, val=3937.5
+    Epoch 24/25: train=3852.5, val=4025.4
+    Epoch 25/25: train=3853.7, val=4029.9
+    FAILED: CUDA out of memory. Tried to allocate 3.30 GiB. GPU 0 has a total capacity of 3.63 GiB of which 2.59 GiB is free. Including non-PyTorch memory, this process has 476.00 MiB memory in use. Process 318009 has 0 bytes memory in use. Of the allocated memory 325.36 MiB is allocated by PyTorch, and 60.64 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+  [mlp 5/6] {'hidden_dim': 512, 'epochs': 15, 'learning_rate': 0.001}
+    Epoch 1/15: train=7508.0, val=4986.4
+    Epoch 2/15: train=4636.0, val=4522.9
+    Epoch 3/15: train=4317.2, val=4359.0
+    Epoch 4/15: train=4155.2, val=4341.8
+    Epoch 5/15: train=4067.5, val=4259.4
+    Epoch 6/15: train=3990.2, val=4163.4
+    Epoch 7/15: train=3980.9, val=4172.8
+    Epoch 8/15: train=3924.6, val=3959.9
+    Epoch 9/15: train=3902.8, val=4111.4
+Traceback (most recent call last):
+  File "/home/junaid/work/lrx-traversal/lrx-traversal/run_sweep.py", line 635, in <module>
+    X_te = torch.tensor(test_data['states_raw'], dtype=torch.uint8, device=device)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/junaid/work/lrx-traversal/lrx-traversal/run_sweep.py", line 479, in train_mlp
+    test_data: cached dict with 'features' and 'labels' for evaluation
+                      ^^^^^^^^^^^
+KeyboardInterrupt

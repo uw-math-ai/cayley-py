@@ -1,0 +1,101 @@
+_wandb:
+    value:
+        cli_version: 0.26.1
+        e:
+            sm3tzwsr24fdwynmrreqbolgld8t9efz:
+                codePath: run_sweep.py
+                codePathLocal: run_sweep.py
+                cpu_count: 4
+                cpu_count_logical: 8
+                cudaVersion: "12.4"
+                disk:
+                    /:
+                        total: "110441844736"
+                        used: "72768192512"
+                email: junaid01@uw.edu
+                executable: /home/junaid/work/lrx-traversal/.venv/bin/python
+                gpu: NVIDIA GeForce GTX 1650 SUPER
+                gpu_count: 1
+                gpu_nvidia:
+                    - architecture: Turing
+                      cudaCores: 1280
+                      memoryTotal: "4294967296"
+                      name: NVIDIA GeForce GTX 1650 SUPER
+                      uuid: GPU-eb3fbb63-d4a6-08fb-8889-da4fc8ef415c
+                host: uw-haswell
+                memory:
+                    total: "16708173824"
+                os: Linux-6.12.74+deb13+1-amd64-x86_64-with-glibc2.41
+                program: /home/junaid/work/lrx-traversal/lrx-traversal/run_sweep.py
+                python: CPython 3.13.5
+                root: /home/junaid/work/lrx-traversal/lrx-traversal
+                startedAt: "2026-05-06T06:13:30.613777Z"
+                writerId: sm3tzwsr24fdwynmrreqbolgld8t9efz
+        m: []
+        python_version: 3.13.5
+        t:
+            "1":
+                - 1
+                - 5
+                - 8
+                - 53
+            "2":
+                - 1
+                - 5
+                - 8
+                - 53
+            "3":
+                - 13
+                - 15
+                - 16
+            "4": 3.13.5
+            "5": 0.26.1
+            "12": 0.26.1
+            "13": linux-x86_64
+lgb_grid:
+    value:
+        learning_rate:
+            - 0.05
+            - 0.1
+            - 0.2
+        max_depth:
+            - 6
+            - 8
+            - 10
+            - 12
+        num_leaves:
+            - 31
+            - 63
+            - 127
+            - 255
+max_train:
+    value: 500000
+mlp_grid:
+    value:
+        epochs:
+            - 15
+            - 25
+        hidden_dim:
+            - 128
+            - 256
+            - 512
+        learning_rate:
+            - 0.001
+n_values:
+    value:
+        - 8
+        - 16
+        - 24
+        - 32
+        - 40
+        - 48
+        - 56
+        - 64
+n_walks:
+    value: 25000
+quick:
+    value: false
+seed:
+    value: 42
+total_runs:
+    value: 432

@@ -1,0 +1,33 @@
+Resuming: 0 completed runs found
+
+============================================================
+STARTING SWEEP
+============================================================
+
+
+############################################################
+# n = 16
+############################################################
+  Generating test data...
+  Test data: 64,000 samples (0.3s)
+  [lgb 1/1] {'num_leaves': 63, 'max_depth': 8, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[999]	train's rmse: 22.6959	val's rmse: 23.768
+    Test R²=0.5612  RMSE=24.47  ρ=0.7438  time=48.9s  [1/2] ETA 0.0h
+
+############################################################
+# n = 32
+############################################################
+  Generating test data...
+  Test data: 128,000 samples (1.1s)
+  [lgb 1/1] {'num_leaves': 63, 'max_depth': 8, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 40.2669	val's rmse: 43.4696
+    Test R²=0.6277  RMSE=45.09  ρ=0.7867  time=77.5s  [2/2] ETA 0.0h
+
+============================================================
+SWEEP COMPLETE
+============================================================
+Results saved to: sweep_results.csv

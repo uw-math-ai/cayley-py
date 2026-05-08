@@ -1,0 +1,214 @@
+
+############################################################
+# n = 16
+############################################################
+  Test data: 64,000 samples
+  [baseline_1k] n_est=1000 leaves=127 lr=0.05 boosting=gbdt obj=rmse
+    R²=0.5773  RMSE=24.02  ρ=0.7565  best_iter=0  time=314.8s  [1/48] ETA 4.2h
+  [baseline_255L] n_est=1000 leaves=255 lr=0.05 boosting=gbdt obj=rmse
+    R²=0.5743  RMSE=24.11  ρ=0.7547  best_iter=0  time=452.3s  [2/48] ETA 5.0h
+  [more_trees_2k] n_est=2000 leaves=127 lr=0.05 boosting=gbdt obj=rmse
+Training until validation scores don't improve for 150 rounds
+Early stopping, best iteration is:
+[1523]	train's rmse: 22.1572	val's rmse: 23.7384
+    R²=0.5759  RMSE=24.06  ρ=0.7557  best_iter=1523  time=686.4s  [3/48] ETA 6.1h
+  [more_trees_3k] n_est=3000 leaves=127 lr=0.05 boosting=gbdt obj=rmse
+Training until validation scores don't improve for 150 rounds
+Early stopping, best iteration is:
+[1763]	train's rmse: 21.8534	val's rmse: 23.7286
+    R²=0.5759  RMSE=24.06  ρ=0.7555  best_iter=1763  time=543.9s  [4/48] ETA 6.2h
+  [more_trees_2k_255L] n_est=2000 leaves=255 lr=0.05 boosting=gbdt obj=rmse
+Training until validation scores don't improve for 150 rounds
+Early stopping, best iteration is:
+[1017]	train's rmse: 21.6178	val's rmse: 23.5002
+    R²=0.5738  RMSE=24.12  ρ=0.7544  best_iter=1017  time=570.6s  [5/48] ETA 6.2h
+  [leaves_511] n_est=2000 leaves=511 lr=0.05 boosting=gbdt obj=rmse
+Training until validation scores don't improve for 150 rounds
+Early stopping, best iteration is:
+[618]	train's rmse: 21.6929	val's rmse: 23.6435
+    R²=0.5735  RMSE=24.13  ρ=0.7538  best_iter=618  time=510.3s  [6/48] ETA 6.0h
+  [low_lr_0.02] n_est=3000 leaves=127 lr=0.02 boosting=gbdt obj=rmse
+Training until validation scores don't improve for 150 rounds
+Did not meet early stopping. Best iteration is:
+[2999]	train's rmse: 22.3082	val's rmse: 23.7561
+    R²=0.5758  RMSE=24.06  ρ=0.7554  best_iter=2999  time=920.1s  [7/48] ETA 6.6h
+  [low_lr_0.01] n_est=3000 leaves=127 lr=0.01 boosting=gbdt obj=rmse
+Training until validation scores don't improve for 150 rounds
+Did not meet early stopping. Best iteration is:
+[3000]	train's rmse: 22.9129	val's rmse: 23.8062
+    R²=0.5794  RMSE=23.96  ρ=0.7582  best_iter=3000  time=184.1s  [8/48] ETA 5.9h
+  [dart_2k] n_est=2000 leaves=127 lr=0.05 boosting=dart obj=rmse
+    R²=0.5792  RMSE=23.97  ρ=0.7573  best_iter=0  time=1116.6s  [9/48] ETA 6.4h
+  [dart_3k] n_est=3000 leaves=127 lr=0.03 boosting=dart obj=rmse
+    R²=0.5811  RMSE=23.91  ρ=0.7591  best_iter=0  time=1662.9s  [10/48] ETA 7.4h
+  [huber_2k] n_est=2000 leaves=127 lr=0.05 boosting=gbdt obj=huber
+Training until validation scores don't improve for 150 rounds
+Did not meet early stopping. Best iteration is:
+[2000]	train's rmse: 24.5752	val's rmse: 24.7705
+    R²=0.5476  RMSE=24.85  ρ=0.7374  best_iter=2000  time=349.8s  [11/48] ETA 6.9h
+  [huber_3k] n_est=3000 leaves=127 lr=0.05 boosting=gbdt obj=huber
+Training until validation scores don't improve for 150 rounds
+Did not meet early stopping. Best iteration is:
+[3000]	train's rmse: 24.4615	val's rmse: 24.642
+    R²=0.5557  RMSE=24.63  ρ=0.7461  best_iter=3000  time=326.8s  [12/48] ETA 6.4h
+
+############################################################
+# n = 32
+############################################################
+  Test data: 128,000 samples
+  [baseline_1k] n_est=1000 leaves=127 lr=0.05 boosting=gbdt obj=rmse
+    R²=0.6300  RMSE=44.95  ρ=0.7872  best_iter=0  time=128.8s  [13/48] ETA 5.9h
+  [baseline_255L] n_est=1000 leaves=255 lr=0.05 boosting=gbdt obj=rmse
+    R²=0.6299  RMSE=44.96  ρ=0.7873  best_iter=0  time=150.0s  [14/48] ETA 5.4h
+  [more_trees_2k] n_est=2000 leaves=127 lr=0.05 boosting=gbdt obj=rmse
+Training until validation scores don't improve for 150 rounds
+Did not meet early stopping. Best iteration is:
+[2000]	train's rmse: 36.9845	val's rmse: 42.9911
+    R²=0.6277  RMSE=45.09  ρ=0.7862  best_iter=2000  time=212.1s  [15/48] ETA 5.0h
+  [more_trees_3k] n_est=3000 leaves=127 lr=0.05 boosting=gbdt obj=rmse
+Training until validation scores don't improve for 150 rounds
+Did not meet early stopping. Best iteration is:
+[2934]	train's rmse: 35.1967	val's rmse: 43.0299
+    R²=0.6255  RMSE=45.22  ρ=0.7855  best_iter=2934  time=280.5s  [16/48] ETA 4.7h
+  [more_trees_2k_255L] n_est=2000 leaves=255 lr=0.05 boosting=gbdt obj=rmse
+Training until validation scores don't improve for 150 rounds
+Did not meet early stopping. Best iteration is:
+[1989]	train's rmse: 33.5934	val's rmse: 42.7638
+    R²=0.6217  RMSE=45.45  ρ=0.7828  best_iter=1989  time=254.9s  [17/48] ETA 4.5h
+  [leaves_511] n_est=2000 leaves=511 lr=0.05 boosting=gbdt obj=rmse
+Training until validation scores don't improve for 150 rounds
+Early stopping, best iteration is:
+[1367]	train's rmse: 33.0193	val's rmse: 42.8019
+    R²=0.6195  RMSE=45.58  ρ=0.7807  best_iter=1367  time=245.5s  [18/48] ETA 4.2h
+  [low_lr_0.02] n_est=3000 leaves=127 lr=0.02 boosting=gbdt obj=rmse
+Training until validation scores don't improve for 150 rounds
+Did not meet early stopping. Best iteration is:
+[3000]	train's rmse: 39.2141	val's rmse: 43.4809
+    R²=0.6325  RMSE=44.80  ρ=0.7887  best_iter=3000  time=344.7s  [19/48] ETA 4.0h
+  [low_lr_0.01] n_est=3000 leaves=127 lr=0.01 boosting=gbdt obj=rmse
+Training until validation scores don't improve for 150 rounds
+Did not meet early stopping. Best iteration is:
+[3000]	train's rmse: 41.2101	val's rmse: 43.5911
+    R²=0.6319  RMSE=44.84  ρ=0.7885  best_iter=3000  time=433.3s  [20/48] ETA 3.8h
+  [dart_2k] n_est=2000 leaves=127 lr=0.05 boosting=dart obj=rmse
+    R²=0.6350  RMSE=44.65  ρ=0.7904  best_iter=0  time=1392.5s  [21/48] ETA 4.0h
+  [dart_3k] n_est=3000 leaves=127 lr=0.03 boosting=dart obj=rmse
+    R²=0.6354  RMSE=44.62  ρ=0.7904  best_iter=0  time=1956.6s  [22/48] ETA 4.3h
+  [huber_2k] n_est=2000 leaves=127 lr=0.05 boosting=gbdt obj=huber
+Training until validation scores don't improve for 150 rounds
+Did not meet early stopping. Best iteration is:
+[2000]	train's rmse: 50.0638	val's rmse: 50.1801
+    R²=0.5381  RMSE=50.22  ρ=0.7498  best_iter=2000  time=650.1s  [23/48] ETA 4.2h
+  [huber_3k] n_est=3000 leaves=127 lr=0.05 boosting=gbdt obj=huber
+Training until validation scores don't improve for 150 rounds
+Did not meet early stopping. Best iteration is:
+[3000]	train's rmse: 47.465	val's rmse: 47.7421
+    R²=0.5829  RMSE=47.73  ρ=0.7563  best_iter=3000  time=974.8s  [24/48] ETA 4.1h
+
+############################################################
+# n = 48
+############################################################
+  Test data: 192,000 samples
+  [baseline_1k] n_est=1000 leaves=127 lr=0.05 boosting=gbdt obj=rmse
+    R²=0.6851  RMSE=62.20  ρ=0.8218  best_iter=0  time=182.5s  [25/48] ETA 3.9h
+  [baseline_255L] n_est=1000 leaves=255 lr=0.05 boosting=gbdt obj=rmse
+    R²=0.6830  RMSE=62.41  ρ=0.8199  best_iter=0  time=211.5s  [26/48] ETA 3.6h
+  [more_trees_2k] n_est=2000 leaves=127 lr=0.05 boosting=gbdt obj=rmse
+Training until validation scores don't improve for 150 rounds
+Did not meet early stopping. Best iteration is:
+[2000]	train's rmse: 51.2318	val's rmse: 61.2766
+    R²=0.6828  RMSE=62.43  ρ=0.8199  best_iter=2000  time=280.1s  [27/48] ETA 3.4h
+  [more_trees_3k] n_est=3000 leaves=127 lr=0.05 boosting=gbdt obj=rmse
+Training until validation scores don't improve for 150 rounds
+Did not meet early stopping. Best iteration is:
+[3000]	train's rmse: 47.2334	val's rmse: 60.6884
+    R²=0.6819  RMSE=62.52  ρ=0.8195  best_iter=3000  time=393.6s  [28/48] ETA 3.2h
+  [more_trees_2k_255L] n_est=2000 leaves=255 lr=0.05 boosting=gbdt obj=rmse
+Training until validation scores don't improve for 150 rounds
+Did not meet early stopping. Best iteration is:
+[2000]	train's rmse: 44.5126	val's rmse: 60.7557
+    R²=0.6800  RMSE=62.71  ρ=0.8183  best_iter=2000  time=347.6s  [29/48] ETA 3.0h
+  [leaves_511] n_est=2000 leaves=511 lr=0.05 boosting=gbdt obj=rmse
+Training until validation scores don't improve for 150 rounds
+Did not meet early stopping. Best iteration is:
+[1998]	train's rmse: 38.3633	val's rmse: 60.5788
+    R²=0.6735  RMSE=63.34  ρ=0.8142  best_iter=1998  time=426.3s  [30/48] ETA 2.8h
+  [low_lr_0.02] n_est=3000 leaves=127 lr=0.02 boosting=gbdt obj=rmse
+Training until validation scores don't improve for 150 rounds
+Did not meet early stopping. Best iteration is:
+[3000]	train's rmse: 54.9034	val's rmse: 61.5646
+    R²=0.6873  RMSE=61.99  ρ=0.8230  best_iter=3000  time=486.0s  [31/48] ETA 2.6h
+  [low_lr_0.01] n_est=3000 leaves=127 lr=0.01 boosting=gbdt obj=rmse
+Training until validation scores don't improve for 150 rounds
+Did not meet early stopping. Best iteration is:
+[3000]	train's rmse: 58.4007	val's rmse: 62.2142
+    R²=0.6834  RMSE=62.37  ρ=0.8210  best_iter=3000  time=638.6s  [32/48] ETA 2.5h
+  [dart_2k] n_est=2000 leaves=127 lr=0.05 boosting=dart obj=rmse
+    R²=0.6859  RMSE=62.13  ρ=0.8231  best_iter=0  time=1612.4s  [33/48] ETA 2.5h
+  [dart_3k] n_est=3000 leaves=127 lr=0.03 boosting=dart obj=rmse
+    R²=0.6849  RMSE=62.23  ρ=0.8224  best_iter=0  time=2523.8s  [34/48] ETA 2.5h
+  [huber_2k] n_est=2000 leaves=127 lr=0.05 boosting=gbdt obj=huber
+Training until validation scores don't improve for 150 rounds
+Did not meet early stopping. Best iteration is:
+[2000]	train's rmse: 80.4773	val's rmse: 80.5734
+    R²=0.4778  RMSE=80.11  ρ=0.7725  best_iter=2000  time=911.2s  [35/48] ETA 2.4h
+  [huber_3k] n_est=3000 leaves=127 lr=0.05 boosting=gbdt obj=huber
+Training until validation scores don't improve for 150 rounds
+Did not meet early stopping. Best iteration is:
+[3000]	train's rmse: 73.3331	val's rmse: 73.6126
+    R²=0.5699  RMSE=72.70  ρ=0.7777  best_iter=3000  time=1384.6s  [36/48] ETA 2.3h
+
+############################################################
+# n = 64
+############################################################
+  Test data: 256,000 samples
+  [baseline_1k] n_est=1000 leaves=127 lr=0.05 boosting=gbdt obj=rmse
+    R²=0.6726  RMSE=84.57  ρ=0.8132  best_iter=0  time=237.9s  [37/48] ETA 2.0h
+  [baseline_255L] n_est=1000 leaves=255 lr=0.05 boosting=gbdt obj=rmse
+    R²=0.6705  RMSE=84.84  ρ=0.8119  best_iter=0  time=296.0s  [38/48] ETA 1.8h
+  [more_trees_2k] n_est=2000 leaves=127 lr=0.05 boosting=gbdt obj=rmse
+Training until validation scores don't improve for 150 rounds
+Did not meet early stopping. Best iteration is:
+[2000]	train's rmse: 64.7185	val's rmse: 78.2898
+    R²=0.6709  RMSE=84.79  ρ=0.8121  best_iter=2000  time=377.1s  [39/48] ETA 1.6h
+  [more_trees_3k] n_est=3000 leaves=127 lr=0.05 boosting=gbdt obj=rmse
+Training until validation scores don't improve for 150 rounds
+Did not meet early stopping. Best iteration is:
+[2999]	train's rmse: 58.74	val's rmse: 77.7276
+    R²=0.6672  RMSE=85.26  ρ=0.8103  best_iter=2999  time=520.0s  [40/48] ETA 1.4h
+  [more_trees_2k_255L] n_est=2000 leaves=255 lr=0.05 boosting=gbdt obj=rmse
+Training until validation scores don't improve for 150 rounds
+Did not meet early stopping. Best iteration is:
+[2000]	train's rmse: 54.747	val's rmse: 77.9387
+    R²=0.6682  RMSE=85.14  ρ=0.8111  best_iter=2000  time=461.8s  [41/48] ETA 1.3h
+  [leaves_511] n_est=2000 leaves=511 lr=0.05 boosting=gbdt obj=rmse
+Training until validation scores don't improve for 150 rounds
+Did not meet early stopping. Best iteration is:
+[2000]	train's rmse: 47.2321	val's rmse: 77.7699
+    R²=0.6650  RMSE=85.54  ρ=0.8090  best_iter=2000  time=602.7s  [42/48] ETA 1.1h
+  [low_lr_0.02] n_est=3000 leaves=127 lr=0.02 boosting=gbdt obj=rmse
+Training until validation scores don't improve for 150 rounds
+Did not meet early stopping. Best iteration is:
+[3000]	train's rmse: 69.8222	val's rmse: 79.2601
+    R²=0.6740  RMSE=84.39  ρ=0.8137  best_iter=3000  time=659.0s  [43/48] ETA 0.9h
+  [low_lr_0.01] n_est=3000 leaves=127 lr=0.01 boosting=gbdt obj=rmse
+Training until validation scores don't improve for 150 rounds
+Did not meet early stopping. Best iteration is:
+[3000]	train's rmse: 75.524	val's rmse: 80.2877
+    R²=0.6728  RMSE=84.54  ρ=0.8131  best_iter=3000  time=837.4s  [44/48] ETA 0.7h
+  [dart_2k] n_est=2000 leaves=127 lr=0.05 boosting=dart obj=rmse
+    R²=0.6728  RMSE=84.55  ρ=0.8131  best_iter=0  time=1804.5s  [45/48] ETA 0.6h
+  [dart_3k] n_est=3000 leaves=127 lr=0.03 boosting=dart obj=rmse
+    R²=0.6727  RMSE=84.56  ρ=0.8135  best_iter=0  time=2795.9s  [46/48] ETA 0.4h
+  [huber_2k] n_est=2000 leaves=127 lr=0.05 boosting=gbdt obj=huber
+Training until validation scores don't improve for 150 rounds
+Did not meet early stopping. Best iteration is:
+[2000]	train's rmse: 113.569	val's rmse: 113.786
+    R²=0.4013  RMSE=114.36  ρ=0.7561  best_iter=2000  time=1149.3s  [47/48] ETA 0.2h
+  [huber_3k] n_est=3000 leaves=127 lr=0.05 boosting=gbdt obj=huber
+Training until validation scores don't improve for 150 rounds
+Did not meet early stopping. Best iteration is:
+[3000]	train's rmse: 102.944	val's rmse: 102.926
+    R²=0.5055  RMSE=103.93  ρ=0.7630  best_iter=3000  time=1723.6s  [48/48] ETA 0.0h
+
+DONE — 48 runs

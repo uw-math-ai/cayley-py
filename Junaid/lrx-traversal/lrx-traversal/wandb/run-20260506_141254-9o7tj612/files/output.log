@@ -1,0 +1,382 @@
+
+############################################################
+# n = 16
+############################################################
+  Test data: 64,000 samples
+  [n=16] optimizer=adam lr=0.001 epochs=25
+    Ep 1/25: train=878.8, val=622.5
+    Ep 11/25: train=566.1, val=603.5
+    Ep 21/25: train=565.2, val=576.9
+    Ep 25/25: train=567.5, val=583.9
+    R²=0.5705  RMSE=24.22  ρ=0.7506  time=77.9s  [1/48] ETA 1.0h
+  [n=16] optimizer=adam lr=0.0005 epochs=25
+    Ep 1/25: train=1073.0, val=670.2
+    Ep 11/25: train=571.8, val=585.9
+    Ep 21/25: train=567.2, val=594.0
+    Ep 25/25: train=569.2, val=581.9
+    R²=0.5709  RMSE=24.20  ρ=0.7510  time=80.1s  [2/48] ETA 1.0h
+  [n=16] optimizer=adamw lr=0.001 epochs=25
+    Ep 1/25: train=871.8, val=616.8
+    Ep 11/25: train=571.0, val=592.9
+    Ep 21/25: train=565.9, val=579.8
+    Ep 25/25: train=566.4, val=597.8
+    R²=0.5686  RMSE=24.27  ρ=0.7493  time=80.2s  [3/48] ETA 1.0h
+  [n=16] optimizer=adamw lr=0.0005 epochs=25
+    Ep 1/25: train=1074.3, val=694.8
+    Ep 11/25: train=569.6, val=603.6
+    Ep 21/25: train=568.0, val=579.7
+    Ep 25/25: train=569.5, val=584.2
+    R²=0.5697  RMSE=24.24  ρ=0.7500  time=79.0s  [4/48] ETA 1.0h
+  [n=16] optimizer=adam lr=0.001 epochs=50
+    Ep 1/50: train=876.3, val=631.1
+    Ep 11/50: train=571.1, val=592.5
+    Ep 21/50: train=568.7, val=590.3
+    Ep 31/50: train=567.0, val=584.4
+    Ep 41/50: train=562.2, val=589.9
+    Ep 50/50: train=564.0, val=598.6
+    R²=0.5698  RMSE=24.24  ρ=0.7501  time=159.4s  [5/48] ETA 1.1h
+  [n=16] optimizer=adam lr=0.0005 epochs=50
+    Ep 1/50: train=1068.7, val=661.9
+    Ep 11/50: train=567.8, val=586.9
+    Ep 21/50: train=558.2, val=586.8
+    Ep 31/50: train=563.3, val=584.4
+    Ep 41/50: train=569.4, val=577.5
+    Ep 50/50: train=566.4, val=577.1
+    R²=0.5709  RMSE=24.20  ρ=0.7509  time=162.9s  [6/48] ETA 1.2h
+  [n=16] optimizer=adamw lr=0.001 epochs=50
+    Ep 1/50: train=878.2, val=628.0
+    Ep 11/50: train=574.2, val=603.8
+    Ep 21/50: train=566.2, val=582.6
+    Ep 31/50: train=566.9, val=602.1
+    Ep 41/50: train=563.9, val=592.5
+    Ep 50/50: train=563.5, val=588.9
+    R²=0.5685  RMSE=24.27  ρ=0.7494  time=155.7s  [7/48] ETA 1.3h
+  [n=16] optimizer=adamw lr=0.0005 epochs=50
+    Ep 1/50: train=1063.4, val=673.5
+    Ep 11/50: train=574.7, val=589.4
+    Ep 21/50: train=567.9, val=586.8
+    Ep 31/50: train=566.6, val=596.7
+    Ep 41/50: train=573.6, val=600.9
+    Ep 50/50: train=565.8, val=584.9
+    R²=0.5705  RMSE=24.21  ρ=0.7505  time=155.6s  [8/48] ETA 1.3h
+  [n=16] optimizer=adam lr=0.001 epochs=100
+    Ep 1/100: train=882.6, val=624.5
+    Ep 11/100: train=564.2, val=603.1
+    Ep 21/100: train=568.0, val=589.5
+    Ep 31/100: train=565.1, val=587.6
+    Ep 41/100: train=565.2, val=573.1
+    Ep 51/100: train=558.9, val=563.4
+    Ep 61/100: train=563.3, val=599.7
+    Ep 71/100: train=563.0, val=577.5
+    Ep 81/100: train=562.2, val=586.2
+    Ep 91/100: train=563.4, val=592.1
+    Ep 100/100: train=560.1, val=592.5
+    R²=0.5701  RMSE=24.23  ρ=0.7516  time=311.7s  [9/48] ETA 1.5h
+  [n=16] optimizer=adam lr=0.0005 epochs=100
+    Ep 1/100: train=1072.2, val=674.2
+    Ep 11/100: train=571.0, val=590.6
+    Ep 21/100: train=567.4, val=592.0
+    Ep 31/100: train=568.6, val=598.0
+    Ep 41/100: train=567.7, val=586.8
+    Ep 51/100: train=563.5, val=604.8
+    Ep 61/100: train=562.0, val=574.5
+    Ep 71/100: train=566.5, val=587.2
+    Ep 81/100: train=566.8, val=584.5
+    Ep 91/100: train=566.8, val=592.7
+    Ep 100/100: train=566.1, val=594.4
+    R²=0.5714  RMSE=24.19  ρ=0.7513  time=305.2s  [10/48] ETA 1.7h
+  [n=16] optimizer=adamw lr=0.001 epochs=100
+    Ep 1/100: train=885.2, val=638.1
+    Ep 11/100: train=572.5, val=586.2
+    Ep 21/100: train=567.3, val=584.1
+    Ep 31/100: train=560.8, val=590.4
+    Ep 41/100: train=565.0, val=579.6
+    Ep 51/100: train=564.8, val=589.0
+    Ep 61/100: train=562.4, val=574.6
+    Ep 71/100: train=560.5, val=582.6
+    Ep 81/100: train=567.3, val=599.0
+    Ep 91/100: train=563.3, val=584.3
+    Ep 100/100: train=565.9, val=591.1
+    R²=0.5680  RMSE=24.28  ρ=0.7491  time=308.0s  [11/48] ETA 1.8h
+  [n=16] optimizer=adamw lr=0.0005 epochs=100
+    Ep 1/100: train=1082.0, val=701.7
+    Ep 11/100: train=571.3, val=575.1
+    Ep 21/100: train=572.9, val=586.5
+    Ep 31/100: train=567.5, val=587.7
+    Ep 41/100: train=569.4, val=578.0
+    Ep 51/100: train=562.0, val=598.3
+    Ep 61/100: train=565.2, val=575.8
+    Ep 71/100: train=564.1, val=577.5
+    Ep 81/100: train=565.7, val=572.7
+    Ep 91/100: train=565.9, val=573.4
+    Ep 100/100: train=568.6, val=585.0
+    R²=0.5716  RMSE=24.18  ρ=0.7513  time=313.8s  [12/48] ETA 1.8h
+
+############################################################
+# n = 32
+############################################################
+  Test data: 128,000 samples
+  [n=32] optimizer=adam lr=0.001 epochs=25
+    Ep 1/25: train=3170.3, val=2127.5
+    Ep 11/25: train=1903.9, val=1846.8
+    Ep 21/25: train=1883.6, val=1857.7
+    Ep 25/25: train=1869.2, val=1882.3
+    R²=0.6568  RMSE=43.29  ρ=0.8055  time=188.0s  [13/48] ETA 1.8h
+  [n=32] optimizer=adam lr=0.0005 epochs=25
+    Ep 1/25: train=3806.9, val=2407.0
+    Ep 11/25: train=1917.1, val=1873.6
+    Ep 21/25: train=1899.5, val=1872.6
+    Ep 25/25: train=1870.1, val=1822.0
+    R²=0.6616  RMSE=42.99  ρ=0.8088  time=190.7s  [14/48] ETA 1.7h
+  [n=32] optimizer=adamw lr=0.001 epochs=25
+    Ep 1/25: train=3211.3, val=2173.0
+    Ep 11/25: train=1910.9, val=1883.8
+    Ep 21/25: train=1877.7, val=1850.9
+    Ep 25/25: train=1893.9, val=1845.7
+    R²=0.6610  RMSE=43.03  ρ=0.8083  time=190.9s  [15/48] ETA 1.7h
+  [n=32] optimizer=adamw lr=0.0005 epochs=25
+    Ep 1/25: train=3938.9, val=2555.7
+    Ep 11/25: train=1906.2, val=1903.5
+    Ep 21/25: train=1879.1, val=1883.8
+    Ep 25/25: train=1872.5, val=1877.4
+    R²=0.6597  RMSE=43.11  ρ=0.8074  time=190.0s  [16/48] ETA 1.6h
+  [n=32] optimizer=adam lr=0.001 epochs=50
+    Ep 1/50: train=3496.1, val=2239.4
+    Ep 11/50: train=1903.0, val=1884.1
+    Ep 21/50: train=1905.2, val=1863.7
+    Ep 31/50: train=1871.3, val=1864.3
+    Ep 41/50: train=1871.3, val=1857.1
+    Ep 50/50: train=1860.9, val=1893.8
+    R²=0.6598  RMSE=43.10  ρ=0.8074  time=372.8s  [17/48] ETA 1.7h
+  [n=32] optimizer=adam lr=0.0005 epochs=50
+    Ep 1/50: train=3757.3, val=2334.8
+    Ep 11/50: train=1892.7, val=1872.3
+    Ep 21/50: train=1885.1, val=1886.9
+    Ep 31/50: train=1886.4, val=1865.3
+    Ep 41/50: train=1880.2, val=1843.8
+    Ep 50/50: train=1887.8, val=1818.0
+    R²=0.6610  RMSE=43.02  ρ=0.8082  time=373.0s  [18/48] ETA 1.7h
+  [n=32] optimizer=adamw lr=0.001 epochs=50
+    Ep 1/50: train=3213.1, val=2142.5
+    Ep 11/50: train=1918.1, val=1889.9
+    Ep 21/50: train=1891.3, val=1865.2
+    Ep 31/50: train=1898.7, val=1861.2
+    Ep 41/50: train=1888.9, val=1863.6
+    Ep 50/50: train=1883.3, val=1855.6
+    R²=0.6595  RMSE=43.12  ρ=0.8075  time=379.6s  [19/48] ETA 1.7h
+  [n=32] optimizer=adamw lr=0.0005 epochs=50
+    Ep 1/50: train=3829.2, val=2461.6
+    Ep 11/50: train=1891.5, val=1890.2
+    Ep 21/50: train=1879.8, val=1842.2
+    Ep 31/50: train=1886.4, val=1868.3
+    Ep 41/50: train=1880.3, val=1831.2
+    Ep 50/50: train=1871.7, val=1876.8
+    R²=0.6587  RMSE=43.17  ρ=0.8066  time=379.9s  [20/48] ETA 1.7h
+  [n=32] optimizer=adam lr=0.001 epochs=100
+    Ep 1/100: train=3256.0, val=2211.3
+    Ep 11/100: train=1901.1, val=1857.4
+    Ep 21/100: train=1881.1, val=1825.1
+    Ep 31/100: train=1873.5, val=1820.7
+    Ep 41/100: train=1852.7, val=1854.5
+    Ep 51/100: train=1852.7, val=1865.8
+    Ep 61/100: train=1860.5, val=1814.2
+    Ep 71/100: train=1868.5, val=1842.1
+    Ep 81/100: train=1867.3, val=1849.4
+    Ep 91/100: train=1874.7, val=1836.9
+    Ep 100/100: train=1871.6, val=1866.1
+    R²=0.6612  RMSE=43.01  ρ=0.8083  time=745.3s  [21/48] ETA 1.9h
+  [n=32] optimizer=adam lr=0.0005 epochs=100
+    Ep 1/100: train=3842.5, val=2529.7
+    Ep 11/100: train=1920.5, val=1860.0
+    Ep 21/100: train=1881.3, val=1871.6
+    Ep 31/100: train=1894.0, val=1894.5
+    Ep 41/100: train=1881.6, val=1835.2
+    Ep 51/100: train=1862.2, val=1853.1
+    Ep 61/100: train=1869.6, val=1827.2
+    Ep 71/100: train=1881.3, val=1839.4
+    Ep 81/100: train=1893.3, val=1856.6
+    Ep 91/100: train=1880.6, val=1824.3
+    Ep 100/100: train=1862.3, val=1847.8
+    R²=0.6613  RMSE=43.01  ρ=0.8082  time=746.0s  [22/48] ETA 2.0h
+  [n=32] optimizer=adamw lr=0.001 epochs=100
+    Ep 1/100: train=3194.2, val=2125.8
+    Ep 11/100: train=1913.9, val=1878.3
+    Ep 21/100: train=1870.9, val=1851.9
+    Ep 31/100: train=1896.6, val=1857.0
+    Ep 41/100: train=1863.3, val=1861.6
+    Ep 51/100: train=1890.0, val=1835.7
+    Ep 61/100: train=1867.8, val=1910.9
+    Ep 71/100: train=1873.5, val=1852.4
+    Ep 81/100: train=1879.4, val=1891.6
+    Ep 91/100: train=1870.9, val=1867.6
+    Ep 100/100: train=1875.5, val=1870.5
+    R²=0.6613  RMSE=43.01  ρ=0.8085  time=758.7s  [23/48] ETA 2.0h
+  [n=32] optimizer=adamw lr=0.0005 epochs=100
+    Ep 1/100: train=3801.5, val=2399.6
+    Ep 11/100: train=1901.3, val=1882.0
+    Ep 21/100: train=1916.2, val=1829.4
+    Ep 31/100: train=1895.4, val=1840.3
+    Ep 41/100: train=1882.0, val=1897.2
+    Ep 51/100: train=1879.0, val=1849.9
+    Ep 61/100: train=1878.0, val=1882.1
+    Ep 71/100: train=1891.1, val=1829.7
+    Ep 81/100: train=1861.0, val=1929.5
+    Ep 91/100: train=1877.7, val=1867.9
+    Ep 100/100: train=1869.4, val=1826.3
+    R²=0.6612  RMSE=43.02  ρ=0.8081  time=759.0s  [24/48] ETA 2.1h
+
+############################################################
+# n = 48
+############################################################
+  Test data: 192,000 samples
+  [n=48] optimizer=adam lr=0.001 epochs=25
+    Ep 1/25: train=7575.3, val=5163.9
+    Ep 11/25: train=3869.4, val=4141.2
+    Ep 21/25: train=3796.4, val=3890.7
+    Ep 25/25: train=3795.3, val=3949.3
+    R²=0.6763  RMSE=63.07  ρ=0.8164  time=278.4s  [25/48] ETA 2.0h
+  [n=48] optimizer=adam lr=0.0005 epochs=25
+    Ep 1/25: train=9580.7, val=6527.8
+    Ep 11/25: train=3921.7, val=4051.4
+    Ep 21/25: train=3885.3, val=3984.7
+    Ep 25/25: train=3771.7, val=3939.8
+    R²=0.6770  RMSE=63.00  ρ=0.8169  time=278.7s  [26/48] ETA 1.9h
+  [n=48] optimizer=adamw lr=0.001 epochs=25
+    Ep 1/25: train=7585.7, val=5123.1
+    Ep 11/25: train=3877.2, val=4036.0
+    Ep 21/25: train=3743.5, val=3948.0
+    Ep 25/25: train=3838.3, val=4117.8
+    R²=0.6737  RMSE=63.32  ρ=0.8145  time=283.6s  [27/48] ETA 1.8h
+  [n=48] optimizer=adamw lr=0.0005 epochs=25
+    Ep 1/25: train=9480.6, val=6533.6
+    Ep 11/25: train=3842.6, val=4087.6
+    Ep 21/25: train=3813.4, val=3920.8
+    Ep 25/25: train=3833.1, val=3982.1
+    R²=0.6747  RMSE=63.22  ρ=0.8154  time=284.0s  [28/48] ETA 1.7h
+  [n=48] optimizer=adam lr=0.001 epochs=50
+    Ep 1/50: train=7603.1, val=5333.8
+    Ep 11/50: train=3798.6, val=4072.4
+    Ep 21/50: train=3771.3, val=3966.6
+    Ep 31/50: train=3744.4, val=3984.5
+    Ep 41/50: train=3731.9, val=3953.1
+    Ep 50/50: train=3774.9, val=3931.4
+    R²=0.6765  RMSE=63.04  ρ=0.8165  time=555.9s  [29/48] ETA 1.7h
+  [n=48] optimizer=adam lr=0.0005 epochs=50
+    Ep 1/50: train=9922.4, val=7227.7
+    Ep 11/50: train=3898.3, val=4052.8
+    Ep 21/50: train=3858.2, val=4031.2
+    Ep 31/50: train=3776.3, val=4088.9
+    Ep 41/50: train=3835.3, val=3966.2
+    Ep 50/50: train=3816.1, val=4045.5
+    R²=0.6801  RMSE=62.69  ρ=0.8186  time=557.2s  [30/48] ETA 1.6h
+  [n=48] optimizer=adamw lr=0.001 epochs=50
+    Ep 1/50: train=8383.3, val=5788.0
+    Ep 11/50: train=3905.2, val=4049.1
+    Ep 21/50: train=3847.8, val=4002.8
+    Ep 31/50: train=3754.1, val=3930.7
+    Ep 41/50: train=3805.0, val=4050.5
+    Ep 50/50: train=3749.2, val=3975.9
+    R²=0.6765  RMSE=63.05  ρ=0.8165  time=566.5s  [31/48] ETA 1.6h
+  [n=48] optimizer=adamw lr=0.0005 epochs=50
+    Ep 1/50: train=9950.3, val=7203.4
+    Ep 11/50: train=3933.6, val=4051.7
+    Ep 21/50: train=3786.2, val=4005.4
+    Ep 31/50: train=3821.6, val=4006.6
+    Ep 41/50: train=3786.9, val=3917.1
+    Ep 50/50: train=3831.2, val=3913.2
+    R²=0.6788  RMSE=62.83  ρ=0.8175  time=567.5s  [32/48] ETA 1.5h
+  [n=48] optimizer=adam lr=0.001 epochs=100
+    Ep 1/100: train=7864.9, val=5516.7
+    Ep 11/100: train=3830.1, val=3985.3
+    Ep 21/100: train=3804.0, val=3937.6
+    Ep 31/100: train=3771.1, val=3883.0
+    Ep 41/100: train=3724.7, val=3923.5
+    Ep 51/100: train=3696.3, val=3992.9
+    Ep 61/100: train=3780.6, val=3908.9
+    Ep 71/100: train=3778.6, val=3954.9
+    Ep 81/100: train=3691.3, val=4034.8
+    Ep 91/100: train=3727.4, val=4061.5
+    Ep 100/100: train=3718.4, val=4018.6
+    R²=0.6791  RMSE=62.80  ρ=0.8179  time=1110.8s  [33/48] ETA 1.5h
+  [n=48] optimizer=adam lr=0.0005 epochs=100
+    Ep 1/100: train=9751.2, val=6911.4
+    Ep 11/100: train=3930.0, val=4095.9
+    Ep 21/100: train=3886.1, val=4073.6
+    Ep 31/100: train=3781.6, val=3931.2
+    Ep 41/100: train=3803.6, val=3945.3
+    Ep 51/100: train=3713.3, val=3997.4
+    Ep 61/100: train=3752.9, val=4043.9
+    Ep 71/100: train=3750.1, val=3948.7
+    Ep 81/100: train=3773.1, val=3975.6
+    Ep 91/100: train=3766.9, val=3977.3
+    Ep 100/100: train=3722.0, val=4004.6
+    R²=0.6803  RMSE=62.68  ρ=0.8187  time=1112.7s  [34/48] ETA 1.5h
+  [n=48] optimizer=adamw lr=0.001 epochs=100
+    Ep 1/100: train=7739.1, val=5298.7
+    Ep 11/100: train=3902.7, val=4020.2
+    Ep 21/100: train=3809.0, val=3935.6
+    Ep 31/100: train=3799.9, val=4073.5
+    Ep 41/100: train=3777.7, val=3990.8
+    Ep 51/100: train=3799.5, val=4012.9
+    Ep 61/100: train=3751.8, val=4001.6
+    Ep 71/100: train=3759.7, val=3993.7
+    Ep 81/100: train=3782.9, val=3974.5
+    Ep 91/100: train=3781.0, val=3948.3
+    Ep 100/100: train=3791.7, val=4106.3
+    R²=0.6765  RMSE=63.05  ρ=0.8162  time=1132.5s  [35/48] ETA 1.5h
+  [n=48] optimizer=adamw lr=0.0005 epochs=100
+    Ep 1/100: train=9942.2, val=7238.7
+    Ep 11/100: train=3856.2, val=4136.5
+    Ep 21/100: train=3881.6, val=4029.0
+    Ep 31/100: train=3792.1, val=4038.2
+    Ep 41/100: train=3811.9, val=3881.0
+    Ep 51/100: train=3810.8, val=4012.7
+    Ep 61/100: train=3810.1, val=3985.0
+    Ep 71/100: train=3799.8, val=3852.8
+    Ep 81/100: train=3812.2, val=4007.9
+    Ep 91/100: train=3818.6, val=3866.6
+    Ep 100/100: train=3767.8, val=3896.1
+    R²=0.6794  RMSE=62.76  ρ=0.8180  time=1563.1s  [36/48] ETA 1.5h
+
+############################################################
+# n = 64
+############################################################
+  Test data: 256,000 samples
+  [n=64] optimizer=adam lr=0.001 epochs=25
+    Ep 1/25: train=13482.2, val=9182.0
+    FAILED: CUDA out of memory. Tried to allocate 314.00 MiB. GPU 0 has a total capacity of 3.63 GiB of which 272.56 MiB is free. Including non-PyTorch memory, this process has 1.20 GiB memory in use. Process 717987 has 2.16 GiB memory in use. Of the allocated memory 1.08 GiB is allocated by PyTorch, and 35.06 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+  [n=64] optimizer=adam lr=0.0005 epochs=25
+    Ep 1/25: train=16137.7, val=10898.5
+    FAILED: CUDA out of memory. Tried to allocate 314.00 MiB. GPU 0 has a total capacity of 3.63 GiB of which 272.56 MiB is free. Including non-PyTorch memory, this process has 1.20 GiB memory in use. Process 717987 has 2.16 GiB memory in use. Of the allocated memory 1.08 GiB is allocated by PyTorch, and 35.06 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+  [n=64] optimizer=adamw lr=0.001 epochs=25
+    Ep 1/25: train=13309.5, val=8992.6
+    FAILED: CUDA out of memory. Tried to allocate 314.00 MiB. GPU 0 has a total capacity of 3.63 GiB of which 272.56 MiB is free. Including non-PyTorch memory, this process has 1.20 GiB memory in use. Process 717987 has 2.16 GiB memory in use. Of the allocated memory 1.08 GiB is allocated by PyTorch, and 35.06 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+  [n=64] optimizer=adamw lr=0.0005 epochs=25
+    Ep 1/25: train=16095.1, val=10866.6
+    FAILED: CUDA out of memory. Tried to allocate 314.00 MiB. GPU 0 has a total capacity of 3.63 GiB of which 272.56 MiB is free. Including non-PyTorch memory, this process has 1.20 GiB memory in use. Process 717987 has 2.16 GiB memory in use. Of the allocated memory 1.08 GiB is allocated by PyTorch, and 35.06 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+  [n=64] optimizer=adam lr=0.001 epochs=50
+    Ep 1/50: train=13193.5, val=9073.2
+    FAILED: CUDA out of memory. Tried to allocate 314.00 MiB. GPU 0 has a total capacity of 3.63 GiB of which 272.56 MiB is free. Including non-PyTorch memory, this process has 1.20 GiB memory in use. Process 717987 has 2.16 GiB memory in use. Of the allocated memory 1.08 GiB is allocated by PyTorch, and 35.06 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+  [n=64] optimizer=adam lr=0.0005 epochs=50
+    Ep 1/50: train=15469.3, val=9855.5
+    FAILED: CUDA out of memory. Tried to allocate 314.00 MiB. GPU 0 has a total capacity of 3.63 GiB of which 272.56 MiB is free. Including non-PyTorch memory, this process has 1.20 GiB memory in use. Process 717987 has 2.16 GiB memory in use. Of the allocated memory 1.08 GiB is allocated by PyTorch, and 35.06 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+  [n=64] optimizer=adamw lr=0.001 epochs=50
+    Ep 1/50: train=12273.5, val=8425.8
+    FAILED: CUDA out of memory. Tried to allocate 314.00 MiB. GPU 0 has a total capacity of 3.63 GiB of which 272.56 MiB is free. Including non-PyTorch memory, this process has 1.20 GiB memory in use. Process 717987 has 2.16 GiB memory in use. Of the allocated memory 1.08 GiB is allocated by PyTorch, and 35.06 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+  [n=64] optimizer=adamw lr=0.0005 epochs=50
+    Ep 1/50: train=16381.0, val=11452.0
+    FAILED: CUDA out of memory. Tried to allocate 314.00 MiB. GPU 0 has a total capacity of 3.63 GiB of which 272.56 MiB is free. Including non-PyTorch memory, this process has 1.20 GiB memory in use. Process 717987 has 2.16 GiB memory in use. Of the allocated memory 1.08 GiB is allocated by PyTorch, and 35.06 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+  [n=64] optimizer=adam lr=0.001 epochs=100
+    Ep 1/100: train=13207.2, val=9202.4
+    FAILED: CUDA out of memory. Tried to allocate 314.00 MiB. GPU 0 has a total capacity of 3.63 GiB of which 272.56 MiB is free. Including non-PyTorch memory, this process has 1.20 GiB memory in use. Process 717987 has 2.16 GiB memory in use. Of the allocated memory 1.08 GiB is allocated by PyTorch, and 35.06 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+  [n=64] optimizer=adam lr=0.0005 epochs=100
+    Ep 1/100: train=16299.3, val=11375.2
+    FAILED: CUDA out of memory. Tried to allocate 314.00 MiB. GPU 0 has a total capacity of 3.63 GiB of which 272.56 MiB is free. Including non-PyTorch memory, this process has 1.20 GiB memory in use. Process 717987 has 2.16 GiB memory in use. Of the allocated memory 1.08 GiB is allocated by PyTorch, and 35.06 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+  [n=64] optimizer=adamw lr=0.001 epochs=100
+    Ep 1/100: train=12801.6, val=8704.2
+    FAILED: CUDA out of memory. Tried to allocate 314.00 MiB. GPU 0 has a total capacity of 3.63 GiB of which 272.56 MiB is free. Including non-PyTorch memory, this process has 1.20 GiB memory in use. Process 717987 has 2.16 GiB memory in use. Of the allocated memory 1.08 GiB is allocated by PyTorch, and 35.06 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+  [n=64] optimizer=adamw lr=0.0005 epochs=100
+    Ep 1/100: train=15457.0, val=10420.2
+    FAILED: CUDA out of memory. Tried to allocate 314.00 MiB. GPU 0 has a total capacity of 3.63 GiB of which 272.56 MiB is free. Including non-PyTorch memory, this process has 1.20 GiB memory in use. Process 717987 has 2.16 GiB memory in use. Of the allocated memory 1.08 GiB is allocated by PyTorch, and 35.06 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+DONE — 36 runs

@@ -1,0 +1,1853 @@
+Resuming: 2 completed runs found
+
+============================================================
+STARTING SWEEP
+============================================================
+
+
+############################################################
+# n = 8
+############################################################
+  Generating test data...
+  Test data: 32,000 samples (0.1s)
+  [lgb 1/48] {'num_leaves': 31, 'max_depth': 6, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[999]	train's rmse: 13.0199	val's rmse: 13.1771
+    Test R²=0.5031  RMSE=13.02  ρ=0.7068  time=31.9s  [3/432] ETA 1.7h
+  [lgb 2/48] {'num_leaves': 31, 'max_depth': 6, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[992]	train's rmse: 12.8978	val's rmse: 13.0475
+    Test R²=0.5016  RMSE=13.04  ρ=0.7058  time=24.5s  [4/432] ETA 2.3h
+  [lgb 3/48] {'num_leaves': 31, 'max_depth': 6, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[442]	train's rmse: 12.9424	val's rmse: 13.0982
+    Test R²=0.5010  RMSE=13.05  ρ=0.7055  time=13.7s  [5/432] ETA 2.3h
+  [lgb 4/48] {'num_leaves': 31, 'max_depth': 8, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[999]	train's rmse: 12.9946	val's rmse: 13.0907
+    Test R²=0.5029  RMSE=13.02  ρ=0.7064  time=25.0s  [6/432] ETA 2.6h
+  [lgb 5/48] {'num_leaves': 31, 'max_depth': 8, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[942]	train's rmse: 12.8724	val's rmse: 13.0908
+    Test R²=0.5038  RMSE=13.01  ρ=0.7074  time=22.6s  [7/432] ETA 2.7h
+  [lgb 6/48] {'num_leaves': 31, 'max_depth': 8, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[451]	train's rmse: 12.9862	val's rmse: 13.1315
+    Test R²=0.4991  RMSE=13.07  ρ=0.7039  time=13.0s  [8/432] ETA 2.7h
+  [lgb 7/48] {'num_leaves': 31, 'max_depth': 10, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 12.9994	val's rmse: 13.1889
+    Test R²=0.5040  RMSE=13.01  ρ=0.7072  time=28.9s  [9/432] ETA 2.9h
+  [lgb 8/48] {'num_leaves': 31, 'max_depth': 10, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[736]	train's rmse: 12.9436	val's rmse: 13.0732
+    Test R²=0.5032  RMSE=13.02  ρ=0.7066  time=19.0s  [10/432] ETA 2.9h
+  [lgb 9/48] {'num_leaves': 31, 'max_depth': 10, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[535]	train's rmse: 12.9441	val's rmse: 13.1698
+    Test R²=0.5021  RMSE=13.03  ρ=0.7064  time=15.0s  [11/432] ETA 2.8h
+  [lgb 10/48] {'num_leaves': 31, 'max_depth': 12, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[997]	train's rmse: 13.001	val's rmse: 13.1344
+    Test R²=0.5039  RMSE=13.01  ρ=0.7070  time=24.4s  [12/432] ETA 2.9h
+  [lgb 11/48] {'num_leaves': 31, 'max_depth': 12, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[886]	train's rmse: 12.957	val's rmse: 13.0872
+    Test R²=0.5022  RMSE=13.03  ρ=0.7060  time=22.2s  [13/432] ETA 2.9h
+  [lgb 12/48] {'num_leaves': 31, 'max_depth': 12, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[439]	train's rmse: 12.9694	val's rmse: 13.1326
+    Test R²=0.5018  RMSE=13.04  ρ=0.7062  time=12.6s  [14/432] ETA 2.9h
+  [lgb 13/48] {'num_leaves': 63, 'max_depth': 6, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[999]	train's rmse: 12.9354	val's rmse: 13.0748
+    Test R²=0.5016  RMSE=13.04  ρ=0.7057  time=30.2s  [15/432] ETA 3.0h
+  [lgb 14/48] {'num_leaves': 63, 'max_depth': 6, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[548]	train's rmse: 12.9739	val's rmse: 13.1265
+    Test R²=0.5012  RMSE=13.05  ρ=0.7052  time=23.9s  [16/432] ETA 3.0h
+  [lgb 15/48] {'num_leaves': 63, 'max_depth': 6, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[329]	train's rmse: 12.9602	val's rmse: 13.1096
+    Test R²=0.5007  RMSE=13.05  ρ=0.7045  time=13.1s  [17/432] ETA 3.0h
+  [lgb 16/48] {'num_leaves': 63, 'max_depth': 8, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[850]	train's rmse: 12.9486	val's rmse: 13.1239
+    Test R²=0.5023  RMSE=13.03  ρ=0.7062  time=26.8s  [18/432] ETA 3.1h
+  [lgb 17/48] {'num_leaves': 63, 'max_depth': 8, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[449]	train's rmse: 12.9723	val's rmse: 13.1448
+    Test R²=0.5011  RMSE=13.05  ρ=0.7050  time=15.2s  [19/432] ETA 3.0h
+  [lgb 18/48] {'num_leaves': 63, 'max_depth': 8, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[195]	train's rmse: 12.9259	val's rmse: 13.0891
+    Test R²=0.5030  RMSE=13.02  ρ=0.7064  time=8.6s  [20/432] ETA 2.9h
+  [lgb 19/48] {'num_leaves': 63, 'max_depth': 10, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[907]	train's rmse: 12.9247	val's rmse: 13.0369
+    Test R²=0.5033  RMSE=13.02  ρ=0.7068  time=26.1s  [21/432] ETA 3.0h
+  [lgb 20/48] {'num_leaves': 63, 'max_depth': 10, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[493]	train's rmse: 12.9241	val's rmse: 13.0484
+    Test R²=0.5025  RMSE=13.03  ρ=0.7064  time=15.3s  [22/432] ETA 2.9h
+  [lgb 21/48] {'num_leaves': 63, 'max_depth': 10, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[263]	train's rmse: 12.9377	val's rmse: 13.1351
+    Test R²=0.5015  RMSE=13.04  ρ=0.7058  time=9.7s  [23/432] ETA 2.9h
+  [lgb 22/48] {'num_leaves': 63, 'max_depth': 12, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[843]	train's rmse: 12.9553	val's rmse: 13.0828
+    Test R²=0.5019  RMSE=13.04  ρ=0.7059  time=29.8s  [24/432] ETA 2.9h
+  [lgb 23/48] {'num_leaves': 63, 'max_depth': 12, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[437]	train's rmse: 12.9223	val's rmse: 13.0753
+    Test R²=0.5014  RMSE=13.04  ρ=0.7050  time=15.1s  [25/432] ETA 2.9h
+  [lgb 24/48] {'num_leaves': 63, 'max_depth': 12, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[276]	train's rmse: 12.9293	val's rmse: 13.1278
+    Test R²=0.5009  RMSE=13.05  ρ=0.7056  time=9.9s  [26/432] ETA 2.9h
+  [lgb 25/48] {'num_leaves': 127, 'max_depth': 6, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[999]	train's rmse: 12.8915	val's rmse: 13.0121
+    Test R²=0.5030  RMSE=13.02  ρ=0.7066  time=29.9s  [27/432] ETA 2.9h
+  [lgb 26/48] {'num_leaves': 127, 'max_depth': 6, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[528]	train's rmse: 12.9868	val's rmse: 13.1398
+    Test R²=0.5028  RMSE=13.03  ρ=0.7066  time=18.9s  [28/432] ETA 2.9h
+  [lgb 27/48] {'num_leaves': 127, 'max_depth': 6, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[312]	train's rmse: 12.9057	val's rmse: 13.0401
+    Test R²=0.5007  RMSE=13.05  ρ=0.7054  time=12.4s  [29/432] ETA 2.9h
+  [lgb 28/48] {'num_leaves': 127, 'max_depth': 8, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[487]	train's rmse: 12.94	val's rmse: 13.1012
+    Test R²=0.5041  RMSE=13.01  ρ=0.7074  time=20.9s  [30/432] ETA 2.9h
+  [lgb 29/48] {'num_leaves': 127, 'max_depth': 8, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[244]	train's rmse: 12.9118	val's rmse: 13.0339
+    Test R²=0.5030  RMSE=13.02  ρ=0.7065  time=13.0s  [31/432] ETA 2.9h
+  [lgb 30/48] {'num_leaves': 127, 'max_depth': 8, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[123]	train's rmse: 12.9704	val's rmse: 13.1103
+    Test R²=0.5014  RMSE=13.04  ρ=0.7058  time=8.3s  [32/432] ETA 2.8h
+  [lgb 31/48] {'num_leaves': 127, 'max_depth': 10, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[366]	train's rmse: 12.9345	val's rmse: 13.0964
+    Test R²=0.5024  RMSE=13.03  ρ=0.7057  time=15.9s  [33/432] ETA 2.8h
+  [lgb 32/48] {'num_leaves': 127, 'max_depth': 10, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[192]	train's rmse: 12.9223	val's rmse: 13.0595
+    Test R²=0.5013  RMSE=13.04  ρ=0.7048  time=10.0s  [34/432] ETA 2.7h
+  [lgb 33/48] {'num_leaves': 127, 'max_depth': 10, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[87]	train's rmse: 12.9654	val's rmse: 13.1164
+    Test R²=0.5018  RMSE=13.04  ρ=0.7053  time=6.4s  [35/432] ETA 2.7h
+  [lgb 34/48] {'num_leaves': 127, 'max_depth': 12, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[443]	train's rmse: 12.8641	val's rmse: 13.007
+    Test R²=0.5023  RMSE=13.03  ρ=0.7056  time=17.8s  [36/432] ETA 2.7h
+  [lgb 35/48] {'num_leaves': 127, 'max_depth': 12, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[211]	train's rmse: 12.9421	val's rmse: 13.1229
+    Test R²=0.5029  RMSE=13.02  ρ=0.7063  time=10.5s  [37/432] ETA 2.6h
+  [lgb 36/48] {'num_leaves': 127, 'max_depth': 12, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[116]	train's rmse: 12.9727	val's rmse: 13.1861
+    Test R²=0.5004  RMSE=13.06  ρ=0.7049  time=7.0s  [38/432] ETA 2.6h
+  [lgb 37/48] {'num_leaves': 255, 'max_depth': 6, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 12.9562	val's rmse: 13.0562
+    Test R²=0.5013  RMSE=13.05  ρ=0.7053  time=30.0s  [39/432] ETA 2.6h
+  [lgb 38/48] {'num_leaves': 255, 'max_depth': 6, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[651]	train's rmse: 12.8903	val's rmse: 13.0878
+    Test R²=0.5014  RMSE=13.04  ρ=0.7055  time=22.9s  [40/432] ETA 2.7h
+  [lgb 39/48] {'num_leaves': 255, 'max_depth': 6, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[244]	train's rmse: 12.9385	val's rmse: 13.0585
+    Test R²=0.5018  RMSE=13.04  ρ=0.7058  time=10.9s  [41/432] ETA 2.6h
+  [lgb 40/48] {'num_leaves': 255, 'max_depth': 8, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[435]	train's rmse: 12.8883	val's rmse: 13.0687
+    Test R²=0.5032  RMSE=13.02  ρ=0.7067  time=20.5s  [42/432] ETA 2.6h
+  [lgb 41/48] {'num_leaves': 255, 'max_depth': 8, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[182]	train's rmse: 12.9287	val's rmse: 13.0944
+    Test R²=0.5020  RMSE=13.04  ρ=0.7059  time=11.3s  [43/432] ETA 2.6h
+  [lgb 42/48] {'num_leaves': 255, 'max_depth': 8, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[75]	train's rmse: 12.9933	val's rmse: 13.2632
+    Test R²=0.5015  RMSE=13.04  ρ=0.7056  time=8.8s  [44/432] ETA 2.6h
+  [lgb 43/48] {'num_leaves': 255, 'max_depth': 10, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[255]	train's rmse: 12.9356	val's rmse: 13.0602
+    Test R²=0.5035  RMSE=13.02  ρ=0.7072  time=16.0s  [45/432] ETA 2.6h
+  [lgb 44/48] {'num_leaves': 255, 'max_depth': 10, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[100]	train's rmse: 12.9605	val's rmse: 13.1154
+    Test R²=0.5047  RMSE=13.00  ρ=0.7078  time=9.2s  [46/432] ETA 2.5h
+  [lgb 45/48] {'num_leaves': 255, 'max_depth': 10, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[57]	train's rmse: 12.9254	val's rmse: 13.1148
+    Test R²=0.5020  RMSE=13.04  ρ=0.7060  time=7.4s  [47/432] ETA 2.5h
+  [lgb 46/48] {'num_leaves': 255, 'max_depth': 12, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[170]	train's rmse: 12.9256	val's rmse: 13.103
+    Test R²=0.5020  RMSE=13.04  ρ=0.7056  time=12.5s  [48/432] ETA 2.5h
+  [lgb 47/48] {'num_leaves': 255, 'max_depth': 12, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[85]	train's rmse: 12.9219	val's rmse: 13.0682
+    Test R²=0.5038  RMSE=13.01  ρ=0.7069  time=8.4s  [49/432] ETA 2.4h
+  [lgb 48/48] {'num_leaves': 255, 'max_depth': 12, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[51]	train's rmse: 12.9279	val's rmse: 13.1018
+    Test R²=0.5015  RMSE=13.04  ρ=0.7054  time=8.0s  [50/432] ETA 2.4h
+  [mlp 1/6] {'hidden_dim': 128, 'epochs': 15, 'learning_rate': 0.001}
+    Epoch 1/15: train=346.3, val=230.5
+    Epoch 2/15: train=198.9, val=183.0
+    Epoch 3/15: train=181.9, val=177.8
+    Epoch 4/15: train=178.6, val=176.7
+    Epoch 5/15: train=176.6, val=174.6
+    Epoch 6/15: train=176.0, val=169.7
+    Epoch 7/15: train=175.5, val=170.0
+    Epoch 8/15: train=175.5, val=171.2
+    Epoch 9/15: train=175.9, val=171.2
+    Epoch 10/15: train=173.0, val=171.7
+    Epoch 11/15: train=174.4, val=172.7
+    Epoch 12/15: train=173.9, val=172.1
+    Epoch 13/15: train=174.6, val=171.0
+    Epoch 14/15: train=173.9, val=169.5
+    Epoch 15/15: train=174.4, val=170.3
+    Test R²=0.5015  RMSE=13.04  ρ=0.7067  time=25.1s  [51/432] ETA 2.4h
+  [mlp 2/6] {'hidden_dim': 128, 'epochs': 25, 'learning_rate': 0.001}
+    Epoch 1/25: train=342.0, val=219.6
+    Epoch 2/25: train=191.6, val=179.5
+    Epoch 3/25: train=179.8, val=176.3
+    Epoch 4/25: train=176.2, val=172.4
+    Epoch 5/25: train=176.3, val=172.1
+    Epoch 6/25: train=172.7, val=172.2
+    Epoch 7/25: train=175.0, val=173.8
+    Epoch 8/25: train=174.8, val=169.3
+    Epoch 9/25: train=174.7, val=173.3
+    Epoch 10/25: train=173.0, val=169.4
+    Epoch 11/25: train=174.3, val=170.0
+    Epoch 12/25: train=173.8, val=173.0
+    Epoch 13/25: train=173.5, val=167.3
+    Epoch 14/25: train=173.5, val=169.1
+    Epoch 15/25: train=173.4, val=170.9
+    Epoch 16/25: train=174.9, val=168.2
+    Epoch 17/25: train=174.8, val=169.2
+    Epoch 18/25: train=172.5, val=171.2
+    Epoch 19/25: train=174.7, val=168.6
+    Epoch 20/25: train=173.3, val=171.0
+    Epoch 21/25: train=171.8, val=170.6
+    Epoch 22/25: train=172.3, val=167.3
+    Epoch 23/25: train=172.6, val=169.8
+    Epoch 24/25: train=173.3, val=166.1
+    Epoch 25/25: train=173.6, val=166.1
+    Test R²=0.5040  RMSE=13.01  ρ=0.7080  time=41.4s  [52/432] ETA 2.4h
+  [mlp 3/6] {'hidden_dim': 256, 'epochs': 15, 'learning_rate': 0.001}
+    Epoch 1/15: train=306.1, val=190.9
+    Epoch 2/15: train=180.1, val=175.7
+    Epoch 3/15: train=174.7, val=176.2
+    Epoch 4/15: train=173.4, val=175.6
+    Epoch 5/15: train=173.3, val=168.0
+    Epoch 6/15: train=173.3, val=172.6
+    Epoch 7/15: train=173.4, val=167.4
+    Epoch 8/15: train=173.8, val=170.3
+    Epoch 9/15: train=171.9, val=172.2
+    Epoch 10/15: train=172.1, val=170.7
+    Epoch 11/15: train=172.1, val=170.6
+    Epoch 12/15: train=172.4, val=171.1
+    Epoch 13/15: train=174.1, val=170.6
+    Epoch 14/15: train=172.3, val=170.9
+    Epoch 15/15: train=172.2, val=172.5
+    Test R²=0.5035  RMSE=13.02  ρ=0.7078  time=24.7s  [53/432] ETA 2.4h
+  [mlp 4/6] {'hidden_dim': 256, 'epochs': 25, 'learning_rate': 0.001}
+    Epoch 1/25: train=306.8, val=188.1
+    Epoch 2/25: train=181.9, val=174.6
+    Epoch 3/25: train=175.8, val=172.7
+    Epoch 4/25: train=174.7, val=172.4
+    Epoch 5/25: train=174.7, val=168.0
+    Epoch 6/25: train=171.6, val=173.3
+    Epoch 7/25: train=172.1, val=172.6
+    Epoch 8/25: train=173.8, val=170.3
+    Epoch 9/25: train=174.2, val=170.0
+    Epoch 10/25: train=173.0, val=170.3
+    Epoch 11/25: train=174.0, val=169.8
+    Epoch 12/25: train=173.5, val=168.0
+    Epoch 13/25: train=173.9, val=172.0
+    Epoch 14/25: train=171.6, val=166.8
+    Epoch 15/25: train=173.2, val=168.8
+    Epoch 16/25: train=173.2, val=169.1
+    Epoch 17/25: train=171.0, val=168.7
+    Epoch 18/25: train=171.5, val=170.6
+    Epoch 19/25: train=172.7, val=168.6
+    Epoch 20/25: train=171.3, val=169.0
+    Epoch 21/25: train=171.3, val=170.6
+    Epoch 22/25: train=172.3, val=171.6
+    Epoch 23/25: train=172.2, val=167.9
+    Epoch 24/25: train=171.2, val=168.0
+    Epoch 25/25: train=172.0, val=168.8
+    Test R²=0.5048  RMSE=13.00  ρ=0.7085  time=40.6s  [54/432] ETA 2.5h
+  [mlp 5/6] {'hidden_dim': 512, 'epochs': 15, 'learning_rate': 0.001}
+    Epoch 1/15: train=273.9, val=177.4
+    Epoch 2/15: train=177.0, val=172.1
+    Epoch 3/15: train=173.7, val=170.5
+    Epoch 4/15: train=173.6, val=169.0
+    Epoch 5/15: train=175.1, val=171.6
+    Epoch 6/15: train=173.6, val=172.1
+    Epoch 7/15: train=174.0, val=170.6
+    Epoch 8/15: train=173.2, val=165.6
+    Epoch 9/15: train=171.6, val=172.7
+    Epoch 10/15: train=172.3, val=170.3
+    Epoch 11/15: train=173.2, val=171.6
+    Epoch 12/15: train=171.3, val=168.3
+    Epoch 13/15: train=171.9, val=169.5
+    Epoch 14/15: train=171.4, val=167.4
+    Epoch 15/15: train=172.8, val=172.0
+    Test R²=0.5043  RMSE=13.01  ρ=0.7080  time=25.3s  [55/432] ETA 2.5h
+  [mlp 6/6] {'hidden_dim': 512, 'epochs': 25, 'learning_rate': 0.001}
+    Epoch 1/25: train=270.9, val=179.6
+    Epoch 2/25: train=178.0, val=172.4
+    Epoch 3/25: train=174.2, val=171.3
+    Epoch 4/25: train=175.1, val=171.3
+    Epoch 5/25: train=173.7, val=171.7
+    Epoch 6/25: train=174.0, val=170.4
+    Epoch 7/25: train=172.5, val=171.1
+    Epoch 8/25: train=173.6, val=170.3
+    Epoch 9/25: train=172.1, val=171.3
+    Epoch 10/25: train=173.7, val=167.4
+    Epoch 11/25: train=173.0, val=169.3
+    Epoch 12/25: train=171.5, val=170.9
+    Epoch 13/25: train=172.8, val=170.4
+    Epoch 14/25: train=172.2, val=168.2
+    Epoch 15/25: train=171.3, val=169.3
+    Epoch 16/25: train=172.7, val=170.0
+    Epoch 17/25: train=172.7, val=169.9
+    Epoch 18/25: train=171.7, val=169.1
+    Epoch 19/25: train=170.9, val=166.3
+    Epoch 20/25: train=171.8, val=168.1
+    Epoch 21/25: train=172.9, val=169.3
+    Epoch 22/25: train=172.3, val=166.7
+    Epoch 23/25: train=170.7, val=173.1
+    Epoch 24/25: train=172.7, val=169.2
+    Epoch 25/25: train=172.2, val=170.3
+    Test R²=0.5053  RMSE=12.99  ρ=0.7091  time=43.6s  [56/432] ETA 2.5h
+
+############################################################
+# n = 16
+############################################################
+  Generating test data...
+  Test data: 64,000 samples (0.3s)
+  [lgb 1/48] {'num_leaves': 31, 'max_depth': 6, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 23.4507	val's rmse: 23.8555
+    Test R²=0.5725  RMSE=24.16  ρ=0.7516  time=38.1s  [57/432] ETA 2.5h
+  [lgb 2/48] {'num_leaves': 31, 'max_depth': 6, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 23.2645	val's rmse: 23.9418
+    Test R²=0.5713  RMSE=24.19  ρ=0.7504  time=36.1s  [58/432] ETA 2.6h
+  [lgb 3/48] {'num_leaves': 31, 'max_depth': 6, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[999]	train's rmse: 22.7227	val's rmse: 23.8774
+    Test R²=0.5690  RMSE=24.26  ρ=0.7498  time=39.6s  [59/432] ETA 2.6h
+  [lgb 4/48] {'num_leaves': 31, 'max_depth': 8, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 23.5905	val's rmse: 23.844
+    Test R²=0.5713  RMSE=24.19  ρ=0.7507  time=37.6s  [60/432] ETA 2.7h
+  [lgb 5/48] {'num_leaves': 31, 'max_depth': 8, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[995]	train's rmse: 23.0034	val's rmse: 23.6694
+    Test R²=0.5729  RMSE=24.15  ρ=0.7517  time=33.7s  [61/432] ETA 2.7h
+  [lgb 6/48] {'num_leaves': 31, 'max_depth': 8, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[996]	train's rmse: 22.5776	val's rmse: 23.7188
+    Test R²=0.5677  RMSE=24.29  ρ=0.7487  time=31.7s  [62/432] ETA 2.7h
+  [lgb 7/48] {'num_leaves': 31, 'max_depth': 10, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 23.474	val's rmse: 23.9132
+    Test R²=0.5732  RMSE=24.14  ρ=0.7518  time=36.1s  [63/432] ETA 2.7h
+  [lgb 8/48] {'num_leaves': 31, 'max_depth': 10, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 23.2032	val's rmse: 24.0583
+    Test R²=0.5742  RMSE=24.11  ρ=0.7525  time=40.7s  [64/432] ETA 2.8h
+  [lgb 9/48] {'num_leaves': 31, 'max_depth': 10, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[999]	train's rmse: 22.6033	val's rmse: 23.8859
+    Test R²=0.5669  RMSE=24.32  ρ=0.7481  time=31.7s  [65/432] ETA 2.8h
+  [lgb 10/48] {'num_leaves': 31, 'max_depth': 12, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[999]	train's rmse: 23.5683	val's rmse: 23.9181
+    Test R²=0.5718  RMSE=24.18  ρ=0.7507  time=36.5s  [66/432] ETA 2.8h
+  [lgb 11/48] {'num_leaves': 31, 'max_depth': 12, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 23.0815	val's rmse: 23.7309
+    Test R²=0.5731  RMSE=24.14  ρ=0.7517  time=33.2s  [67/432] ETA 2.8h
+  [lgb 12/48] {'num_leaves': 31, 'max_depth': 12, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[992]	train's rmse: 22.4823	val's rmse: 23.806
+    Test R²=0.5688  RMSE=24.26  ρ=0.7490  time=31.4s  [68/432] ETA 2.8h
+  [lgb 13/48] {'num_leaves': 63, 'max_depth': 6, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 23.2539	val's rmse: 23.8695
+    Test R²=0.5744  RMSE=24.11  ρ=0.7531  time=50.4s  [69/432] ETA 2.9h
+  [lgb 14/48] {'num_leaves': 63, 'max_depth': 6, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[998]	train's rmse: 22.8126	val's rmse: 23.8787
+    Test R²=0.5735  RMSE=24.13  ρ=0.7525  time=38.2s  [70/432] ETA 2.9h
+  [lgb 15/48] {'num_leaves': 63, 'max_depth': 6, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[970]	train's rmse: 22.3889	val's rmse: 23.884
+    Test R²=0.5639  RMSE=24.40  ρ=0.7470  time=37.4s  [71/432] ETA 2.9h
+  [lgb 16/48] {'num_leaves': 63, 'max_depth': 8, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 23.0854	val's rmse: 23.7898
+    Test R²=0.5724  RMSE=24.16  ρ=0.7514  time=50.3s  [72/432] ETA 3.0h
+  [lgb 17/48] {'num_leaves': 63, 'max_depth': 8, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 18/48] {'num_leaves': 63, 'max_depth': 8, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[792]	train's rmse: 22.2042	val's rmse: 23.7851
+    Test R²=0.5652  RMSE=24.36  ρ=0.7472  time=31.2s  [73/432] ETA 3.0h
+  [lgb 19/48] {'num_leaves': 63, 'max_depth': 10, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 23.0327	val's rmse: 23.8412
+    Test R²=0.5719  RMSE=24.18  ρ=0.7509  time=48.5s  [74/432] ETA 3.0h
+  [lgb 20/48] {'num_leaves': 63, 'max_depth': 10, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 22.4368	val's rmse: 23.6549
+    Test R²=0.5700  RMSE=24.23  ρ=0.7499  time=37.9s  [75/432] ETA 3.0h
+  [lgb 21/48] {'num_leaves': 63, 'max_depth': 10, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[906]	train's rmse: 21.8708	val's rmse: 23.6381
+    Test R²=0.5614  RMSE=24.47  ρ=0.7444  time=32.8s  [76/432] ETA 3.0h
+  [lgb 22/48] {'num_leaves': 63, 'max_depth': 12, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 22.9984	val's rmse: 23.7322
+    Test R²=0.5740  RMSE=24.12  ρ=0.7525  time=37.5s  [77/432] ETA 3.1h
+  [lgb 23/48] {'num_leaves': 63, 'max_depth': 12, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[998]	train's rmse: 22.4333	val's rmse: 23.7784
+    Test R²=0.5713  RMSE=24.19  ρ=0.7502  time=41.8s  [78/432] ETA 3.1h
+  [lgb 24/48] {'num_leaves': 63, 'max_depth': 12, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[792]	train's rmse: 21.8964	val's rmse: 23.5688
+    Test R²=0.5602  RMSE=24.50  ρ=0.7438  time=28.5s  [79/432] ETA 3.1h
+  [lgb 25/48] {'num_leaves': 127, 'max_depth': 6, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[999]	train's rmse: 23.2554	val's rmse: 23.9031
+    Test R²=0.5738  RMSE=24.12  ρ=0.7523  time=49.3s  [80/432] ETA 3.1h
+  [lgb 26/48] {'num_leaves': 127, 'max_depth': 6, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[999]	train's rmse: 22.8516	val's rmse: 23.7765
+    Test R²=0.5720  RMSE=24.17  ρ=0.7517  time=38.3s  [81/432] ETA 3.1h
+  [lgb 27/48] {'num_leaves': 127, 'max_depth': 6, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[987]	train's rmse: 22.2716	val's rmse: 23.7496
+    Test R²=0.5669  RMSE=24.32  ρ=0.7484  time=36.4s  [82/432] ETA 3.1h
+  [lgb 28/48] {'num_leaves': 127, 'max_depth': 8, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[994]	train's rmse: 22.699	val's rmse: 23.8063
+    Test R²=0.5723  RMSE=24.16  ρ=0.7515  time=57.2s  [83/432] ETA 3.2h
+  [lgb 29/48] {'num_leaves': 127, 'max_depth': 8, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[741]	train's rmse: 22.3196	val's rmse: 23.6887
+    Test R²=0.5713  RMSE=24.19  ρ=0.7506  time=34.7s  [84/432] ETA 3.2h
+  [lgb 30/48] {'num_leaves': 127, 'max_depth': 8, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[418]	train's rmse: 22.2298	val's rmse: 23.9282
+    Test R²=0.5648  RMSE=24.38  ρ=0.7470  time=21.8s  [85/432] ETA 3.2h
+  [lgb 31/48] {'num_leaves': 127, 'max_depth': 10, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[998]	train's rmse: 22.38	val's rmse: 23.669
+    Test R²=0.5717  RMSE=24.18  ρ=0.7509  time=55.1s  [86/432] ETA 3.2h
+  [lgb 32/48] {'num_leaves': 127, 'max_depth': 10, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[871]	train's rmse: 22.0233	val's rmse: 23.7436
+    Test R²=0.5682  RMSE=24.28  ρ=0.7486  time=37.7s  [87/432] ETA 3.2h
+  [lgb 33/48] {'num_leaves': 127, 'max_depth': 10, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[426]	train's rmse: 21.9722	val's rmse: 23.7428
+    Test R²=0.5616  RMSE=24.46  ρ=0.7445  time=25.8s  [88/432] ETA 3.2h
+  [lgb 34/48] {'num_leaves': 127, 'max_depth': 12, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 22.5025	val's rmse: 23.7182
+    Test R²=0.5741  RMSE=24.11  ρ=0.7524  time=41.0s  [89/432] ETA 3.2h
+  [lgb 35/48] {'num_leaves': 127, 'max_depth': 12, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[828]	train's rmse: 21.8582	val's rmse: 23.6566
+    Test R²=0.5627  RMSE=24.43  ρ=0.7449  time=43.5s  [90/432] ETA 3.2h
+  [lgb 36/48] {'num_leaves': 127, 'max_depth': 12, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[319]	train's rmse: 22.2108	val's rmse: 23.8071
+    Test R²=0.5648  RMSE=24.37  ρ=0.7469  time=20.6s  [91/432] ETA 3.2h
+  [lgb 37/48] {'num_leaves': 255, 'max_depth': 6, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[999]	train's rmse: 23.2784	val's rmse: 23.748
+    Test R²=0.5725  RMSE=24.16  ρ=0.7512  time=41.0s  [92/432] ETA 3.2h
+  [lgb 38/48] {'num_leaves': 255, 'max_depth': 6, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[999]	train's rmse: 22.9117	val's rmse: 23.8661
+    Test R²=0.5713  RMSE=24.19  ρ=0.7508  time=46.2s  [93/432] ETA 3.2h
+  [lgb 39/48] {'num_leaves': 255, 'max_depth': 6, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[991]	train's rmse: 22.3613	val's rmse: 23.7748
+    Test R²=0.5692  RMSE=24.25  ρ=0.7502  time=36.0s  [94/432] ETA 3.3h
+  [lgb 40/48] {'num_leaves': 255, 'max_depth': 8, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[978]	train's rmse: 22.6169	val's rmse: 23.8281
+    Test R²=0.5719  RMSE=24.18  ρ=0.7512  time=45.3s  [95/432] ETA 3.3h
+  [lgb 41/48] {'num_leaves': 255, 'max_depth': 8, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[900]	train's rmse: 22.0706	val's rmse: 23.7958
+    Test R²=0.5668  RMSE=24.32  ρ=0.7479  time=41.2s  [96/432] ETA 3.3h
+  [lgb 42/48] {'num_leaves': 255, 'max_depth': 8, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[526]	train's rmse: 21.9396	val's rmse: 23.7425
+    Test R²=0.5597  RMSE=24.52  ρ=0.7434  time=26.1s  [97/432] ETA 3.3h
+  [lgb 43/48] {'num_leaves': 255, 'max_depth': 10, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[999]	train's rmse: 21.9582	val's rmse: 23.7198
+    Test R²=0.5678  RMSE=24.29  ρ=0.7482  time=48.1s  [98/432] ETA 3.3h
+  [lgb 44/48] {'num_leaves': 255, 'max_depth': 10, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[408]	train's rmse: 22.1048	val's rmse: 23.8043
+    Test R²=0.5700  RMSE=24.23  ρ=0.7499  time=33.8s  [99/432] ETA 3.3h
+  [lgb 45/48] {'num_leaves': 255, 'max_depth': 10, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[203]	train's rmse: 22.1305	val's rmse: 23.6845
+    Test R²=0.5666  RMSE=24.32  ρ=0.7485  time=15.5s  [100/432] ETA 3.3h
+  [lgb 46/48] {'num_leaves': 255, 'max_depth': 12, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[783]	train's rmse: 22.004	val's rmse: 23.6804
+    Test R²=0.5668  RMSE=24.32  ρ=0.7470  time=42.2s  [101/432] ETA 3.3h
+  [lgb 47/48] {'num_leaves': 255, 'max_depth': 12, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[327]	train's rmse: 22.1282	val's rmse: 23.8075
+    Test R²=0.5699  RMSE=24.23  ρ=0.7496  time=21.5s  [102/432] ETA 3.3h
+  [lgb 48/48] {'num_leaves': 255, 'max_depth': 12, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[190]	train's rmse: 22.1406	val's rmse: 23.9322
+    Test R²=0.5652  RMSE=24.36  ρ=0.7464  time=14.3s  [103/432] ETA 3.3h
+  [mlp 1/6] {'hidden_dim': 128, 'epochs': 15, 'learning_rate': 0.001}
+    Epoch 1/15: train=1152.7, val=800.5
+    Epoch 2/15: train=696.9, val=657.4
+    Epoch 3/15: train=625.4, val=611.6
+    Epoch 4/15: train=603.3, val=601.4
+    Epoch 5/15: train=597.6, val=593.8
+    Epoch 6/15: train=592.7, val=582.7
+    Epoch 7/15: train=588.4, val=590.6
+    Epoch 8/15: train=586.1, val=592.8
+    Epoch 9/15: train=581.6, val=589.0
+    Epoch 10/15: train=582.9, val=590.7
+    Epoch 11/15: train=576.6, val=581.1
+    Epoch 12/15: train=579.4, val=573.4
+    Epoch 13/15: train=576.7, val=579.7
+    Epoch 14/15: train=572.8, val=582.7
+    Epoch 15/15: train=576.2, val=565.8
+    Test R²=0.5766  RMSE=24.04  ρ=0.7553  time=68.4s  [104/432] ETA 3.3h
+  [mlp 2/6] {'hidden_dim': 128, 'epochs': 25, 'learning_rate': 0.001}
+    Epoch 1/25: train=1135.8, val=789.5
+    Epoch 2/25: train=679.5, val=656.2
+    Epoch 3/25: train=626.1, val=621.2
+    Epoch 4/25: train=609.8, val=608.4
+    Epoch 5/25: train=599.5, val=590.9
+    Epoch 6/25: train=589.5, val=599.1
+    Epoch 7/25: train=591.2, val=594.0
+    Epoch 8/25: train=587.3, val=593.3
+    Epoch 9/25: train=584.9, val=595.5
+    Epoch 10/25: train=581.7, val=597.4
+    Epoch 11/25: train=581.6, val=585.0
+    Epoch 12/25: train=584.2, val=594.0
+    Epoch 13/25: train=582.1, val=590.3
+    Epoch 14/25: train=578.5, val=576.3
+    Epoch 15/25: train=575.0, val=584.4
+    Epoch 16/25: train=574.4, val=587.5
+    Epoch 17/25: train=574.9, val=578.6
+    Epoch 18/25: train=578.3, val=582.6
+    Epoch 19/25: train=574.7, val=581.1
+    Epoch 20/25: train=575.9, val=573.2
+    Epoch 21/25: train=576.9, val=595.2
+    Epoch 22/25: train=568.5, val=578.6
+    Epoch 23/25: train=574.8, val=572.7
+    Epoch 24/25: train=577.0, val=578.3
+    Epoch 25/25: train=572.3, val=576.4
+    Test R²=0.5755  RMSE=24.07  ρ=0.7549  time=116.1s  [105/432] ETA 3.3h
+  [mlp 3/6] {'hidden_dim': 256, 'epochs': 15, 'learning_rate': 0.001}
+    Epoch 1/15: train=1023.1, val=682.0
+    Epoch 2/15: train=628.4, val=617.9
+    Epoch 3/15: train=596.8, val=618.4
+    Epoch 4/15: train=588.0, val=584.7
+    Epoch 5/15: train=582.9, val=589.5
+    Epoch 6/15: train=580.5, val=586.4
+    Epoch 7/15: train=583.4, val=579.1
+    Epoch 8/15: train=577.8, val=578.9
+    Epoch 9/15: train=575.7, val=591.5
+    Epoch 10/15: train=571.7, val=580.9
+    Epoch 11/15: train=572.5, val=565.8
+    Epoch 12/15: train=570.8, val=594.2
+    Epoch 13/15: train=572.2, val=583.8
+    Epoch 14/15: train=567.6, val=566.5
+    Epoch 15/15: train=574.3, val=575.6
+    Test R²=0.5787  RMSE=23.98  ρ=0.7562  time=66.9s  [106/432] ETA 3.3h
+  [mlp 4/6] {'hidden_dim': 256, 'epochs': 25, 'learning_rate': 0.001}
+    Epoch 1/25: train=1011.3, val=675.7
+    Epoch 2/25: train=625.5, val=601.9
+    Epoch 3/25: train=597.7, val=593.4
+    Epoch 4/25: train=586.8, val=602.4
+    Epoch 5/25: train=581.1, val=578.1
+    Epoch 6/25: train=577.1, val=588.1
+    Epoch 7/25: train=586.5, val=575.5
+    Epoch 8/25: train=571.0, val=580.0
+    Epoch 9/25: train=572.3, val=586.0
+    Epoch 10/25: train=578.9, val=575.2
+    Epoch 11/25: train=574.7, val=580.8
+    Epoch 12/25: train=579.0, val=583.9
+    Epoch 13/25: train=575.1, val=560.7
+    Epoch 14/25: train=575.0, val=575.7
+    Epoch 15/25: train=570.7, val=578.7
+    Epoch 16/25: train=571.6, val=584.2
+    Epoch 17/25: train=570.9, val=595.2
+    Epoch 18/25: train=567.3, val=576.2
+    Epoch 19/25: train=571.4, val=585.0
+    Epoch 20/25: train=572.2, val=582.3
+    Epoch 21/25: train=576.1, val=575.5
+    Epoch 22/25: train=569.9, val=568.4
+    Epoch 23/25: train=571.7, val=566.2
+    Epoch 24/25: train=570.5, val=578.0
+    Epoch 25/25: train=572.4, val=566.4
+    Test R²=0.5797  RMSE=23.96  ρ=0.7572  time=113.8s  [107/432] ETA 3.4h
+  [mlp 5/6] {'hidden_dim': 512, 'epochs': 15, 'learning_rate': 0.001}
+    Epoch 1/15: train=880.0, val=616.7
+    Epoch 2/15: train=595.5, val=592.2
+    Epoch 3/15: train=585.1, val=600.0
+    Epoch 4/15: train=579.8, val=581.9
+    Epoch 5/15: train=578.3, val=578.7
+    Epoch 6/15: train=573.6, val=580.0
+    Epoch 7/15: train=573.5, val=578.1
+    Epoch 8/15: train=569.3, val=565.1
+    Epoch 9/15: train=573.3, val=574.6
+    Epoch 10/15: train=570.3, val=568.9
+    Epoch 11/15: train=567.1, val=580.6
+    Epoch 12/15: train=565.4, val=589.0
+    Epoch 13/15: train=570.3, val=580.2
+    Epoch 14/15: train=568.7, val=587.1
+    Epoch 15/15: train=569.0, val=573.6
+    Test R²=0.5799  RMSE=23.95  ρ=0.7570  time=73.1s  [108/432] ETA 3.4h
+  [mlp 6/6] {'hidden_dim': 512, 'epochs': 25, 'learning_rate': 0.001}
+    Epoch 1/25: train=886.1, val=603.9
+    Epoch 2/25: train=594.0, val=593.9
+    Epoch 3/25: train=580.1, val=579.7
+    Epoch 4/25: train=572.3, val=579.1
+    Epoch 5/25: train=570.9, val=570.6
+    Epoch 6/25: train=570.9, val=572.5
+    Epoch 7/25: train=569.5, val=581.8
+    Epoch 8/25: train=569.6, val=557.4
+    Epoch 9/25: train=570.1, val=578.1
+    Epoch 10/25: train=572.2, val=582.3
+    Epoch 11/25: train=566.9, val=566.7
+    Epoch 12/25: train=570.1, val=567.3
+    Epoch 13/25: train=569.3, val=559.1
+    Epoch 14/25: train=558.5, val=563.9
+    Epoch 15/25: train=566.4, val=569.7
+    Epoch 16/25: train=565.9, val=564.2
+    Epoch 17/25: train=568.9, val=580.1
+    Epoch 18/25: train=565.6, val=575.2
+    Epoch 19/25: train=565.6, val=574.4
+    Epoch 20/25: train=564.7, val=560.2
+    Epoch 21/25: train=563.1, val=559.1
+    Epoch 22/25: train=561.3, val=565.7
+    Epoch 23/25: train=566.2, val=554.9
+    Epoch 24/25: train=566.6, val=575.8
+    Epoch 25/25: train=570.1, val=586.5
+    Test R²=0.5817  RMSE=23.90  ρ=0.7580  time=124.3s  [109/432] ETA 3.5h
+
+############################################################
+# n = 24
+############################################################
+  Generating test data...
+  Test data: 96,000 samples (0.6s)
+  [lgb 1/48] {'num_leaves': 31, 'max_depth': 6, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 33.5938	val's rmse: 34.31
+    Test R²=0.5869  RMSE=35.62  ρ=0.7617  time=57.4s  [110/432] ETA 3.5h
+  [lgb 2/48] {'num_leaves': 31, 'max_depth': 6, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 32.8633	val's rmse: 33.9966
+    Test R²=0.5908  RMSE=35.45  ρ=0.7652  time=52.3s  [111/432] ETA 3.5h
+  [lgb 3/48] {'num_leaves': 31, 'max_depth': 6, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 31.8994	val's rmse: 33.7844
+    Test R²=0.5845  RMSE=35.73  ρ=0.7612  time=47.7s  [112/432] ETA 3.5h
+  [lgb 4/48] {'num_leaves': 31, 'max_depth': 8, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 33.5853	val's rmse: 34.5088
+    Test R²=0.5878  RMSE=35.59  ρ=0.7622  time=57.4s  [113/432] ETA 3.5h
+  [lgb 5/48] {'num_leaves': 31, 'max_depth': 8, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 32.8558	val's rmse: 34.0185
+    Test R²=0.5886  RMSE=35.55  ρ=0.7633  time=50.5s  [114/432] ETA 3.5h
+  [lgb 6/48] {'num_leaves': 31, 'max_depth': 8, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[998]	train's rmse: 31.593	val's rmse: 33.8092
+    Test R²=0.5872  RMSE=35.61  ρ=0.7632  time=46.1s  [115/432] ETA 3.5h
+  [lgb 7/48] {'num_leaves': 31, 'max_depth': 10, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 33.451	val's rmse: 34.1279
+    Test R²=0.5873  RMSE=35.61  ρ=0.7619  time=58.3s  [116/432] ETA 3.6h
+  [lgb 8/48] {'num_leaves': 31, 'max_depth': 10, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 32.8963	val's rmse: 34.2011
+    Test R²=0.5880  RMSE=35.58  ρ=0.7627  time=51.0s  [117/432] ETA 3.6h
+  [lgb 9/48] {'num_leaves': 31, 'max_depth': 10, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[996]	train's rmse: 31.5183	val's rmse: 33.7508
+    Test R²=0.5823  RMSE=35.82  ρ=0.7602  time=44.8s  [118/432] ETA 3.6h
+  [lgb 10/48] {'num_leaves': 31, 'max_depth': 12, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 33.393	val's rmse: 33.9536
+    Test R²=0.5887  RMSE=35.55  ρ=0.7631  time=58.6s  [119/432] ETA 3.6h
+  [lgb 11/48] {'num_leaves': 31, 'max_depth': 12, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 32.7533	val's rmse: 33.9397
+    Test R²=0.5897  RMSE=35.50  ρ=0.7640  time=50.8s  [120/432] ETA 3.6h
+  [lgb 12/48] {'num_leaves': 31, 'max_depth': 12, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[998]	train's rmse: 31.5962	val's rmse: 33.8465
+    Test R²=0.5840  RMSE=35.75  ρ=0.7609  time=45.5s  [121/432] ETA 3.6h
+  [lgb 13/48] {'num_leaves': 63, 'max_depth': 6, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 33.2465	val's rmse: 34.0368
+    Test R²=0.5891  RMSE=35.53  ρ=0.7633  time=64.3s  [122/432] ETA 3.6h
+  [lgb 14/48] {'num_leaves': 63, 'max_depth': 6, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[999]	train's rmse: 32.3066	val's rmse: 33.9162
+    Test R²=0.5884  RMSE=35.56  ρ=0.7632  time=57.6s  [123/432] ETA 3.6h
+  [lgb 15/48] {'num_leaves': 63, 'max_depth': 6, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[998]	train's rmse: 31.0361	val's rmse: 33.679
+    Test R²=0.5809  RMSE=35.88  ρ=0.7594  time=54.7s  [124/432] ETA 3.6h
+  [lgb 16/48] {'num_leaves': 63, 'max_depth': 8, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 32.8617	val's rmse: 34.1787
+    Test R²=0.5900  RMSE=35.49  ρ=0.7638  time=65.6s  [125/432] ETA 3.6h
+  [lgb 17/48] {'num_leaves': 63, 'max_depth': 8, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 31.5615	val's rmse: 33.7846
+    Test R²=0.5894  RMSE=35.52  ρ=0.7639  time=57.7s  [126/432] ETA 3.6h
+  [lgb 18/48] {'num_leaves': 63, 'max_depth': 8, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[990]	train's rmse: 30.1666	val's rmse: 33.7271
+    Test R²=0.5781  RMSE=36.00  ρ=0.7578  time=51.2s  [127/432] ETA 3.6h
+  [lgb 19/48] {'num_leaves': 63, 'max_depth': 10, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 32.6641	val's rmse: 34.0035
+    Test R²=0.5901  RMSE=35.49  ρ=0.7642  time=67.0s  [128/432] ETA 3.7h
+  [lgb 20/48] {'num_leaves': 63, 'max_depth': 10, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 31.5039	val's rmse: 33.8928
+    Test R²=0.5864  RMSE=35.65  ρ=0.7619  time=55.7s  [129/432] ETA 3.7h
+  [lgb 21/48] {'num_leaves': 63, 'max_depth': 10, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[961]	train's rmse: 30.0968	val's rmse: 33.8545
+    Test R²=0.5774  RMSE=36.03  ρ=0.7570  time=49.5s  [130/432] ETA 3.7h
+  [lgb 22/48] {'num_leaves': 63, 'max_depth': 12, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 32.5176	val's rmse: 33.8353
+    Test R²=0.5880  RMSE=35.58  ρ=0.7630  time=65.6s  [131/432] ETA 3.7h
+  [lgb 23/48] {'num_leaves': 63, 'max_depth': 12, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 31.3573	val's rmse: 33.8232
+    Test R²=0.5875  RMSE=35.60  ρ=0.7629  time=55.2s  [132/432] ETA 3.7h
+  [lgb 24/48] {'num_leaves': 63, 'max_depth': 12, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 29.769	val's rmse: 33.7014
+    Test R²=0.5790  RMSE=35.96  ρ=0.7582  time=49.8s  [133/432] ETA 3.7h
+  [lgb 25/48] {'num_leaves': 127, 'max_depth': 6, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 33.0803	val's rmse: 34.0649
+    Test R²=0.5890  RMSE=35.53  ρ=0.7632  time=64.0s  [134/432] ETA 3.7h
+  [lgb 26/48] {'num_leaves': 127, 'max_depth': 6, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 32.3327	val's rmse: 33.9257
+    Test R²=0.5900  RMSE=35.49  ρ=0.7645  time=57.7s  [135/432] ETA 3.7h
+  [lgb 27/48] {'num_leaves': 127, 'max_depth': 6, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 31.0984	val's rmse: 33.7716
+    Test R²=0.5803  RMSE=35.91  ρ=0.7591  time=53.7s  [136/432] ETA 3.7h
+  [lgb 28/48] {'num_leaves': 127, 'max_depth': 8, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[998]	train's rmse: 31.7352	val's rmse: 33.7563
+    Test R²=0.5909  RMSE=35.45  ρ=0.7648  time=73.6s  [137/432] ETA 3.7h
+  [lgb 29/48] {'num_leaves': 127, 'max_depth': 8, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 30.4346	val's rmse: 33.7098
+    Test R²=0.5830  RMSE=35.79  ρ=0.7606  time=65.7s  [138/432] ETA 3.7h
+  [lgb 30/48] {'num_leaves': 127, 'max_depth': 8, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[638]	train's rmse: 29.7541	val's rmse: 33.6636
+    Test R²=0.5762  RMSE=36.08  ρ=0.7571  time=49.1s  [139/432] ETA 3.7h
+  [lgb 31/48] {'num_leaves': 127, 'max_depth': 10, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 31.4349	val's rmse: 33.6608
+    Test R²=0.5893  RMSE=35.52  ρ=0.7636  time=76.9s  [140/432] ETA 3.7h
+  [lgb 32/48] {'num_leaves': 127, 'max_depth': 10, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[996]	train's rmse: 29.8191	val's rmse: 33.4953
+    Test R²=0.5797  RMSE=35.93  ρ=0.7583  time=66.1s  [141/432] ETA 3.7h
+  [lgb 33/48] {'num_leaves': 127, 'max_depth': 10, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[702]	train's rmse: 29.1295	val's rmse: 33.8791
+    Test R²=0.5741  RMSE=36.17  ρ=0.7558  time=48.8s  [142/432] ETA 3.7h
+  [lgb 34/48] {'num_leaves': 127, 'max_depth': 12, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 31.3886	val's rmse: 33.7901
+    Test R²=0.5887  RMSE=35.55  ρ=0.7634  time=71.4s  [143/432] ETA 3.8h
+  [lgb 35/48] {'num_leaves': 127, 'max_depth': 12, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 29.6941	val's rmse: 33.7138
+    Test R²=0.5815  RMSE=35.86  ρ=0.7592  time=63.1s  [144/432] ETA 3.8h
+  [lgb 36/48] {'num_leaves': 127, 'max_depth': 12, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[605]	train's rmse: 29.2206	val's rmse: 33.6937
+    Test R²=0.5778  RMSE=36.01  ρ=0.7575  time=42.3s  [145/432] ETA 3.8h
+  [lgb 37/48] {'num_leaves': 255, 'max_depth': 6, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 33.2292	val's rmse: 34.3055
+    Test R²=0.5891  RMSE=35.53  ρ=0.7632  time=64.5s  [146/432] ETA 3.8h
+  [lgb 38/48] {'num_leaves': 255, 'max_depth': 6, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 32.3239	val's rmse: 33.9221
+    Test R²=0.5898  RMSE=35.50  ρ=0.7641  time=57.7s  [147/432] ETA 3.8h
+  [lgb 39/48] {'num_leaves': 255, 'max_depth': 6, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[998]	train's rmse: 31.0364	val's rmse: 33.7999
+    Test R²=0.5829  RMSE=35.79  ρ=0.7609  time=54.3s  [148/432] ETA 3.8h
+  [lgb 40/48] {'num_leaves': 255, 'max_depth': 8, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 31.4246	val's rmse: 33.6759
+    Test R²=0.5888  RMSE=35.54  ρ=0.7637  time=79.6s  [149/432] ETA 3.8h
+  [lgb 41/48] {'num_leaves': 255, 'max_depth': 8, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[998]	train's rmse: 30.1553	val's rmse: 33.7461
+    Test R²=0.5839  RMSE=35.75  ρ=0.7610  time=67.3s  [150/432] ETA 3.8h
+  [lgb 42/48] {'num_leaves': 255, 'max_depth': 8, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[697]	train's rmse: 29.3264	val's rmse: 33.7383
+    Test R²=0.5771  RMSE=36.04  ρ=0.7576  time=54.1s  [151/432] ETA 3.8h
+  [lgb 43/48] {'num_leaves': 255, 'max_depth': 10, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[997]	train's rmse: 30.0085	val's rmse: 33.5135
+    Test R²=0.5898  RMSE=35.50  ρ=0.7643  time=91.5s  [152/432] ETA 3.8h
+  [lgb 44/48] {'num_leaves': 255, 'max_depth': 10, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[889]	train's rmse: 28.52	val's rmse: 33.4002
+    Test R²=0.5771  RMSE=36.04  ρ=0.7574  time=79.0s  [153/432] ETA 3.8h
+  [lgb 45/48] {'num_leaves': 255, 'max_depth': 10, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[380]	train's rmse: 29.085	val's rmse: 33.678
+    Test R²=0.5698  RMSE=36.35  ρ=0.7525  time=41.4s  [154/432] ETA 3.8h
+  [lgb 46/48] {'num_leaves': 255, 'max_depth': 12, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 29.7698	val's rmse: 33.4898
+    Test R²=0.5855  RMSE=35.68  ρ=0.7620  time=94.0s  [155/432] ETA 3.8h
+  [lgb 47/48] {'num_leaves': 255, 'max_depth': 12, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[893]	train's rmse: 27.9336	val's rmse: 33.7063
+    Test R²=0.5776  RMSE=36.02  ρ=0.7573  time=73.9s  [156/432] ETA 3.8h
+  [lgb 48/48] {'num_leaves': 255, 'max_depth': 12, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[323]	train's rmse: 29.0428	val's rmse: 33.8039
+    Test R²=0.5730  RMSE=36.22  ρ=0.7542  time=33.0s  [157/432] ETA 3.8h
+  [mlp 1/6] {'hidden_dim': 128, 'epochs': 15, 'learning_rate': 0.001}
+    Epoch 1/15: train=2544.2, val=1940.8
+    Epoch 2/15: train=1624.2, val=1440.3
+    Epoch 3/15: train=1306.5, val=1370.5
+    Epoch 4/15: train=1236.6, val=1315.0
+    Epoch 5/15: train=1214.4, val=1278.9
+    Epoch 6/15: train=1197.8, val=1296.3
+    Epoch 7/15: train=1195.8, val=1271.3
+    Epoch 8/15: train=1194.6, val=1267.5
+    Epoch 9/15: train=1180.2, val=1263.4
+    Epoch 10/15: train=1177.1, val=1268.4
+    Epoch 11/15: train=1173.8, val=1278.1
+    Epoch 12/15: train=1163.8, val=1269.8
+    Epoch 13/15: train=1165.0, val=1274.3
+    Epoch 14/15: train=1159.0, val=1272.9
+    Epoch 15/15: train=1171.5, val=1241.7
+    Test R²=0.5898  RMSE=35.50  ρ=0.7644  time=100.0s  [158/432] ETA 3.8h
+  [mlp 2/6] {'hidden_dim': 128, 'epochs': 25, 'learning_rate': 0.001}
+    Epoch 1/25: train=2563.5, val=1979.4
+    Epoch 2/25: train=1630.3, val=1443.9
+    Epoch 3/25: train=1311.5, val=1348.2
+    Epoch 4/25: train=1235.4, val=1311.9
+    Epoch 5/25: train=1208.7, val=1265.0
+    Epoch 6/25: train=1193.0, val=1281.9
+    Epoch 7/25: train=1198.1, val=1284.6
+    Epoch 8/25: train=1189.7, val=1244.5
+    Epoch 9/25: train=1179.6, val=1289.0
+    Epoch 10/25: train=1165.6, val=1270.8
+    Epoch 11/25: train=1188.0, val=1270.6
+    Epoch 12/25: train=1167.8, val=1247.6
+    Epoch 13/25: train=1170.6, val=1249.6
+    Epoch 14/25: train=1166.5, val=1253.7
+    Epoch 15/25: train=1159.8, val=1253.2
+    Epoch 16/25: train=1167.8, val=1254.2
+    Epoch 17/25: train=1157.5, val=1262.8
+    Epoch 18/25: train=1163.7, val=1265.9
+    Epoch 19/25: train=1167.1, val=1229.1
+    Epoch 20/25: train=1163.4, val=1248.6
+    Epoch 21/25: train=1162.4, val=1239.0
+    Epoch 22/25: train=1156.5, val=1264.9
+    Epoch 23/25: train=1149.6, val=1217.3
+    Epoch 24/25: train=1155.6, val=1281.3
+    Epoch 25/25: train=1151.0, val=1274.1
+    Test R²=0.5912  RMSE=35.44  ρ=0.7656  time=175.2s  [159/432] ETA 3.9h
+  [mlp 3/6] {'hidden_dim': 256, 'epochs': 15, 'learning_rate': 0.001}
+    Epoch 1/15: train=2237.0, val=1569.2
+    Epoch 2/15: train=1344.5, val=1354.1
+    Epoch 3/15: train=1234.1, val=1297.2
+    Epoch 4/15: train=1215.3, val=1276.6
+    Epoch 5/15: train=1199.3, val=1261.2
+    Epoch 6/15: train=1182.0, val=1247.0
+    Epoch 7/15: train=1162.2, val=1280.0
+    Epoch 8/15: train=1159.7, val=1264.0
+    Epoch 9/15: train=1167.1, val=1259.0
+    Epoch 10/15: train=1155.8, val=1267.7
+    Epoch 11/15: train=1165.8, val=1267.1
+    Epoch 12/15: train=1153.1, val=1257.6
+    Epoch 13/15: train=1160.4, val=1260.2
+    Epoch 14/15: train=1159.4, val=1259.0
+    Epoch 15/15: train=1158.9, val=1283.7
+    Test R²=0.5911  RMSE=35.44  ρ=0.7653  time=100.7s  [160/432] ETA 3.9h
+  [mlp 4/6] {'hidden_dim': 256, 'epochs': 25, 'learning_rate': 0.001}
+    Epoch 1/25: train=2156.9, val=1552.0
+    Epoch 2/25: train=1322.1, val=1358.5
+    Epoch 3/25: train=1226.3, val=1276.7
+    Epoch 4/25: train=1205.6, val=1291.8
+    Epoch 5/25: train=1190.6, val=1270.1
+    Epoch 6/25: train=1177.0, val=1247.5
+    Epoch 7/25: train=1165.0, val=1258.4
+    Epoch 8/25: train=1174.4, val=1280.3
+    Epoch 9/25: train=1161.7, val=1233.7
+    Epoch 10/25: train=1161.0, val=1221.8
+    Epoch 11/25: train=1159.4, val=1247.9
+    Epoch 12/25: train=1155.7, val=1242.4
+    Epoch 13/25: train=1154.6, val=1292.7
+    Epoch 14/25: train=1156.4, val=1283.7
+    Epoch 15/25: train=1143.6, val=1256.1
+    Epoch 16/25: train=1153.6, val=1232.2
+    Epoch 17/25: train=1134.5, val=1254.9
+    Epoch 18/25: train=1145.4, val=1247.4
+    Epoch 19/25: train=1147.1, val=1221.8
+    Epoch 20/25: train=1157.5, val=1234.9
+    Epoch 21/25: train=1149.3, val=1230.9
+    Epoch 22/25: train=1156.8, val=1261.4
+    Epoch 23/25: train=1143.1, val=1233.5
+    Epoch 24/25: train=1141.8, val=1238.7
+    Epoch 25/25: train=1144.8, val=1252.5
+    Test R²=0.5940  RMSE=35.32  ρ=0.7669  time=166.1s  [161/432] ETA 3.9h
+  [mlp 5/6] {'hidden_dim': 512, 'epochs': 15, 'learning_rate': 0.001}
+    Epoch 1/15: train=1894.4, val=1379.4
+    Epoch 2/15: train=1258.2, val=1313.9
+    Epoch 3/15: train=1201.3, val=1284.9
+    Epoch 4/15: train=1176.7, val=1283.7
+    Epoch 5/15: train=1176.8, val=1254.2
+    Epoch 6/15: train=1162.1, val=1256.2
+    Epoch 7/15: train=1165.2, val=1257.7
+    Epoch 8/15: train=1160.3, val=1229.2
+    Epoch 9/15: train=1162.3, val=1251.1
+    Epoch 10/15: train=1145.9, val=1240.2
+    Epoch 11/15: train=1146.0, val=1280.8
+    Epoch 12/15: train=1161.8, val=1216.9
+    Epoch 13/15: train=1154.3, val=1264.4
+    Epoch 14/15: train=1156.6, val=1270.0
+    Epoch 15/15: train=1141.7, val=1239.9
+    Test R²=0.5941  RMSE=35.31  ρ=0.7672  time=110.0s  [162/432] ETA 3.9h
+  [mlp 6/6] {'hidden_dim': 512, 'epochs': 25, 'learning_rate': 0.001}
+    Epoch 1/25: train=1922.5, val=1431.1
+    Epoch 2/25: train=1270.0, val=1292.8
+    Epoch 3/25: train=1210.1, val=1298.4
+    Epoch 4/25: train=1179.6, val=1264.3
+    Epoch 5/25: train=1161.4, val=1259.1
+    Epoch 6/25: train=1158.7, val=1267.3
+    Epoch 7/25: train=1160.3, val=1241.7
+    Epoch 8/25: train=1154.3, val=1275.6
+    Epoch 9/25: train=1157.1, val=1256.7
+    Epoch 10/25: train=1142.2, val=1300.0
+    Epoch 11/25: train=1152.6, val=1228.9
+    Epoch 12/25: train=1155.7, val=1245.8
+    Epoch 13/25: train=1150.1, val=1266.3
+    Epoch 14/25: train=1146.8, val=1215.3
+    Epoch 15/25: train=1138.9, val=1236.7
+    Epoch 16/25: train=1145.8, val=1223.3
+    Epoch 17/25: train=1152.5, val=1232.5
+    Epoch 18/25: train=1141.4, val=1213.9
+    Epoch 19/25: train=1156.1, val=1246.4
+    Epoch 20/25: train=1142.8, val=1225.5
+    Epoch 21/25: train=1136.3, val=1223.9
+    Epoch 22/25: train=1146.1, val=1244.1
+    Epoch 23/25: train=1145.7, val=1266.4
+    Epoch 24/25: train=1146.9, val=1238.1
+    Epoch 25/25: train=1147.5, val=1247.3
+    Test R²=0.5956  RMSE=35.24  ρ=0.7683  time=190.7s  [163/432] ETA 4.0h
+
+############################################################
+# n = 32
+############################################################
+  Generating test data...
+  Test data: 128,000 samples (1.1s)
+  [lgb 1/48] {'num_leaves': 31, 'max_depth': 6, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 43.5295	val's rmse: 44.3309
+    Test R²=0.6323  RMSE=44.81  ρ=0.7898  time=71.0s  [164/432] ETA 4.0h
+  [lgb 2/48] {'num_leaves': 31, 'max_depth': 6, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[999]	train's rmse: 42.2556	val's rmse: 43.7502
+    Test R²=0.6336  RMSE=44.73  ρ=0.7908  time=62.3s  [165/432] ETA 4.0h
+  [lgb 3/48] {'num_leaves': 31, 'max_depth': 6, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 41.0061	val's rmse: 44.3128
+    Test R²=0.6306  RMSE=44.91  ρ=0.7889  time=58.1s  [166/432] ETA 4.0h
+  [lgb 4/48] {'num_leaves': 31, 'max_depth': 8, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 43.3441	val's rmse: 44.4732
+    Test R²=0.6338  RMSE=44.72  ρ=0.7909  time=72.1s  [167/432] ETA 4.0h
+  [lgb 5/48] {'num_leaves': 31, 'max_depth': 8, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 41.981	val's rmse: 43.6166
+    Test R²=0.6356  RMSE=44.61  ρ=0.7918  time=62.5s  [168/432] ETA 4.0h
+  [lgb 6/48] {'num_leaves': 31, 'max_depth': 8, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 40.4065	val's rmse: 43.6588
+    Test R²=0.6318  RMSE=44.84  ρ=0.7898  time=56.7s  [169/432] ETA 4.0h
+  [lgb 7/48] {'num_leaves': 31, 'max_depth': 10, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 43.1656	val's rmse: 44.1331
+    Test R²=0.6338  RMSE=44.72  ρ=0.7906  time=71.9s  [170/432] ETA 4.0h
+  [lgb 8/48] {'num_leaves': 31, 'max_depth': 10, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 42.0612	val's rmse: 43.7303
+    Test R²=0.6355  RMSE=44.62  ρ=0.7918  time=63.0s  [171/432] ETA 4.0h
+  [lgb 9/48] {'num_leaves': 31, 'max_depth': 10, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[998]	train's rmse: 40.285	val's rmse: 43.6646
+    Test R²=0.6344  RMSE=44.68  ρ=0.7916  time=56.3s  [172/432] ETA 3.9h
+  [lgb 10/48] {'num_leaves': 31, 'max_depth': 12, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 43.2271	val's rmse: 44.3002
+    Test R²=0.6355  RMSE=44.61  ρ=0.7919  time=73.1s  [173/432] ETA 3.9h
+  [lgb 11/48] {'num_leaves': 31, 'max_depth': 12, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[998]	train's rmse: 41.9144	val's rmse: 43.9431
+    Test R²=0.6352  RMSE=44.63  ρ=0.7916  time=62.1s  [174/432] ETA 3.9h
+  [lgb 12/48] {'num_leaves': 31, 'max_depth': 12, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 40.6205	val's rmse: 44.0194
+    Test R²=0.6319  RMSE=44.84  ρ=0.7902  time=55.7s  [175/432] ETA 3.9h
+  [lgb 13/48] {'num_leaves': 63, 'max_depth': 6, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 42.7197	val's rmse: 43.6849
+    Test R²=0.6345  RMSE=44.68  ρ=0.7914  time=77.6s  [176/432] ETA 3.9h
+  [lgb 14/48] {'num_leaves': 63, 'max_depth': 6, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 41.4183	val's rmse: 43.8768
+    Test R²=0.6337  RMSE=44.73  ρ=0.7910  time=69.9s  [177/432] ETA 3.9h
+  [lgb 15/48] {'num_leaves': 63, 'max_depth': 6, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 39.3703	val's rmse: 43.3787
+    Test R²=0.6298  RMSE=44.97  ρ=0.7894  time=65.1s  [178/432] ETA 3.9h
+  [lgb 16/48] {'num_leaves': 63, 'max_depth': 8, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 42.0302	val's rmse: 44.0069
+    Test R²=0.6362  RMSE=44.58  ρ=0.7921  time=81.3s  [179/432] ETA 3.9h
+  [lgb 17/48] {'num_leaves': 63, 'max_depth': 8, 'learning_rate': 0.1} — SKIPPED (already done)
+  [lgb 18/48] {'num_leaves': 63, 'max_depth': 8, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[980]	train's rmse: 37.8624	val's rmse: 43.5039
+    Test R²=0.6271  RMSE=45.13  ρ=0.7874  time=64.4s  [180/432] ETA 3.9h
+  [lgb 19/48] {'num_leaves': 63, 'max_depth': 10, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 41.9302	val's rmse: 43.7689
+    Test R²=0.6355  RMSE=44.62  ρ=0.7913  time=83.0s  [181/432] ETA 3.9h
+  [lgb 20/48] {'num_leaves': 63, 'max_depth': 10, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 40.063	val's rmse: 43.5112
+    Test R²=0.6354  RMSE=44.63  ρ=0.7915  time=70.2s  [182/432] ETA 3.9h
+  [lgb 21/48] {'num_leaves': 63, 'max_depth': 10, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[995]	train's rmse: 37.525	val's rmse: 43.5862
+    Test R²=0.6269  RMSE=45.14  ρ=0.7866  time=62.4s  [183/432] ETA 3.9h
+  [lgb 22/48] {'num_leaves': 63, 'max_depth': 12, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 41.7241	val's rmse: 43.6433
+    Test R²=0.6375  RMSE=44.49  ρ=0.7927  time=82.7s  [184/432] ETA 3.9h
+  [lgb 23/48] {'num_leaves': 63, 'max_depth': 12, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 40.0983	val's rmse: 43.4945
+    Test R²=0.6346  RMSE=44.67  ρ=0.7911  time=68.6s  [185/432] ETA 3.9h
+  [lgb 24/48] {'num_leaves': 63, 'max_depth': 12, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 37.3488	val's rmse: 43.3051
+    Test R²=0.6284  RMSE=45.05  ρ=0.7874  time=60.5s  [186/432] ETA 3.9h
+  [lgb 25/48] {'num_leaves': 127, 'max_depth': 6, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 42.5542	val's rmse: 43.888
+    Test R²=0.6346  RMSE=44.67  ρ=0.7918  time=76.4s  [187/432] ETA 3.9h
+  [lgb 26/48] {'num_leaves': 127, 'max_depth': 6, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 41.0147	val's rmse: 43.4157
+    Test R²=0.6369  RMSE=44.53  ρ=0.7930  time=70.3s  [188/432] ETA 3.9h
+  [lgb 27/48] {'num_leaves': 127, 'max_depth': 6, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 39.4414	val's rmse: 43.6089
+    Test R²=0.6321  RMSE=44.83  ρ=0.7908  time=64.6s  [189/432] ETA 3.9h
+  [lgb 28/48] {'num_leaves': 127, 'max_depth': 8, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 40.4164	val's rmse: 43.3453
+    Test R²=0.6363  RMSE=44.57  ρ=0.7923  time=95.1s  [190/432] ETA 3.9h
+  [lgb 29/48] {'num_leaves': 127, 'max_depth': 8, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[999]	train's rmse: 38.4116	val's rmse: 43.1488
+    Test R²=0.6323  RMSE=44.81  ρ=0.7902  time=83.2s  [191/432] ETA 3.9h
+  [lgb 30/48] {'num_leaves': 127, 'max_depth': 8, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[959]	train's rmse: 35.7209	val's rmse: 43.5196
+    Test R²=0.6173  RMSE=45.72  ρ=0.7817  time=78.2s  [192/432] ETA 3.9h
+  [lgb 31/48] {'num_leaves': 127, 'max_depth': 10, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 39.9663	val's rmse: 43.1872
+    Test R²=0.6370  RMSE=44.52  ρ=0.7925  time=96.1s  [193/432] ETA 3.9h
+  [lgb 32/48] {'num_leaves': 127, 'max_depth': 10, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[989]	train's rmse: 37.3551	val's rmse: 43.1041
+    Test R²=0.6326  RMSE=44.79  ρ=0.7902  time=81.8s  [194/432] ETA 3.9h
+  [lgb 33/48] {'num_leaves': 127, 'max_depth': 10, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[658]	train's rmse: 36.3274	val's rmse: 43.4419
+    Test R²=0.6248  RMSE=45.27  ρ=0.7858  time=58.1s  [195/432] ETA 3.9h
+  [lgb 34/48] {'num_leaves': 127, 'max_depth': 12, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 39.8187	val's rmse: 43.5588
+    Test R²=0.6358  RMSE=44.60  ρ=0.7916  time=94.3s  [196/432] ETA 3.9h
+  [lgb 35/48] {'num_leaves': 127, 'max_depth': 12, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 36.9968	val's rmse: 42.942
+    Test R²=0.6332  RMSE=44.76  ρ=0.7903  time=80.2s  [197/432] ETA 3.9h
+  [lgb 36/48] {'num_leaves': 127, 'max_depth': 12, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[678]	train's rmse: 35.7337	val's rmse: 43.2828
+    Test R²=0.6240  RMSE=45.32  ρ=0.7849  time=57.9s  [198/432] ETA 3.9h
+  [lgb 37/48] {'num_leaves': 255, 'max_depth': 6, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 42.4319	val's rmse: 43.8365
+    Test R²=0.6349  RMSE=44.65  ρ=0.7919  time=76.9s  [199/432] ETA 3.9h
+  [lgb 38/48] {'num_leaves': 255, 'max_depth': 6, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 41.2767	val's rmse: 43.6103
+    Test R²=0.6382  RMSE=44.45  ρ=0.7943  time=69.5s  [200/432] ETA 3.8h
+  [lgb 39/48] {'num_leaves': 255, 'max_depth': 6, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 39.6257	val's rmse: 43.3222
+    Test R²=0.6306  RMSE=44.91  ρ=0.7901  time=64.8s  [201/432] ETA 3.8h
+  [lgb 40/48] {'num_leaves': 255, 'max_depth': 8, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 39.8597	val's rmse: 43.1982
+    Test R²=0.6369  RMSE=44.53  ρ=0.7928  time=101.9s  [202/432] ETA 3.8h
+  [lgb 41/48] {'num_leaves': 255, 'max_depth': 8, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[996]	train's rmse: 37.6871	val's rmse: 43.0061
+    Test R²=0.6316  RMSE=44.85  ρ=0.7898  time=86.3s  [203/432] ETA 3.8h
+  [lgb 42/48] {'num_leaves': 255, 'max_depth': 8, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[934]	train's rmse: 34.9673	val's rmse: 43.6361
+    Test R²=0.6167  RMSE=45.75  ρ=0.7813  time=80.1s  [204/432] ETA 3.8h
+  [lgb 43/48] {'num_leaves': 255, 'max_depth': 10, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 37.7606	val's rmse: 43.1519
+    Test R²=0.6354  RMSE=44.62  ρ=0.7916  time=113.8s  [205/432] ETA 3.8h
+  [lgb 44/48] {'num_leaves': 255, 'max_depth': 10, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 34.7727	val's rmse: 42.8979
+    Test R²=0.6276  RMSE=45.10  ρ=0.7870  time=98.6s  [206/432] ETA 3.8h
+  [lgb 45/48] {'num_leaves': 255, 'max_depth': 10, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[449]	train's rmse: 35.2105	val's rmse: 43.4254
+    Test R²=0.6194  RMSE=45.59  ρ=0.7826  time=56.7s  [207/432] ETA 3.8h
+  [lgb 46/48] {'num_leaves': 255, 'max_depth': 12, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[998]	train's rmse: 37.1774	val's rmse: 43.0323
+    Test R²=0.6337  RMSE=44.72  ρ=0.7905  time=116.3s  [208/432] ETA 3.8h
+  [lgb 47/48] {'num_leaves': 255, 'max_depth': 12, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 33.6218	val's rmse: 42.9868
+    Test R²=0.6230  RMSE=45.37  ρ=0.7837  time=101.7s  [209/432] ETA 3.8h
+  [lgb 48/48] {'num_leaves': 255, 'max_depth': 12, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[437]	train's rmse: 34.6392	val's rmse: 43.4685
+    Test R²=0.6190  RMSE=45.61  ρ=0.7823  time=55.4s  [210/432] ETA 3.8h
+  [mlp 1/6] {'hidden_dim': 128, 'epochs': 15, 'learning_rate': 0.001}
+    Epoch 1/15: train=4613.9, val=3822.7
+    Epoch 2/15: train=3151.2, val=2665.1
+    Epoch 3/15: train=2504.7, val=2321.5
+    Epoch 4/15: train=2222.7, val=2169.0
+    Epoch 5/15: train=2101.6, val=2089.0
+    Epoch 6/15: train=2045.9, val=2061.0
+    Epoch 7/15: train=2015.3, val=2079.1
+    Epoch 8/15: train=2012.7, val=2060.1
+    Epoch 9/15: train=1998.1, val=1986.3
+    Epoch 10/15: train=1974.7, val=2001.4
+    Epoch 11/15: train=1957.8, val=1953.7
+    Epoch 12/15: train=1946.3, val=2016.0
+    Epoch 13/15: train=1924.5, val=1987.9
+    Epoch 14/15: train=1943.1, val=1962.9
+    Epoch 15/15: train=1951.2, val=1976.0
+    Test R²=0.6379  RMSE=44.47  ρ=0.7947  time=140.7s  [211/432] ETA 3.8h
+  [mlp 2/6] {'hidden_dim': 128, 'epochs': 25, 'learning_rate': 0.001}
+    Epoch 1/25: train=4494.3, val=3703.5
+    Epoch 2/25: train=3286.3, val=2889.4
+    Epoch 3/25: train=2571.9, val=2330.1
+    Epoch 4/25: train=2191.5, val=2146.0
+    Epoch 5/25: train=2087.6, val=2074.7
+    Epoch 6/25: train=2029.8, val=2079.9
+    Epoch 7/25: train=2008.7, val=2063.1
+    Epoch 8/25: train=1983.3, val=2056.1
+    Epoch 9/25: train=1970.3, val=1994.9
+    Epoch 10/25: train=1977.9, val=1984.1
+    Epoch 11/25: train=1944.8, val=2024.4
+    Epoch 12/25: train=1956.8, val=1974.6
+    Epoch 13/25: train=1944.1, val=1985.2
+    Epoch 14/25: train=1939.8, val=1943.0
+    Epoch 15/25: train=1943.3, val=2010.8
+    Epoch 16/25: train=1952.5, val=1968.6
+    Epoch 17/25: train=1937.8, val=1989.3
+    Epoch 18/25: train=1908.6, val=1913.1
+    Epoch 19/25: train=1933.9, val=1929.2
+    Epoch 20/25: train=1928.1, val=1971.9
+    Epoch 21/25: train=1925.8, val=1946.4
+    Epoch 22/25: train=1920.2, val=1983.2
+    Epoch 23/25: train=1923.0, val=1944.6
+    Epoch 24/25: train=1918.4, val=1995.9
+    Epoch 25/25: train=1924.5, val=1994.1
+    Test R²=0.6395  RMSE=44.37  ρ=0.7953  time=235.9s  [212/432] ETA 3.9h
+  [mlp 3/6] {'hidden_dim': 256, 'epochs': 15, 'learning_rate': 0.001}
+    Epoch 1/15: train=3755.0, val=2523.0
+    Epoch 2/15: train=2241.1, val=2111.4
+    Epoch 3/15: train=2064.6, val=2051.6
+    Epoch 4/15: train=2011.3, val=1992.4
+    Epoch 5/15: train=1989.0, val=2013.2
+    Epoch 6/15: train=1954.8, val=1937.6
+    Epoch 7/15: train=1957.9, val=1989.9
+    Epoch 8/15: train=1944.0, val=1987.6
+    Epoch 9/15: train=1919.9, val=2055.7
+    Epoch 10/15: train=1927.2, val=1962.9
+    Epoch 11/15: train=1905.3, val=1939.0
+    Epoch 12/15: train=1923.6, val=1947.2
+    Epoch 13/15: train=1923.0, val=2010.6
+    Epoch 14/15: train=1891.2, val=1962.4
+    Epoch 15/15: train=1920.1, val=1992.6
+    Test R²=0.6426  RMSE=44.18  ρ=0.7967  time=140.5s  [213/432] ETA 3.9h
+  [mlp 4/6] {'hidden_dim': 256, 'epochs': 25, 'learning_rate': 0.001}
+    Epoch 1/25: train=3874.4, val=2619.2
+    Epoch 2/25: train=2310.0, val=2142.4
+    Epoch 3/25: train=2078.9, val=2052.7
+    Epoch 4/25: train=1999.0, val=2032.0
+    Epoch 5/25: train=1982.8, val=1971.2
+    Epoch 6/25: train=1955.0, val=1938.0
+    Epoch 7/25: train=1944.3, val=1968.5
+    Epoch 8/25: train=1935.5, val=1972.0
+    Epoch 9/25: train=1932.8, val=2006.3
+    Epoch 10/25: train=1919.0, val=2008.4
+    Epoch 11/25: train=1920.4, val=1878.7
+    Epoch 12/25: train=1900.0, val=1968.5
+    Epoch 13/25: train=1905.8, val=1938.5
+    Epoch 14/25: train=1912.1, val=1952.3
+    Epoch 15/25: train=1900.9, val=1950.7
+    Epoch 16/25: train=1896.3, val=1979.2
+    Epoch 17/25: train=1901.3, val=2025.6
+    Epoch 18/25: train=1911.0, val=1959.1
+    Epoch 19/25: train=1902.1, val=1927.5
+    Epoch 20/25: train=1911.1, val=1906.0
+    Epoch 21/25: train=1904.1, val=1962.1
+    Epoch 22/25: train=1899.3, val=1977.2
+    Epoch 23/25: train=1898.3, val=1977.9
+    Epoch 24/25: train=1882.7, val=1868.5
+    Epoch 25/25: train=1901.4, val=1929.1
+    Test R²=0.6426  RMSE=44.18  ρ=0.7971  time=237.3s  [214/432] ETA 3.9h
+  [mlp 5/6] {'hidden_dim': 512, 'epochs': 15, 'learning_rate': 0.001}
+    Epoch 1/15: train=3207.1, val=2216.3
+    Epoch 2/15: train=2104.3, val=1991.9
+    Epoch 3/15: train=1994.9, val=2038.7
+    Epoch 4/15: train=1983.3, val=1981.1
+    Epoch 5/15: train=1938.8, val=1994.1
+    Epoch 6/15: train=1917.2, val=1987.9
+    Epoch 7/15: train=1921.5, val=1929.2
+    Epoch 8/15: train=1891.8, val=1967.3
+    Epoch 9/15: train=1918.5, val=1976.3
+    Epoch 10/15: train=1898.7, val=1912.2
+    Epoch 11/15: train=1893.9, val=1972.1
+    Epoch 12/15: train=1887.9, val=1964.8
+    Epoch 13/15: train=1911.6, val=1966.9
+    Epoch 14/15: train=1884.0, val=1941.1
+    Epoch 15/15: train=1890.4, val=1999.9
+    Test R²=0.6422  RMSE=44.21  ρ=0.7966  time=108.7s  [215/432] ETA 3.9h
+  [mlp 6/6] {'hidden_dim': 512, 'epochs': 25, 'learning_rate': 0.001}
+    Epoch 1/25: train=3178.2, val=2243.9
+    Epoch 2/25: train=2104.1, val=2072.1
+    Epoch 3/25: train=2009.0, val=2020.9
+    Epoch 4/25: train=1955.4, val=1969.9
+    Epoch 5/25: train=1938.7, val=1941.9
+    Epoch 6/25: train=1923.2, val=1930.7
+    Epoch 7/25: train=1918.4, val=1919.4
+    Epoch 8/25: train=1903.3, val=1987.6
+    Epoch 9/25: train=1879.4, val=2039.5
+    Epoch 10/25: train=1890.4, val=1892.4
+    Epoch 11/25: train=1904.5, val=1982.0
+    Epoch 12/25: train=1887.7, val=1980.6
+    Epoch 13/25: train=1897.8, val=1930.6
+    Epoch 14/25: train=1897.1, val=1945.6
+    Epoch 15/25: train=1857.7, val=1898.8
+    Epoch 16/25: train=1901.7, val=1948.7
+    Epoch 17/25: train=1893.3, val=1948.3
+    Epoch 18/25: train=1879.1, val=1931.1
+    Epoch 19/25: train=1885.2, val=1976.7
+    Epoch 20/25: train=1889.0, val=1870.8
+    Epoch 21/25: train=1876.5, val=1916.2
+    Epoch 22/25: train=1885.5, val=1944.3
+    Epoch 23/25: train=1893.2, val=1941.2
+    Epoch 24/25: train=1883.8, val=1997.0
+    Epoch 25/25: train=1872.7, val=1881.5
+    Test R²=0.6429  RMSE=44.16  ρ=0.7972  time=183.7s  [216/432] ETA 3.9h
+
+############################################################
+# n = 40
+############################################################
+  Generating test data...
+  Test data: 160,000 samples (1.7s)
+  [lgb 1/48] {'num_leaves': 31, 'max_depth': 6, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 52.7479	val's rmse: 53.7106
+    Test R²=0.6568  RMSE=54.11  ρ=0.8039  time=84.8s  [217/432] ETA 3.9h
+  [lgb 2/48] {'num_leaves': 31, 'max_depth': 6, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 51.0313	val's rmse: 53.2896
+    Test R²=0.6632  RMSE=53.61  ρ=0.8087  time=76.2s  [218/432] ETA 3.9h
+  [lgb 3/48] {'num_leaves': 31, 'max_depth': 6, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 49.3995	val's rmse: 53.3388
+    Test R²=0.6607  RMSE=53.81  ρ=0.8072  time=70.3s  [219/432] ETA 3.9h
+  [lgb 4/48] {'num_leaves': 31, 'max_depth': 8, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 52.8122	val's rmse: 53.9031
+    Test R²=0.6583  RMSE=54.00  ρ=0.8048  time=86.9s  [220/432] ETA 3.9h
+  [lgb 5/48] {'num_leaves': 31, 'max_depth': 8, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 50.9502	val's rmse: 53.356
+    Test R²=0.6607  RMSE=53.81  ρ=0.8065  time=75.1s  [221/432] ETA 3.9h
+  [lgb 6/48] {'num_leaves': 31, 'max_depth': 8, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[999]	train's rmse: 48.9316	val's rmse: 52.8127
+    Test R²=0.6600  RMSE=53.86  ρ=0.8067  time=68.1s  [222/432] ETA 3.8h
+  [lgb 7/48] {'num_leaves': 31, 'max_depth': 10, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 52.6512	val's rmse: 53.7754
+    Test R²=0.6581  RMSE=54.02  ρ=0.8046  time=89.0s  [223/432] ETA 3.8h
+  [lgb 8/48] {'num_leaves': 31, 'max_depth': 10, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 51.2009	val's rmse: 53.5547
+    Test R²=0.6608  RMSE=53.80  ρ=0.8064  time=75.1s  [224/432] ETA 3.8h
+  [lgb 9/48] {'num_leaves': 31, 'max_depth': 10, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 48.809	val's rmse: 52.8749
+    Test R²=0.6604  RMSE=53.83  ρ=0.8065  time=68.3s  [225/432] ETA 3.8h
+  [lgb 10/48] {'num_leaves': 31, 'max_depth': 12, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 52.7812	val's rmse: 53.9382
+    Test R²=0.6594  RMSE=53.91  ρ=0.8056  time=88.6s  [226/432] ETA 3.8h
+  [lgb 11/48] {'num_leaves': 31, 'max_depth': 12, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 50.742	val's rmse: 53.0976
+    Test R²=0.6618  RMSE=53.72  ρ=0.8069  time=76.9s  [227/432] ETA 3.8h
+  [lgb 12/48] {'num_leaves': 31, 'max_depth': 12, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 48.772	val's rmse: 53.0676
+    Test R²=0.6603  RMSE=53.84  ρ=0.8064  time=67.5s  [228/432] ETA 3.8h
+  [lgb 13/48] {'num_leaves': 63, 'max_depth': 6, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 51.6635	val's rmse: 53.4656
+    Test R²=0.6598  RMSE=53.88  ρ=0.8061  time=93.0s  [229/432] ETA 3.8h
+  [lgb 14/48] {'num_leaves': 63, 'max_depth': 6, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 49.9802	val's rmse: 53.0571
+    Test R²=0.6603  RMSE=53.84  ρ=0.8065  time=84.4s  [230/432] ETA 3.8h
+  [lgb 15/48] {'num_leaves': 63, 'max_depth': 6, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[999]	train's rmse: 47.5136	val's rmse: 53.0205
+    Test R²=0.6572  RMSE=54.08  ρ=0.8056  time=78.4s  [231/432] ETA 3.8h
+  [lgb 16/48] {'num_leaves': 63, 'max_depth': 8, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 50.9052	val's rmse: 53.2676
+    Test R²=0.6617  RMSE=53.73  ρ=0.8071  time=99.7s  [232/432] ETA 3.7h
+  [lgb 17/48] {'num_leaves': 63, 'max_depth': 8, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[999]	train's rmse: 48.7797	val's rmse: 53.3036
+    Test R²=0.6621  RMSE=53.69  ρ=0.8075  time=86.1s  [233/432] ETA 3.7h
+  [lgb 18/48] {'num_leaves': 63, 'max_depth': 8, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 45.3734	val's rmse: 52.6674
+    Test R²=0.6513  RMSE=54.55  ρ=0.8011  time=77.7s  [234/432] ETA 3.7h
+  [lgb 19/48] {'num_leaves': 63, 'max_depth': 10, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 50.652	val's rmse: 53.1321
+    Test R²=0.6631  RMSE=53.61  ρ=0.8078  time=100.4s  [235/432] ETA 3.7h
+  [lgb 20/48] {'num_leaves': 63, 'max_depth': 10, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 48.2956	val's rmse: 52.8595
+    Test R²=0.6604  RMSE=53.83  ρ=0.8063  time=85.0s  [236/432] ETA 3.7h
+  [lgb 21/48] {'num_leaves': 63, 'max_depth': 10, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[999]	train's rmse: 44.7097	val's rmse: 53.078
+    Test R²=0.6534  RMSE=54.38  ρ=0.8023  time=76.3s  [237/432] ETA 3.7h
+  [lgb 22/48] {'num_leaves': 63, 'max_depth': 12, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 50.7757	val's rmse: 53.3434
+    Test R²=0.6630  RMSE=53.63  ρ=0.8077  time=101.2s  [238/432] ETA 3.7h
+  [lgb 23/48] {'num_leaves': 63, 'max_depth': 12, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 48.2088	val's rmse: 52.9754
+    Test R²=0.6611  RMSE=53.78  ρ=0.8065  time=84.0s  [239/432] ETA 3.7h
+  [lgb 24/48] {'num_leaves': 63, 'max_depth': 12, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 44.6746	val's rmse: 52.8114
+    Test R²=0.6512  RMSE=54.56  ρ=0.8008  time=73.8s  [240/432] ETA 3.7h
+  [lgb 25/48] {'num_leaves': 127, 'max_depth': 6, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 51.6076	val's rmse: 53.5885
+    Test R²=0.6603  RMSE=53.84  ρ=0.8066  time=92.0s  [241/432] ETA 3.7h
+  [lgb 26/48] {'num_leaves': 127, 'max_depth': 6, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[998]	train's rmse: 49.9078	val's rmse: 53.1064
+    Test R²=0.6599  RMSE=53.87  ρ=0.8062  time=84.3s  [242/432] ETA 3.6h
+  [lgb 27/48] {'num_leaves': 127, 'max_depth': 6, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[998]	train's rmse: 47.4683	val's rmse: 53.1041
+    Test R²=0.6528  RMSE=54.43  ρ=0.8028  time=78.5s  [243/432] ETA 3.6h
+  [lgb 28/48] {'num_leaves': 127, 'max_depth': 8, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 48.9663	val's rmse: 52.8643
+    Test R²=0.6631  RMSE=53.62  ρ=0.8081  time=115.5s  [244/432] ETA 3.6h
+  [lgb 29/48] {'num_leaves': 127, 'max_depth': 8, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 45.8571	val's rmse: 52.7791
+    Test R²=0.6609  RMSE=53.79  ρ=0.8067  time=102.0s  [245/432] ETA 3.6h
+  [lgb 30/48] {'num_leaves': 127, 'max_depth': 8, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[986]	train's rmse: 41.6496	val's rmse: 52.6302
+    Test R²=0.6521  RMSE=54.49  ρ=0.8026  time=94.6s  [246/432] ETA 3.6h
+  [lgb 31/48] {'num_leaves': 127, 'max_depth': 10, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 48.3145	val's rmse: 52.6731
+    Test R²=0.6624  RMSE=53.67  ρ=0.8074  time=119.2s  [247/432] ETA 3.6h
+  [lgb 32/48] {'num_leaves': 127, 'max_depth': 10, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 44.4315	val's rmse: 52.362
+    Test R²=0.6600  RMSE=53.86  ρ=0.8061  time=101.9s  [248/432] ETA 3.6h
+  [lgb 33/48] {'num_leaves': 127, 'max_depth': 10, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[818]	train's rmse: 41.3969	val's rmse: 52.6736
+    Test R²=0.6452  RMSE=55.03  ρ=0.7979  time=84.3s  [249/432] ETA 3.6h
+  [lgb 34/48] {'num_leaves': 127, 'max_depth': 12, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 48.0656	val's rmse: 52.6498
+    Test R²=0.6641  RMSE=53.54  ρ=0.8085  time=117.8s  [250/432] ETA 3.6h
+  [lgb 35/48] {'num_leaves': 127, 'max_depth': 12, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[995]	train's rmse: 44.2031	val's rmse: 52.3466
+    Test R²=0.6585  RMSE=53.98  ρ=0.8050  time=98.1s  [251/432] ETA 3.6h
+  [lgb 36/48] {'num_leaves': 127, 'max_depth': 12, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[843]	train's rmse: 40.604	val's rmse: 52.6477
+    Test R²=0.6458  RMSE=54.97  ρ=0.7975  time=82.2s  [252/432] ETA 3.6h
+  [lgb 37/48] {'num_leaves': 255, 'max_depth': 6, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 51.9118	val's rmse: 53.4146
+    Test R²=0.6587  RMSE=53.97  ρ=0.8052  time=94.5s  [253/432] ETA 3.5h
+  [lgb 38/48] {'num_leaves': 255, 'max_depth': 6, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[999]	train's rmse: 49.8797	val's rmse: 52.9869
+    Test R²=0.6617  RMSE=53.73  ρ=0.8072  time=85.3s  [254/432] ETA 3.5h
+  [lgb 39/48] {'num_leaves': 255, 'max_depth': 6, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[999]	train's rmse: 47.4308	val's rmse: 52.7767
+    Test R²=0.6556  RMSE=54.21  ρ=0.8042  time=79.0s  [255/432] ETA 3.5h
+  [lgb 40/48] {'num_leaves': 255, 'max_depth': 8, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[999]	train's rmse: 48.0228	val's rmse: 52.5379
+    Test R²=0.6618  RMSE=53.72  ρ=0.8073  time=121.6s  [256/432] ETA 3.5h
+  [lgb 41/48] {'num_leaves': 255, 'max_depth': 8, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 45.0527	val's rmse: 52.5848
+    Test R²=0.6607  RMSE=53.81  ρ=0.8067  time=105.8s  [257/432] ETA 3.5h
+  [lgb 42/48] {'num_leaves': 255, 'max_depth': 8, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[824]	train's rmse: 41.9813	val's rmse: 52.4025
+    Test R²=0.6477  RMSE=54.83  ρ=0.7997  time=91.9s  [258/432] ETA 3.5h
+  [lgb 43/48] {'num_leaves': 255, 'max_depth': 10, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 45.317	val's rmse: 52.3306
+    Test R²=0.6628  RMSE=53.64  ρ=0.8076  time=144.6s  [259/432] ETA 3.5h
+  [lgb 44/48] {'num_leaves': 255, 'max_depth': 10, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[999]	train's rmse: 40.9296	val's rmse: 52.2995
+    Test R²=0.6555  RMSE=54.22  ρ=0.8033  time=122.3s  [260/432] ETA 3.5h
+  [lgb 45/48] {'num_leaves': 255, 'max_depth': 10, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[692]	train's rmse: 38.2339	val's rmse: 52.5437
+    Test R²=0.6403  RMSE=55.40  ρ=0.7950  time=94.9s  [261/432] ETA 3.5h
+  [lgb 46/48] {'num_leaves': 255, 'max_depth': 12, 'learning_rate': 0.05}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[1000]	train's rmse: 44.3242	val's rmse: 52.6108
+    Test R²=0.6630  RMSE=53.63  ρ=0.8075  time=148.3s  [262/432] ETA 3.5h
+  [lgb 47/48] {'num_leaves': 255, 'max_depth': 12, 'learning_rate': 0.1}
+Training until validation scores don't improve for 100 rounds
+Did not meet early stopping. Best iteration is:
+[984]	train's rmse: 39.1776	val's rmse: 52.0872
+    Test R²=0.6549  RMSE=54.27  ρ=0.8032  time=126.9s  [263/432] ETA 3.5h
+  [lgb 48/48] {'num_leaves': 255, 'max_depth': 12, 'learning_rate': 0.2}
+Training until validation scores don't improve for 100 rounds
+Early stopping, best iteration is:
+[549]	train's rmse: 38.5012	val's rmse: 52.5371
+    Test R²=0.6401  RMSE=55.42  ρ=0.7943  time=78.5s  [264/432] ETA 3.4h
+  [mlp 1/6] {'hidden_dim': 128, 'epochs': 15, 'learning_rate': 0.001}
+    Epoch 1/15: train=5609.6, val=3832.9
+    Epoch 2/15: train=3554.7, val=3360.4
+    Epoch 3/15: train=3234.3, val=3209.6
+    Epoch 4/15: train=3139.6, val=3072.3
+    Epoch 5/15: train=3058.0, val=3017.7
+    Epoch 6/15: train=3020.6, val=3001.6
+    Epoch 7/15: train=3017.2, val=2994.3
+    Epoch 8/15: train=2974.8, val=3003.2
+    Epoch 9/15: train=2954.8, val=2944.7
+    Epoch 10/15: train=2942.0, val=2939.9
+    Epoch 11/15: train=2926.7, val=2946.7
+    Epoch 12/15: train=2894.1, val=3009.5
+    Epoch 13/15: train=2892.0, val=2916.5
+    Epoch 14/15: train=2870.0, val=2867.3
+    Epoch 15/15: train=2874.2, val=2958.9
+    FAILED: CUDA out of memory. Tried to allocate 978.00 MiB. GPU 0 has a total capacity of 3.63 GiB of which 700.88 MiB is free. Including non-PyTorch memory, this process has 2.94 GiB memory in use. Of the allocated memory 2.51 GiB is allocated by PyTorch, and 348.85 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+  [mlp 2/6] {'hidden_dim': 128, 'epochs': 25, 'learning_rate': 0.001}
+    Epoch 1/25: train=6880.2, val=5644.9
+    Epoch 2/25: train=5075.8, val=4386.2
+    Epoch 3/25: train=3836.5, val=3433.8
+    Epoch 4/25: train=3223.4, val=3106.4
+    Epoch 5/25: train=3085.2, val=3056.5
+    Epoch 6/25: train=2982.8, val=3066.6
+    Epoch 7/25: train=2980.2, val=2958.5
+    Epoch 8/25: train=2940.5, val=2895.8
+    Epoch 9/25: train=2910.8, val=2779.5
+    Epoch 10/25: train=2878.7, val=2838.4
+    Epoch 11/25: train=2894.2, val=2870.1
+    Epoch 12/25: train=2869.6, val=2833.5
+    Epoch 13/25: train=2841.7, val=2826.5
+    Epoch 14/25: train=2849.3, val=2805.6
+    Epoch 15/25: train=2856.8, val=2892.6
+    Epoch 16/25: train=2858.2, val=2825.9
+    Epoch 17/25: train=2853.9, val=2736.5
+    Epoch 18/25: train=2815.1, val=2835.2
+    Epoch 19/25: train=2822.8, val=2780.1
+    Epoch 20/25: train=2831.9, val=2820.7
+    Epoch 21/25: train=2822.4, val=2716.5
+    Epoch 22/25: train=2788.4, val=2827.9
+    Epoch 23/25: train=2800.3, val=2749.6
+    Epoch 24/25: train=2801.6, val=2794.6
+    Epoch 25/25: train=2813.7, val=2801.7
+    FAILED: CUDA out of memory. Tried to allocate 1.91 GiB. GPU 0 has a total capacity of 3.63 GiB of which 700.88 MiB is free. Including non-PyTorch memory, this process has 2.94 GiB memory in use. Of the allocated memory 661.98 MiB is allocated by PyTorch, and 2.20 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+  [mlp 3/6] {'hidden_dim': 256, 'epochs': 15, 'learning_rate': 0.001}
+    Epoch 1/15: train=5523.2, val=3832.3
+    Epoch 2/15: train=3487.9, val=3282.3
+    Epoch 3/15: train=3133.0, val=3080.2
+    Epoch 4/15: train=3007.6, val=2940.5
+    Epoch 5/15: train=2961.8, val=2963.7
+    Epoch 6/15: train=2926.8, val=2888.5
+    Epoch 7/15: train=2878.3, val=2886.5
+    Epoch 8/15: train=2896.9, val=2918.9
+    Epoch 9/15: train=2866.5, val=2865.3
+    Epoch 10/15: train=2826.6, val=2800.7
+    Epoch 11/15: train=2841.7, val=2802.0
+    Epoch 12/15: train=2834.5, val=2858.2
+    Epoch 13/15: train=2832.1, val=2774.9
+    Epoch 14/15: train=2813.4, val=2843.3
+    Epoch 15/15: train=2803.7, val=2857.2
+    FAILED: CUDA out of memory. Tried to allocate 1.91 GiB. GPU 0 has a total capacity of 3.63 GiB of which 704.88 MiB is free. Including non-PyTorch memory, this process has 2.93 GiB memory in use. Of the allocated memory 665.11 MiB is allocated by PyTorch, and 2.19 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+  [mlp 4/6] {'hidden_dim': 256, 'epochs': 25, 'learning_rate': 0.001}
+    Epoch 1/25: train=5636.8, val=3917.4
+    Epoch 2/25: train=3451.5, val=3192.8
+    Epoch 3/25: train=3137.5, val=3051.0
+Traceback (most recent call last):
+  File "/home/junaid/work/lrx-traversal/lrx-traversal/run_sweep.py", line 624, in <module>
+    params = dict(zip(MLP_GRID.keys(), combo))
+                 ~~~~^^^^^^^^^^^^^^^^^^^^^^^^~
+  File "/home/junaid/work/lrx-traversal/lrx-traversal/run_sweep.py", line 473, in train_mlp
+    bx = X_tr[i:i+MLP_BATCH_SIZE]
+    ^^^^^^^^^^^^^^^
+  File "/home/junaid/work/lrx-traversal/.venv/lib/python3.13/site-packages/torch/_tensor.py", line 581, in backward
+    torch.autograd.backward(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        self, gradient, retain_graph, create_graph, inputs=inputs
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/junaid/work/lrx-traversal/.venv/lib/python3.13/site-packages/torch/autograd/__init__.py", line 347, in backward
+    _engine_run_backward(
+    ~~~~~~~~~~~~~~~~~~~~^
+        tensors,
+        ^^^^^^^^
+    ...<5 lines>...
+        accumulate_grad=True,
+        ^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/junaid/work/lrx-traversal/.venv/lib/python3.13/site-packages/torch/autograd/graph.py", line 825, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        t_outputs, *args, **kwargs
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )  # Calls into the C++ engine to run the backward pass
+    ^
+KeyboardInterrupt

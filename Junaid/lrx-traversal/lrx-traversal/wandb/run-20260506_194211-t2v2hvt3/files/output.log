@@ -1,0 +1,166 @@
+
+############################################################
+# n = 16
+############################################################
+  Test data: 64,000 samples
+  [n=16] optimizer=adam lr=0.001 epochs=25 — SKIPPED
+  [n=16] optimizer=adam lr=0.0005 epochs=25 — SKIPPED
+  [n=16] optimizer=adamw lr=0.001 epochs=25 — SKIPPED
+  [n=16] optimizer=adamw lr=0.0005 epochs=25 — SKIPPED
+  [n=16] optimizer=adam lr=0.001 epochs=50 — SKIPPED
+  [n=16] optimizer=adam lr=0.0005 epochs=50 — SKIPPED
+  [n=16] optimizer=adamw lr=0.001 epochs=50 — SKIPPED
+  [n=16] optimizer=adamw lr=0.0005 epochs=50 — SKIPPED
+  [n=16] optimizer=adam lr=0.001 epochs=100 — SKIPPED
+  [n=16] optimizer=adam lr=0.0005 epochs=100 — SKIPPED
+  [n=16] optimizer=adamw lr=0.001 epochs=100 — SKIPPED
+  [n=16] optimizer=adamw lr=0.0005 epochs=100 — SKIPPED
+
+############################################################
+# n = 32
+############################################################
+  Test data: 128,000 samples
+  [n=32] optimizer=adam lr=0.001 epochs=25 — SKIPPED
+  [n=32] optimizer=adam lr=0.0005 epochs=25 — SKIPPED
+  [n=32] optimizer=adamw lr=0.001 epochs=25 — SKIPPED
+  [n=32] optimizer=adamw lr=0.0005 epochs=25 — SKIPPED
+  [n=32] optimizer=adam lr=0.001 epochs=50 — SKIPPED
+  [n=32] optimizer=adam lr=0.0005 epochs=50 — SKIPPED
+  [n=32] optimizer=adamw lr=0.001 epochs=50 — SKIPPED
+  [n=32] optimizer=adamw lr=0.0005 epochs=50 — SKIPPED
+  [n=32] optimizer=adam lr=0.001 epochs=100 — SKIPPED
+  [n=32] optimizer=adam lr=0.0005 epochs=100 — SKIPPED
+  [n=32] optimizer=adamw lr=0.001 epochs=100 — SKIPPED
+  [n=32] optimizer=adamw lr=0.0005 epochs=100 — SKIPPED
+
+############################################################
+# n = 48
+############################################################
+  Test data: 192,000 samples
+  [n=48] optimizer=adam lr=0.001 epochs=25 — SKIPPED
+  [n=48] optimizer=adam lr=0.0005 epochs=25 — SKIPPED
+  [n=48] optimizer=adamw lr=0.001 epochs=25 — SKIPPED
+  [n=48] optimizer=adamw lr=0.0005 epochs=25 — SKIPPED
+  [n=48] optimizer=adam lr=0.001 epochs=50 — SKIPPED
+  [n=48] optimizer=adam lr=0.0005 epochs=50 — SKIPPED
+  [n=48] optimizer=adamw lr=0.001 epochs=50 — SKIPPED
+  [n=48] optimizer=adamw lr=0.0005 epochs=50 — SKIPPED
+  [n=48] optimizer=adam lr=0.001 epochs=100 — SKIPPED
+  [n=48] optimizer=adam lr=0.0005 epochs=100 — SKIPPED
+  [n=48] optimizer=adamw lr=0.001 epochs=100 — SKIPPED
+  [n=48] optimizer=adamw lr=0.0005 epochs=100 — SKIPPED
+
+############################################################
+# n = 64
+############################################################
+  Test data: 256,000 samples
+  [n=64] optimizer=adam lr=0.001 epochs=25
+    Ep 1/25: train=13849.3, val=9041.6
+    Ep 11/25: train=6317.6, val=6633.8
+    Ep 21/25: train=6262.8, val=6643.0
+    Ep 25/25: train=6157.9, val=6890.1
+    R²=0.6926  RMSE=81.95  ρ=0.8270  time=576.4s  [37/48] ETA 0.0h
+  [n=64] optimizer=adam lr=0.0005 epochs=25
+    Ep 1/25: train=15481.5, val=9955.9
+    Ep 11/25: train=6498.0, val=6890.3
+    Ep 21/25: train=6274.4, val=6649.5
+    Ep 25/25: train=6204.2, val=6627.5
+    R²=0.6966  RMSE=81.42  ρ=0.8292  time=580.0s  [38/48] ETA 0.1h
+  [n=64] optimizer=adamw lr=0.001 epochs=25
+    Ep 1/25: train=13506.7, val=8966.1
+    Ep 11/25: train=6354.3, val=6909.6
+    Ep 21/25: train=6233.5, val=6706.7
+    Ep 25/25: train=6195.1, val=6769.8
+    R²=0.6960  RMSE=81.49  ρ=0.8285  time=591.6s  [39/48] ETA 0.1h
+  [n=64] optimizer=adamw lr=0.0005 epochs=25
+    Ep 1/25: train=16361.1, val=11198.3
+    Ep 11/25: train=6490.7, val=6759.6
+    Ep 21/25: train=6359.9, val=6557.5
+    Ep 25/25: train=6275.3, val=6485.4
+    R²=0.6995  RMSE=81.02  ρ=0.8308  time=593.0s  [40/48] ETA 0.1h
+  [n=64] optimizer=adam lr=0.001 epochs=50
+    Ep 1/50: train=12988.9, val=8545.0
+    Ep 11/50: train=6346.4, val=6611.9
+    Ep 21/50: train=6194.6, val=6646.0
+    Ep 31/50: train=6204.8, val=6690.1
+    Ep 41/50: train=6162.4, val=6593.5
+    Ep 50/50: train=6180.9, val=6567.6
+    R²=0.6918  RMSE=82.05  ρ=0.8260  time=1158.3s  [41/48] ETA 0.2h
+  [n=64] optimizer=adam lr=0.0005 epochs=50
+    Ep 1/50: train=16534.9, val=11481.6
+    Ep 11/50: train=6530.4, val=6902.1
+    Ep 21/50: train=6273.2, val=6683.8
+    Ep 31/50: train=6272.2, val=6342.9
+    Ep 41/50: train=6202.4, val=6486.9
+    Ep 50/50: train=6177.9, val=6547.2
+    R²=0.6988  RMSE=81.11  ρ=0.8306  time=1160.1s  [42/48] ETA 0.2h
+  [n=64] optimizer=adamw lr=0.001 epochs=50
+    Ep 1/50: train=12668.9, val=8378.8
+    Ep 11/50: train=6286.7, val=6884.4
+    Ep 21/50: train=6256.6, val=6557.1
+    Ep 31/50: train=6087.5, val=6809.5
+    Ep 41/50: train=6158.4, val=6601.4
+    Ep 50/50: train=6214.0, val=6758.3
+    R²=0.6955  RMSE=81.57  ρ=0.8282  time=1184.9s  [43/48] ETA 0.2h
+  [n=64] optimizer=adamw lr=0.0005 epochs=50
+    Ep 1/50: train=16310.9, val=11297.8
+    Ep 11/50: train=6479.8, val=6546.8
+    Ep 21/50: train=6309.1, val=6528.4
+    Ep 31/50: train=6323.3, val=6637.1
+    Ep 41/50: train=6259.4, val=6593.4
+    Ep 50/50: train=6242.3, val=6596.7
+    R²=0.6987  RMSE=81.13  ρ=0.8304  time=1185.5s  [44/48] ETA 0.2h
+  [n=64] optimizer=adam lr=0.001 epochs=100
+    Ep 1/100: train=12655.7, val=8637.9
+    Ep 11/100: train=6364.9, val=6886.2
+    Ep 21/100: train=6292.1, val=6591.7
+    Ep 31/100: train=6251.8, val=6665.9
+    Ep 41/100: train=6108.8, val=6617.4
+    Ep 51/100: train=6260.9, val=6434.6
+    Ep 61/100: train=6170.6, val=6501.6
+    Ep 71/100: train=6128.7, val=6821.7
+    Ep 81/100: train=6223.5, val=6611.5
+    Ep 91/100: train=6227.8, val=6885.8
+    Ep 100/100: train=6130.5, val=6555.1
+    R²=0.6988  RMSE=81.12  ρ=0.8303  time=2314.2s  [45/48] ETA 0.2h
+  [n=64] optimizer=adam lr=0.0005 epochs=100
+    Ep 1/100: train=16843.3, val=11849.0
+    Ep 11/100: train=6433.9, val=6725.1
+    Ep 21/100: train=6330.3, val=6553.5
+    Ep 31/100: train=6190.1, val=6463.9
+    Ep 41/100: train=6157.0, val=6573.8
+    Ep 51/100: train=6213.0, val=6646.8
+    Ep 61/100: train=6175.2, val=6473.1
+    Ep 71/100: train=6244.6, val=6380.1
+    Ep 81/100: train=6161.2, val=6493.1
+    Ep 91/100: train=6150.4, val=6581.1
+    Ep 100/100: train=6170.1, val=6705.2
+    R²=0.7020  RMSE=80.69  ρ=0.8323  time=2319.1s  [46/48] ETA 0.1h
+  [n=64] optimizer=adamw lr=0.001 epochs=100
+    Ep 1/100: train=12563.5, val=8702.8
+    Ep 11/100: train=6347.3, val=6649.0
+    Ep 21/100: train=6224.0, val=6886.0
+    Ep 31/100: train=6206.3, val=6665.6
+    Ep 41/100: train=6211.8, val=6690.6
+    Ep 51/100: train=6139.9, val=6732.9
+    Ep 61/100: train=6207.6, val=6422.5
+    Ep 71/100: train=6230.7, val=6949.0
+    Ep 81/100: train=6151.6, val=6688.2
+    Ep 91/100: train=6181.7, val=6549.3
+    Ep 100/100: train=6169.3, val=6630.0
+    R²=0.6976  RMSE=81.28  ρ=0.8296  time=2413.1s  [47/48] ETA 0.1h
+  [n=64] optimizer=adamw lr=0.0005 epochs=100
+    Ep 1/100: train=16015.7, val=10563.6
+    Ep 11/100: train=6499.4, val=6562.0
+    Ep 21/100: train=6320.9, val=6678.3
+    Ep 31/100: train=6228.8, val=6599.0
+    Ep 41/100: train=6288.6, val=6729.0
+    Ep 51/100: train=6213.7, val=6561.9
+    Ep 61/100: train=6227.7, val=6506.5
+    Ep 71/100: train=6182.1, val=6493.8
+    Ep 81/100: train=6194.6, val=6542.0
+    Ep 91/100: train=6305.2, val=6606.4
+    Ep 100/100: train=6217.7, val=6483.8
+    R²=0.6989  RMSE=81.10  ρ=0.8304  time=2444.5s  [48/48] ETA 0.0h
+
+DONE — 48 runs

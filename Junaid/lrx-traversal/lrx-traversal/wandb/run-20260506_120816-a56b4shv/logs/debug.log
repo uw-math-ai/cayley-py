@@ -1,0 +1,24 @@
+2026-05-06 12:08:16,093 INFO    MainThread:322560 [wandb_setup.py:_flush():81] Current SDK version is 0.26.1
+2026-05-06 12:08:16,093 INFO    MainThread:322560 [wandb_setup.py:_flush():81] Configure stats pid to 322560
+2026-05-06 12:08:16,093 INFO    MainThread:322560 [wandb_setup.py:_flush():81] Loading settings from environment variables
+2026-05-06 12:08:16,093 INFO    MainThread:322560 [wandb_init.py:setup_run_log_directory():723] Logging user logs to /home/junaid/work/lrx-traversal/lrx-traversal/wandb/run-20260506_120816-a56b4shv/logs/debug.log
+2026-05-06 12:08:16,093 INFO    MainThread:322560 [wandb_init.py:setup_run_log_directory():724] Logging internal logs to /home/junaid/work/lrx-traversal/lrx-traversal/wandb/run-20260506_120816-a56b4shv/logs/debug-internal.log
+2026-05-06 12:08:16,093 INFO    MainThread:322560 [wandb_init.py:init():850] calling init triggers
+2026-05-06 12:08:16,093 INFO    MainThread:322560 [wandb_init.py:init():855] wandb.init called with sweep_config: {}
+config: {'n_values': [8, 16, 24, 32, 40, 48, 56, 64], 'lgb_grid': {'num_leaves': [31, 63, 127, 255], 'max_depth': [6, 8, 10, 12], 'learning_rate': [0.05, 0.1, 0.2]}, 'mlp_grid': {'hidden_dim': [128, 256, 512], 'epochs': [15, 25], 'learning_rate': [0.001]}, 'total_runs': 432, 'quick': False, 'max_train': 500000, 'n_walks': 25000, 'seed': 42, '_wandb': {}}
+2026-05-06 12:08:16,093 INFO    MainThread:322560 [wandb_init.py:init():898] starting backend
+2026-05-06 12:08:16,346 INFO    MainThread:322560 [wandb_init.py:init():913] sending inform_init request
+2026-05-06 12:08:16,545 INFO    MainThread:322560 [wandb_init.py:init():918] backend started and connected
+2026-05-06 12:08:16,672 INFO    MainThread:322560 [wandb_init.py:init():988] updated telemetry
+2026-05-06 12:08:16,673 INFO    MainThread:322560 [wandb_init.py:init():1011] communicating run to backend with 90.0 second timeout
+2026-05-06 12:08:17,102 INFO    MainThread:322560 [wandb_init.py:init():1056] starting run threads in backend
+2026-05-06 12:08:17,212 INFO    MainThread:322560 [wandb_run.py:_console_start():2554] atexit reg
+2026-05-06 12:08:17,212 INFO    MainThread:322560 [wandb_run.py:_redirect():2403] redirect: wrap_raw
+2026-05-06 12:08:17,212 INFO    MainThread:322560 [wandb_run.py:_redirect():2472] Wrapping output streams.
+2026-05-06 12:08:17,212 INFO    MainThread:322560 [wandb_run.py:_redirect():2495] Redirects installed.
+2026-05-06 12:08:17,214 INFO    MainThread:322560 [wandb_init.py:init():1094] run started, returning control to user process
+2026-05-06 13:19:13,822 INFO    MainThread:322560 [wandb_run.py:_finish():2321] finishing run junaid01-uw/koltsov3-sweep/a56b4shv
+2026-05-06 13:19:13,823 INFO    MainThread:322560 [wandb_run.py:_atexit_cleanup():2520] got exitcode: 0
+2026-05-06 13:19:13,823 INFO    MainThread:322560 [wandb_run.py:_restore():2502] restore
+2026-05-06 13:19:13,823 INFO    MainThread:322560 [wandb_run.py:_restore():2508] restore done
+2026-05-06 13:19:14,478 INFO    MainThread:322560 [wandb_run.py:_footer_sync_info():3889] logging synced files
