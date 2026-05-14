@@ -23,16 +23,14 @@ set -euo pipefail
 cd "$SLURM_SUBMIT_DIR"
 mkdir -p logs
 
-# TODO: customize this environment setup for your Hyak install. Examples:
-#   module load python/3.11
-#   source /gscratch/YOUR_LAB/rmuddana/venvs/cayley/bin/activate
-#   # or, if you use conda:
-#   # conda activate cayley
-source /path/to/your/venv/bin/activate   # TODO: point this at your Python environment
+# Environment setup for Klone. The venv lives on gscratch (not home) because the
+# home-directory quota is too small for torch + its CUDA dependencies.
+module load coenv/python/3.11.9
+source /gscratch/stf/rmuddana/venvs/cayley/bin/activate
 
 # W&B credentials: the sweep script loads WANDB_API_KEY from Rithikesh/.env
-# automatically (that file is gitignored). Nothing extra is needed here. If you
-# would rather use a one-time `wandb login` on Hyak instead, that also works.
+# automatically (that file is gitignored). If you used `wandb login` once on
+# Klone instead, that also works -- the script falls back to the cached login.
 
 # Medium sweep defaults: n = 8,12,16,24. Start with a smaller smoke test first
 # (see README) when validating a new environment.
