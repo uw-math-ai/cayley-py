@@ -1,0 +1,14 @@
+# Dependencies for Rithikesh's Koltsov3 gradient boosting sweep.
+# The repo-root requirements.txt covers the shared/base deps (numpy, torch,
+# scipy, scikit-learn, pandas, ...); this file adds what koltsov3_gb_sweep.py
+# needs on top of that.
+#
+# On Hyak:
+#   module load coenv/python/3.11.9
+#   python3 -m venv ~/venvs/cayley && source ~/venvs/cayley/bin/activate
+#   pip install -r requirements.txt -r Rithikesh/requirements.txt
+
+xgboost
+python-dotenv
+wandb
+matplotlib
