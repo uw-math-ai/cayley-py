@@ -15,6 +15,11 @@
 
 set -euo pipefail
 
+# Never let packages in ~/.local/lib leak into the conda env. An earlier failed
+# install left a corrupted matplotlib there; user-site packages would shadow the
+# clean copies installed into the conda env below.
+export PYTHONNOUSERSITE=1
+
 # ---- Paths (everything on gscratch, not home) ----
 GSCRATCH_BASE="/gscratch/stf/rmuddana"
 CONDA_DIR="${GSCRATCH_BASE}/miniconda3"
@@ -66,10 +71,20 @@ fi
 # ---- 4. Install dependencies into the env ----
 echo "[4/5] Installing dependencies into '${ENV_NAME}'..."
 conda activate "${ENV_NAME}"
+
+# A previous failed install left broken packages in ~/.local/lib/python3.11
+# (notably a half-installed matplotlib). Those would shadow the conda env's
+# copies, so remove them. This only touches leftover pip --user packages.
+if [ -d "${HOME}/.local/lib/python3.11" ]; then
+    echo "      Removing stale ~/.local/lib/python3.11 packages..."
+    rm -rf "${HOME}/.local/lib/python3.11"
+fi
+
 # Keep pip's cache on gscratch, not the small home quota.
 export PIP_CACHE_DIR="${GSCRATCH_BASE}/.pip-cache"
+# --no-user / PYTHONNOUSERSITE keep everything inside the conda env.
 python -m pip install --upgrade pip
-python -m pip install \
+python -m pip install --no-cache-dir=false \
     -r "${REPO_DIR}/requirements.txt" \
     -r "${REPO_DIR}/Rithikesh/requirements.txt"
 

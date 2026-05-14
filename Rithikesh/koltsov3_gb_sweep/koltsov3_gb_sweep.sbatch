@@ -28,6 +28,7 @@ mkdir -p logs
 #     so a conda Python is required instead
 #   - the home-directory quota is too small for conda + torch + CUDA deps
 # Run Rithikesh/koltsov3_gb_sweep/setup_env.sh once to create this env.
+export PYTHONNOUSERSITE=1   # ignore ~/.local packages; keep the conda env isolated
 source /gscratch/stf/rmuddana/miniconda3/etc/profile.d/conda.sh
 conda activate cayley
 
