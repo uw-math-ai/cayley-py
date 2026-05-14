@@ -50,6 +50,11 @@ echo "[2/5] Activating conda..."
 # shellcheck disable=SC1091
 source "${CONDA_DIR}/etc/profile.d/conda.sh"
 
+# Recent conda requires explicitly accepting the Anaconda channel Terms of
+# Service before the default channels can be used. This is idempotent.
+conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main || true
+conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r || true
+
 # ---- 3. Create the cayley env (skip if it exists) ----
 if conda env list | grep -qE "^\s*${ENV_NAME}\s"; then
     echo "[3/5] Conda env '${ENV_NAME}' already exists - skipping create."
