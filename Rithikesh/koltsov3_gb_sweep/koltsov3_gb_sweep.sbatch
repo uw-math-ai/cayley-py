@@ -23,10 +23,13 @@ set -euo pipefail
 cd "$SLURM_SUBMIT_DIR"
 mkdir -p logs
 
-# Environment setup for Klone. The venv lives on gscratch (not home) because the
-# home-directory quota is too small for torch + its CUDA dependencies.
-module load coenv/python/3.11.9
-source /gscratch/stf/rmuddana/venvs/cayley/bin/activate
+# Environment setup for Klone. We use a conda env on gscratch:
+#   - the coenv/python modules are built without libffi (import ctypes fails),
+#     so a conda Python is required instead
+#   - the home-directory quota is too small for conda + torch + CUDA deps
+# Run Rithikesh/koltsov3_gb_sweep/setup_env.sh once to create this env.
+source /gscratch/stf/rmuddana/miniconda3/etc/profile.d/conda.sh
+conda activate cayley
 
 # W&B credentials: the sweep script loads WANDB_API_KEY from Rithikesh/.env
 # automatically (that file is gitignored). If you used `wandb login` once on

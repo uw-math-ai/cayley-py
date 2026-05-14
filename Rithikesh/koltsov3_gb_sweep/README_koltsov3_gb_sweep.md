@@ -172,28 +172,42 @@ python koltsov3_gb_sweep.py \
 Expected outputs appear in `smoke_test/`. (R² will be low on this tiny config —
 that is expected; it only checks the pipeline runs.)
 
+## Hyak (Klone) environment setup
+
+The `coenv/python/*` modules on Klone are built without `libffi`, so
+`import ctypes` fails and torch/xgboost/wandb cannot import. The setup therefore
+uses a **conda environment on gscratch** (the home-directory quota is also too
+small for torch + CUDA deps).
+
+`setup_env.sh` automates the whole thing — install Miniconda on gscratch, create
+the `cayley` env, install all dependencies, verify the imports. Run it once:
+
+```bash
+bash /gscratch/stf/rmuddana/cayley-py/Rithikesh/koltsov3_gb_sweep/setup_env.sh
+```
+
+It is safe to re-run (it skips steps already done).
+
+To use the env manually in a new shell:
+
+```bash
+source /gscratch/stf/rmuddana/miniconda3/etc/profile.d/conda.sh
+conda activate cayley
+```
+
 ## Hyak batch job
 
-1. Keep these files together in one directory on Hyak:
+1. Make sure the repo is on Klone at `/gscratch/stf/rmuddana/cayley-py` and the
+   `cayley` conda env exists (run `setup_env.sh` above).
 
-   ```text
-   koltsov3_gb_sweep.py
-   koltsov3_gb_sweep.sbatch
-   README_koltsov3_gb_sweep.md
-   ```
+2. The `.sbatch` is already filled in for this setup (`account=stf`,
+   `partition=ckpt`, conda env on gscratch). No edits needed unless your paths
+   differ.
 
-   Make sure `Rithikesh/.env` exists one directory up (for W&B).
-
-2. Edit `koltsov3_gb_sweep.sbatch` — replace every `TODO`:
-
-   - `--account=TODO_ACCOUNT` — run `hyakalloc` to find your account
-   - `--partition=TODO_PARTITION` — pick a partition you can use
-   - the `source /path/to/your/venv/bin/activate` line — point it at your
-     Python environment (venv or conda)
-
-3. Submit:
+3. Submit from the sweep folder:
 
    ```bash
+   cd /gscratch/stf/rmuddana/cayley-py/Rithikesh/koltsov3_gb_sweep
    sbatch koltsov3_gb_sweep.sbatch
    ```
 
