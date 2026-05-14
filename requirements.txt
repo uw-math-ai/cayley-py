@@ -9,6 +9,10 @@ numba
 h5py
 kagglehub
 pytest
-cayleypy @ git+https://github.com/cayleypy/cayleypy 
+cayleypy @ git+https://github.com/cayleypy/cayleypy
 ipywidgets
 nbstripout
+xgboost
+python-dotenv
+wandb
+matplotlib

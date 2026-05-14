@@ -4,6 +4,10 @@
 *.png
 *.pdf
 
+# Secrets / credentials - never commit
+.env
+*.env
+
 # git repo
 cayleypy/
 
