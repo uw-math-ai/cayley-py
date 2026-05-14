@@ -82,9 +82,9 @@ fi
 
 # Keep pip's cache on gscratch, not the small home quota.
 export PIP_CACHE_DIR="${GSCRATCH_BASE}/.pip-cache"
-# --no-user / PYTHONNOUSERSITE keep everything inside the conda env.
+# PYTHONNOUSERSITE (set at the top) keeps everything inside the conda env.
 python -m pip install --upgrade pip
-python -m pip install --no-cache-dir=false \
+python -m pip install \
     -r "${REPO_DIR}/requirements.txt" \
     -r "${REPO_DIR}/Rithikesh/requirements.txt"
 
