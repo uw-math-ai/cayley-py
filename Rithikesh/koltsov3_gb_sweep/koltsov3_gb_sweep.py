@@ -717,10 +717,25 @@ def train_one_config(
     test_metrics = evaluate_predictions(y_test, test_pred)
 
     # -------- Per-iteration history (the "epoch" CSV equivalent) --------
+    # XGBoost's evals_result only carries train/val RMSE round-by-round. To get
+    # training-curve parity with Merav's MLP W&B view (which shows r2 + Spearman
+    # over time as well), recompute val r2/Spearman every val_metric_every
+    # rounds via model.predict with a partial iteration_range. The cost is one
+    # prediction every N rounds -- cheap relative to training.
     train_rmse_hist = evals_result.get("train", {}).get("rmse", [])
     val_rmse_hist = evals_result.get("val", {}).get("rmse", [])
+    metric_every = max(1, args.val_metric_every)
     iteration_rows: List[Dict[str, Any]] = []
     for it, (tr_rmse, va_rmse) in enumerate(zip(train_rmse_hist, val_rmse_hist)):
+        is_metric_round = (it + 1) % metric_every == 0 or it == len(train_rmse_hist) - 1
+        val_r2_it = np.nan
+        val_spearman_it = np.nan
+        if is_metric_round:
+            val_pred_it = model.predict(dval, iteration_range=(0, it + 1))
+            metrics_it = evaluate_predictions(y_val, val_pred_it)
+            val_r2_it = metrics_it["r2"]
+            val_spearman_it = metrics_it["spearman"]
+
         row = {
             "config_id": sweep_cfg.run_name,
             **asdict(sweep_cfg),
@@ -728,14 +743,23 @@ def train_one_config(
             "walk_length": walk_length,
             "train_rmse": tr_rmse,
             "val_rmse": va_rmse,
+            "val_r2": val_r2_it,
+            "val_spearman": val_spearman_it,
             "n_features": len(feature_cols),
         }
         iteration_rows.append(row)
         if wandb_run is not None:
-            wandb_run.log(
-                {"iteration": it, "train/rmse": tr_rmse, "val/rmse": va_rmse},
-                step=it,
-            )
+            log_payload: Dict[str, Any] = {
+                "iteration": it,
+                "train/rmse": tr_rmse,
+                "val/rmse": va_rmse,
+            }
+            if is_metric_round:
+                if not np.isnan(val_r2_it):
+                    log_payload["val/r2"] = val_r2_it
+                if not np.isnan(val_spearman_it):
+                    log_payload["val/spearman"] = val_spearman_it
+            wandb_run.log(log_payload, step=it)
 
     # -------- Feature importance (gain) --------
     gain_scores = model.get_score(importance_type="gain")
@@ -970,6 +994,7 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument("--nthread", type=int, default=-1, help="XGBoost threads; -1 uses all")
     parser.add_argument("--verbose-eval", type=int, default=0, help="XGBoost log period; 0 silences")
     parser.add_argument("--top-features-to-record", type=int, default=25, help="Top-gain features stored in the summary CSV")
+    parser.add_argument("--val-metric-every", type=int, default=50, help="Recompute val r2/Spearman every N boosting rounds for the W&B training curve")
 
     # Output / problem.
     parser.add_argument("--output-dir", type=Path, default=Path("koltsov3_gb_sweep_results"), help="Output directory")
