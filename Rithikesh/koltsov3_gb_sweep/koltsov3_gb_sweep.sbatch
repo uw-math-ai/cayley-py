@@ -36,10 +36,13 @@ conda activate cayley
 # automatically (that file is gitignored). If you used `wandb login` once on
 # Klone instead, that also works -- the script falls back to the cached login.
 
-# Medium sweep defaults: n = 8,12,16,24. Start with a smaller smoke test first
-# (see README) when validating a new environment.
+# Sweep: n = 5,6,7,8 (Merav's MLP n's, for direct GB-vs-MLP comparison)
+#        + 12,16,24 (larger n, our extensions)
+# max_depth = 4,6,8 -> 7 n x 3 depth = 21 configs.
+# BFS metadata is on: it auto-skips when n! > --max-bfs-states (default 50000),
+# so n=5..8 get exact diameters and n>=12 are auto-skipped at zero extra cost.
 python koltsov3_gb_sweep.py \
-  --n-values 8,12,16,24 \
+  --n-values 5,6,7,8,12,16,24 \
   --n-random-walks-values 2000 \
   --walk-length-multipliers 8 \
   --random-walk-types non-backtracking-beam \
@@ -58,7 +61,7 @@ python koltsov3_gb_sweep.py \
   --early-stopping-rounds 50 \
   --device auto \
   --output-dir koltsov3_gb_sweep_${SLURM_JOB_ID} \
-  --compute-bfs-metadata false \
+  --compute-bfs-metadata true \
   --use-wandb true \
   --wandb-entity CayleyPy \
   --wandb-project cayley-py \
