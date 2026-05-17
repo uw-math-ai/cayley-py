@@ -45,7 +45,7 @@ python koltsov3_gb_sweep.py \
   --n-values 5,6,7,8,12,16,24 \
   --n-random-walks-values 2000 \
   --walk-length-multipliers 8 \
-  --random-walk-types non-backtracking-beam \
+  --random-walk-types simple \
   --steps-back-to-ban-values 2 \
   --n-estimators-values 600 \
   --max-depth-values 4,6,8 \
