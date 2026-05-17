@@ -18,7 +18,7 @@ python koltsov3_gb_sweep.py \
   --n-values 5,6 \
   --n-random-walks-values 50 \
   --walk-length-multipliers 4 \
-  --random-walk-types non-backtracking-beam \
+  --random-walk-types simple \
   --steps-back-to-ban-values 2 \
   --n-estimators-values 30 \
   --max-depth-values 3,5 \
