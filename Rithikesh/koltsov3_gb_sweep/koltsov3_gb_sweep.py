@@ -122,6 +122,36 @@ def parse_str_list(value: str) -> List[str]:
     return parsed
 
 
+def parse_walks_per_n(value: str) -> Dict[int, int]:
+    if not value:
+        raise argparse.ArgumentTypeError("Expected entries like '5:500,16:25000'.")
+    mapping: Dict[int, int] = {}
+    for chunk in value.split(","):
+        chunk = chunk.strip()
+        if not chunk:
+            continue
+        if ":" not in chunk:
+            raise argparse.ArgumentTypeError(
+                f"Invalid walks-per-n entry '{chunk}'; expected 'n:walks'."
+            )
+        n_str, walks_str = chunk.split(":", 1)
+        try:
+            n_key = int(n_str.strip())
+            walks = int(walks_str.strip())
+        except ValueError as exc:
+            raise argparse.ArgumentTypeError(f"Invalid walks-per-n entry '{chunk}'.") from exc
+        if n_key <= 0 or walks <= 0:
+            raise argparse.ArgumentTypeError(
+                f"walks-per-n entry '{chunk}' must have positive n and walks."
+            )
+        if n_key in mapping:
+            raise argparse.ArgumentTypeError(f"Duplicate n={n_key} in --walks-per-n.")
+        mapping[n_key] = walks
+    if not mapping:
+        raise argparse.ArgumentTypeError("--walks-per-n cannot be empty.")
+    return mapping
+
+
 def str2bool(value: str | bool) -> bool:
     if isinstance(value, bool):
         return value
@@ -542,26 +572,34 @@ class SweepConfig:
         )
 
 
+def walks_for_n(args: argparse.Namespace, n: int) -> List[int]:
+    """Per-n walk counts. If --walks-per-n maps n, it overrides --n-random-walks-values."""
+    override = getattr(args, "walks_per_n", None)
+    if override and n in override:
+        return [override[n]]
+    return list(args.n_random_walks_values)
+
+
 def iter_sweep_configs(args: argparse.Namespace) -> Iterable[SweepConfig]:
-    for values in itertools.product(
-        args.n_values,
-        args.n_random_walks_values,
-        args.walk_length_multipliers,
-        args.random_walk_types,
-        args.steps_back_to_ban_values,
-        args.n_estimators_values,
-        args.max_depth_values,
-        args.learning_rate_values,
-        args.subsample_values,
-        args.colsample_bytree_values,
-        args.min_child_weight_values,
-        args.reg_lambda_values,
-        args.reg_alpha_values,
-        args.n_val_samples_values,
-        args.n_test_samples_values,
-        args.seed_values,
-    ):
-        yield SweepConfig(*values)
+    for n in args.n_values:
+        for values in itertools.product(
+            walks_for_n(args, n),
+            args.walk_length_multipliers,
+            args.random_walk_types,
+            args.steps_back_to_ban_values,
+            args.n_estimators_values,
+            args.max_depth_values,
+            args.learning_rate_values,
+            args.subsample_values,
+            args.colsample_bytree_values,
+            args.min_child_weight_values,
+            args.reg_lambda_values,
+            args.reg_alpha_values,
+            args.n_val_samples_values,
+            args.n_test_samples_values,
+            args.seed_values,
+        ):
+            yield SweepConfig(n, *values)
 
 
 # -----------------------------
@@ -811,6 +849,7 @@ def train_one_config(
         "config_id": sweep_cfg.run_name,
         **asdict(sweep_cfg),
         "walk_length": walk_length,
+        "state_space_size": math.factorial(n),
         "graph_family": "koltsov3",
         "koltsov3_k": args.koltsov3_k,
         "device": str(device),
@@ -971,6 +1010,16 @@ def build_arg_parser() -> argparse.ArgumentParser:
     # Data / random-walk axes.
     parser.add_argument("--n-values", type=parse_int_list, default=[8, 12, 16, 24], help="Comma-separated n values")
     parser.add_argument("--n-random-walks-values", type=parse_int_list, default=[2000], help="Training random-walk counts")
+    parser.add_argument(
+        "--walks-per-n",
+        type=parse_walks_per_n,
+        default=None,
+        help=(
+            "Optional per-n walk override, e.g. '5:500,16:25000,24:25000'. "
+            "Any n listed here uses the mapped walk count; n values not listed "
+            "fall back to --n-random-walks-values (Cartesian product)."
+        ),
+    )
     parser.add_argument("--walk-length-multipliers", type=parse_int_list, default=[8], help="walk_length = multiplier * n")
     parser.add_argument("--random-walk-types", type=parse_str_list, default=["non-backtracking-beam"], help="simple,non-backtracking-beam")
     parser.add_argument("--steps-back-to-ban-values", type=parse_int_list, default=[2], help="Previous move counts to ban")
@@ -1028,10 +1077,8 @@ def validate_args(args: argparse.Namespace) -> None:
     if invalid:
         raise ValueError(f"Invalid random walk type(s): {invalid}. Valid options: {sorted(valid_walk_types)}")
 
-    n_configs = 1
+    other_axes = 1
     for values in [
-        args.n_values,
-        args.n_random_walks_values,
         args.walk_length_multipliers,
         args.random_walk_types,
         args.steps_back_to_ban_values,
@@ -1047,7 +1094,11 @@ def validate_args(args: argparse.Namespace) -> None:
         args.n_test_samples_values,
         args.seed_values,
     ]:
-        n_configs *= len(values)
+        other_axes *= len(values)
+
+    n_configs = 0
+    for n in args.n_values:
+        n_configs += len(walks_for_n(args, n)) * other_axes
     args.n_total_configs = n_configs
 
     if n_configs > 200:
@@ -1075,6 +1126,9 @@ def main(argv: Optional[Sequence[str]] = None) -> None:
     print(f"total configurations: {args.n_total_configs}", flush=True)
     print(f"sweep_group_name: {sweep_group_name}", flush=True)
     print(f"xgboost: {xgb.__version__}", flush=True)
+    if getattr(args, "walks_per_n", None):
+        plan = ", ".join(f"n={n}->{walks_for_n(args, n)} walks" for n in args.n_values)
+        print(f"walks-per-n plan: {plan}", flush=True)
 
     if args.use_wandb:
         if wandb is None:

@@ -39,11 +39,16 @@ conda activate cayley
 # Sweep: n = 5,6,7,8 (Merav's MLP n's, for direct GB-vs-MLP comparison)
 #        + 12,16,24 (larger n, our extensions)
 # max_depth = 4,6,8 -> 7 n x 3 depth = 21 configs.
+# --walks-per-n gives each n a tailored walk count: small n saturate quickly
+# (capped by n!), large n need many more walks for coverage. Junaid uses
+# 25k walks for all n; we extend that pattern with smaller counts for small n
+# where the state space saturates well below 25k walks.
 # BFS metadata is on: it auto-skips when n! > --max-bfs-states (default 50000),
 # so n=5..8 get exact diameters and n>=12 are auto-skipped at zero extra cost.
 python koltsov3_gb_sweep.py \
   --n-values 5,6,7,8,12,16,24 \
   --n-random-walks-values 2000 \
+  --walks-per-n 5:500,6:1000,7:3000,8:5000,12:25000,16:25000,24:25000 \
   --walk-length-multipliers 8 \
   --random-walk-types simple \
   --steps-back-to-ban-values 2 \
