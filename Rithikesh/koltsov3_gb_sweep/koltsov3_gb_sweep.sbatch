@@ -7,7 +7,7 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8               # XGBoost 'hist' is CPU-parallel; more cores = faster training
 #SBATCH --mem=32G
-#SBATCH --time=04:00:00                 # ckpt jobs may be preempted; the script writes partial CSVs so
+#SBATCH --time=06:00:00                 # ckpt jobs may be preempted; the script writes partial CSVs so
                                         # progress is not lost. Bump --time if a sweep needs longer.
 #SBATCH --output=logs/%x_%j.out
 #SBATCH --error=logs/%x_%j.err
@@ -38,7 +38,9 @@ conda activate cayley
 
 # Sweep: n = 5,6,7,8 (Merav's MLP n's, for direct GB-vs-MLP comparison)
 #        + 12,16,24 (larger n, our extensions)
-# max_depth = 4,6,8 -> 7 n x 3 depth = 21 configs.
+# max_depth = 6,8,10,12 x lr = 0.05,0.1 -> 4*2 = 8 hyperparam configs per n,
+# x 7 n = 56 configs total. Mirrors Junaid's wider LightGBM grid more closely;
+# his sweep used max_depth=6..12, lr=0.05..0.2, n_estimators=1000.
 # --walks-per-n gives each n a tailored walk count: small n saturate quickly
 # (capped by n!), large n need many more walks for coverage. Junaid uses
 # 25k walks for all n; we extend that pattern with smaller counts for small n
@@ -52,9 +54,9 @@ python koltsov3_gb_sweep.py \
   --walk-length-multipliers 8 \
   --random-walk-types simple \
   --steps-back-to-ban-values 2 \
-  --n-estimators-values 600 \
-  --max-depth-values 4,6,8 \
-  --learning-rate-values 0.05 \
+  --n-estimators-values 1000 \
+  --max-depth-values 6,8,10,12 \
+  --learning-rate-values 0.05,0.1 \
   --subsample-values 0.8 \
   --colsample-bytree-values 0.8 \
   --min-child-weight-values 5 \
