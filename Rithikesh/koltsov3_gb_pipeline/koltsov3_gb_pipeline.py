@@ -2142,11 +2142,24 @@ def main(argv: Optional[Sequence[str]] = None) -> None:
         iteration_rows.extend(iteration_rows_for_config)
         mdqn_rows.extend(mdqn_rows_for_config)
 
-        # Incremental writes make long Slurm jobs safer if a later config fails.
-        pd.DataFrame(summary_rows).to_csv(output_dir / "summary_results_partial.csv", index=False)
-        pd.DataFrame(iteration_rows).to_csv(output_dir / "iteration_results_partial.csv", index=False)
+        # Incremental writes after every config -- if the Slurm ckpt partition
+        # preempts the job, the partial CSVs AND plots stay representative of
+        # whatever finished. save_plots() overwrites the same filenames, so the
+        # cost is bounded and the final state is always "everything done so
+        # far". Wrap in try/except so a single bad config doesn't lose progress.
+        df_summary_partial = pd.DataFrame(summary_rows)
+        df_iters_partial = pd.DataFrame(iteration_rows)
+        df_summary_partial.to_csv(output_dir / "summary_results_partial.csv", index=False)
+        df_iters_partial.to_csv(output_dir / "iteration_results_partial.csv", index=False)
         if mdqn_rows:
             pd.DataFrame(mdqn_rows).to_csv(output_dir / "mdqn_results_partial.csv", index=False)
+        if args.save_plots:
+            try:
+                save_plots(df_summary_partial, df_iters_partial, output_dir)
+            except Exception as exc:
+                # Plotting is a convenience; don't let a matplotlib hiccup kill
+                # the sweep. Print and move on; the next config's call will retry.
+                print(f"  WARNING: incremental save_plots failed: {exc}", flush=True)
 
     df_summary = pd.DataFrame(summary_rows)
     df_iters = pd.DataFrame(iteration_rows)
@@ -2163,6 +2176,8 @@ def main(argv: Optional[Sequence[str]] = None) -> None:
         json.dump({k: str(v) if isinstance(v, Path) else v for k, v in vars(args).items()}, fh, indent=2)
 
     if args.save_plots:
+        # Final pass with the complete dataset. Same files as the incremental
+        # passes; final overwrite ensures everything reflects the full sweep.
         save_plots(df_summary, df_iters, output_dir)
 
     print(f"\nSaved final summary CSV to {summary_csv}", flush=True)
