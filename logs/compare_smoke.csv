@@ -1,0 +1,5 @@
+label,algorithm,profile,state_set,beam_width,step_limit,history_size,policy_alpha,apply_x_trick,success_rate,solved_count,total_count,median_length_ratio,median_path_length,median_runtime_sec,median_states_scored,median_steps_taken
+ppo_robust,ppo,heuristic_only,benchmark_eval,4,4,4,0.0,True,0.0,0,4,,,,,
+ppo_robust,ppo,checkpoint_default,benchmark_eval,4,4,4,0.5,True,0.0,0,4,,,,,
+dqn_smoke,dqn,heuristic_only,benchmark_eval,4,4,4,0.0,True,0.0,0,4,,,,,
+dqn_smoke,dqn,checkpoint_default,benchmark_eval,4,4,4,0.0,True,0.0,0,4,,,,,

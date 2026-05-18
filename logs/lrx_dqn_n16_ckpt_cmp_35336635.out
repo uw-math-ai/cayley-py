@@ -1,0 +1,4 @@
+Python 3.11.15
+torch=2.6.0+cu124
+cuda_available=True
+cuda_device=NVIDIA GeForce RTX 2080 Ti
