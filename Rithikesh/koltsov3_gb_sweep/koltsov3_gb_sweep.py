@@ -260,6 +260,32 @@ def sample_allowed_moves(allowed: torch.Tensor, device: torch.device) -> torch.T
     return move_ids
 
 
+def first_visit_dedup(
+    states: torch.Tensor,
+    labels: torch.Tensor,
+) -> Tuple[torch.Tensor, torch.Tensor]:
+    """Keep one row per unique state, labeled by the minimum (earliest) visit.
+
+    Implements the paper's diffusion-distance semantics: a state s visited
+    multiple times at steps k1 < k2 < ... gets label k1. Without this, the
+    same state appears in training with conflicting labels and the model
+    converges to predicting the per-state mean (~0.5 under our normalization).
+    """
+    n = states.shape[0]
+    if n == 0:
+        return states, labels
+    # torch.unique(dim=0) returns sorted unique rows + an inverse index that
+    # maps each input row to its group id. We then use scatter_reduce to take
+    # the min label per group.
+    unique_states, inverse_idx = torch.unique(states, dim=0, return_inverse=True)
+    n_groups = unique_states.shape[0]
+    min_labels = torch.full(
+        (n_groups,), float("inf"), dtype=labels.dtype, device=labels.device
+    )
+    min_labels.scatter_reduce_(0, inverse_idx, labels, reduce="amin", include_self=True)
+    return unique_states, min_labels
+
+
 def random_walks(
     generators: Sequence[np.ndarray] | torch.Tensor,
     n_random_walk_length: int,
@@ -269,6 +295,7 @@ def random_walks(
     state_rw_start: torch.Tensor,
     dtype_state: torch.dtype,
     device: torch.device,
+    dedup_strategy: str = "none",
 ) -> Tuple[torch.Tensor, torch.Tensor]:
     """Generate random-walk states and normalized depth labels.
 
@@ -312,7 +339,13 @@ def random_walks(
     else:
         raise ValueError(f"Unknown random_walks_type: {random_walks_type}")
 
-    return torch.cat(all_states, dim=0), torch.cat(all_y, dim=0).float()
+    states_out = torch.cat(all_states, dim=0)
+    labels_out = torch.cat(all_y, dim=0).float()
+    if dedup_strategy == "first-visit":
+        states_out, labels_out = first_visit_dedup(states_out, labels_out)
+    elif dedup_strategy != "none":
+        raise ValueError(f"Unknown dedup_strategy: {dedup_strategy}")
+    return states_out, labels_out
 
 
 # -----------------------------
@@ -636,6 +669,7 @@ def train_one_config(
         state_rw_start=identity_state,
         dtype_state=dtype_state,
         device=device,
+        dedup_strategy=args.dedup_strategy,
     )
     X_val_states, y_val_t = random_walks(
         generators,
@@ -646,6 +680,7 @@ def train_one_config(
         state_rw_start=identity_state,
         dtype_state=dtype_state,
         device=device,
+        dedup_strategy=args.dedup_strategy,
     )
     X_test_states, y_test_t = random_walks(
         generators,
@@ -656,6 +691,7 @@ def train_one_config(
         state_rw_start=identity_state,
         dtype_state=dtype_state,
         device=device,
+        dedup_strategy=args.dedup_strategy,
     )
 
     # Optional cap on training rows to keep feature matrices manageable for large n.
@@ -845,11 +881,21 @@ def train_one_config(
         print("Computing exact BFS metadata. This is only safe for small n.", flush=True)
         bfs_metadata = compute_exact_bfs_metadata(n, generators, max_states=args.max_bfs_states)
 
+    raw_train_rows_generated = sweep_cfg.n_random_walks_to_generate * walk_length
+    train_dedup_factor = (
+        raw_train_rows_generated / max(int(X_train_states.shape[0]), 1)
+        if args.dedup_strategy == "first-visit"
+        else 1.0
+    )
+
     summary_row = {
         "config_id": sweep_cfg.run_name,
         **asdict(sweep_cfg),
         "walk_length": walk_length,
         "state_space_size": math.factorial(n),
+        "dedup_strategy": args.dedup_strategy,
+        "raw_train_rows_generated": raw_train_rows_generated,
+        "train_dedup_factor": train_dedup_factor,
         "graph_family": "koltsov3",
         "koltsov3_k": args.koltsov3_k,
         "device": str(device),
@@ -1011,6 +1057,18 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument("--n-values", type=parse_int_list, default=[8, 12, 16, 24], help="Comma-separated n values")
     parser.add_argument("--n-random-walks-values", type=parse_int_list, default=[2000], help="Training random-walk counts")
     parser.add_argument(
+        "--dedup-strategy",
+        choices=["none", "first-visit"],
+        default="none",
+        help=(
+            "Label dedup applied to train/val/test walks. 'none' (default) keeps every "
+            "(state, step) row; 'first-visit' keeps one row per unique state labeled by "
+            "its earliest visit step (paper's diffusion-distance spec). Different "
+            "strategies are different experiments (the target label is a different "
+            "function), so val/test follow the same dedup as train."
+        ),
+    )
+    parser.add_argument(
         "--walks-per-n",
         type=parse_walks_per_n,
         default=None,
@@ -1126,6 +1184,7 @@ def main(argv: Optional[Sequence[str]] = None) -> None:
     print(f"total configurations: {args.n_total_configs}", flush=True)
     print(f"sweep_group_name: {sweep_group_name}", flush=True)
     print(f"xgboost: {xgb.__version__}", flush=True)
+    print(f"dedup_strategy: {args.dedup_strategy}", flush=True)
     if getattr(args, "walks_per_n", None):
         plan = ", ".join(f"n={n}->{walks_for_n(args, n)} walks" for n in args.n_values)
         print(f"walks-per-n plan: {plan}", flush=True)

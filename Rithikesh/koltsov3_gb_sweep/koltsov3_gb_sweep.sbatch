@@ -45,6 +45,12 @@ conda activate cayley
 # (capped by n!), large n need many more walks for coverage. Junaid uses
 # 25k walks for all n; we extend that pattern with smaller counts for small n
 # where the state space saturates well below 25k walks.
+# --dedup-strategy first-visit implements the paper's diffusion-distance spec:
+# keep one row per unique state, labeled by its earliest visit step. Three prior
+# sweeps (no dedup, simple walks, scaled walks, wider grid) all plateaued at
+# val_rmse ~0.21 / R2~0.5-0.6 - label noise from duplicate states was the
+# bottleneck everywhere. Applied to train/val/test together since the dedup
+# changes what "distance" means.
 # BFS metadata is on: it auto-skips when n! > --max-bfs-states (default 50000),
 # so n=5..8 get exact diameters and n>=12 are auto-skipped at zero extra cost.
 python koltsov3_gb_sweep.py \
@@ -65,6 +71,7 @@ python koltsov3_gb_sweep.py \
   --n-val-samples-values 300 \
   --n-test-samples-values 300 \
   --seed-values 0 \
+  --dedup-strategy first-visit \
   --early-stopping-rounds 50 \
   --device auto \
   --output-dir koltsov3_gb_sweep_${SLURM_JOB_ID} \

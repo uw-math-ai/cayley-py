@@ -31,6 +31,7 @@ python koltsov3_gb_sweep.py \
   --n-val-samples-values 20 \
   --n-test-samples-values 20 \
   --seed-values 0 \
+  --dedup-strategy first-visit \
   --output-dir smoke_test \
   --compute-bfs-metadata true \
   --use-wandb false
