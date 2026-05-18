@@ -1,5 +1,5 @@
 #!/bin/bash
-# One-shot environment setup for the Koltsov3 GB sweep on Klone (UW Hyak).
+# One-shot environment setup for the Koltsov3 GB pipeline on Klone (UW Hyak).
 #
 # Why this script exists:
 #   - The `coenv/python/3.11.9` and `3.13.11` modules are built without libffi,
@@ -9,7 +9,7 @@
 #     everything goes on gscratch.
 #
 # Usage (from anywhere on Klone):
-#   bash /gscratch/stf/rmuddana/cayley-py/Rithikesh/koltsov3_gb_sweep/setup_env.sh
+#   bash /gscratch/stf/rmuddana/cayley-py/Rithikesh/koltsov3_gb_pipeline/setup_env.sh
 #
 # Safe to re-run: it skips steps that are already done.
 
@@ -28,7 +28,7 @@ REPO_DIR="${GSCRATCH_BASE}/cayley-py"
 INSTALLER="${GSCRATCH_BASE}/Miniconda3-latest-Linux-x86_64.sh"
 
 echo "=============================================="
-echo " Koltsov3 GB sweep - environment setup"
+echo " Koltsov3 GB pipeline - environment setup"
 echo "=============================================="
 echo "conda dir : ${CONDA_DIR}"
 echo "env name  : ${ENV_NAME}"

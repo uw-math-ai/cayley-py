@@ -1,51 +1,65 @@
 #!/usr/bin/env python3
-"""General Koltsov3 random-walk gradient boosting (XGBoost) sweep script for Hyak/Slurm.
+"""Koltsov3 random-walk gradient boosting (XGBoost) pipeline for Hyak/Slurm.
 
-This is the gradient boosting counterpart to Merav's koltsov3_general_sweep.py
-(an MLP sweep). The MLP is swapped for an XGBoost regressor, and raw permutation
-states are replaced with the hand-crafted feature set from Junaid's LightGBM work.
+Ports Chervov & Soibelman's Algorithm 4 (Modified DQN) to XGBoost. Three phases
+chained per configuration:
 
-Core experiment choices preserved from the MLP script:
+  Phase 1 (warm-up). Diffusion-distance training: generate random walks from
+    the identity, label states by normalized random-walk depth, fit XGBoost.
+    This is the only phase the original koltsov3_gb_sweep.py ran.
+
+  Phase 2 (MDQN refinement, optional). For each MDQN epoch, regenerate walks,
+    expand each visited state's neighbors, compute Bellman targets
+        d(s) = 1 + min_{t in N(s)} f_theta(t),
+    clip d(s) into [0, k] using the state's first-visit step k, and refit
+    XGBoost on (s, d(s)). Enabled when any --n-epochs-dqn-values > 0.
+
+  Phase 3 (guided beam search, optional). Use the final model as a heuristic in
+    a torch beam search from a scrambled state back to the identity. Reports
+    whether and at what step the identity was reached. Enabled by
+    --run-beam-search true.
+
+Preserved from the original sweep script:
   - Koltsov3 generator construction on permutations 0..n-1
-  - random-walk labels equal to normalized random-walk depth (step / walk_length)
-  - fixed validation/test random walks for each configuration
-  - one model trained for each sweep configuration
-  - summary and per-iteration CSV outputs, plots, optional W&B logging
+  - random-walk training data with optional first-visit dedup
+  - fixed validation/test random walks per configuration
+  - hand-crafted feature set from Junaid's LightGBM work (extract_features())
+  - summary CSV, per-iteration CSV, plots, optional W&B
   - optional exact BFS metadata for small n only
+  - W&B key loaded from a gitignored .env file (WANDB_API_KEY)
 
-Key differences from the MLP script:
-  - XGBoost has no epochs; training data is generated ONCE per configuration
-    (the MLP script regenerated training walks every epoch). The "epoch" CSV
-    becomes a per-boosting-iteration CSV built from XGBoost's eval history.
-  - States are turned into hand-crafted features (displacement, parity,
-    inversions, descents, per-generator features, theoretical lower bounds, ...)
-    before training. See extract_features().
-  - The hyperparameter axes are XGBoost params (n_estimators, max_depth,
-    learning_rate, subsample, colsample_bytree, min_child_weight, reg_lambda,
-    reg_alpha) instead of MLP width/lr/batch_size/epochs.
-  - W&B credentials are loaded from a gitignored .env file (WANDB_API_KEY) so
-    the key never has to be passed in by hand and never enters git.
+Sweep axes:
+  - Phase 1 / data: n, n_random_walks, walk_length_multiplier, walk_type,
+    steps_back_to_ban, n_val_samples, n_test_samples, seed
+  - Phase 1 / XGBoost: n_estimators, max_depth, learning_rate, subsample,
+    colsample_bytree, min_child_weight, reg_lambda, reg_alpha
+  - Phase 2 / MDQN: n_epochs_dqn (0 disables), dqn_n_random_walks, dqn_clip
+  - Phase 3 / beam: beam_width, n_steps_limit_mult (limit = mult * n**2),
+    beam_steps_back_to_ban, n_scrambles
 
-Example smoke test:
-    python koltsov3_gb_sweep.py \
-      --n-values 5 \
-      --n-random-walks-values 50 \
-      --walk-length-multipliers 4 \
-      --random-walk-types non-backtracking-beam \
-      --steps-back-to-ban-values 2 \
-      --n-estimators-values 20 \
-      --max-depth-values 4 \
-      --learning-rate-values 0.1 \
-      --subsample-values 0.8 \
-      --colsample-bytree-values 0.8 \
-      --min-child-weight-values 5 \
-      --reg-lambda-values 1.0 \
-      --reg-alpha-values 0.0 \
-      --n-val-samples-values 20 \
-      --n-test-samples-values 20 \
-      --seed-values 0 \
-      --output-dir smoke_test \
-      --use-wandb false
+MDQN requires --dedup-strategy first-visit so that each state has a well-defined
+"first-visit step k" to clip against (line 7 of Algorithm 4).
+
+Example smoke test (Phase 1 only):
+    python koltsov3_gb_pipeline.py \
+      --n-values 5 --n-random-walks-values 50 \
+      --walk-length-multipliers 4 --random-walk-types simple \
+      --steps-back-to-ban-values 0 \
+      --n-estimators-values 20 --max-depth-values 4 \
+      --learning-rate-values 0.1 --subsample-values 0.8 \
+      --colsample-bytree-values 0.8 --min-child-weight-values 5 \
+      --reg-lambda-values 1.0 --reg-alpha-values 0.0 \
+      --n-val-samples-values 20 --n-test-samples-values 20 \
+      --seed-values 0 --output-dir smoke_test --use-wandb false
+
+Example full Algorithm 4 (Phase 1 + Phase 2 + Phase 3):
+    python koltsov3_gb_pipeline.py \
+      ... (Phase 1 args as above) \
+      --dedup-strategy first-visit \
+      --n-epochs-dqn-values 50 --dqn-n-random-walks-values 50 \
+      --run-beam-search true --beam-width-values 1024 \
+      --n-steps-limit-mult-values 4 --beam-steps-back-to-ban-values 8 \
+      --n-scrambles-values 1
 """
 
 from __future__ import annotations
@@ -163,6 +177,15 @@ def str2bool(value: str | bool) -> bool:
     raise argparse.ArgumentTypeError("Boolean value expected.")
 
 
+def parse_bool_list(value: str) -> List[bool]:
+    if not value:
+        raise argparse.ArgumentTypeError("Expected a comma-separated list of bools.")
+    parsed = [str2bool(x.strip()) for x in value.split(",") if x.strip()]
+    if not parsed:
+        raise argparse.ArgumentTypeError("List cannot be empty.")
+    return parsed
+
+
 # -----------------------------
 # Reproducibility/device helpers
 # -----------------------------
@@ -229,8 +252,24 @@ def get_koltsov3_moves(n: int, k: int = 0) -> List[np.ndarray]:
     return [I, K, S]
 
 
-def get_random_walk_length(n: int, walk_length_multiplier: int) -> int:
-    return walk_length_multiplier * n
+def get_random_walk_length(n: int, walk_length_multiplier: int, mode: str) -> int:
+    """Decide walk length from n and the chosen mode.
+
+    Modes:
+      - 'multiplier' (default): walk_length = walk_length_multiplier * n. Lets
+        the multiplier axis drive walk length, matching Merav's MLP sweep.
+      - 'min_npairs_or_16n': walk_length = min(n*(n-1)//2, 16*n). Danny's
+        n(n-1)/2 formula (the "Antonina Dolgorukova" value used in his
+        CNN_FINAL_RESULTS notebook), capped at 16n so n=64 doesn't blow up
+        to 2016-step walks. In this mode walk_length_multiplier is ignored
+        for the length computation, but is still tracked in run names so
+        sweeps that vary the axis stay distinguishable.
+    """
+    if mode == "multiplier":
+        return walk_length_multiplier * n
+    if mode == "min_npairs_or_16n":
+        return min(n * (n - 1) // 2, 16 * n)
+    raise ValueError(f"Unknown walk_length_mode: {mode}")
 
 
 def build_problem(
@@ -248,6 +287,21 @@ def normalize_generators(generators: Sequence[np.ndarray] | torch.Tensor, device
     if isinstance(generators, torch.Tensor):
         return generators.to(device=device, dtype=torch.long)
     return torch.tensor(np.array(generators), dtype=torch.long, device=device)
+
+
+def get_neighbors(states: torch.Tensor, moves: torch.Tensor) -> torch.Tensor:
+    """Apply every generator to every state.
+
+    Returns a 3-D tensor of shape (n_states, n_moves, state_size). Used by both
+    the MDQN Bellman update (min over neighbors) and beam-search expansion. To
+    get a 2-D candidate matrix, call .flatten(end_dim=1) on the result.
+    """
+    n_states = states.size(0)
+    n_moves = moves.size(0)
+    state_size = states.size(1)
+    expanded_states = states.unsqueeze(1).expand(n_states, n_moves, state_size)
+    expanded_moves = moves.unsqueeze(0).expand(n_states, n_moves, state_size)
+    return torch.gather(expanded_states, 2, expanded_moves)
 
 
 def sample_allowed_moves(allowed: torch.Tensor, device: torch.device) -> torch.Tensor:
@@ -499,17 +553,25 @@ def compute_exact_bfs_metadata(
     n: int,
     generators: Sequence[np.ndarray],
     max_states: int,
-) -> Dict[str, Any]:
-    """Compute exact BFS diameter/layer sizes from the identity, if small enough."""
+    return_distance_map: bool = False,
+) -> Tuple[Dict[str, Any], Optional[Dict[Tuple[int, ...], int]]]:
+    """Compute exact BFS diameter/layer sizes from the identity, if small enough.
+
+    Returns (metadata, distance_map). When return_distance_map=True and BFS
+    succeeded, distance_map[state_tuple] = shortest-path-distance from identity
+    to that state. When BFS was skipped or return_distance_map=False, the
+    second element is None.
+    """
     total_possible_states = math.factorial(n)
     if total_possible_states > max_states:
-        return {
+        meta = {
             "bfs_computed": False,
             "bfs_skip_reason": f"n!={total_possible_states} exceeds max_bfs_states={max_states}",
             "diameter": np.nan,
             "last_layer_count": np.nan,
             "layer_sizes": "",
         }
+        return meta, None
 
     start = tuple(range(n))
     visited = {start: 0}
@@ -528,13 +590,14 @@ def compute_exact_bfs_metadata(
 
     diameter = max(layer_counts)
     layer_sizes = [layer_counts[i] for i in range(diameter + 1)]
-    return {
+    meta = {
         "bfs_computed": True,
         "bfs_skip_reason": "",
         "diameter": diameter,
         "last_layer_count": layer_sizes[-1],
         "layer_sizes": json.dumps(layer_sizes),
     }
+    return meta, visited if return_distance_map else None
 
 
 # -----------------------------
@@ -591,10 +654,27 @@ class SweepConfig:
     n_val_samples: int
     n_test_samples: int
     seed: int
+    # Phase 2 (MDQN). n_epochs_dqn == 0 disables. dqn_n_random_walks is the
+    # number of walks regenerated per MDQN epoch. dqn_clip toggles the
+    # min(k, max(0, d)) clip from Algorithm 4 line 7.
+    n_epochs_dqn: int
+    dqn_n_random_walks: int
+    dqn_clip: bool
+    # Phase 3 (beam search). Enabled per-config when args.run_beam_search is on.
+    # n_steps_limit = n_steps_limit_mult * n**2.
+    # scramble_depth_mult: scramble steps = mult * n_generators**3 (notebook
+    # uses mult=100 i.e. n_gens**3 * 100; the deep scramble matters because
+    # it sets how far the start state is from identity and therefore how hard
+    # the beam search has to work. Make this an axis so it can be swept.)
+    beam_width: int
+    n_steps_limit_mult: int
+    beam_steps_back_to_ban: int
+    n_scrambles: int
+    beam_scramble_depth_mult: int
 
     @property
     def run_name(self) -> str:
-        return (
+        base = (
             f"n{self.n}_rw{self.n_random_walks_to_generate}_"
             f"wlm{self.walk_length_multiplier}_{self.random_walks_type}_"
             f"ban{self.n_random_walks_steps_back_to_ban}_"
@@ -603,6 +683,17 @@ class SweepConfig:
             f"mcw{self.min_child_weight:g}_l2{self.reg_lambda:g}_l1{self.reg_alpha:g}_"
             f"seed{self.seed}"
         )
+        if self.n_epochs_dqn > 0:
+            base += f"_dqn{self.n_epochs_dqn}rw{self.dqn_n_random_walks}clip{int(self.dqn_clip)}"
+        # Beam fields are always in the run name (even when beam search is off
+        # they're carried along as no-op axes) -- keeps run_names unique when a
+        # user does sweep over beam params with phases switched on/off.
+        base += (
+            f"_bw{self.beam_width}_lim{self.n_steps_limit_mult}_"
+            f"bban{self.beam_steps_back_to_ban}_sc{self.n_scrambles}_"
+            f"scrm{self.beam_scramble_depth_mult}"
+        )
+        return base
 
 
 def walks_for_n(args: argparse.Namespace, n: int) -> List[int]:
@@ -631,8 +722,554 @@ def iter_sweep_configs(args: argparse.Namespace) -> Iterable[SweepConfig]:
             args.n_val_samples_values,
             args.n_test_samples_values,
             args.seed_values,
+            args.n_epochs_dqn_values,
+            args.dqn_n_random_walks_values,
+            args.dqn_clip_values,
+            args.beam_width_values,
+            args.n_steps_limit_mult_values,
+            args.beam_steps_back_to_ban_values,
+            args.n_scrambles_values,
+            args.beam_scramble_depth_mult_values,
         ):
             yield SweepConfig(n, *values)
+
+
+# -----------------------------
+# MDQN refinement (Algorithm 4, Part 2)
+# -----------------------------
+
+
+def predict_features_batched(
+    model: xgb.Booster,
+    feature_df: pd.DataFrame,
+    feature_cols: List[str],
+    best_ntree_limit: int,
+    batch_size: int = 200_000,
+) -> np.ndarray:
+    """Predict in chunks to keep DMatrix allocation bounded."""
+    n = len(feature_df)
+    preds = np.empty(n, dtype=np.float32)
+    for start in range(0, n, batch_size):
+        end = min(start + batch_size, n)
+        d = xgb.DMatrix(feature_df.iloc[start:end], feature_names=feature_cols)
+        preds[start:end] = model.predict(d, iteration_range=(0, best_ntree_limit))
+    return preds
+
+
+def run_mdqn_phase(
+    model: xgb.Booster,
+    initial_best_ntree_limit: int,
+    sweep_cfg: SweepConfig,
+    args: argparse.Namespace,
+    generators: Sequence[np.ndarray],
+    identity_state: torch.Tensor,
+    dtype_state: torch.dtype,
+    device: torch.device,
+    feature_cols: List[str],
+    walk_length: int,
+    target_scale: float,
+    wandb_run: Optional[Any] = None,
+    log_step_offset: int = 0,
+) -> Tuple[xgb.Booster, int, List[Dict[str, Any]]]:
+    """Run Algorithm 4 Part 2: Bellman-update MDQN refinement on top of a warm-started XGBoost.
+
+    Loop body, repeated sweep_cfg.n_epochs_dqn times:
+      1. Regenerate dqn_n_random_walks walks, dedup to first-visit (so each
+         state has a well-defined first-visit step k).
+      2. Expand neighbors of every visited state via get_neighbors().
+      3. Predict normalized distances for the neighbor set with the current
+         model; recover integer distance estimates by multiplying by target_scale.
+      4. Bellman: d(s) = 1 + min_t f_theta(t).
+      5. Clip d(s) into [0, k] (optional, controlled by dqn_clip).
+      6. Renormalize to [0, 1] and refit XGBoost from scratch on (state_features,
+         normalized d(s)).
+    """
+    moves = normalize_generators(generators, device)
+    n_moves = moves.shape[0]
+    state_size = identity_state.shape[0]
+    history: List[Dict[str, Any]] = []
+
+    params = {
+        "objective": "reg:squarederror",
+        "eval_metric": "rmse",
+        "tree_method": "hist",
+        "max_depth": sweep_cfg.max_depth,
+        "learning_rate": sweep_cfg.learning_rate,
+        "subsample": sweep_cfg.subsample,
+        "colsample_bytree": sweep_cfg.colsample_bytree,
+        "min_child_weight": sweep_cfg.min_child_weight,
+        "reg_lambda": sweep_cfg.reg_lambda,
+        "reg_alpha": sweep_cfg.reg_alpha,
+        "seed": sweep_cfg.seed,
+        "nthread": args.nthread,
+    }
+    if device.type == "cuda":
+        params["device"] = "cuda"
+
+    current_model = model
+    current_ntree_limit = initial_best_ntree_limit
+
+    for epoch in range(sweep_cfg.n_epochs_dqn):
+        t0 = time.time()
+        # 1. Fresh random walks for this MDQN epoch (the M in MDQN: random
+        # subset of nodes is regenerated each epoch).
+        X_states, y_norm = random_walks(
+            generators,
+            n_random_walk_length=walk_length,
+            n_random_walks_to_generate=sweep_cfg.dqn_n_random_walks,
+            n_random_walks_steps_back_to_ban=sweep_cfg.n_random_walks_steps_back_to_ban,
+            random_walks_type=sweep_cfg.random_walks_type,
+            state_rw_start=identity_state,
+            dtype_state=dtype_state,
+            device=device,
+            dedup_strategy="first-visit",
+        )
+        n_states = int(X_states.shape[0])
+        if n_states == 0:
+            print(f"  MDQN epoch {epoch}: dedup produced zero states, skipping", flush=True)
+            continue
+
+        # k = integer first-visit step (used for the clip in Algorithm 4 line 7).
+        k_per_state = (y_norm.detach().cpu().numpy() * target_scale).round().astype(np.float32)
+
+        # 2. Expand neighbors. neighbors: (n_states, n_moves, state_size) ->
+        # flatten to (n_states * n_moves, state_size) so we predict in one batch.
+        neighbors = get_neighbors(X_states, moves).reshape(n_states * n_moves, state_size)
+        neighbor_features = states_tensor_to_features(neighbors, n=sweep_cfg.n, k=args.koltsov3_k)
+
+        # 3. Predict and reshape back to (n_states, n_moves).
+        neighbor_preds = predict_features_batched(
+            current_model, neighbor_features, feature_cols, current_ntree_limit
+        )
+        neighbor_preds = neighbor_preds.reshape(n_states, n_moves)
+        # The model predicts NORMALIZED distance; rescale to integer step units.
+        neighbor_preds_steps = neighbor_preds * target_scale
+
+        # 4. Bellman update: 1 + min over moves.
+        d_new_steps = 1.0 + neighbor_preds_steps.min(axis=1)
+
+        # 5. Clip to [0, k]. With clip on, the algorithm trusts the random-walk
+        # bound (the state was reached in k steps, so the true distance can't
+        # exceed k).
+        if sweep_cfg.dqn_clip:
+            d_new_steps = np.minimum(k_per_state, np.maximum(0.0, d_new_steps))
+
+        # 6. Renormalize and refit. We renormalize by walk_length to keep
+        # outputs on the same [0, 1] scale as Phase 1, so the warm-up model and
+        # the MDQN-refined model are interchangeable downstream.
+        d_new_norm = d_new_steps / max(walk_length, 1)
+        X_features = states_tensor_to_features(X_states, n=sweep_cfg.n, k=args.koltsov3_k)
+        dtrain = xgb.DMatrix(X_features, label=d_new_norm, feature_names=feature_cols)
+
+        # Refit from scratch (n_estimators full rounds, no early stopping --
+        # MDQN's Bellman targets change every epoch, so a separate val set
+        # tracking through epochs would be misleading).
+        evals_result: Dict[str, Dict[str, List[float]]] = {}
+        current_model = xgb.train(
+            params=params,
+            dtrain=dtrain,
+            num_boost_round=sweep_cfg.n_estimators,
+            evals=[(dtrain, "train")],
+            evals_result=evals_result,
+            verbose_eval=False,
+        )
+        current_ntree_limit = current_model.num_boosted_rounds()
+
+        train_rmse_last = evals_result.get("train", {}).get("rmse", [np.nan])[-1]
+        d_mean = float(np.mean(d_new_steps))
+        d_max = float(np.max(d_new_steps))
+        elapsed = time.time() - t0
+
+        row = {
+            "dqn_epoch": epoch,
+            "dqn_states": n_states,
+            "dqn_train_rmse": float(train_rmse_last),
+            "dqn_d_mean_steps": d_mean,
+            "dqn_d_max_steps": d_max,
+            "dqn_epoch_sec": elapsed,
+        }
+        history.append(row)
+        if wandb_run is not None:
+            wandb_run.log(
+                {
+                    "mdqn/epoch": epoch,
+                    "mdqn/train_rmse": row["dqn_train_rmse"],
+                    "mdqn/d_mean_steps": d_mean,
+                    "mdqn/d_max_steps": d_max,
+                    "mdqn/epoch_sec": elapsed,
+                },
+                step=log_step_offset + epoch,
+            )
+
+        if args.verbose_mdqn:
+            print(
+                f"  MDQN epoch {epoch}: states={n_states}, train_rmse={train_rmse_last:.5f}, "
+                f"d_mean_steps={d_mean:.2f}, d_max_steps={d_max:.2f}, time={elapsed:.1f}s",
+                flush=True,
+            )
+
+    return current_model, current_ntree_limit, history
+
+
+# -----------------------------
+# Beam search evaluation (Algorithm 4, Part 3 -- guided beam search)
+# -----------------------------
+
+
+def scramble_state(
+    identity_state: torch.Tensor,
+    generators_tensor: torch.Tensor,
+    n_scramble_steps: int,
+    device: torch.device,
+) -> torch.Tensor:
+    """Apply n_scramble_steps random generators to the identity to make a start state."""
+    state = identity_state.clone()
+    n_gens = generators_tensor.shape[0]
+    for _ in range(n_scramble_steps):
+        idx = int(torch.randint(0, n_gens, (1,), device=device).item())
+        state = state[generators_tensor[idx]]
+    return state
+
+
+def run_beam_search_once(
+    model: xgb.Booster,
+    best_ntree_limit: int,
+    feature_cols: List[str],
+    state_start: torch.Tensor,
+    state_destination: torch.Tensor,
+    generators_tensor: torch.Tensor,
+    beam_width: int,
+    n_steps_limit: int,
+    steps_back_to_ban: int,
+    target_scale: float,
+    args: argparse.Namespace,
+    sweep_cfg: SweepConfig,
+    device: torch.device,
+) -> Dict[str, Any]:
+    """One beam-search rollout using XGBoost as the heuristic.
+
+    Mirrors the notebook's torch beam search (cell 82): at every step apply all
+    generators to the current beam, dedup, ban states seen on the last
+    steps_back_to_ban steps via hashing, score with the model, keep beam_width
+    cheapest.
+
+    Path reconstruction. At each step we store, per surviving beam row, the
+    index of its parent in the previous beam and the generator index used to
+    reach it. On found=True we walk these backpointers from the matching row
+    back to state_start, producing the move sequence. The sequence is then
+    re-applied to state_start as a correctness check (beam_path_verified).
+    """
+    state_size = state_destination.shape[0]
+    n_generators = generators_tensor.shape[0]
+
+    # Random hash vector (same trick as the notebook): h(s) = sum(s * v) for a
+    # random v in int64. Lets us check "state seen recently" with a fast isin.
+    max_int = int(2**62)
+    vec_hasher = torch.randint(
+        -max_int, max_int, size=(state_size,), device=device, dtype=torch.int64
+    )
+
+    array_beam = state_start.view(1, state_size).to(device=device, dtype=torch.long)
+
+    if steps_back_to_ban > 0:
+        hash_initial = torch.sum(array_beam.to(torch.int64) * vec_hasher, dim=1)
+        vec_hashes_current = hash_initial.expand(
+            beam_width * n_generators, steps_back_to_ban
+        ).clone()
+        cyclic_idx = 0
+
+    found = False
+    found_step = -1
+    found_local_idx = -1  # row index of the matching candidate in the final beam (pre-break)
+    last_q_min = float("nan")
+    last_q_max = float("nan")
+    last_q_median = float("nan")
+    early_exit_reason = "step_limit_reached"
+
+    # Backpointer storage. parent_history[t] and gen_history[t] are 1-D tensors
+    # of length beam_size_at_step_t telling us, for each row in the step-t beam,
+    # which row of the step-(t-1) beam it came from and which generator was
+    # applied. parent_history[0] / gen_history[0] correspond to the start state
+    # and are filled with sentinel -1.
+    parent_history: List[torch.Tensor] = [
+        torch.tensor([-1], dtype=torch.long, device=device)
+    ]
+    gen_history: List[torch.Tensor] = [
+        torch.tensor([-1], dtype=torch.long, device=device)
+    ]
+
+    for i_step in range(1, n_steps_limit + 1):
+        prev_beam_size = array_beam.shape[0]
+
+        # 1. Apply all generators to all beam states; shape (beam, gens, size).
+        #    Before reshape, position (i, j) in candidates_3d came from beam
+        #    row i via generator j. After flattening row-major to (B*G, size),
+        #    flat index k maps to (parent=k//G, gen=k%G).
+        candidates = get_neighbors(array_beam, generators_tensor).reshape(-1, state_size)
+        cand_parent = (
+            torch.arange(candidates.shape[0], device=device) // n_generators
+        )
+        cand_gen = torch.arange(candidates.shape[0], device=device) % n_generators
+
+        # 2. Deduplicate. (Critical -- without this the beam collapses to copies.)
+        # We need a representative pre-dedup index for each unique row so we
+        # can carry parent/gen info through. torch.unique(return_inverse=True)
+        # gives inverse[i] = group-id of input row i; scatter the first input
+        # index per group to obtain "input index of one representative".
+        unique_cands, inverse = torch.unique(candidates, dim=0, return_inverse=True)
+        n_unique = unique_cands.shape[0]
+        rep_input_idx = torch.full((n_unique,), -1, dtype=torch.long, device=device)
+        all_input_idx = torch.arange(candidates.shape[0], device=device)
+        # For each group, the smallest input index becomes its representative.
+        # scatter_reduce 'amin' with full(-1) doesn't work for ints because
+        # amin treats -1 as a candidate min; use a forward fill instead.
+        # Iterate-free option: sort inverse and take the first input index per
+        # unique group via cumulative bincount tricks. Simplest correct:
+        # use scatter_reduce on input indices initialized to a sentinel larger
+        # than any valid index.
+        sentinel = candidates.shape[0]
+        rep_input_idx = torch.full((n_unique,), sentinel, dtype=torch.long, device=device)
+        rep_input_idx.scatter_reduce_(
+            0, inverse, all_input_idx, reduce="amin", include_self=True
+        )
+        # All groups must have at least one input row, so no sentinel left.
+        candidates = unique_cands
+        cand_parent = cand_parent[rep_input_idx]
+        cand_gen = cand_gen[rep_input_idx]
+
+        # 3. Check for destination.
+        eq_dest = torch.all(candidates == state_destination, dim=1)
+        if torch.any(eq_dest).item():
+            # Record this final layer in the histories *before* breaking, so
+            # backpointer reconstruction can include it.
+            parent_history.append(cand_parent.clone())
+            gen_history.append(cand_gen.clone())
+            found = True
+            found_step = i_step
+            found_local_idx = int(torch.where(eq_dest)[0][0].item())
+            break
+
+        # 4. Ban states seen on the last steps_back_to_ban steps.
+        if steps_back_to_ban > 0:
+            new_hashes = torch.sum(candidates.to(torch.int64) * vec_hasher, dim=1)
+            mask_new = ~torch.isin(new_hashes, vec_hashes_current.view(-1), assume_unique=False)
+            if int(mask_new.sum().item()) == 0:
+                early_exit_reason = "no_new_states"
+                break
+            candidates = candidates[mask_new]
+            cand_parent = cand_parent[mask_new]
+            cand_gen = cand_gen[mask_new]
+            # Update hash storage (cyclic buffer over the last steps_back_to_ban rounds).
+            cyclic_idx = (cyclic_idx + 1) % steps_back_to_ban
+            new_hashes_kept = new_hashes[mask_new]
+            n_kept = new_hashes_kept.numel()
+            vec_hashes_current[:n_kept, cyclic_idx] = new_hashes_kept
+
+        # 5. Score with the model and keep the beam_width cheapest.
+        if candidates.shape[0] > beam_width:
+            feat = states_tensor_to_features(candidates, n=sweep_cfg.n, k=args.koltsov3_k)
+            q = predict_features_batched(model, feat, feature_cols, best_ntree_limit)
+            # Tighter q = closer to identity.
+            idx_np = np.argsort(q)[:beam_width]
+            idx = torch.as_tensor(idx_np, dtype=torch.long, device=device)
+            array_beam = candidates[idx, :]
+            cand_parent = cand_parent[idx]
+            cand_gen = cand_gen[idx]
+            last_q_min = float(q[idx_np].min())
+            last_q_max = float(q[idx_np].max())
+            last_q_median = float(np.median(q[idx_np]))
+        else:
+            array_beam = candidates
+
+        parent_history.append(cand_parent.clone())
+        gen_history.append(cand_gen.clone())
+
+    # -------- Path reconstruction --------
+    path_moves: List[int] = []
+    path_verified = False
+    if found and found_local_idx >= 0:
+        # parent_history / gen_history have len = found_step + 1 (entry 0 is
+        # the start state, entry t is step t). Walk back from the matching
+        # row in the final layer to step 0.
+        idx_cursor = found_local_idx
+        for t in range(found_step, 0, -1):
+            gen_used = int(gen_history[t][idx_cursor].item())
+            path_moves.append(gen_used)
+            idx_cursor = int(parent_history[t][idx_cursor].item())
+        path_moves.reverse()
+        # Verify by re-applying.
+        verify_state = state_start.view(state_size).to(device=device, dtype=torch.long).clone()
+        for g in path_moves:
+            verify_state = verify_state[generators_tensor[g]]
+        path_verified = bool(torch.equal(verify_state, state_destination.to(verify_state.dtype)))
+
+    PATH_JSON_CAP = 500
+    if len(path_moves) > PATH_JSON_CAP:
+        # Keep first 250 and last 250 with a marker so JSON stays readable.
+        path_for_json = path_moves[: PATH_JSON_CAP // 2] + [-1] + path_moves[-PATH_JSON_CAP // 2 :]
+    else:
+        path_for_json = path_moves
+
+    return {
+        "beam_found": bool(found),
+        "beam_found_step": int(found_step) if found else -1,
+        "beam_steps_taken": int(found_step) if found else int(n_steps_limit),
+        "beam_exit_reason": "found" if found else early_exit_reason,
+        "beam_final_q_min": last_q_min,
+        "beam_final_q_max": last_q_max,
+        "beam_final_q_median": last_q_median,
+        "beam_path_length": len(path_moves),
+        "beam_path_verified": path_verified,
+        "beam_path_moves_json": json.dumps(path_for_json),
+    }
+
+
+def run_beam_phase(
+    model: xgb.Booster,
+    best_ntree_limit: int,
+    feature_cols: List[str],
+    sweep_cfg: SweepConfig,
+    args: argparse.Namespace,
+    generators: Sequence[np.ndarray],
+    identity_state: torch.Tensor,
+    walk_length: int,
+    target_scale: float,
+    device: torch.device,
+    wandb_run: Optional[Any] = None,
+    log_step_offset: int = 0,
+    bfs_distance_map: Optional[Dict[Tuple[int, ...], int]] = None,
+) -> Dict[str, Any]:
+    """Run n_scrambles beam-search rollouts and aggregate. Returns summary stats.
+
+    If bfs_distance_map is provided (small n where exact BFS fit in memory),
+    each rollout also records the true shortest-path distance from state_start
+    to identity, plus an optimality ratio beam_steps_taken / optimal_steps.
+    """
+    generators_tensor = normalize_generators(generators, device)
+    n = sweep_cfg.n
+    n_steps_limit = sweep_cfg.n_steps_limit_mult * n * n
+    # Scramble depth follows the notebook (cell 76 solve_random_state):
+    # n_generators**3 * mult, default mult=100 i.e. 27 * 100 = 2700 random
+    # moves. This deep scramble is what the paper's beam-search comparison
+    # uses; it dominates walk_length and makes the start state genuinely far
+    # from identity. To compare directly with teammates' neural-net runs we
+    # want the same value here.
+    n_gens = generators_tensor.shape[0]
+    n_scramble_steps = n_gens ** 3 * sweep_cfg.beam_scramble_depth_mult
+
+    per_run_rows: List[Dict[str, Any]] = []
+    for run_idx in range(sweep_cfg.n_scrambles):
+        state_start = scramble_state(identity_state, generators_tensor, n_scramble_steps, device)
+        t0 = time.time()
+        result = run_beam_search_once(
+            model=model,
+            best_ntree_limit=best_ntree_limit,
+            feature_cols=feature_cols,
+            state_start=state_start,
+            state_destination=identity_state,
+            generators_tensor=generators_tensor,
+            beam_width=sweep_cfg.beam_width,
+            n_steps_limit=n_steps_limit,
+            steps_back_to_ban=sweep_cfg.beam_steps_back_to_ban,
+            target_scale=target_scale,
+            args=args,
+            sweep_cfg=sweep_cfg,
+            device=device,
+        )
+        result["beam_run_sec"] = time.time() - t0
+        result["beam_run_idx"] = run_idx
+        result["beam_scramble_steps"] = n_scramble_steps
+
+        # Optimal-distance lookup. With first-visit BFS from identity, the
+        # distance map gives the true shortest-path distance. For start states
+        # not in the map (would only happen if the graph were disconnected,
+        # which it isn't for Koltsov3), we record -1 / nan to make the gap
+        # visible rather than silent.
+        if bfs_distance_map is not None:
+            start_tuple = tuple(int(x) for x in state_start.detach().cpu().tolist())
+            optimal_steps = bfs_distance_map.get(start_tuple, -1)
+            result["beam_optimal_steps"] = int(optimal_steps)
+            if result["beam_found"] and optimal_steps > 0:
+                result["beam_optimality_ratio"] = (
+                    result["beam_steps_taken"] / float(optimal_steps)
+                )
+            else:
+                result["beam_optimality_ratio"] = float("nan")
+        else:
+            result["beam_optimal_steps"] = -1
+            result["beam_optimality_ratio"] = float("nan")
+
+        per_run_rows.append(result)
+        if wandb_run is not None:
+            wandb_run.log(
+                {
+                    "beam/run_idx": run_idx,
+                    "beam/found": int(result["beam_found"]),
+                    "beam/steps_taken": result["beam_steps_taken"],
+                    "beam/run_sec": result["beam_run_sec"],
+                    **(
+                        {
+                            "beam/optimal_steps": result["beam_optimal_steps"],
+                            "beam/optimality_ratio": result["beam_optimality_ratio"],
+                        }
+                        if result["beam_optimal_steps"] >= 0
+                        else {}
+                    ),
+                },
+                step=log_step_offset + run_idx,
+            )
+        if args.verbose_beam:
+            opt_str = ""
+            if result["beam_optimal_steps"] >= 0:
+                ratio = result["beam_optimality_ratio"]
+                ratio_str = "n/a" if (ratio != ratio) else f"{ratio:.2f}"
+                opt_str = (
+                    f", optimal={result['beam_optimal_steps']}, "
+                    f"ratio={ratio_str}"
+                )
+            print(
+                f"  Beam run {run_idx}: found={result['beam_found']}, "
+                f"steps={result['beam_steps_taken']}{opt_str}, "
+                f"reason={result['beam_exit_reason']}, time={result['beam_run_sec']:.1f}s",
+                flush=True,
+            )
+
+    found_flags = [r["beam_found"] for r in per_run_rows]
+    steps = [r["beam_steps_taken"] for r in per_run_rows]
+
+    # Aggregate optimality stats only over runs where we both have an optimal
+    # answer and the beam actually found a solution; otherwise the ratio is
+    # nan.
+    optimal_runs = [r for r in per_run_rows if r["beam_optimal_steps"] >= 0]
+    opt_known_rate = len(optimal_runs) / max(len(per_run_rows), 1)
+    found_with_optimal = [
+        r for r in optimal_runs if r["beam_found"] and r["beam_optimal_steps"] > 0
+    ]
+    if found_with_optimal:
+        mean_optimal_steps = float(
+            np.mean([r["beam_optimal_steps"] for r in found_with_optimal])
+        )
+        mean_opt_ratio = float(
+            np.mean([r["beam_optimality_ratio"] for r in found_with_optimal])
+        )
+    else:
+        mean_optimal_steps = float("nan")
+        mean_opt_ratio = float("nan")
+
+    return {
+        "beam_n_runs": len(per_run_rows),
+        "beam_found_rate": float(np.mean(found_flags)) if per_run_rows else np.nan,
+        "beam_mean_steps": float(np.mean(steps)) if per_run_rows else np.nan,
+        "beam_median_steps": float(np.median(steps)) if per_run_rows else np.nan,
+        "beam_min_steps": int(np.min(steps)) if per_run_rows else -1,
+        "beam_max_steps": int(np.max(steps)) if per_run_rows else -1,
+        "beam_per_run_json": json.dumps(per_run_rows),
+        "beam_n_steps_limit": n_steps_limit,
+        "beam_scramble_steps": n_scramble_steps,
+        "beam_optimal_known_rate": opt_known_rate,
+        "beam_mean_optimal_steps": mean_optimal_steps,
+        "beam_mean_optimality_ratio": mean_opt_ratio,
+    }
 
 
 # -----------------------------
@@ -646,11 +1283,13 @@ def train_one_config(
     device: torch.device,
     output_dir: Path,
     sweep_group_name: str,
-) -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:
+) -> Tuple[Dict[str, Any], List[Dict[str, Any]], List[Dict[str, Any]]]:
     set_seed(sweep_cfg.seed)
 
     n = sweep_cfg.n
-    walk_length = get_random_walk_length(n, sweep_cfg.walk_length_multiplier)
+    walk_length = get_random_walk_length(
+        n, sweep_cfg.walk_length_multiplier, args.walk_length_mode
+    )
     generators, identity_state, dtype_state = build_problem(n=n, koltsov3_k=args.koltsov3_k, device=device)
 
     print(f"\n----- Starting {sweep_cfg.run_name} -----", flush=True)
@@ -732,6 +1371,7 @@ def train_one_config(
                 "walk_length": walk_length,
                 "koltsov3_k": args.koltsov3_k,
                 "device_arg": args.device,
+                "walk_length_mode": args.walk_length_mode,
                 "n_features": len(feature_cols),
                 "early_stopping_rounds": args.early_stopping_rounds,
             },
@@ -789,6 +1429,127 @@ def train_one_config(
     train_metrics = evaluate_predictions(y_train, train_pred)
     val_metrics = evaluate_predictions(y_val, val_pred)
     test_metrics = evaluate_predictions(y_test, test_pred)
+
+    # -------- Phase 2 (MDQN refinement, optional) --------
+    target_scale = float(max(walk_length, 1))
+    mdqn_history: List[Dict[str, Any]] = []
+    mdqn_time_sec = 0.0
+    post_mdqn_train_metrics = train_metrics
+    post_mdqn_val_metrics = val_metrics
+    post_mdqn_test_metrics = test_metrics
+    if sweep_cfg.n_epochs_dqn > 0:
+        if args.dedup_strategy != "first-visit":
+            raise ValueError(
+                "MDQN requires --dedup-strategy first-visit so that each state has a "
+                "well-defined first-visit step k for the Algorithm 4 line 7 clip."
+            )
+        print(
+            f"  Phase 2 (MDQN): {sweep_cfg.n_epochs_dqn} epochs, "
+            f"{sweep_cfg.dqn_n_random_walks} walks/epoch, clip={sweep_cfg.dqn_clip}",
+            flush=True,
+        )
+        mdqn_start = time.time()
+        model, best_ntree_limit, mdqn_history = run_mdqn_phase(
+            model=model,
+            initial_best_ntree_limit=best_ntree_limit,
+            sweep_cfg=sweep_cfg,
+            args=args,
+            generators=generators,
+            identity_state=identity_state,
+            dtype_state=dtype_state,
+            device=device,
+            feature_cols=feature_cols,
+            walk_length=walk_length,
+            target_scale=target_scale,
+            wandb_run=wandb_run,
+            log_step_offset=int(sweep_cfg.n_estimators) + 1,
+        )
+        mdqn_time_sec = time.time() - mdqn_start
+        # Re-evaluate on the same val/test sets with the refined model so we can
+        # report MDQN's effect. The labels on those sets are still "diffusion
+        # distance" (normalized RW depth) -- MDQN may shift the model's
+        # predictions away from those labels, so post-MDQN val/test RMSE can
+        # legitimately go UP even though heuristic quality goes up. The beam
+        # search phase is the real downstream test of heuristic quality.
+        post_iter_range = (0, best_ntree_limit)
+        post_train_pred = model.predict(dtrain, iteration_range=post_iter_range)
+        post_val_pred = model.predict(dval, iteration_range=post_iter_range)
+        post_test_pred = model.predict(dtest, iteration_range=post_iter_range)
+        post_mdqn_train_metrics = evaluate_predictions(y_train, post_train_pred)
+        post_mdqn_val_metrics = evaluate_predictions(y_val, post_val_pred)
+        post_mdqn_test_metrics = evaluate_predictions(y_test, post_test_pred)
+        print(
+            f"  Phase 2 done in {mdqn_time_sec:.1f}s. "
+            f"val_rmse: {val_metrics['rmse']:.5f} -> {post_mdqn_val_metrics['rmse']:.5f}, "
+            f"test_rmse: {test_metrics['rmse']:.5f} -> {post_mdqn_test_metrics['rmse']:.5f}",
+            flush=True,
+        )
+
+    # -------- BFS metadata (computed before Phase 3 so the distance map is
+    # available for optimal-path comparison) --------
+    bfs_metadata: Dict[str, Any] = {
+        "bfs_computed": False,
+        "bfs_skip_reason": "disabled",
+        "diameter": np.nan,
+        "last_layer_count": np.nan,
+        "layer_sizes": "",
+    }
+    bfs_distance_map: Optional[Dict[Tuple[int, ...], int]] = None
+    if args.compute_bfs_metadata:
+        print("Computing exact BFS metadata. This is only safe for small n.", flush=True)
+        bfs_metadata, bfs_distance_map = compute_exact_bfs_metadata(
+            n, generators, max_states=args.max_bfs_states, return_distance_map=True
+        )
+
+    # -------- Phase 3 (guided beam search, optional) --------
+    beam_summary: Dict[str, Any] = {
+        "beam_n_runs": 0,
+        "beam_found_rate": np.nan,
+        "beam_mean_steps": np.nan,
+        "beam_median_steps": np.nan,
+        "beam_min_steps": -1,
+        "beam_max_steps": -1,
+        "beam_per_run_json": "",
+        "beam_n_steps_limit": -1,
+        "beam_scramble_steps": -1,
+        "beam_optimal_known_rate": np.nan,
+        "beam_mean_optimal_steps": np.nan,
+        "beam_mean_optimality_ratio": np.nan,
+    }
+    beam_time_sec = 0.0
+    if args.run_beam_search and sweep_cfg.n_scrambles > 0:
+        print(
+            f"  Phase 3 (beam): width={sweep_cfg.beam_width}, "
+            f"n_steps_limit={sweep_cfg.n_steps_limit_mult * n * n}, "
+            f"steps_back_to_ban={sweep_cfg.beam_steps_back_to_ban}, "
+            f"n_scrambles={sweep_cfg.n_scrambles}, "
+            f"bfs_known={bfs_distance_map is not None}",
+            flush=True,
+        )
+        beam_start = time.time()
+        beam_summary = run_beam_phase(
+            model=model,
+            best_ntree_limit=best_ntree_limit,
+            feature_cols=feature_cols,
+            sweep_cfg=sweep_cfg,
+            args=args,
+            generators=generators,
+            identity_state=identity_state,
+            walk_length=walk_length,
+            target_scale=target_scale,
+            device=device,
+            wandb_run=wandb_run,
+            log_step_offset=int(sweep_cfg.n_estimators) + int(sweep_cfg.n_epochs_dqn) + 2,
+            bfs_distance_map=bfs_distance_map,
+        )
+        beam_time_sec = time.time() - beam_start
+        print(
+            f"  Phase 3 done in {beam_time_sec:.1f}s. "
+            f"found_rate={beam_summary['beam_found_rate']:.2f}, "
+            f"mean_steps={beam_summary['beam_mean_steps']:.1f}, "
+            f"mean_opt_ratio={beam_summary['beam_mean_optimality_ratio']}",
+            flush=True,
+        )
 
     # -------- Per-iteration history (the "epoch" CSV equivalent) --------
     # XGBoost's evals_result only carries train/val RMSE round-by-round. To get
@@ -870,16 +1631,9 @@ def train_one_config(
     num_unique_test_states = unique_state_count(X_test_states)
     label_summary = label_stats(y_train_t, y_val_t, y_test_t)
 
-    bfs_metadata: Dict[str, Any] = {
-        "bfs_computed": False,
-        "bfs_skip_reason": "disabled",
-        "diameter": np.nan,
-        "last_layer_count": np.nan,
-        "layer_sizes": "",
-    }
-    if args.compute_bfs_metadata:
-        print("Computing exact BFS metadata. This is only safe for small n.", flush=True)
-        bfs_metadata = compute_exact_bfs_metadata(n, generators, max_states=args.max_bfs_states)
+    # bfs_metadata was computed earlier (before Phase 3) so the distance map
+    # could be used for the optimal-path comparison; it's reused here for the
+    # summary row.
 
     raw_train_rows_generated = sweep_cfg.n_random_walks_to_generate * walk_length
     train_dedup_factor = (
@@ -892,6 +1646,7 @@ def train_one_config(
         "config_id": sweep_cfg.run_name,
         **asdict(sweep_cfg),
         "walk_length": walk_length,
+        "walk_length_mode": args.walk_length_mode,
         "state_space_size": math.factorial(n),
         "dedup_strategy": args.dedup_strategy,
         "raw_train_rows_generated": raw_train_rows_generated,
@@ -932,6 +1687,25 @@ def train_one_config(
         "data_time_sec": data_time_sec,
         "fit_time_sec": fit_time_sec,
         "predict_time_sec": predict_time_sec,
+        # Phase 2 (MDQN). When n_epochs_dqn == 0 these mirror the Phase 1 values.
+        "mdqn_ran": sweep_cfg.n_epochs_dqn > 0,
+        "mdqn_time_sec": mdqn_time_sec,
+        "post_mdqn_train_rmse": post_mdqn_train_metrics["rmse"],
+        "post_mdqn_val_rmse": post_mdqn_val_metrics["rmse"],
+        "post_mdqn_test_rmse": post_mdqn_test_metrics["rmse"],
+        "post_mdqn_train_r2": post_mdqn_train_metrics["r2"],
+        "post_mdqn_val_r2": post_mdqn_val_metrics["r2"],
+        "post_mdqn_test_r2": post_mdqn_test_metrics["r2"],
+        "post_mdqn_train_spearman": post_mdqn_train_metrics["spearman"],
+        "post_mdqn_val_spearman": post_mdqn_val_metrics["spearman"],
+        "post_mdqn_test_spearman": post_mdqn_test_metrics["spearman"],
+        "mdqn_final_train_rmse": (
+            mdqn_history[-1]["dqn_train_rmse"] if mdqn_history else np.nan
+        ),
+        # Phase 3 (beam search).
+        "beam_ran": bool(args.run_beam_search and sweep_cfg.n_scrambles > 0),
+        "beam_time_sec": beam_time_sec,
+        **beam_summary,
         **bfs_metadata,
     }
 
@@ -939,13 +1713,17 @@ def train_one_config(
         wandb_run.log({f"final/{k}": v for k, v in summary_row.items() if isinstance(v, (int, float, str, bool))})
         wandb_run.finish()
 
+    # Stamp config_id on every MDQN row so the CSV can be joined back to summary.
+    for row in mdqn_history:
+        row["config_id"] = sweep_cfg.run_name
+
     print(
         f"Finished {sweep_cfg.run_name}: "
         f"test_rmse={test_metrics['rmse']:.5f}, test_r2={test_metrics['r2']:.4f}, "
         f"test_spearman={test_metrics['spearman']:.4f}, best_iter={best_iteration}",
         flush=True,
     )
-    return summary_row, iteration_rows
+    return summary_row, iteration_rows, mdqn_history
 
 
 # -----------------------------
@@ -1004,6 +1782,14 @@ def save_plots(df_summary: pd.DataFrame, df_iters: pd.DataFrame, output_dir: Pat
         "n_val_samples",
         "n_test_samples",
         "seed",
+        "n_epochs_dqn",
+        "dqn_n_random_walks",
+        "dqn_clip",
+        "beam_width",
+        "n_steps_limit_mult",
+        "beam_steps_back_to_ban",
+        "n_scrambles",
+        "beam_scramble_depth_mult",
     ]
     for _group_key, df_g in df_summary.groupby(group_cols, dropna=False):
         if df_g["max_depth"].nunique() < 2:
@@ -1078,7 +1864,18 @@ def build_arg_parser() -> argparse.ArgumentParser:
             "fall back to --n-random-walks-values (Cartesian product)."
         ),
     )
-    parser.add_argument("--walk-length-multipliers", type=parse_int_list, default=[8], help="walk_length = multiplier * n")
+    parser.add_argument("--walk-length-multipliers", type=parse_int_list, default=[8], help="walk_length = multiplier * n (only used when --walk-length-mode multiplier)")
+    parser.add_argument(
+        "--walk-length-mode",
+        choices=["multiplier", "min_npairs_or_16n"],
+        default="multiplier",
+        help=(
+            "How walk_length is computed. 'multiplier' (default): mult * n, "
+            "driven by --walk-length-multipliers. 'min_npairs_or_16n': "
+            "min(n*(n-1)//2, 16n) -- Danny's Algorithm-4 default with a 16n "
+            "cap so n=64 doesn't explode to 2016-step walks."
+        ),
+    )
     parser.add_argument("--random-walk-types", type=parse_str_list, default=["non-backtracking-beam"], help="simple,non-backtracking-beam")
     parser.add_argument("--steps-back-to-ban-values", type=parse_int_list, default=[2], help="Previous move counts to ban")
     parser.add_argument("--n-val-samples-values", type=parse_int_list, default=[300], help="Validation random-walk counts")
@@ -1103,8 +1900,75 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument("--top-features-to-record", type=int, default=25, help="Top-gain features stored in the summary CSV")
     parser.add_argument("--val-metric-every", type=int, default=50, help="Recompute val r2/Spearman every N boosting rounds for the W&B training curve")
 
+    # Phase 2 (MDQN) sweep axes.
+    parser.add_argument(
+        "--n-epochs-dqn-values",
+        type=parse_int_list,
+        default=[0],
+        help="MDQN epochs per config. 0 disables Phase 2. Algorithm 4 outer-loop length M.",
+    )
+    parser.add_argument(
+        "--dqn-n-random-walks-values",
+        type=parse_int_list,
+        default=[2000],
+        help="Walks regenerated per MDQN epoch. Algorithm 4 inner N.",
+    )
+    parser.add_argument(
+        "--dqn-clip-values",
+        type=parse_bool_list,
+        default=[True],
+        help="Apply the [0, k] clip from Algorithm 4 line 7. Comma-separated true/false.",
+    )
+    parser.add_argument("--verbose-mdqn", type=str2bool, nargs="?", const=True, default=True, help="Print per-MDQN-epoch lines.")
+
+    # Phase 3 (beam search) sweep axes + master switch.
+    parser.add_argument(
+        "--run-beam-search",
+        type=str2bool,
+        nargs="?",
+        const=True,
+        default=False,
+        help="Master switch for Phase 3. Per-config beam search is only run when this is true AND n_scrambles > 0.",
+    )
+    parser.add_argument(
+        "--beam-width-values",
+        type=parse_int_list,
+        default=[1024],
+        help="Beam widths to try in Phase 3.",
+    )
+    parser.add_argument(
+        "--n-steps-limit-mult-values",
+        type=parse_int_list,
+        default=[4],
+        help="Beam search step-limit multiplier: n_steps_limit = mult * n**2.",
+    )
+    parser.add_argument(
+        "--beam-steps-back-to-ban-values",
+        type=parse_int_list,
+        default=[8],
+        help="Per-beam-search history depth for non-backtracking ban (cell 82's CFG['n_beam_search_steps_back_to_ban']).",
+    )
+    parser.add_argument(
+        "--n-scrambles-values",
+        type=parse_int_list,
+        default=[1],
+        help="Number of independent beam-search rollouts per config. Each uses a fresh scrambled start state.",
+    )
+    parser.add_argument(
+        "--beam-scramble-depth-mult-values",
+        type=parse_int_list,
+        default=[100],
+        help=(
+            "Scramble depth multiplier: scramble_steps = n_generators**3 * mult. "
+            "Notebook default is mult=100 (yielding ~2700 random moves for "
+            "Koltsov3's 3 generators). Match teammates' scramble depth for "
+            "apples-to-apples beam-search comparisons."
+        ),
+    )
+    parser.add_argument("--verbose-beam", type=str2bool, nargs="?", const=True, default=True, help="Print per-beam-run lines.")
+
     # Output / problem.
-    parser.add_argument("--output-dir", type=Path, default=Path("koltsov3_gb_sweep_results"), help="Output directory")
+    parser.add_argument("--output-dir", type=Path, default=Path("koltsov3_gb_pipeline_results"), help="Output directory")
     parser.add_argument("--koltsov3-k", type=int, default=0, help="k in the Koltsov3 S=(k,k+2) generator")
     parser.add_argument("--device", choices=["auto", "cpu", "cuda"], default="auto", help="auto, cpu, or cuda")
     parser.add_argument("--save-plots", type=str2bool, nargs="?", const=True, default=True)
@@ -1147,6 +2011,19 @@ def validate_args(args: argparse.Namespace) -> None:
             flush=True,
         )
 
+    # MDQN <-> dedup invariant. The algorithm clips d(s) to [0, k] where k is
+    # the first-visit step. Without first-visit dedup, k is ambiguous (multiple
+    # k's per state), so the clip is meaningless. Fail fast instead of silently
+    # mis-clipping.
+    any_mdqn = any(v > 0 for v in args.n_epochs_dqn_values)
+    if any_mdqn and args.dedup_strategy != "first-visit":
+        raise ValueError(
+            "MDQN is enabled (n_epochs_dqn > 0) but --dedup-strategy is not "
+            "'first-visit'. Algorithm 4 line 7 clips d(s) to [0, k] where k is "
+            "the first-visit step, which is only well-defined under first-visit "
+            "dedup. Pass --dedup-strategy first-visit."
+        )
+
     other_axes = 1
     for values in [
         args.walk_length_multipliers,
@@ -1163,6 +2040,14 @@ def validate_args(args: argparse.Namespace) -> None:
         args.n_val_samples_values,
         args.n_test_samples_values,
         args.seed_values,
+        args.n_epochs_dqn_values,
+        args.dqn_n_random_walks_values,
+        args.dqn_clip_values,
+        args.beam_width_values,
+        args.n_steps_limit_mult_values,
+        args.beam_steps_back_to_ban_values,
+        args.n_scrambles_values,
+        args.beam_scramble_depth_mult_values,
     ]:
         other_axes *= len(values)
 
@@ -1189,10 +2074,10 @@ def main(argv: Optional[Sequence[str]] = None) -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
     (output_dir / "plots").mkdir(parents=True, exist_ok=True)
 
-    sweep_group_name = args.wandb_group or f"koltsov3_gb_sweep_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+    sweep_group_name = args.wandb_group or f"koltsov3_gb_pipeline_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
 
     print("=" * 70, flush=True)
-    print(f"  Koltsov3 GB sweep  -  {args.n_total_configs} configurations", flush=True)
+    print(f"  Koltsov3 GB pipeline  -  {args.n_total_configs} configurations", flush=True)
     print("=" * 70, flush=True)
     print(f"  output_dir:        {output_dir}", flush=True)
     print(f"  sweep_group_name:  {sweep_group_name}", flush=True)
@@ -1202,15 +2087,27 @@ def main(argv: Optional[Sequence[str]] = None) -> None:
     print(f"  n_values:          {args.n_values}", flush=True)
     walks_plan = ", ".join(f"n={n}:{walks_for_n(args, n)}" for n in args.n_values)
     print(f"  walks per n:       {walks_plan}", flush=True)
+    print(f"  walk_length_mode:  {args.walk_length_mode}", flush=True)
     print(f"  walk_length_mult:  {args.walk_length_multipliers}", flush=True)
     print(f"  walk_type:         {args.random_walk_types}", flush=True)
     print(f"  dedup_strategy:    {args.dedup_strategy}", flush=True)
-    print("  --- model ---", flush=True)
+    print("  --- model (Phase 1) ---", flush=True)
     print(f"  n_estimators:      {args.n_estimators_values}", flush=True)
     print(f"  max_depth:         {args.max_depth_values}", flush=True)
     print(f"  learning_rate:     {args.learning_rate_values}", flush=True)
     print(f"  early_stopping:    {args.early_stopping_rounds}", flush=True)
     print(f"  max_train_samples: {args.max_train_samples}", flush=True)
+    print("  --- MDQN (Phase 2) ---", flush=True)
+    print(f"  n_epochs_dqn:      {args.n_epochs_dqn_values}", flush=True)
+    print(f"  dqn_n_random_walks:{args.dqn_n_random_walks_values}", flush=True)
+    print(f"  dqn_clip:          {args.dqn_clip_values}", flush=True)
+    print("  --- beam search (Phase 3) ---", flush=True)
+    print(f"  run_beam_search:   {args.run_beam_search}", flush=True)
+    print(f"  beam_width:        {args.beam_width_values}", flush=True)
+    print(f"  n_steps_limit_mult:{args.n_steps_limit_mult_values}", flush=True)
+    print(f"  beam_steps_back:   {args.beam_steps_back_to_ban_values}", flush=True)
+    print(f"  n_scrambles:       {args.n_scrambles_values}", flush=True)
+    print(f"  scramble_depth_m:  {args.beam_scramble_depth_mult_values}", flush=True)
     print("=" * 70, flush=True)
 
     if args.use_wandb:
@@ -1229,11 +2126,12 @@ def main(argv: Optional[Sequence[str]] = None) -> None:
 
     summary_rows: List[Dict[str, Any]] = []
     iteration_rows: List[Dict[str, Any]] = []
+    mdqn_rows: List[Dict[str, Any]] = []
 
     all_configs = list(iter_sweep_configs(args))
     for i, sweep_cfg in enumerate(all_configs, start=1):
         print(f"\n===== Configuration {i}/{len(all_configs)} =====", flush=True)
-        summary_row, iteration_rows_for_config = train_one_config(
+        summary_row, iteration_rows_for_config, mdqn_rows_for_config = train_one_config(
             sweep_cfg=sweep_cfg,
             args=args,
             device=device,
@@ -1242,18 +2140,24 @@ def main(argv: Optional[Sequence[str]] = None) -> None:
         )
         summary_rows.append(summary_row)
         iteration_rows.extend(iteration_rows_for_config)
+        mdqn_rows.extend(mdqn_rows_for_config)
 
         # Incremental writes make long Slurm jobs safer if a later config fails.
         pd.DataFrame(summary_rows).to_csv(output_dir / "summary_results_partial.csv", index=False)
         pd.DataFrame(iteration_rows).to_csv(output_dir / "iteration_results_partial.csv", index=False)
+        if mdqn_rows:
+            pd.DataFrame(mdqn_rows).to_csv(output_dir / "mdqn_results_partial.csv", index=False)
 
     df_summary = pd.DataFrame(summary_rows)
     df_iters = pd.DataFrame(iteration_rows)
+    df_mdqn = pd.DataFrame(mdqn_rows)
 
     summary_csv = output_dir / "summary_results.csv"
     iteration_csv = output_dir / "iteration_results.csv"
     df_summary.to_csv(summary_csv, index=False)
     df_iters.to_csv(iteration_csv, index=False)
+    if not df_mdqn.empty:
+        df_mdqn.to_csv(output_dir / "mdqn_results.csv", index=False)
 
     with open(output_dir / "run_args.json", "w", encoding="utf-8") as fh:
         json.dump({k: str(v) if isinstance(v, Path) else v for k, v in vars(args).items()}, fh, indent=2)

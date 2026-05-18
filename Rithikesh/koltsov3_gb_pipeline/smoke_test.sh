@@ -1,10 +1,10 @@
 #!/bin/bash
-# Quick smoke test for the Koltsov3 GB sweep -- tiny config, runs in seconds.
-# Verifies the script runs end-to-end in this environment before submitting a
-# real sbatch job. Does NOT use W&B.
+# Quick smoke test for the Koltsov3 GB pipeline -- tiny config, runs in seconds.
+# Exercises all three phases (warm-up, MDQN, beam search) so a successful run
+# proves the wiring end-to-end. Does NOT use W&B.
 #
 # Usage (from anywhere on Klone, with the `cayley` conda env active):
-#   bash /gscratch/stf/rmuddana/cayley-py/Rithikesh/koltsov3_gb_sweep/smoke_test.sh
+#   bash /gscratch/stf/rmuddana/cayley-py/Rithikesh/koltsov3_gb_pipeline/smoke_test.sh
 
 set -euo pipefail
 
@@ -14,7 +14,7 @@ cd "${SCRIPT_DIR}"
 echo "Running smoke test from ${SCRIPT_DIR}"
 echo
 
-python koltsov3_gb_sweep.py \
+python koltsov3_gb_pipeline.py \
   --n-values 5,6 \
   --n-random-walks-values 50 \
   --walk-length-multipliers 4 \
@@ -32,6 +32,15 @@ python koltsov3_gb_sweep.py \
   --n-test-samples-values 20 \
   --seed-values 0 \
   --dedup-strategy first-visit \
+  --n-epochs-dqn-values 3 \
+  --dqn-n-random-walks-values 50 \
+  --dqn-clip-values true \
+  --run-beam-search true \
+  --beam-width-values 64 \
+  --n-steps-limit-mult-values 2 \
+  --beam-steps-back-to-ban-values 2 \
+  --n-scrambles-values 1 \
+  --beam-scramble-depth-mult-values 1 \
   --output-dir smoke_test \
   --compute-bfs-metadata true \
   --use-wandb false
@@ -40,5 +49,5 @@ echo
 echo "=============================================="
 echo " Smoke test finished. Check smoke_test/ for:"
 echo "   summary_results.csv, iteration_results.csv,"
-echo "   plots/, feature_importance/"
+echo "   mdqn_results.csv, plots/, feature_importance/"
 echo "=============================================="

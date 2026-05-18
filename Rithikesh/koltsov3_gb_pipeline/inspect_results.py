@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Quick inspector for a finished Koltsov3 GB sweep run directory.
+"""Quick inspector for a finished Koltsov3 GB pipeline run directory.
 
-Usage (from the sweep folder):
-    python inspect_results.py koltsov3_gb_sweep_35265614
+Usage (from the pipeline folder):
+    python inspect_results.py koltsov3_gb_pipeline_35265614
 
 Prints three views designed to diagnose whether the model is learning:
   1. Per-config final metrics (train / val / test RMSE, R2, Spearman)
