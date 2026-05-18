@@ -1135,6 +1135,18 @@ def validate_args(args: argparse.Namespace) -> None:
     if invalid:
         raise ValueError(f"Invalid random walk type(s): {invalid}. Valid options: {sorted(valid_walk_types)}")
 
+    # steps_back_to_ban only affects non-backtracking-beam walks. With simple
+    # walks every step samples uniformly, so the ban value is silently ignored
+    # but still multiplies the Cartesian config count - flag that.
+    non_zero_bans = [b for b in args.steps_back_to_ban_values if b != 0]
+    if "non-backtracking-beam" not in args.random_walk_types and non_zero_bans:
+        print(
+            f"WARNING: --steps-back-to-ban-values={args.steps_back_to_ban_values} has no "
+            "effect with --random-walk-types=simple. It is multiplied into the Cartesian "
+            "config count but produces identical walks. Use [0] to drop this axis.",
+            flush=True,
+        )
+
     other_axes = 1
     for values in [
         args.walk_length_multipliers,
@@ -1179,15 +1191,27 @@ def main(argv: Optional[Sequence[str]] = None) -> None:
 
     sweep_group_name = args.wandb_group or f"koltsov3_gb_sweep_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
 
-    print(f"device: {device}", flush=True)
-    print(f"output_dir: {output_dir}", flush=True)
-    print(f"total configurations: {args.n_total_configs}", flush=True)
-    print(f"sweep_group_name: {sweep_group_name}", flush=True)
-    print(f"xgboost: {xgb.__version__}", flush=True)
-    print(f"dedup_strategy: {args.dedup_strategy}", flush=True)
-    if getattr(args, "walks_per_n", None):
-        plan = ", ".join(f"n={n}->{walks_for_n(args, n)} walks" for n in args.n_values)
-        print(f"walks-per-n plan: {plan}", flush=True)
+    print("=" * 70, flush=True)
+    print(f"  Koltsov3 GB sweep  -  {args.n_total_configs} configurations", flush=True)
+    print("=" * 70, flush=True)
+    print(f"  output_dir:        {output_dir}", flush=True)
+    print(f"  sweep_group_name:  {sweep_group_name}", flush=True)
+    print(f"  device:            {device}", flush=True)
+    print(f"  xgboost:           {xgb.__version__}", flush=True)
+    print("  --- data ---", flush=True)
+    print(f"  n_values:          {args.n_values}", flush=True)
+    walks_plan = ", ".join(f"n={n}:{walks_for_n(args, n)}" for n in args.n_values)
+    print(f"  walks per n:       {walks_plan}", flush=True)
+    print(f"  walk_length_mult:  {args.walk_length_multipliers}", flush=True)
+    print(f"  walk_type:         {args.random_walk_types}", flush=True)
+    print(f"  dedup_strategy:    {args.dedup_strategy}", flush=True)
+    print("  --- model ---", flush=True)
+    print(f"  n_estimators:      {args.n_estimators_values}", flush=True)
+    print(f"  max_depth:         {args.max_depth_values}", flush=True)
+    print(f"  learning_rate:     {args.learning_rate_values}", flush=True)
+    print(f"  early_stopping:    {args.early_stopping_rounds}", flush=True)
+    print(f"  max_train_samples: {args.max_train_samples}", flush=True)
+    print("=" * 70, flush=True)
 
     if args.use_wandb:
         if wandb is None:

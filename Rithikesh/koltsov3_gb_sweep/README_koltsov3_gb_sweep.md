@@ -10,6 +10,10 @@ Files:
 
 - `koltsov3_gb_sweep.py` — main Python experiment script
 - `koltsov3_gb_sweep.sbatch` — example Hyak Slurm batch script
+- `smoke_test.sh` — tiny 4-config end-to-end smoke test (`bash smoke_test.sh`)
+- `setup_env.sh` — one-shot Klone conda env setup (`bash setup_env.sh`)
+- `inspect_results.py` — post-sweep diagnostics on a results directory
+  (`python inspect_results.py <output_dir>`)
 - `README_koltsov3_gb_sweep.md` — this file
 
 The W&B API key lives in `Rithikesh/.env` (one directory up). That file is
@@ -86,10 +90,26 @@ combination.
 ### Data / random-walk axes
 
 - `--n-values` — permutation sizes, e.g. `8,12,16,24` (default)
-- `--n-random-walks-values` — number of training random walks
+- `--n-random-walks-values` — number of training random walks (Cartesian-swept)
+- `--walks-per-n` — optional per-n walk override, e.g.
+  `5:500,16:25000,24:25000`. Any n listed here uses the mapped walk count;
+  unlisted n fall back to `--n-random-walks-values`. Useful because the right
+  walk count scales with state space (n!): small n saturate at hundreds of
+  walks, large n need tens of thousands.
 - `--walk-length-multipliers` — walk length is `n * multiplier`
-- `--random-walk-types` — `simple` or `non-backtracking-beam`
-- `--steps-back-to-ban-values` — for `non-backtracking-beam`, previous moves to ban
+- `--random-walk-types` — `simple` (uniform random) or `non-backtracking-beam`.
+  **For training, use `simple`** — beam-search-based walks are designed to stay
+  on promising paths, which gives terrible state-space coverage and crushes the
+  model with label collision. `non-backtracking-beam` is the *inference-time*
+  algorithm in the paper, not a training-data generator.
+- `--steps-back-to-ban-values` — for `non-backtracking-beam` only; ignored
+  silently for `simple` walks (the script warns when this happens)
+- `--dedup-strategy` — `none` (default) or `first-visit`. `first-visit`
+  implements the paper's diffusion-distance label spec: keep one row per unique
+  state labeled by its earliest visit step. Without dedup the same state
+  appears with multiple conflicting labels and the model converges to
+  predicting the per-state mean. Applied to train/val/test together (changing
+  the strategy changes what the regression target is).
 - `--n-val-samples-values` / `--n-test-samples-values` — validation/test walk counts
 - `--seed-values` — random seeds
 
@@ -147,30 +167,22 @@ committed.
 Run this first to check imports, paths, and the environment:
 
 ```bash
-python koltsov3_gb_sweep.py \
-  --n-values 5,6 \
-  --n-random-walks-values 50 \
-  --walk-length-multipliers 4 \
-  --random-walk-types non-backtracking-beam \
-  --steps-back-to-ban-values 2 \
-  --n-estimators-values 30 \
-  --max-depth-values 3,5 \
-  --learning-rate-values 0.1 \
-  --subsample-values 0.8 \
-  --colsample-bytree-values 0.8 \
-  --min-child-weight-values 5 \
-  --reg-lambda-values 1.0 \
-  --reg-alpha-values 0.0 \
-  --n-val-samples-values 20 \
-  --n-test-samples-values 20 \
-  --seed-values 0 \
-  --output-dir smoke_test \
-  --compute-bfs-metadata true \
-  --use-wandb false
+bash smoke_test.sh
 ```
 
-Expected outputs appear in `smoke_test/`. (R² will be low on this tiny config —
-that is expected; it only checks the pipeline runs.)
+It runs 4 tiny configurations (n=5,6 × max_depth=3,5) with simple walks and
+first-visit dedup, no W&B. Finishes in seconds. Output goes to `smoke_test/`.
+R² will be modest on this tiny config — the smoke test only verifies the
+pipeline runs end-to-end, not that the model is well-tuned.
+
+After it finishes, inspect the results:
+
+```bash
+python inspect_results.py smoke_test
+```
+
+That prints final per-config metrics, per-n label/uniqueness stats, and a
+representative training curve.
 
 ## Hyak (Klone) environment setup
 
@@ -240,6 +252,9 @@ Inside `--output-dir`:
 - **Gaps:** `train_val_rmse_gap`, `train_test_rmse_gap`, `val_test_rmse_gap`
 - **Dataset size / uniqueness:** `n_train_states`/`n_val_states`/`n_test_states`,
   `num_unique_*_states`, `unique_*_fraction`
+- **Dedup / state space:** `dedup_strategy`, `raw_train_rows_generated`,
+  `train_dedup_factor` (raw rows / unique rows; `1.0` when dedup is off),
+  `state_space_size` (`n!`)
 - **Labels:** `label_min`, `label_max`, `label_mean`, `label_std`
 - **Features:** `n_features`, `top_features_by_gain` (JSON)
 - **Timing:** `data_time_sec`, `fit_time_sec`, `predict_time_sec`

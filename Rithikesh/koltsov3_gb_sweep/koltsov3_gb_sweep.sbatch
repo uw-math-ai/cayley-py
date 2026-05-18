@@ -59,7 +59,7 @@ python koltsov3_gb_sweep.py \
   --walks-per-n 5:500,6:1000,7:3000,8:5000,12:25000,16:25000,24:25000 \
   --walk-length-multipliers 8 \
   --random-walk-types simple \
-  --steps-back-to-ban-values 2 \
+  --steps-back-to-ban-values 0 \
   --n-estimators-values 1000 \
   --max-depth-values 6,8,10,12 \
   --learning-rate-values 0.05,0.1 \
