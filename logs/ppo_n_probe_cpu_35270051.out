@@ -1,0 +1,20 @@
+torch_version=2.6.0+cu124
+cuda_available=False
+=== probe_start n=16 params=396292 ===
+update=0002/0008 mean_reward=-0.0205 mean_return=-0.2989 explained_var=+0.0662
+update=0004/0008 mean_reward=+0.0527 mean_return=+0.4940 explained_var=+0.1890
+update=0006/0008 mean_reward=+0.0205 mean_return=+0.9203 explained_var=+0.5091
+update=0008/0008 mean_reward=+0.0518 mean_return=+0.6127 explained_var=+0.6050
+probe_summary n=16 train_seconds=58.40 success_rate=0.135 mean_final_distance=9.005 mean_solved_steps=1.963
+=== probe_start n=32 params=789508 ===
+update=0002/0008 mean_reward=+0.0059 mean_return=+0.3070 explained_var=+0.0370
+update=0004/0008 mean_reward=-0.0029 mean_return=+0.4116 explained_var=+0.2552
+update=0006/0008 mean_reward=-0.0342 mean_return=+0.3062 explained_var=+0.5370
+update=0008/0008 mean_reward=+0.0645 mean_return=-0.2050 explained_var=+0.8015
+probe_summary n=32 train_seconds=5.82 success_rate=0.020 mean_final_distance=26.180 mean_solved_steps=1.250
+=== probe_start n=64 params=2362372 ===
+update=0002/0008 mean_reward=+0.0557 mean_return=+0.4963 explained_var=+0.0237
+update=0004/0008 mean_reward=-0.0020 mean_return=+1.4065 explained_var=+0.1935
+update=0006/0008 mean_reward=-0.0010 mean_return=+2.9813 explained_var=+0.4439
+update=0008/0008 mean_reward=+0.0693 mean_return=+3.9426 explained_var=+0.6233
+probe_summary n=64 train_seconds=6.57 success_rate=0.010 mean_final_distance=58.780 mean_solved_steps=1.500

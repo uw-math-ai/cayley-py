@@ -1,0 +1,177 @@
+Python 3.11.15
+torch=2.6.0+cu124
+cuda_available=True
+cuda_device=Tesla P100-PCIE-16GB
+value_bootstrap_dataset size=523626 walk_length=128 history=32
+warmup_epoch=001/030 value_loss=678.566512
+warmup_epoch=006/030 value_loss=404.267078
+warmup_epoch=012/030 value_loss=386.120212
+warmup_epoch=018/030 value_loss=374.394630
+warmup_epoch=024/030 value_loss=367.843987
+warmup_epoch=030/030 value_loss=363.512106
+bellman[001/020]_epoch=001/001 value_loss=100.684482
+bellman[002/020]_epoch=001/001 value_loss=39.833077
+bellman[003/020]_epoch=001/001 value_loss=21.550396
+bellman[004/020]_epoch=001/001 value_loss=13.974114
+bellman[005/020]_epoch=001/001 value_loss=11.497645
+bellman[006/020]_epoch=001/001 value_loss=8.212193
+bellman[007/020]_epoch=001/001 value_loss=6.649484
+bellman[008/020]_epoch=001/001 value_loss=9.231222
+bellman[009/020]_epoch=001/001 value_loss=3.686491
+bellman[010/020]_epoch=001/001 value_loss=5.337035
+bellman[011/020]_epoch=001/001 value_loss=3.661866
+bellman[012/020]_epoch=001/001 value_loss=3.294386
+bellman[013/020]_epoch=001/001 value_loss=2.982290
+bellman[014/020]_epoch=001/001 value_loss=2.657696
+bellman[015/020]_epoch=001/001 value_loss=2.314380
+bellman[016/020]_epoch=001/001 value_loss=2.060613
+bellman[017/020]_epoch=001/001 value_loss=1.875317
+bellman[018/020]_epoch=001/001 value_loss=2.866366
+bellman[019/020]_epoch=001/001 value_loss=2.772766
+bellman[020/020]_epoch=001/001 value_loss=2.588661
+policy_warmstart_epoch=001/010 policy_loss=1.089503
+policy_warmstart_epoch=002/010 policy_loss=1.050668
+policy_warmstart_epoch=004/010 policy_loss=1.036526
+policy_warmstart_epoch=006/010 policy_loss=1.029225
+policy_warmstart_epoch=008/010 policy_loss=1.024456
+policy_warmstart_epoch=010/010 policy_loss=1.021331
+update=0004/0256 mean_reward=-1.0052 mean_return=-29.2709 explained_var=+0.0126
+hard_eval update=0004/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.405
+Saved best hard-eval checkpoint to checkpoints/lrx_ppo_n16_best_35282509.pt
+update=0008/0256 mean_reward=-0.9854 mean_return=-30.2084 explained_var=+0.0466
+hard_eval update=0008/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.412
+update=0012/0256 mean_reward=-0.9499 mean_return=-28.4525 explained_var=+0.1138
+hard_eval update=0012/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.348
+Saved best hard-eval checkpoint to checkpoints/lrx_ppo_n16_best_35282509.pt
+update=0016/0256 mean_reward=-0.9548 mean_return=-30.2783 explained_var=+0.1103
+hard_eval update=0016/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.361
+update=0020/0256 mean_reward=-0.9720 mean_return=-30.1029 explained_var=+0.0630
+hard_eval update=0020/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.410
+update=0024/0256 mean_reward=-0.9878 mean_return=-30.2249 explained_var=+0.0526
+hard_eval update=0024/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.348
+update=0028/0256 mean_reward=-0.9570 mean_return=-30.7445 explained_var=-0.0124
+hard_eval update=0028/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.347
+Saved best hard-eval checkpoint to checkpoints/lrx_ppo_n16_best_35282509.pt
+update=0032/0256 mean_reward=-0.9815 mean_return=-31.8828 explained_var=+0.0790
+hard_eval update=0032/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.402
+update=0036/0256 mean_reward=-0.9756 mean_return=-31.1442 explained_var=+0.0652
+hard_eval update=0036/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.347
+Saved best hard-eval checkpoint to checkpoints/lrx_ppo_n16_best_35282509.pt
+update=0040/0256 mean_reward=-0.9429 mean_return=-30.2310 explained_var=+0.0988
+hard_eval update=0040/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.347
+Saved best hard-eval checkpoint to checkpoints/lrx_ppo_n16_best_35282509.pt
+update=0044/0256 mean_reward=-0.9628 mean_return=-30.3556 explained_var=+0.0689
+hard_eval update=0044/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.347
+update=0048/0256 mean_reward=-0.9588 mean_return=-30.5537 explained_var=-0.0069
+hard_eval update=0048/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.348
+update=0052/0256 mean_reward=-0.9775 mean_return=-30.8973 explained_var=+0.0889
+hard_eval update=0052/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.347
+update=0056/0256 mean_reward=-0.9766 mean_return=-32.2064 explained_var=+0.0497
+hard_eval update=0056/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.380
+update=0060/0256 mean_reward=-0.9893 mean_return=-31.6825 explained_var=+0.0124
+hard_eval update=0060/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.346
+Saved best hard-eval checkpoint to checkpoints/lrx_ppo_n16_best_35282509.pt
+update=0064/0256 mean_reward=-0.9512 mean_return=-31.6914 explained_var=+0.1006
+hard_eval update=0064/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.348
+update=0068/0256 mean_reward=-0.9250 mean_return=-32.1285 explained_var=+0.0525
+hard_eval update=0068/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.347
+update=0072/0256 mean_reward=-0.9652 mean_return=-30.9432 explained_var=+0.1168
+hard_eval update=0072/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.371
+update=0076/0256 mean_reward=-0.9648 mean_return=-31.5614 explained_var=+0.0656
+hard_eval update=0076/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.347
+update=0080/0256 mean_reward=-0.9451 mean_return=-30.3273 explained_var=+0.1220
+hard_eval update=0080/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.347
+update=0084/0256 mean_reward=-0.9606 mean_return=-29.9297 explained_var=+0.1387
+hard_eval update=0084/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.396
+update=0088/0256 mean_reward=-0.9108 mean_return=-27.6089 explained_var=+0.1422
+hard_eval update=0088/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.346
+Saved best hard-eval checkpoint to checkpoints/lrx_ppo_n16_best_35282509.pt
+update=0092/0256 mean_reward=-0.9431 mean_return=-30.1247 explained_var=+0.1116
+hard_eval update=0092/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.347
+update=0096/0256 mean_reward=-1.0034 mean_return=-31.0979 explained_var=+0.1148
+hard_eval update=0096/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.347
+update=0100/0256 mean_reward=-0.9922 mean_return=-30.8118 explained_var=+0.1935
+hard_eval update=0100/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.346
+update=0104/0256 mean_reward=-0.9305 mean_return=-28.5997 explained_var=+0.1893
+hard_eval update=0104/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.346
+Saved best hard-eval checkpoint to checkpoints/lrx_ppo_n16_best_35282509.pt
+update=0108/0256 mean_reward=-0.9724 mean_return=-30.7981 explained_var=+0.0635
+hard_eval update=0108/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.405
+update=0112/0256 mean_reward=-0.9401 mean_return=-29.3515 explained_var=+0.2649
+hard_eval update=0112/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.347
+update=0116/0256 mean_reward=-0.9726 mean_return=-32.6812 explained_var=+0.0800
+hard_eval update=0116/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.349
+update=0120/0256 mean_reward=-0.9630 mean_return=-29.9066 explained_var=+0.1139
+hard_eval update=0120/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.403
+update=0124/0256 mean_reward=-0.9620 mean_return=-30.1118 explained_var=+0.1235
+hard_eval update=0124/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.347
+update=0128/0256 mean_reward=-0.9852 mean_return=-31.2825 explained_var=+0.0623
+hard_eval update=0128/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.347
+update=0132/0256 mean_reward=-0.9650 mean_return=-31.2871 explained_var=+0.2342
+hard_eval update=0132/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.405
+update=0136/0256 mean_reward=-0.9642 mean_return=-29.4915 explained_var=+0.1034
+hard_eval update=0136/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.347
+update=0140/0256 mean_reward=-0.9218 mean_return=-29.3817 explained_var=+0.3574
+hard_eval update=0140/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.347
+update=0144/0256 mean_reward=-0.9877 mean_return=-29.9391 explained_var=+0.0633
+hard_eval update=0144/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.405
+update=0148/0256 mean_reward=-0.9781 mean_return=-32.7684 explained_var=+0.2049
+hard_eval update=0148/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.346
+update=0152/0256 mean_reward=-0.9669 mean_return=-30.8831 explained_var=+0.2290
+hard_eval update=0152/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.348
+update=0156/0256 mean_reward=-0.9654 mean_return=-31.1846 explained_var=+0.2338
+hard_eval update=0156/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.412
+update=0160/0256 mean_reward=-0.9822 mean_return=-29.8259 explained_var=+0.3369
+hard_eval update=0160/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.348
+update=0164/0256 mean_reward=-0.9581 mean_return=-30.3339 explained_var=+0.3720
+hard_eval update=0164/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.347
+update=0168/0256 mean_reward=-0.9523 mean_return=-29.9316 explained_var=+0.2788
+hard_eval update=0168/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.475 median_runtime=0.778
+update=0172/0256 mean_reward=-0.9945 mean_return=-31.0021 explained_var=+0.1259
+hard_eval update=0172/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.348
+update=0176/0256 mean_reward=-0.9900 mean_return=-31.0314 explained_var=+0.2368
+hard_eval update=0176/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.347
+update=0180/0256 mean_reward=-0.9558 mean_return=-29.1061 explained_var=+0.2903
+hard_eval update=0180/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.347
+update=0184/0256 mean_reward=-0.9884 mean_return=-32.6990 explained_var=+0.0822
+hard_eval update=0184/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.345
+Saved best hard-eval checkpoint to checkpoints/lrx_ppo_n16_best_35282509.pt
+update=0188/0256 mean_reward=-0.9040 mean_return=-28.4187 explained_var=+0.3527
+hard_eval update=0188/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.345
+Saved best hard-eval checkpoint to checkpoints/lrx_ppo_n16_best_35282509.pt
+update=0192/0256 mean_reward=-0.9302 mean_return=-27.8316 explained_var=+0.3997
+hard_eval update=0192/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.360
+update=0196/0256 mean_reward=-0.9471 mean_return=-30.8864 explained_var=+0.2468
+hard_eval update=0196/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.381
+update=0200/0256 mean_reward=-0.9697 mean_return=-30.9820 explained_var=+0.2524
+hard_eval update=0200/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.345
+update=0204/0256 mean_reward=-0.9155 mean_return=-27.5569 explained_var=+0.3990
+hard_eval update=0204/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.345
+Saved best hard-eval checkpoint to checkpoints/lrx_ppo_n16_best_35282509.pt
+update=0208/0256 mean_reward=-0.9560 mean_return=-31.1503 explained_var=+0.1455
+hard_eval update=0208/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.384
+update=0212/0256 mean_reward=-0.9581 mean_return=-32.0284 explained_var=+0.2838
+hard_eval update=0212/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.345
+Saved best hard-eval checkpoint to checkpoints/lrx_ppo_n16_best_35282509.pt
+update=0216/0256 mean_reward=-0.9708 mean_return=-32.3335 explained_var=+0.1408
+hard_eval update=0216/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.345
+update=0220/0256 mean_reward=-0.9735 mean_return=-32.9079 explained_var=+0.2128
+hard_eval update=0220/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.398
+update=0224/0256 mean_reward=-0.9593 mean_return=-31.1981 explained_var=+0.1438
+hard_eval update=0224/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.346
+update=0228/0256 mean_reward=-0.9777 mean_return=-29.7031 explained_var=+0.1783
+hard_eval update=0228/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.346
+update=0232/0256 mean_reward=-0.9425 mean_return=-30.4126 explained_var=+0.3034
+hard_eval update=0232/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.403
+update=0236/0256 mean_reward=-0.9623 mean_return=-30.6307 explained_var=+0.1240
+hard_eval update=0236/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.421
+update=0240/0256 mean_reward=-0.9742 mean_return=-30.2803 explained_var=+0.2167
+hard_eval update=0240/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.347
+update=0244/0256 mean_reward=-0.9720 mean_return=-30.7419 explained_var=+0.2374
+hard_eval update=0244/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.402
+update=0248/0256 mean_reward=-0.9733 mean_return=-31.6173 explained_var=+0.1146
+hard_eval update=0248/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.346
+update=0252/0256 mean_reward=-0.9770 mean_return=-31.3479 explained_var=+0.1573
+hard_eval update=0252/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.346
+update=0256/0256 mean_reward=-0.9613 mean_return=-31.7188 explained_var=+0.2746
+hard_eval update=0256/0256 source=conjectured_longest success=1/1 success_rate=1.000 median_path_ratio=0.258 median_runtime=0.397

@@ -1,0 +1,17 @@
+Python 3.11.15
+torch=2.6.0+cu124
+cuda_available=True
+cuda_device=NVIDIA L40S
+============================= test session starts ==============================
+platform linux -- Python 3.11.15, pytest-9.0.3, pluggy-1.6.0 -- /mmfs1/gscratch/stf/zengrf/cayley-py/Michael/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /mmfs1/gscratch/stf/zengrf/cayley-py
+collecting ... collected 5 items
+
+Michael/test_lrx_koltsov3_ppo.py::test_get_koltsov3_generators_n5_k0_matches_expected PASSED [ 20%]
+Michael/test_lrx_koltsov3_ppo.py::test_apply_generator_reorders_state PASSED [ 40%]
+Michael/test_lrx_koltsov3_ppo.py::test_compute_gae_terminal_steps_match_reward_minus_value PASSED [ 60%]
+Michael/test_lrx_koltsov3_ppo.py::test_ppo_config_defaults_scale_with_n PASSED [ 80%]
+Michael/test_lrx_koltsov3_ppo.py::test_ppo_config_rejects_non_divisible_rollout_minibatch PASSED [100%]
+
+============================== 5 passed in 1.82s ===============================
