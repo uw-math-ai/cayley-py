@@ -24,14 +24,20 @@ def main() -> None:
         sys.exit(1)
 
     out_dir = Path(sys.argv[1])
-    summary_csv = out_dir / "summary_results.csv"
-    iters_csv = out_dir / "iteration_results.csv"
-    if not summary_csv.is_file():
-        print(f"ERROR: {summary_csv} not found")
+
+    def _pick(final_name: str, partial_name: str) -> Path:
+        final = out_dir / final_name
+        partial = out_dir / partial_name
+        if final.is_file():
+            return final
+        if partial.is_file():
+            print(f"NOTE: {final.name} not found, falling back to {partial.name}")
+            return partial
+        print(f"ERROR: neither {final} nor {partial} found")
         sys.exit(1)
-    if not iters_csv.is_file():
-        print(f"ERROR: {iters_csv} not found")
-        sys.exit(1)
+
+    summary_csv = _pick("summary_results.csv", "summary_results_partial.csv")
+    iters_csv = _pick("iteration_results.csv", "iteration_results_partial.csv")
 
     pd.set_option("display.width", 200)
     pd.set_option("display.max_columns", 60)
