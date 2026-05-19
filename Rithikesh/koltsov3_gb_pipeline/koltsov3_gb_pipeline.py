@@ -1969,6 +1969,18 @@ def build_arg_parser() -> argparse.ArgumentParser:
 
     # Output / problem.
     parser.add_argument("--output-dir", type=Path, default=Path("koltsov3_gb_pipeline_results"), help="Output directory")
+    parser.add_argument(
+        "--resume",
+        type=str2bool,
+        nargs="?",
+        const=True,
+        default=False,
+        help=(
+            "Resume from an existing --output-dir: load summary_results_partial.csv, "
+            "skip configs whose config_id (== SweepConfig.run_name) already finished, "
+            "and append new results to the same partial CSVs."
+        ),
+    )
     parser.add_argument("--koltsov3-k", type=int, default=0, help="k in the Koltsov3 S=(k,k+2) generator")
     parser.add_argument("--device", choices=["auto", "cpu", "cuda"], default="auto", help="auto, cpu, or cuda")
     parser.add_argument("--save-plots", type=str2bool, nargs="?", const=True, default=True)
@@ -2128,8 +2140,57 @@ def main(argv: Optional[Sequence[str]] = None) -> None:
     iteration_rows: List[Dict[str, Any]] = []
     mdqn_rows: List[Dict[str, Any]] = []
 
+    # --resume: load any prior partial CSVs in this output_dir, treat their
+    # config_ids as already done, and seed the row lists so the next
+    # incremental write produces a complete file rather than a stub.
+    done_ids: set = set()
+    if args.resume:
+        summary_partial = output_dir / "summary_results_partial.csv"
+        if summary_partial.is_file():
+            df_prev = pd.read_csv(summary_partial)
+            # A config is "done" only if test_rmse was written (i.e. the row is
+            # complete -- guards against a half-written final row).
+            if "test_rmse" in df_prev.columns:
+                df_prev = df_prev[df_prev["test_rmse"].notna()]
+            done_ids = set(df_prev["config_id"].astype(str).tolist())
+            summary_rows = df_prev.to_dict("records")
+            iters_partial = output_dir / "iteration_results_partial.csv"
+            if iters_partial.is_file():
+                df_iters_prev = pd.read_csv(iters_partial)
+                df_iters_prev = df_iters_prev[df_iters_prev["config_id"].astype(str).isin(done_ids)]
+                iteration_rows = df_iters_prev.to_dict("records")
+            mdqn_partial = output_dir / "mdqn_results_partial.csv"
+            if mdqn_partial.is_file():
+                df_mdqn_prev = pd.read_csv(mdqn_partial)
+                df_mdqn_prev = df_mdqn_prev[df_mdqn_prev["config_id"].astype(str).isin(done_ids)]
+                mdqn_rows = df_mdqn_prev.to_dict("records")
+            print(
+                f"--resume: loaded {len(done_ids)} finished configs from "
+                f"{summary_partial.name}; they will be skipped.",
+                flush=True,
+            )
+        else:
+            print(
+                f"--resume: no {summary_partial.name} in {output_dir}; "
+                "starting fresh.",
+                flush=True,
+            )
+
     all_configs = list(iter_sweep_configs(args))
+    n_to_run = sum(1 for cfg in all_configs if cfg.run_name not in done_ids)
+    if done_ids:
+        print(
+            f"Plan: {len(all_configs)} total configs, {len(done_ids)} already done, "
+            f"{n_to_run} to run.",
+            flush=True,
+        )
     for i, sweep_cfg in enumerate(all_configs, start=1):
+        if sweep_cfg.run_name in done_ids:
+            print(
+                f"\n===== Configuration {i}/{len(all_configs)} -- SKIP (resume) {sweep_cfg.run_name} =====",
+                flush=True,
+            )
+            continue
         print(f"\n===== Configuration {i}/{len(all_configs)} =====", flush=True)
         summary_row, iteration_rows_for_config, mdqn_rows_for_config = train_one_config(
             sweep_cfg=sweep_cfg,

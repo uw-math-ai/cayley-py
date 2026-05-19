@@ -213,6 +213,22 @@ Inside `--output-dir`:
 - `iteration_results.csv` — one row per Phase-1 boosting iteration per config
 - `mdqn_results.csv` — one row per MDQN epoch per config (only when Phase 2 ran)
 - `summary_results_partial.csv` / `iteration_results_partial.csv` / `mdqn_results_partial.csv` — incremental, written after each config
+
+### Resuming a preempted run
+
+The `ckpt` partition can preempt the job. To pick up where it left off, point
+`--output-dir` at the existing run directory and add `--resume`:
+
+```bash
+python koltsov3_gb_pipeline.py --output-dir koltsov3_gb_pipeline_<JOBID> --resume ...same other args...
+```
+
+Resume loads `summary_results_partial.csv`, treats each row whose `test_rmse`
+is non-null as a finished config (keyed by `config_id`, which equals
+`SweepConfig.run_name`), skips those in the main loop, and appends new rows to
+the same partial CSVs. The final non-partial CSVs are written once everything
+finishes. Pass the *same* sweep flags as the original submission so the
+configs match.
 - `run_args.json` — command-line arguments
 - `plots/rmse_by_config.png`, `plots/spearman_by_config.png` — per-config overviews
 - `plots/rmse_vs_max_depth_*.png` — depth trend plots when `max_depth` varies
