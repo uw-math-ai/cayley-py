@@ -1698,7 +1698,7 @@ def train_pass3_beam_aware_value_correction(guide_model, criterion, tensor_gener
 # =============================================================================
 # 3. TRIAL LOOP
 # =============================================================================
-N_TRIALS = 30
+N_TRIALS = 10
 _all_pass1_path_lengths = []
 _all_residual_path_lengths = []
 _all_final_path_lengths = []
