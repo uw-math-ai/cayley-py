@@ -2,3 +2,109 @@ Python 3.11.15
 torch=2.6.0+cu124
 cuda_available=True
 cuda_device=NVIDIA GeForce RTX 2080 Ti
+dqn_dataset size=523626 walk_length=128 history=32
+dqn_warmup_epoch=001/030 value_loss=664.694856
+dqn_warmup_epoch=006/030 value_loss=403.600239
+dqn_warmup_epoch=012/030 value_loss=384.260621
+dqn_warmup_epoch=018/030 value_loss=374.467122
+dqn_warmup_epoch=024/030 value_loss=370.138761
+dqn_warmup_epoch=030/030 value_loss=362.067653
+dqn[001/080]_epoch=001/001 value_loss=90.106193
+dqn[002/080]_epoch=001/001 value_loss=63.231213
+dqn[003/080]_epoch=001/001 value_loss=23.628075
+dqn[004/080]_epoch=001/001 value_loss=20.594502
+dqn[005/080]_epoch=001/001 value_loss=12.661245
+dqn[006/080]_epoch=001/001 value_loss=8.639101
+dqn[007/080]_epoch=001/001 value_loss=7.377401
+dqn[008/080]_epoch=001/001 value_loss=5.811271
+dqn[009/080]_epoch=001/001 value_loss=4.624477
+dqn[010/080]_epoch=001/001 value_loss=4.058011
+dqn_epoch=010/080 target_mean=31.0086 pred_mean=29.4077 dataset_mse=5.027644
+hard_eval epoch=010/080 source=fixed_nonbacktracking_walk_seed123_depth128 reference=witness_length success=4/4 success_rate=1.000 median_path_ratio=0.359 median_path_len=46.0 median_runtime=0.766
+Saved best hard-eval checkpoint to checkpoints/lrx_dqn_n16_best_35336635.pt
+dqn[011/080]_epoch=001/001 value_loss=3.586935
+dqn[012/080]_epoch=001/001 value_loss=3.242695
+dqn[013/080]_epoch=001/001 value_loss=2.944400
+dqn[014/080]_epoch=001/001 value_loss=2.728115
+dqn[015/080]_epoch=001/001 value_loss=2.389983
+dqn[016/080]_epoch=001/001 value_loss=2.230886
+dqn[017/080]_epoch=001/001 value_loss=2.008896
+dqn[018/080]_epoch=001/001 value_loss=1.798055
+dqn[019/080]_epoch=001/001 value_loss=1.659380
+dqn[020/080]_epoch=001/001 value_loss=1.505554
+dqn_epoch=020/080 target_mean=18.8509 pred_mean=17.9803 dataset_mse=1.716745
+hard_eval epoch=020/080 source=fixed_nonbacktracking_walk_seed123_depth128 reference=witness_length success=4/4 success_rate=1.000 median_path_ratio=0.359 median_path_len=46.0 median_runtime=0.599
+Saved best hard-eval checkpoint to checkpoints/lrx_dqn_n16_best_35336635.pt
+dqn[021/080]_epoch=001/001 value_loss=1.348574
+dqn[022/080]_epoch=001/001 value_loss=1.210661
+dqn[023/080]_epoch=001/001 value_loss=1.020636
+dqn[024/080]_epoch=001/001 value_loss=1.035179
+dqn[025/080]_epoch=001/001 value_loss=0.787881
+dqn[026/080]_epoch=001/001 value_loss=0.883144
+dqn[027/080]_epoch=001/001 value_loss=0.858081
+dqn[028/080]_epoch=001/001 value_loss=0.551355
+dqn[029/080]_epoch=001/001 value_loss=0.518623
+dqn[030/080]_epoch=001/001 value_loss=0.492519
+dqn_epoch=030/080 target_mean=18.3526 pred_mean=18.0128 dataset_mse=0.502604
+hard_eval epoch=030/080 source=fixed_nonbacktracking_walk_seed123_depth128 reference=witness_length success=4/4 success_rate=1.000 median_path_ratio=0.352 median_path_len=45.0 median_runtime=0.623
+Saved best hard-eval checkpoint to checkpoints/lrx_dqn_n16_best_35336635.pt
+dqn[031/080]_epoch=001/001 value_loss=0.435655
+dqn[032/080]_epoch=001/001 value_loss=0.415968
+dqn[033/080]_epoch=001/001 value_loss=0.392373
+dqn[034/080]_epoch=001/001 value_loss=0.567088
+dqn[035/080]_epoch=001/001 value_loss=0.567974
+dqn[036/080]_epoch=001/001 value_loss=0.511190
+dqn[037/080]_epoch=001/001 value_loss=0.434895
+dqn[038/080]_epoch=001/001 value_loss=0.400835
+dqn[039/080]_epoch=001/001 value_loss=0.465257
+dqn[040/080]_epoch=001/001 value_loss=0.557236
+dqn_epoch=040/080 target_mean=21.3912 pred_mean=20.9310 dataset_mse=0.454468
+hard_eval epoch=040/080 source=fixed_nonbacktracking_walk_seed123_depth128 reference=witness_length success=4/4 success_rate=1.000 median_path_ratio=0.359 median_path_len=46.0 median_runtime=0.628
+dqn[041/080]_epoch=001/001 value_loss=0.442753
+dqn[042/080]_epoch=001/001 value_loss=0.438692
+dqn[043/080]_epoch=001/001 value_loss=0.450391
+dqn[044/080]_epoch=001/001 value_loss=0.434674
+dqn[045/080]_epoch=001/001 value_loss=0.439210
+dqn[046/080]_epoch=001/001 value_loss=0.460047
+dqn[047/080]_epoch=001/001 value_loss=0.477942
+dqn[048/080]_epoch=001/001 value_loss=0.445129
+dqn[049/080]_epoch=001/001 value_loss=0.449371
+dqn[050/080]_epoch=001/001 value_loss=0.322012
+dqn_epoch=050/080 target_mean=23.8275 pred_mean=23.5436 dataset_mse=0.313945
+hard_eval epoch=050/080 source=fixed_nonbacktracking_walk_seed123_depth128 reference=witness_length success=4/4 success_rate=1.000 median_path_ratio=0.367 median_path_len=47.0 median_runtime=0.632
+dqn[051/080]_epoch=001/001 value_loss=0.338724
+dqn[052/080]_epoch=001/001 value_loss=0.499780
+dqn[053/080]_epoch=001/001 value_loss=0.507937
+dqn[054/080]_epoch=001/001 value_loss=0.364218
+dqn[055/080]_epoch=001/001 value_loss=0.894991
+dqn[056/080]_epoch=001/001 value_loss=0.539404
+dqn[057/080]_epoch=001/001 value_loss=0.546339
+dqn[058/080]_epoch=001/001 value_loss=0.552117
+dqn[059/080]_epoch=001/001 value_loss=0.561513
+dqn[060/080]_epoch=001/001 value_loss=0.574113
+dqn_epoch=060/080 target_mean=22.9308 pred_mean=23.3511 dataset_mse=0.468800
+hard_eval epoch=060/080 source=fixed_nonbacktracking_walk_seed123_depth128 reference=witness_length success=4/4 success_rate=1.000 median_path_ratio=0.367 median_path_len=47.0 median_runtime=0.627
+dqn[061/080]_epoch=001/001 value_loss=0.537253
+dqn[062/080]_epoch=001/001 value_loss=0.542309
+dqn[063/080]_epoch=001/001 value_loss=0.433012
+dqn[064/080]_epoch=001/001 value_loss=0.473994
+dqn[065/080]_epoch=001/001 value_loss=0.558189
+dqn[066/080]_epoch=001/001 value_loss=0.549198
+dqn[067/080]_epoch=001/001 value_loss=0.422071
+dqn[068/080]_epoch=001/001 value_loss=0.406929
+dqn[069/080]_epoch=001/001 value_loss=0.461612
+dqn[070/080]_epoch=001/001 value_loss=0.504798
+dqn_epoch=070/080 target_mean=23.3077 pred_mean=22.8842 dataset_mse=0.465451
+hard_eval epoch=070/080 source=fixed_nonbacktracking_walk_seed123_depth128 reference=witness_length success=4/4 success_rate=1.000 median_path_ratio=0.359 median_path_len=46.0 median_runtime=0.602
+dqn[071/080]_epoch=001/001 value_loss=0.504864
+dqn[072/080]_epoch=001/001 value_loss=0.360299
+dqn[073/080]_epoch=001/001 value_loss=0.518503
+dqn[074/080]_epoch=001/001 value_loss=0.501395
+dqn[075/080]_epoch=001/001 value_loss=0.499771
+dqn[076/080]_epoch=001/001 value_loss=0.521348
+dqn[077/080]_epoch=001/001 value_loss=0.589804
+dqn[078/080]_epoch=001/001 value_loss=0.520302
+dqn[079/080]_epoch=001/001 value_loss=0.493318
+dqn[080/080]_epoch=001/001 value_loss=0.511236
+dqn_epoch=080/080 target_mean=25.3017 pred_mean=24.6876 dataset_mse=0.680576
+hard_eval epoch=080/080 source=fixed_nonbacktracking_walk_seed123_depth128 reference=witness_length success=4/4 success_rate=1.000 median_path_ratio=0.359 median_path_len=46.0 median_runtime=0.632

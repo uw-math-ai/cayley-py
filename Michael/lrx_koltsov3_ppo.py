@@ -458,6 +458,9 @@ class PPOConfig:
     grad_clip_norm: float = 0.5
     target_kl: Optional[float] = None
     anneal_learning_rate: bool = False
+    heuristic_teacher_refresh_updates: int = 0
+    offpolicy_heuristic_refresh_updates: int = 0
+    offpolicy_heuristic_refresh_epochs: int = 1
     success_bonus: float = 5.0
     step_penalty: float = 1.0
     warmup_epochs: int = 0
@@ -498,6 +501,12 @@ class PPOConfig:
             )
         if self.target_kl is not None and self.target_kl <= 0.0:
             raise ValueError("target_kl must be positive when provided")
+        if self.heuristic_teacher_refresh_updates < 0:
+            raise ValueError("heuristic_teacher_refresh_updates must be non-negative")
+        if self.offpolicy_heuristic_refresh_updates < 0:
+            raise ValueError("offpolicy_heuristic_refresh_updates must be non-negative")
+        if self.offpolicy_heuristic_refresh_epochs < 0:
+            raise ValueError("offpolicy_heuristic_refresh_epochs must be non-negative")
 
 
 if nn is not None:
@@ -559,6 +568,14 @@ def _select_device(device: str) -> str:
     if device == "auto":
         return "cuda" if torch.cuda.is_available() else "cpu"
     return device
+
+
+def sync_reference_model(reference_model: ActorCritic, source_model: ActorCritic) -> None:
+    """Copy the current model weights into a frozen evaluation-only reference model."""
+    reference_model.load_state_dict(source_model.state_dict())
+    reference_model.eval()
+    for parameter in reference_model.parameters():
+        parameter.requires_grad_(False)
 
 
 def build_ppo_optimizer(model: ActorCritic, config: PPOConfig) -> torch.optim.Optimizer:
@@ -1378,6 +1395,51 @@ def run_policy_warmstart(
     )
 
 
+def run_offpolicy_heuristic_refresh(
+    model: ActorCritic,
+    heuristic_teacher_model: ActorCritic,
+    generators: np.ndarray,
+    config: PPOConfig,
+    *,
+    device: str,
+    rng: np.random.Generator,
+    optimizer: torch.optim.Optimizer,
+    update_idx: int,
+    total_updates: int,
+) -> None:
+    """Run DQN-style Bellman refinement on the same deep walk distribution used in warm-up."""
+    if config.offpolicy_heuristic_refresh_epochs <= 0:
+        return
+
+    refresh_states, _ = generate_nonbacktracking_walk_dataset(
+        generators,
+        num_walks=config.warmup_walks,
+        walk_length=config.warmup_walk_length,
+        rng=rng,
+        history_size=config.warmup_history_size,
+    )
+    refresh_targets = compute_reference_heuristic_targets(
+        heuristic_teacher_model,
+        refresh_states,
+        generators,
+        device=device,
+        batch_size=config.bellman_batch_size,
+    )
+    _run_value_regression_epochs(
+        model,
+        refresh_states,
+        refresh_targets,
+        device=device,
+        optimizer=optimizer,
+        epochs=config.offpolicy_heuristic_refresh_epochs,
+        batch_size=config.warmup_batch_size,
+        grad_clip_norm=config.grad_clip_norm,
+        log_prefix=(
+            f"offpolicy_refresh[{update_idx:04d}/{total_updates:04d}]"
+        ),
+    )
+
+
 def train_ppo(config: PPOConfig) -> ActorCritic:
     """Train a PPO policy on Koltsov3 traversal with potential shaping and hard-state eval."""
     _require_torch()
@@ -1406,13 +1468,19 @@ def train_ppo(config: PPOConfig) -> ActorCritic:
     if bootstrap_dataset is not None:
         bootstrap_states, _ = bootstrap_dataset
         run_policy_warmstart(model, bootstrap_states, generators, config, device=device)
-    reference_model = ActorCritic(config.n, config.hidden_dim, k=config.k).to(device)
-    reference_model.load_state_dict(model.state_dict())
-    reference_model.eval()
-    for parameter in reference_model.parameters():
-        parameter.requires_grad_(False)
+    reward_reference_model = ActorCritic(config.n, config.hidden_dim, k=config.k).to(device)
+    heuristic_teacher_model = ActorCritic(config.n, config.hidden_dim, k=config.k).to(device)
+    sync_reference_model(reward_reference_model, model)
+    sync_reference_model(heuristic_teacher_model, model)
 
     optimizer = build_ppo_optimizer(model, config)
+    auxiliary_value_optimizer = None
+    if config.offpolicy_heuristic_refresh_updates > 0:
+        auxiliary_value_optimizer = torch.optim.Adam(
+            list(model.trunk.parameters()) + list(model.value_head.parameters()),
+            lr=config.value_lr,
+        )
+    offpolicy_rng = np.random.default_rng(config.seed + 10_003)
 
     state = identity.copy()
     episode_step = 0
@@ -1439,7 +1507,7 @@ def train_ppo(config: PPOConfig) -> ActorCritic:
             obs_t = torch.tensor(state, dtype=torch.long, device=device).unsqueeze(0)
             with torch.no_grad():
                 logits_t, _, critic_t = model.actor_critic(obs_t)
-                _, ref_prev_value_t = reference_model(obs_t)
+                _, ref_prev_value_t = reward_reference_model(obs_t)
                 dist_t = torch.distributions.Categorical(logits=logits_t)
                 action_t = dist_t.sample()
                 logp_t = dist_t.log_prob(action_t)
@@ -1450,7 +1518,7 @@ def train_ppo(config: PPOConfig) -> ActorCritic:
 
             next_obs_t = torch.tensor(next_state, dtype=torch.long, device=device).unsqueeze(0)
             with torch.no_grad():
-                _, ref_next_value_t = reference_model(next_obs_t)
+                _, ref_next_value_t = reward_reference_model(next_obs_t)
 
             prev_potential = float(ref_prev_value_t.item())
             next_potential = 0.0 if done else float(ref_next_value_t.item())
@@ -1503,7 +1571,7 @@ def train_ppo(config: PPOConfig) -> ActorCritic:
         adv_t = torch.tensor(adv_buf, dtype=torch.float32, device=device)
         ret_t = torch.tensor(ret_buf, dtype=torch.float32, device=device)
         heuristic_target_buf = compute_reference_heuristic_targets(
-            reference_model,
+            heuristic_teacher_model,
             obs_buf,
             generators,
             device=device,
@@ -1604,6 +1672,46 @@ def train_ppo(config: PPOConfig) -> ActorCritic:
                     f"approx_kl={early_stop_kl:.4f} target_kl={config.target_kl:.4f}"
                 )
 
+        teacher_refreshed = False
+        if (
+            config.heuristic_teacher_refresh_updates > 0
+            and update_idx % config.heuristic_teacher_refresh_updates == 0
+            and update_idx != updates
+        ):
+            sync_reference_model(heuristic_teacher_model, model)
+            teacher_refreshed = True
+            print(
+                f"heuristic_teacher_refresh update={update_idx:04d}/{updates:04d} "
+                f"interval={config.heuristic_teacher_refresh_updates}"
+            )
+
+        if (
+            config.offpolicy_heuristic_refresh_updates > 0
+            and update_idx % config.offpolicy_heuristic_refresh_updates == 0
+            and auxiliary_value_optimizer is not None
+        ):
+            if not teacher_refreshed:
+                sync_reference_model(heuristic_teacher_model, model)
+                print(
+                    f"heuristic_teacher_refresh update={update_idx:04d}/{updates:04d} "
+                    f"interval=offpolicy"
+                )
+            print(
+                f"offpolicy_refresh_start update={update_idx:04d}/{updates:04d} "
+                f"walks={config.warmup_walks} walk_length={config.warmup_walk_length}"
+            )
+            run_offpolicy_heuristic_refresh(
+                model,
+                heuristic_teacher_model,
+                generators,
+                config,
+                device=device,
+                rng=offpolicy_rng,
+                optimizer=auxiliary_value_optimizer,
+                update_idx=update_idx,
+                total_updates=updates,
+            )
+
         should_eval = (
             config.eval_every_updates > 0
             and (update_idx % config.eval_every_updates == 0 or update_idx == updates)
@@ -1635,7 +1743,7 @@ def train_ppo(config: PPOConfig) -> ActorCritic:
                     config=config,
                     update_idx=update_idx,
                     hard_eval=hard_eval,
-                    reference_model=reference_model,
+                    reference_model=reward_reference_model,
                 )
                 best_hard_eval = hard_eval
                 print(f"Saved best hard-eval checkpoint to {config.checkpoint_path}")
@@ -1646,7 +1754,7 @@ def train_ppo(config: PPOConfig) -> ActorCritic:
             model=model,
             config=config,
             update_idx=updates,
-            reference_model=reference_model,
+            reference_model=reward_reference_model,
         )
         print(f"Saved checkpoint to {config.checkpoint_path}")
 
@@ -1680,6 +1788,9 @@ def parse_args() -> PPOConfig:
         action=argparse.BooleanOptionalAction,
         default=False,
     )
+    parser.add_argument("--heuristic-teacher-refresh-updates", type=int, default=0)
+    parser.add_argument("--offpolicy-heuristic-refresh-updates", type=int, default=0)
+    parser.add_argument("--offpolicy-heuristic-refresh-epochs", type=int, default=1)
     parser.add_argument("--success-bonus", type=float, default=5.0)
     parser.add_argument("--step-penalty", type=float, default=1.0)
     parser.add_argument("--warmup-epochs", type=int, default=0)
@@ -1729,6 +1840,9 @@ def parse_args() -> PPOConfig:
         grad_clip_norm=args.grad_clip_norm,
         target_kl=args.target_kl,
         anneal_learning_rate=args.anneal_learning_rate,
+        heuristic_teacher_refresh_updates=args.heuristic_teacher_refresh_updates,
+        offpolicy_heuristic_refresh_updates=args.offpolicy_heuristic_refresh_updates,
+        offpolicy_heuristic_refresh_epochs=args.offpolicy_heuristic_refresh_epochs,
         success_bonus=args.success_bonus,
         step_penalty=args.step_penalty,
         warmup_epochs=args.warmup_epochs,

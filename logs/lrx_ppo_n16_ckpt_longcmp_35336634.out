@@ -2,3 +2,150 @@ Python 3.11.15
 torch=2.6.0+cu124
 cuda_available=True
 cuda_device=NVIDIA GeForce RTX 2080 Ti
+value_bootstrap_dataset size=523626 walk_length=128 history=32
+warmup_epoch=001/030 value_loss=664.694856
+warmup_epoch=006/030 value_loss=403.600239
+warmup_epoch=012/030 value_loss=384.260621
+warmup_epoch=018/030 value_loss=374.467122
+warmup_epoch=024/030 value_loss=370.138761
+warmup_epoch=030/030 value_loss=362.067653
+bellman[001/020]_epoch=001/001 value_loss=90.106193
+bellman[002/020]_epoch=001/001 value_loss=55.189667
+bellman[003/020]_epoch=001/001 value_loss=29.394724
+bellman[004/020]_epoch=001/001 value_loss=18.649086
+bellman[005/020]_epoch=001/001 value_loss=12.391710
+bellman[006/020]_epoch=001/001 value_loss=9.293904
+bellman[007/020]_epoch=001/001 value_loss=7.173516
+bellman[008/020]_epoch=001/001 value_loss=6.105509
+bellman[009/020]_epoch=001/001 value_loss=5.088506
+bellman[010/020]_epoch=001/001 value_loss=4.326557
+bellman[011/020]_epoch=001/001 value_loss=3.803052
+bellman[012/020]_epoch=001/001 value_loss=3.371011
+bellman[013/020]_epoch=001/001 value_loss=3.052767
+bellman[014/020]_epoch=001/001 value_loss=2.753785
+bellman[015/020]_epoch=001/001 value_loss=1.803476
+bellman[016/020]_epoch=001/001 value_loss=2.142674
+bellman[017/020]_epoch=001/001 value_loss=1.963469
+bellman[018/020]_epoch=001/001 value_loss=1.776627
+bellman[019/020]_epoch=001/001 value_loss=1.582569
+bellman[020/020]_epoch=001/001 value_loss=1.356602
+policy_warmstart_epoch=001/010 policy_loss=1.095529
+policy_warmstart_epoch=002/010 policy_loss=1.059205
+policy_warmstart_epoch=004/010 policy_loss=1.047729
+policy_warmstart_epoch=006/010 policy_loss=1.041966
+policy_warmstart_epoch=008/010 policy_loss=1.037696
+policy_warmstart_epoch=010/010 policy_loss=1.034523
+update=0008/0512 mean_reward=-0.9864 mean_return=-29.9491 explained_var=+0.0905 policy_loss=+0.0015 critic_loss=129.1581 heuristic_loss=1.5797 entropy=0.5825 approx_kl=0.0089 clipfrac=0.1432 ppo_epochs=02/04
+ppo_early_stop update=0008/0512 approx_kl=0.0214 target_kl=0.0200
+update=0016/0512 mean_reward=-1.0087 mean_return=-33.5667 explained_var=-0.0020 policy_loss=-0.0028 critic_loss=134.4052 heuristic_loss=0.8190 entropy=0.3188 approx_kl=0.0056 clipfrac=0.0581 ppo_epochs=04/04
+hard_eval update=0016/0512 source=fixed_nonbacktracking_walk_seed123_depth128 reference=witness_length success=3/4 success_rate=0.750 median_path_ratio=0.250 median_path_len=32.0 median_runtime=0.706
+Saved best hard-eval checkpoint to checkpoints/lrx_ppo_n16_best_35336634.pt
+update=0024/0512 mean_reward=-0.9938 mean_return=-31.7331 explained_var=+0.0796 policy_loss=+0.0019 critic_loss=112.2468 heuristic_loss=0.4238 entropy=0.1418 approx_kl=0.0030 clipfrac=0.0312 ppo_epochs=04/04
+update=0032/0512 mean_reward=-1.0011 mean_return=-32.9031 explained_var=+0.0363 policy_loss=+0.0002 critic_loss=124.9181 heuristic_loss=0.3274 entropy=0.0380 approx_kl=0.0007 clipfrac=0.0039 ppo_epochs=04/04
+hard_eval update=0032/0512 source=fixed_nonbacktracking_walk_seed123_depth128 reference=witness_length success=3/4 success_rate=0.750 median_path_ratio=0.250 median_path_len=32.0 median_runtime=0.587
+Saved best hard-eval checkpoint to checkpoints/lrx_ppo_n16_best_35336634.pt
+update=0040/0512 mean_reward=-0.9904 mean_return=-32.4063 explained_var=-0.0173 policy_loss=-0.0021 critic_loss=129.1935 heuristic_loss=0.8604 entropy=0.0584 approx_kl=0.0019 clipfrac=0.0083 ppo_epochs=04/04
+update=0048/0512 mean_reward=-0.9886 mean_return=-32.1723 explained_var=+0.0137 policy_loss=+0.0006 critic_loss=130.8272 heuristic_loss=0.3210 entropy=0.0299 approx_kl=0.0011 clipfrac=0.0083 ppo_epochs=04/04
+hard_eval update=0048/0512 source=fixed_nonbacktracking_walk_seed123_depth128 reference=witness_length success=4/4 success_rate=1.000 median_path_ratio=0.508 median_path_len=65.0 median_runtime=1.259
+Saved best hard-eval checkpoint to checkpoints/lrx_ppo_n16_best_35336634.pt
+update=0056/0512 mean_reward=-0.9945 mean_return=-32.6283 explained_var=-0.0124 policy_loss=+0.0001 critic_loss=125.1145 heuristic_loss=0.4869 entropy=0.0612 approx_kl=0.0003 clipfrac=0.0039 ppo_epochs=04/04
+update=0064/0512 mean_reward=-0.9850 mean_return=-32.2331 explained_var=+0.0010 policy_loss=+0.0014 critic_loss=135.8871 heuristic_loss=0.3885 entropy=0.0746 approx_kl=0.0027 clipfrac=0.0132 ppo_epochs=04/04
+hard_eval update=0064/0512 source=fixed_nonbacktracking_walk_seed123_depth128 reference=witness_length success=2/4 success_rate=0.500 median_path_ratio=0.234 median_path_len=30.0 median_runtime=0.540
+update=0072/0512 mean_reward=-0.9963 mean_return=-33.5979 explained_var=-0.0010 policy_loss=+0.0012 critic_loss=126.5346 heuristic_loss=0.4228 entropy=0.1554 approx_kl=0.0014 clipfrac=0.0168 ppo_epochs=04/04
+update=0080/0512 mean_reward=-0.9925 mean_return=-32.5241 explained_var=+0.0778 policy_loss=+0.0005 critic_loss=122.9929 heuristic_loss=0.3181 entropy=0.2118 approx_kl=0.0023 clipfrac=0.0127 ppo_epochs=04/04
+hard_eval update=0080/0512 source=fixed_nonbacktracking_walk_seed123_depth128 reference=witness_length success=1/4 success_rate=0.250 median_path_ratio=0.266 median_path_len=34.0 median_runtime=0.633
+update=0088/0512 mean_reward=-0.9859 mean_return=-32.8263 explained_var=+0.0304 policy_loss=+0.0097 critic_loss=136.2568 heuristic_loss=0.4104 entropy=0.3443 approx_kl=0.0135 clipfrac=0.1492 ppo_epochs=02/04
+ppo_early_stop update=0088/0512 approx_kl=0.0411 target_kl=0.0200
+update=0096/0512 mean_reward=-0.9745 mean_return=-32.4703 explained_var=+0.0958 policy_loss=+0.0097 critic_loss=128.9360 heuristic_loss=1.2492 entropy=0.2021 approx_kl=0.0085 clipfrac=0.0629 ppo_epochs=03/04
+ppo_early_stop update=0096/0512 approx_kl=0.0217 target_kl=0.0200
+hard_eval update=0096/0512 source=fixed_nonbacktracking_walk_seed123_depth128 reference=witness_length success=1/4 success_rate=0.250 median_path_ratio=0.234 median_path_len=30.0 median_runtime=0.569
+update=0104/0512 mean_reward=-0.9949 mean_return=-32.9227 explained_var=+0.0268 policy_loss=+0.0042 critic_loss=136.8844 heuristic_loss=0.5841 entropy=0.2070 approx_kl=0.0048 clipfrac=0.0337 ppo_epochs=04/04
+update=0112/0512 mean_reward=-0.9834 mean_return=-32.0846 explained_var=+0.0647 policy_loss=+0.0112 critic_loss=132.4143 heuristic_loss=0.4534 entropy=0.1542 approx_kl=0.0108 clipfrac=0.0752 ppo_epochs=01/04
+ppo_early_stop update=0112/0512 approx_kl=0.0297 target_kl=0.0200
+hard_eval update=0112/0512 source=fixed_nonbacktracking_walk_seed123_depth128 reference=witness_length success=1/4 success_rate=0.250 median_path_ratio=1.094 median_path_len=140.0 median_runtime=2.729
+update=0120/0512 mean_reward=-0.9853 mean_return=-32.4319 explained_var=+0.1199 policy_loss=+0.0012 critic_loss=132.2462 heuristic_loss=0.5556 entropy=0.1763 approx_kl=0.0086 clipfrac=0.0439 ppo_epochs=02/04
+ppo_early_stop update=0120/0512 approx_kl=0.0339 target_kl=0.0200
+update=0128/0512 mean_reward=-1.0171 mean_return=-34.2055 explained_var=+0.2650 policy_loss=+0.0045 critic_loss=114.6291 heuristic_loss=2.8376 entropy=0.6041 approx_kl=0.0063 clipfrac=0.0688 ppo_epochs=04/04
+hard_eval update=0128/0512 source=fixed_nonbacktracking_walk_seed123_depth128 reference=witness_length success=2/4 success_rate=0.500 median_path_ratio=0.625 median_path_len=80.0 median_runtime=1.458
+update=0136/0512 mean_reward=-1.0066 mean_return=-29.8086 explained_var=+0.4971 policy_loss=-0.0003 critic_loss=74.1913 heuristic_loss=2.0679 entropy=0.3964 approx_kl=0.0100 clipfrac=0.1023 ppo_epochs=03/04
+ppo_early_stop update=0136/0512 approx_kl=0.0203 target_kl=0.0200
+update=0144/0512 mean_reward=-1.0183 mean_return=-30.2615 explained_var=+0.4535 policy_loss=+0.0031 critic_loss=84.9818 heuristic_loss=1.5192 entropy=0.2126 approx_kl=0.0097 clipfrac=0.0791 ppo_epochs=01/04
+ppo_early_stop update=0144/0512 approx_kl=0.0207 target_kl=0.0200
+hard_eval update=0144/0512 source=fixed_nonbacktracking_walk_seed123_depth128 reference=witness_length success=3/4 success_rate=0.750 median_path_ratio=0.266 median_path_len=34.0 median_runtime=0.635
+update=0152/0512 mean_reward=-1.0262 mean_return=-32.0513 explained_var=+0.6074 policy_loss=-0.0043 critic_loss=68.8570 heuristic_loss=0.6084 entropy=0.2568 approx_kl=0.0084 clipfrac=0.0653 ppo_epochs=04/04
+ppo_early_stop update=0152/0512 approx_kl=0.0296 target_kl=0.0200
+update=0160/0512 mean_reward=-1.0182 mean_return=-28.3889 explained_var=+0.3496 policy_loss=+0.0002 critic_loss=77.1592 heuristic_loss=0.7033 entropy=0.1007 approx_kl=0.0009 clipfrac=0.0132 ppo_epochs=04/04
+hard_eval update=0160/0512 source=fixed_nonbacktracking_walk_seed123_depth128 reference=witness_length success=4/4 success_rate=1.000 median_path_ratio=0.406 median_path_len=52.0 median_runtime=0.965
+Saved best hard-eval checkpoint to checkpoints/lrx_ppo_n16_best_35336634.pt
+update=0168/0512 mean_reward=-1.0328 mean_return=-29.3922 explained_var=+0.3754 policy_loss=-0.0002 critic_loss=77.8199 heuristic_loss=0.8677 entropy=0.0819 approx_kl=0.0016 clipfrac=0.0171 ppo_epochs=04/04
+update=0176/0512 mean_reward=-1.0252 mean_return=-29.6602 explained_var=+0.4490 policy_loss=-0.0020 critic_loss=80.1812 heuristic_loss=0.6373 entropy=0.1561 approx_kl=0.0023 clipfrac=0.0115 ppo_epochs=04/04
+hard_eval update=0176/0512 source=fixed_nonbacktracking_walk_seed123_depth128 reference=witness_length success=4/4 success_rate=1.000 median_path_ratio=0.375 median_path_len=48.0 median_runtime=0.848
+Saved best hard-eval checkpoint to checkpoints/lrx_ppo_n16_best_35336634.pt
+update=0184/0512 mean_reward=-1.0358 mean_return=-31.3570 explained_var=+0.4090 policy_loss=-0.0037 critic_loss=86.4688 heuristic_loss=0.7167 entropy=0.1118 approx_kl=0.0093 clipfrac=0.0449 ppo_epochs=02/04
+ppo_early_stop update=0184/0512 approx_kl=0.0283 target_kl=0.0200
+update=0192/0512 mean_reward=-1.0518 mean_return=-31.0826 explained_var=+0.4231 policy_loss=+0.0000 critic_loss=81.8715 heuristic_loss=0.7820 entropy=0.1104 approx_kl=0.0008 clipfrac=0.0110 ppo_epochs=04/04
+hard_eval update=0192/0512 source=fixed_nonbacktracking_walk_seed123_depth128 reference=witness_length success=4/4 success_rate=1.000 median_path_ratio=0.375 median_path_len=48.0 median_runtime=0.895
+update=0200/0512 mean_reward=-1.0547 mean_return=-30.4382 explained_var=+0.3644 policy_loss=-0.0071 critic_loss=81.7877 heuristic_loss=0.5369 entropy=0.1774 approx_kl=0.0065 clipfrac=0.0412 ppo_epochs=03/04
+ppo_early_stop update=0200/0512 approx_kl=0.0273 target_kl=0.0200
+update=0208/0512 mean_reward=-1.0373 mean_return=-32.4658 explained_var=+0.3319 policy_loss=-0.0004 critic_loss=98.4708 heuristic_loss=0.4696 entropy=0.2959 approx_kl=0.0052 clipfrac=0.0438 ppo_epochs=04/04
+ppo_early_stop update=0208/0512 approx_kl=0.0242 target_kl=0.0200
+hard_eval update=0208/0512 source=fixed_nonbacktracking_walk_seed123_depth128 reference=witness_length success=4/4 success_rate=1.000 median_path_ratio=0.375 median_path_len=48.0 median_runtime=0.874
+update=0216/0512 mean_reward=-1.0411 mean_return=-31.2281 explained_var=+0.3104 policy_loss=-0.0003 critic_loss=93.0372 heuristic_loss=0.4876 entropy=0.2148 approx_kl=0.0015 clipfrac=0.0190 ppo_epochs=04/04
+update=0224/0512 mean_reward=-1.0376 mean_return=-30.9460 explained_var=+0.3320 policy_loss=+0.0031 critic_loss=87.3938 heuristic_loss=0.4843 entropy=0.2177 approx_kl=0.0039 clipfrac=0.0420 ppo_epochs=04/04
+hard_eval update=0224/0512 source=fixed_nonbacktracking_walk_seed123_depth128 reference=witness_length success=4/4 success_rate=1.000 median_path_ratio=0.375 median_path_len=48.0 median_runtime=0.897
+update=0232/0512 mean_reward=-1.0543 mean_return=-31.2011 explained_var=+0.3750 policy_loss=-0.0016 critic_loss=85.5438 heuristic_loss=0.4519 entropy=0.1754 approx_kl=0.0024 clipfrac=0.0254 ppo_epochs=04/04
+update=0240/0512 mean_reward=-1.0368 mean_return=-30.4717 explained_var=+0.3597 policy_loss=-0.0020 critic_loss=83.9575 heuristic_loss=0.3644 entropy=0.1202 approx_kl=0.0013 clipfrac=0.0139 ppo_epochs=04/04
+hard_eval update=0240/0512 source=fixed_nonbacktracking_walk_seed123_depth128 reference=witness_length success=4/4 success_rate=1.000 median_path_ratio=0.375 median_path_len=48.0 median_runtime=0.884
+update=0248/0512 mean_reward=-1.0629 mean_return=-30.8064 explained_var=+0.4465 policy_loss=-0.0006 critic_loss=76.6957 heuristic_loss=0.5092 entropy=0.1292 approx_kl=0.0004 clipfrac=0.0063 ppo_epochs=04/04
+update=0256/0512 mean_reward=-1.0314 mean_return=-31.0991 explained_var=+0.4063 policy_loss=+0.0006 critic_loss=84.8790 heuristic_loss=0.3399 entropy=0.1213 approx_kl=0.0033 clipfrac=0.0322 ppo_epochs=04/04
+hard_eval update=0256/0512 source=fixed_nonbacktracking_walk_seed123_depth128 reference=witness_length success=4/4 success_rate=1.000 median_path_ratio=0.375 median_path_len=48.0 median_runtime=0.906
+update=0264/0512 mean_reward=-1.0389 mean_return=-30.1667 explained_var=+0.3834 policy_loss=+0.0004 critic_loss=78.9480 heuristic_loss=0.2644 entropy=0.1205 approx_kl=0.0004 clipfrac=0.0068 ppo_epochs=04/04
+update=0272/0512 mean_reward=-1.0565 mean_return=-31.1091 explained_var=+0.3987 policy_loss=+0.0004 critic_loss=82.5482 heuristic_loss=0.3163 entropy=0.1593 approx_kl=0.0003 clipfrac=0.0044 ppo_epochs=04/04
+hard_eval update=0272/0512 source=fixed_nonbacktracking_walk_seed123_depth128 reference=witness_length success=4/4 success_rate=1.000 median_path_ratio=0.352 median_path_len=45.0 median_runtime=0.591
+Saved best hard-eval checkpoint to checkpoints/lrx_ppo_n16_best_35336634.pt
+update=0280/0512 mean_reward=-1.0504 mean_return=-31.7079 explained_var=+0.4480 policy_loss=-0.0017 critic_loss=83.9026 heuristic_loss=0.2262 entropy=0.1951 approx_kl=0.0073 clipfrac=0.0498 ppo_epochs=04/04
+update=0288/0512 mean_reward=-1.0490 mean_return=-31.7118 explained_var=+0.3920 policy_loss=+0.0002 critic_loss=88.2279 heuristic_loss=0.4804 entropy=0.1537 approx_kl=0.0003 clipfrac=0.0032 ppo_epochs=04/04
+hard_eval update=0288/0512 source=fixed_nonbacktracking_walk_seed123_depth128 reference=witness_length success=4/4 success_rate=1.000 median_path_ratio=0.344 median_path_len=44.0 median_runtime=0.534
+Saved best hard-eval checkpoint to checkpoints/lrx_ppo_n16_best_35336634.pt
+update=0296/0512 mean_reward=-1.0411 mean_return=-30.9955 explained_var=+0.3649 policy_loss=-0.0008 critic_loss=88.0611 heuristic_loss=0.3719 entropy=0.0686 approx_kl=0.0017 clipfrac=0.0149 ppo_epochs=04/04
+update=0304/0512 mean_reward=-1.0397 mean_return=-29.8289 explained_var=+0.3962 policy_loss=-0.0002 critic_loss=76.9533 heuristic_loss=0.2238 entropy=0.0691 approx_kl=0.0021 clipfrac=0.0232 ppo_epochs=04/04
+hard_eval update=0304/0512 source=fixed_nonbacktracking_walk_seed123_depth128 reference=witness_length success=4/4 success_rate=1.000 median_path_ratio=0.375 median_path_len=48.0 median_runtime=0.655
+update=0312/0512 mean_reward=-1.0412 mean_return=-30.6925 explained_var=+0.3529 policy_loss=+0.0008 critic_loss=82.7064 heuristic_loss=0.2868 entropy=0.1010 approx_kl=0.0012 clipfrac=0.0168 ppo_epochs=04/04
+update=0320/0512 mean_reward=-1.0374 mean_return=-30.0854 explained_var=+0.3754 policy_loss=+0.0004 critic_loss=79.2691 heuristic_loss=0.3273 entropy=0.0810 approx_kl=0.0027 clipfrac=0.0183 ppo_epochs=04/04
+hard_eval update=0320/0512 source=fixed_nonbacktracking_walk_seed123_depth128 reference=witness_length success=4/4 success_rate=1.000 median_path_ratio=0.352 median_path_len=45.0 median_runtime=0.586
+update=0328/0512 mean_reward=-1.0275 mean_return=-30.3586 explained_var=+0.3776 policy_loss=-0.0000 critic_loss=80.0410 heuristic_loss=0.1521 entropy=0.0505 approx_kl=0.0001 clipfrac=0.0010 ppo_epochs=04/04
+update=0336/0512 mean_reward=-1.0421 mean_return=-30.1475 explained_var=+0.4112 policy_loss=-0.0004 critic_loss=77.6245 heuristic_loss=0.4622 entropy=0.0825 approx_kl=0.0004 clipfrac=0.0044 ppo_epochs=04/04
+hard_eval update=0336/0512 source=fixed_nonbacktracking_walk_seed123_depth128 reference=witness_length success=4/4 success_rate=1.000 median_path_ratio=0.367 median_path_len=47.0 median_runtime=0.567
+update=0344/0512 mean_reward=-1.0409 mean_return=-31.2067 explained_var=+0.3570 policy_loss=+0.0005 critic_loss=86.1117 heuristic_loss=0.1820 entropy=0.0854 approx_kl=0.0008 clipfrac=0.0100 ppo_epochs=04/04
+update=0352/0512 mean_reward=-1.0484 mean_return=-31.8936 explained_var=+0.3163 policy_loss=-0.0002 critic_loss=96.0354 heuristic_loss=0.2597 entropy=0.1092 approx_kl=0.0012 clipfrac=0.0107 ppo_epochs=04/04
+hard_eval update=0352/0512 source=fixed_nonbacktracking_walk_seed123_depth128 reference=witness_length success=4/4 success_rate=1.000 median_path_ratio=0.367 median_path_len=47.0 median_runtime=0.603
+update=0360/0512 mean_reward=-1.0528 mean_return=-30.9675 explained_var=+0.3590 policy_loss=-0.0004 critic_loss=83.9698 heuristic_loss=0.2416 entropy=0.1142 approx_kl=0.0004 clipfrac=0.0037 ppo_epochs=04/04
+update=0368/0512 mean_reward=-1.0495 mean_return=-30.4765 explained_var=+0.3569 policy_loss=+0.0002 critic_loss=85.3646 heuristic_loss=0.2966 entropy=0.0767 approx_kl=0.0003 clipfrac=0.0049 ppo_epochs=04/04
+hard_eval update=0368/0512 source=fixed_nonbacktracking_walk_seed123_depth128 reference=witness_length success=4/4 success_rate=1.000 median_path_ratio=0.367 median_path_len=47.0 median_runtime=0.567
+update=0376/0512 mean_reward=-1.0408 mean_return=-31.0427 explained_var=+0.3886 policy_loss=+0.0007 critic_loss=83.5386 heuristic_loss=0.4223 entropy=0.0544 approx_kl=0.0010 clipfrac=0.0142 ppo_epochs=04/04
+update=0384/0512 mean_reward=-1.0402 mean_return=-30.1125 explained_var=+0.3645 policy_loss=-0.0009 critic_loss=79.1019 heuristic_loss=0.2459 entropy=0.0495 approx_kl=0.0003 clipfrac=0.0054 ppo_epochs=04/04
+hard_eval update=0384/0512 source=fixed_nonbacktracking_walk_seed123_depth128 reference=witness_length success=4/4 success_rate=1.000 median_path_ratio=0.359 median_path_len=46.0 median_runtime=0.585
+update=0392/0512 mean_reward=-1.0458 mean_return=-30.8202 explained_var=+0.3746 policy_loss=-0.0000 critic_loss=81.1999 heuristic_loss=0.3144 entropy=0.0419 approx_kl=0.0000 clipfrac=0.0000 ppo_epochs=04/04
+update=0400/0512 mean_reward=-1.0370 mean_return=-29.9245 explained_var=+0.3377 policy_loss=-0.0003 critic_loss=82.0141 heuristic_loss=0.1411 entropy=0.0420 approx_kl=0.0001 clipfrac=0.0010 ppo_epochs=04/04
+hard_eval update=0400/0512 source=fixed_nonbacktracking_walk_seed123_depth128 reference=witness_length success=4/4 success_rate=1.000 median_path_ratio=0.375 median_path_len=48.0 median_runtime=0.581
+update=0408/0512 mean_reward=-1.0358 mean_return=-30.6154 explained_var=+0.3452 policy_loss=-0.0003 critic_loss=86.8344 heuristic_loss=0.1678 entropy=0.0558 approx_kl=0.0008 clipfrac=0.0081 ppo_epochs=04/04
+update=0416/0512 mean_reward=-1.0447 mean_return=-30.9270 explained_var=+0.3235 policy_loss=-0.0007 critic_loss=88.5322 heuristic_loss=0.2481 entropy=0.0549 approx_kl=0.0012 clipfrac=0.0117 ppo_epochs=04/04
+hard_eval update=0416/0512 source=fixed_nonbacktracking_walk_seed123_depth128 reference=witness_length success=4/4 success_rate=1.000 median_path_ratio=0.359 median_path_len=46.0 median_runtime=0.557
+update=0424/0512 mean_reward=-1.0488 mean_return=-31.0009 explained_var=+0.3814 policy_loss=-0.0003 critic_loss=83.8256 heuristic_loss=0.2064 entropy=0.0384 approx_kl=0.0001 clipfrac=0.0007 ppo_epochs=04/04
+update=0432/0512 mean_reward=-1.0524 mean_return=-31.8189 explained_var=+0.3721 policy_loss=-0.0004 critic_loss=85.6028 heuristic_loss=0.1942 entropy=0.0582 approx_kl=0.0003 clipfrac=0.0039 ppo_epochs=04/04
+hard_eval update=0432/0512 source=fixed_nonbacktracking_walk_seed123_depth128 reference=witness_length success=4/4 success_rate=1.000 median_path_ratio=0.359 median_path_len=46.0 median_runtime=0.590
+update=0440/0512 mean_reward=-1.0400 mean_return=-31.8597 explained_var=+0.3273 policy_loss=-0.0000 critic_loss=93.5388 heuristic_loss=0.1962 entropy=0.0659 approx_kl=0.0003 clipfrac=0.0054 ppo_epochs=04/04
+update=0448/0512 mean_reward=-1.0477 mean_return=-31.1428 explained_var=+0.3559 policy_loss=-0.0002 critic_loss=87.1857 heuristic_loss=0.1992 entropy=0.0710 approx_kl=0.0001 clipfrac=0.0007 ppo_epochs=04/04
+hard_eval update=0448/0512 source=fixed_nonbacktracking_walk_seed123_depth128 reference=witness_length success=4/4 success_rate=1.000 median_path_ratio=0.367 median_path_len=47.0 median_runtime=0.609
+update=0456/0512 mean_reward=-1.0502 mean_return=-30.6536 explained_var=+0.3252 policy_loss=+0.0004 critic_loss=88.3327 heuristic_loss=0.1265 entropy=0.0433 approx_kl=0.0003 clipfrac=0.0027 ppo_epochs=04/04
+update=0464/0512 mean_reward=-1.0428 mean_return=-30.7870 explained_var=+0.3587 policy_loss=-0.0001 critic_loss=85.2963 heuristic_loss=0.0838 entropy=0.0371 approx_kl=0.0000 clipfrac=0.0000 ppo_epochs=04/04
+hard_eval update=0464/0512 source=fixed_nonbacktracking_walk_seed123_depth128 reference=witness_length success=4/4 success_rate=1.000 median_path_ratio=0.367 median_path_len=47.0 median_runtime=0.613
+update=0472/0512 mean_reward=-1.0375 mean_return=-30.3702 explained_var=+0.4034 policy_loss=-0.0001 critic_loss=79.5845 heuristic_loss=0.2374 entropy=0.0377 approx_kl=0.0000 clipfrac=0.0000 ppo_epochs=04/04
+update=0480/0512 mean_reward=-1.0370 mean_return=-30.3343 explained_var=+0.3494 policy_loss=-0.0002 critic_loss=86.4183 heuristic_loss=0.1276 entropy=0.0368 approx_kl=0.0001 clipfrac=0.0020 ppo_epochs=04/04
+hard_eval update=0480/0512 source=fixed_nonbacktracking_walk_seed123_depth128 reference=witness_length success=4/4 success_rate=1.000 median_path_ratio=0.367 median_path_len=47.0 median_runtime=0.595
+update=0488/0512 mean_reward=-1.0505 mean_return=-30.8572 explained_var=+0.3746 policy_loss=+0.0001 critic_loss=84.9181 heuristic_loss=0.2735 entropy=0.0426 approx_kl=0.0000 clipfrac=0.0000 ppo_epochs=04/04
+update=0496/0512 mean_reward=-1.0456 mean_return=-30.5953 explained_var=+0.3549 policy_loss=-0.0000 critic_loss=83.5153 heuristic_loss=0.2691 entropy=0.0298 approx_kl=0.0000 clipfrac=0.0000 ppo_epochs=04/04
+hard_eval update=0496/0512 source=fixed_nonbacktracking_walk_seed123_depth128 reference=witness_length success=4/4 success_rate=1.000 median_path_ratio=0.367 median_path_len=47.0 median_runtime=0.637
+update=0504/0512 mean_reward=-1.0534 mean_return=-31.6245 explained_var=+0.3460 policy_loss=-0.0000 critic_loss=87.8441 heuristic_loss=0.2666 entropy=0.0263 approx_kl=0.0000 clipfrac=0.0000 ppo_epochs=04/04
+update=0512/0512 mean_reward=-1.0471 mean_return=-31.0885 explained_var=+0.3404 policy_loss=+0.0000 critic_loss=84.9193 heuristic_loss=0.0787 entropy=0.0271 approx_kl=0.0000 clipfrac=0.0000 ppo_epochs=04/04
+hard_eval update=0512/0512 source=fixed_nonbacktracking_walk_seed123_depth128 reference=witness_length success=4/4 success_rate=1.000 median_path_ratio=0.367 median_path_len=47.0 median_runtime=0.598

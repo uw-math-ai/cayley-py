@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=lrx_ppo_n16_ckpt_longcmp
+#SBATCH --job-name=lrx_ppo_n16_ckpt_ctrl80
 #SBATCH --account=stf-ckpt
 #SBATCH --partition=ckpt-all
 #SBATCH --nodes=1
@@ -38,7 +38,7 @@ checkpoint_path="checkpoints/lrx_ppo_n16_best_${SLURM_JOB_ID}.pt"
 
 python Michael/lrx_koltsov3_ppo.py \
   --n 16 \
-  --total-steps 524288 \
+  --total-steps 655360 \
   --rollout-steps 1024 \
   --hidden-dim 512 \
   --policy-lr 3e-4 \
@@ -52,6 +52,9 @@ python Michael/lrx_koltsov3_ppo.py \
   --grad-clip-norm 0.5 \
   --target-kl 0.02 \
   --anneal-learning-rate \
+  --heuristic-teacher-refresh-updates 8 \
+  --offpolicy-heuristic-refresh-updates 8 \
+  --offpolicy-heuristic-refresh-epochs 1 \
   --success-bonus 5.0 \
   --step-penalty 1.0 \
   --warmup-epochs 30 \

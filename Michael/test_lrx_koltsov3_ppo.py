@@ -23,6 +23,7 @@ from Michael.lrx_koltsov3_ppo import (
     koltsov3_feature_dim,
     score_policy_guided_candidates,
     successor_values_to_soft_action_targets,
+    sync_reference_model,
     torch,
     valid_koltsov3_actions,
 )
@@ -80,6 +81,21 @@ def test_ppo_config_rejects_non_divisible_rollout_minibatch():
 def test_ppo_config_rejects_non_positive_target_kl():
     with pytest.raises(ValueError):
         PPOConfig(target_kl=0.0)
+
+
+def test_ppo_config_rejects_negative_teacher_refresh_interval():
+    with pytest.raises(ValueError):
+        PPOConfig(heuristic_teacher_refresh_updates=-1)
+
+
+def test_ppo_config_rejects_negative_offpolicy_refresh_interval():
+    with pytest.raises(ValueError):
+        PPOConfig(offpolicy_heuristic_refresh_updates=-1)
+
+
+def test_ppo_config_rejects_negative_offpolicy_refresh_epochs():
+    with pytest.raises(ValueError):
+        PPOConfig(offpolicy_heuristic_refresh_epochs=-1)
 
 
 def test_potential_shaping_reward_uses_potential_drop_and_bonus():
@@ -337,6 +353,26 @@ def test_annealed_ppo_learning_rates_scale_both_param_groups():
     anneal_ppo_learning_rates(optimizer, cfg, update_idx=3, total_updates=4)
 
     assert sorted(group["lr"] for group in optimizer.param_groups) == [1.5e-4, 5e-4]
+
+
+@pytest.mark.skipif(torch is None, reason="PyTorch is not installed")
+def test_sync_reference_model_copies_source_weights_and_freezes_target():
+    source_model = ActorCritic(n=5, hidden_dim=32, k=0)
+    reference_model = ActorCritic(n=5, hidden_dim=32, k=0)
+
+    with torch.no_grad():
+        source_model.policy_head.weight.fill_(0.25)
+        source_model.value_head.bias.fill_(1.5)
+
+    sync_reference_model(reference_model, source_model)
+
+    for source_param, reference_param in zip(
+        source_model.parameters(),
+        reference_model.parameters(),
+    ):
+        assert torch.allclose(source_param, reference_param)
+    assert reference_model.training is False
+    assert all(not parameter.requires_grad for parameter in reference_model.parameters())
 
 
 @pytest.mark.skipif(torch is None, reason="PyTorch is not installed")
