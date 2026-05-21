@@ -23,7 +23,7 @@ except ImportError:
     import wandb
 
 # Option 1: paste your key here.
-WANDB_API_KEY = ""  # <-- paste your W&B API key here, or set env var WANDB_API_KEY
+WANDB_API_KEY = "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"  # <-- paste your W&B API key here, or set env var WANDB_API_KEY
 
 _wandb_key = os.environ.get("WANDB_API_KEY", WANDB_API_KEY)
 if _wandb_key:
@@ -1698,7 +1698,7 @@ def train_pass3_beam_aware_value_correction(guide_model, criterion, tensor_gener
 # =============================================================================
 # 3. TRIAL LOOP
 # =============================================================================
-N_TRIALS = 15
+N_TRIALS = 30
 _all_pass1_path_lengths = []
 _all_residual_path_lengths = []
 _all_final_path_lengths = []
