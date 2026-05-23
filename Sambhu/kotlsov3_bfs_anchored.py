@@ -144,7 +144,7 @@ CFG['pass2_beam_aware_min_step'] = 21
 
 CFG['beam_search_torch'] = True
 CFG['beam_search_Fironov'] = False
-CFG['beam_width']  = 256
+CFG['beam_width']  = 2**16
 CFG['n_steps_limit']  = 256
 CFG['alpha_previous_cost_accumulation']  = 0
 CFG['beam_search_models_or_heuristics'] = 'model_torch'
