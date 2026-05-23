@@ -1,6 +1,11 @@
 # =============================================================================
-# LRX CayleyPy — W&B 10-trial runner with BFS-anchored mDQN + residual rollout + beam-aware lambda sweep
+# Koltsov3 — W&B 10-trial runner with BFS-anchored mDQN + residual rollout + beam-aware lambda sweep
 # Pipeline: warmup -> BFS exact anchor -> pass1 mDQN with BFS regularization -> pass2 residual calibration -> pass3 beam-aware penalty on residual -> lambda sweep.
+#
+# Adapted from Sambhu/bfs_anchored.py. The training pipeline is unchanged, but
+# the original LRX generators are replaced with Michael's Koltsov3 generator
+# setup: n=16, k=0, actions [I, K, S], identity destination, and conjectured
+# longest start state [1, 0, n-1, n-2, ..., 2].
 #
 # v2 target change:
 #   Instead of expecting an 8-step greedy rollout to reduce V by 8, use
@@ -23,14 +28,21 @@ except ImportError:
     subprocess.check_call([sys.executable, "-m", "pip", "install", "-q", "wandb"])
     import wandb
 
-# Option 1: paste your key here.
-WANDB_API_KEY = "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"  # <-- paste your W&B API key here, or set env var WANDB_API_KEY
+# Paste your W&B API key here if you want this script to log in directly.
+# You can also leave this placeholder and set WANDB_API_KEY in the environment.
+WANDB_API_KEY = "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"
 
-_wandb_key = os.environ.get("WANDB_API_KEY", WANDB_API_KEY)
-if _wandb_key:
+_WANDB_API_KEY_PLACEHOLDER = "PASTE_YOUR_WANDB_API_KEY_HERE"
+_env_wandb_key = os.environ.get("WANDB_API_KEY", "")
+_wandb_key = (
+    _env_wandb_key
+    if _env_wandb_key and _env_wandb_key != _WANDB_API_KEY_PLACEHOLDER
+    else WANDB_API_KEY
+)
+if _wandb_key and _wandb_key != _WANDB_API_KEY_PLACEHOLDER:
     wandb.login(key=_wandb_key)
 else:
-    print("WARNING: WANDB_API_KEY is blank and env var WANDB_API_KEY is not set.")
+    print("WARNING: Paste your key into WANDB_API_KEY or set env var WANDB_API_KEY.")
     print("         If you are already logged in on this machine, wandb.init may still work.")
 
 
@@ -60,27 +72,29 @@ def seed_everything(seed: int, deterministic: bool = False):
     return seed
 
 # =============================================================================
-# 1. CONFIG — same parameters as notebook
+# 1. CONFIG — Koltsov3 version, matched to Michael's n=16/k=0 runs
 # =============================================================================
 CFG = {}
 
-CFG['n_permutations_length']  = 28
+CFG['generator_family'] = 'koltsov3'
+CFG['koltsov3_k'] = 0
+CFG['n_permutations_length']  = 16
 n_permutations_length = CFG['n_permutations_length']
 
 CFG['random_walks_type'] = 'non-backtracking-beam'
-CFG['n_random_walk_length']  = int(n_permutations_length * (n_permutations_length - 1) / 2)
-CFG['n_random_walks_to_generate']  = 10_000
+CFG['n_random_walk_length']  = 8 * n_permutations_length
+CFG['n_random_walks_to_generate']  = 4096
 CFG['n_random_walks_steps_back_to_ban']  = 8
 
 CFG['model_type'] = 'MLP'
-CFG['list_layers_sizes'] = [128]
+CFG['list_layers_sizes'] = [512, 512]
 CFG['n_epochs'] = 30
 CFG['batch_size'] = 1024
 CFG['lr'] = 0.001
 
-CFG['n_epochs_dqn'] = 200
+CFG['n_epochs_dqn'] = 80
 CFG['flag_dqn_round'] = False
-CFG['n_random_walks_to_generate_dqn'] = 10_000
+CFG['n_random_walks_to_generate_dqn'] = 4096
 
 # -----------------------------------------------------------------------------
 # Exact shallow-BFS anchoring / regularization
@@ -102,8 +116,8 @@ CFG['bfs_anchor_max_states'] = None
 
 CFG['pass2_enabled']                = True
 CFG['pass2_n_epochs']               = 50
-CFG['pass2_n_walks']                = 10_000
-CFG['pass2_walk_length']            = int(n_permutations_length * (n_permutations_length - 1) / 2)
+CFG['pass2_n_walks']                = 4096
+CFG['pass2_walk_length']            = 8 * n_permutations_length
 CFG['pass2_rollout_length']         = 8
 CFG['pass2_use_rollout_correction'] = True
 CFG['pass2_rollout_mix_alpha']      = 0.9
@@ -130,14 +144,15 @@ CFG['pass2_beam_aware_min_step'] = 21
 
 CFG['beam_search_torch'] = True
 CFG['beam_search_Fironov'] = False
-CFG['beam_width']  = 2**16
-CFG['n_steps_limit']  = 4 * n_permutations_length**2
+CFG['beam_width']  = 256
+CFG['n_steps_limit']  = 256
 CFG['alpha_previous_cost_accumulation']  = 0
 CFG['beam_search_models_or_heuristics'] = 'model_torch'
 CFG['ban_p0_p1_transposition_if_p0_lt_p1_ie_already_sorted'] = False
+CFG['eval_apply_x_trick'] = True
 CFG['n_beam_search_steps_back_to_ban'] = 32
 
-CFG['solve_random_or_longest_state'] = 'solve_LRX_longest'
+CFG['solve_random_or_longest_state'] = 'solve_koltsov3_conjectured_longest'
 
 # Reproducibility / paired evaluation. For each trial seed we run both
 # the unmodified mDQN baseline and the BFS-anchored residual + beam-aware
@@ -146,15 +161,15 @@ CFG['base_seed'] = 20260522
 CFG['paired_standard_mdqn_baseline'] = True
 CFG['deterministic_torch'] = False
 
-with open('CFG.json', 'w') as json_file:
+with open('CFG_koltsov3.json', 'w') as json_file:
     json.dump(CFG, json_file)
 
 print(CFG)
 for k in CFG:
     print(k, ':', CFG[k])
 
-WANDB_PROJECT = "lrx-cayleypy-rl-bfs-anchored-full"
-WANDB_GROUP = "n28_paired_seed_baseline_bfs_anchor_residual_beamaware_10trials_v1"
+WANDB_PROJECT = "koltsov3-bfs-anchored"
+WANDB_GROUP = "n16_k0_michael_params_bfs_anchor_residual_beamaware_10trials_v1"
 
 
 # =============================================================================
@@ -205,6 +220,36 @@ def get_LRX_moves(n):
     R = np.array([n - 1] + list(np.arange(n - 1)))
     X = np.array([1, 0] + list(np.arange(2, n)))
     return L, R, X
+
+
+def get_koltsov3_generators(n, k=0):
+    """Michael's Koltsov3 generators: I swaps evens, K swaps odds, S swaps k and k+2."""
+    if n < 3:
+        raise ValueError("n must be at least 3 for Koltsov3 generators")
+    if not (0 <= k <= n - 3):
+        raise ValueError(f"k must be in [0, {n - 3}] for n={n}")
+
+    I = np.arange(n, dtype=np.int64)
+    K = np.arange(n, dtype=np.int64)
+    S = np.arange(n, dtype=np.int64)
+
+    for i in range(0, n - 1, 2):
+        I[i], I[i + 1] = I[i + 1], I[i]
+    for i in range(1, n - 1, 2):
+        K[i], K[i + 1] = K[i + 1], K[i]
+    S[k], S[k + 2] = S[k + 2], S[k]
+
+    return I, K, S
+
+
+def get_koltsov3_conjectured_longest(n):
+    """Paper/Michael conjectured longest element: [1, 0, n-1, n-2, ..., 2]."""
+    if n < 3:
+        raise ValueError("n must be at least 3")
+    return np.concatenate([
+        np.array([1, 0], dtype=np.int64),
+        np.arange(n - 1, 1, -1, dtype=np.int64),
+    ])
 
 
 def get_neighbors(states, moves):
@@ -426,7 +471,7 @@ def bfs_growth_permutations_torch_simple(generators, center_states=None, radius_
         center_states = torch.arange(state_size, device=device, dtype=dtype).reshape(1, state_size)
     if not isinstance(center_states, torch.Tensor):
         center_states = torch.tensor(center_states)
-    center_states = center_states.reshape(-1, state_size).to(device)
+    center_states = center_states.reshape(-1, state_size).to(device=device, dtype=dtype)
 
     if vec_hasher is None:
         max_int = int(2**62)
@@ -788,6 +833,10 @@ def run_beam_search(stage_name, model, state_start, state_destination, list_gene
     n_steps_back_to_ban = CFG['n_beam_search_steps_back_to_ban']
     beam_search_models_or_heuristics = CFG['beam_search_models_or_heuristics']
     ban_p0_p1_transposition_if_p0_lt_p1_ie_already_sorted = CFG['ban_p0_p1_transposition_if_p0_lt_p1_ie_already_sorted']
+    apply_koltsov3_x_trick = (
+        CFG.get('generator_family') == 'koltsov3'
+        and bool(CFG.get('eval_apply_x_trick', False))
+    )
 
     def should_snapshot(step):
         if snapshot_store is None:
@@ -826,18 +875,31 @@ def run_beam_search(stage_name, model, state_start, state_destination, list_gene
     last_step = 0
     for i_step in range(1, n_steps_limit + 1):
         last_step = i_step
-        if not ban_p0_p1_transposition_if_p0_lt_p1_ie_already_sorted:
+        if not ban_p0_p1_transposition_if_p0_lt_p1_ie_already_sorted and not apply_koltsov3_x_trick:
             array_new_states = get_neighbors(array_beam_states, tensor_generators).flatten(end_dim=1)
         else:
             array_new_states = torch.empty((0, array_beam_states.shape[1]), device=device, dtype=dtype)
             row_indices = np.arange(array_beam_states.shape[0])[:, np.newaxis]
             for ii1, move in enumerate(list_generators):
-                if ii1 != i_position_X_in_list_generators:
-                    array_states_tmp = array_beam_states[row_indices, move]
+                if apply_koltsov3_x_trick and ii1 == 0:
+                    # Michael's optional X-trick for Koltsov3 eval: if p0 < p1,
+                    # skip action I. Action order is [I, K, S].
+                    mask_action = array_beam_states[:, 0] >= array_beam_states[:, 1]
+                    if mask_action.sum().item() == 0:
+                        continue
+                    row_indices_tmp = np.arange(mask_action.sum().item())[:, np.newaxis]
+                    array_states_tmp = array_beam_states[mask_action][row_indices_tmp, move]
+                elif (
+                    ban_p0_p1_transposition_if_p0_lt_p1_ie_already_sorted
+                    and ii1 == i_position_X_in_list_generators
+                ):
+                    mask_action = array_beam_states[:, 0] > array_beam_states[:, 1]
+                    if mask_action.sum().item() == 0:
+                        continue
+                    row_indices_tmp = np.arange(mask_action.sum().item())[:, np.newaxis]
+                    array_states_tmp = array_beam_states[mask_action][row_indices_tmp, move]
                 else:
-                    mask_X_condtion = array_beam_states[:, 0] > array_beam_states[:, 1]
-                    row_indices_tmp = np.arange(mask_X_condtion.sum().item())[:, np.newaxis]
-                    array_states_tmp = array_beam_states[mask_X_condtion][row_indices_tmp, move]
+                    array_states_tmp = array_beam_states[row_indices, move]
                 array_new_states = torch.cat([array_new_states, array_states_tmp], dim=0)
 
         array_new_states = get_unique_states(array_new_states, vec_hasher)
@@ -1045,11 +1107,17 @@ def train_bfs_anchor_prepass(model, optimizer, criterion, bfs_states, bfs_distan
 
 
 def train_mdqn_pass1(model, optimizer, criterion, list_generators, tensor_generators, state_destination,
-                     vec_hasher, dtype, device, CFG, trial_idx, bfs_states=None, bfs_distances=None):
+                     vec_hasher, dtype, device, CFG, trial_idx, bfs_states=None, bfs_distances=None,
+                     mdqn_epoch_seed_base=None):
     print("\n--- Pass 1: mDQN Training ---")
     t_total = now()
     losses = []
     for epoch in range(CFG['n_epochs_dqn']):
+        if mdqn_epoch_seed_base is not None:
+            seed_everything(
+                int(mdqn_epoch_seed_base) + int(epoch),
+                deterministic=bool(CFG.get('deterministic_torch', False)),
+            )
         t_epoch = now()
         t0 = now()
         X_train, y_train = random_walks(
@@ -1499,19 +1567,20 @@ def _collect_beam_training_states(snapshots, CFG, trial_idx):
     snapshots unless they occur at/after CFG['pass2_beam_aware_min_step'].
     """
     pieces = []
+    fallback_pieces = []
     max_per = int(CFG.get('pass2_beam_aware_max_states_per_snapshot', 20_000))
     min_step = int(CFG.get('pass2_beam_aware_min_step', 21))
 
     for snap in snapshots:
         step = int(snap.get('step', 0))
         kind = str(snap.get('kind', ''))
-        if step < min_step:
-            continue
-        if not (
+        is_beam_training_kind = (
             'selected_top_by_current_model' in kind or
             'just_pruned_by_current_model' in kind or
             'selected_all_unsaturated' in kind
-        ):
+        )
+        is_fallback_kind = is_beam_training_kind or 'found_destination_candidates' in kind
+        if not is_fallback_kind:
             continue
         states = snap['states'].detach().cpu()
         if states.numel() == 0:
@@ -1522,8 +1591,12 @@ def _collect_beam_training_states(snapshots, CFG, trial_idx):
             g.manual_seed(12345 + 1000 * int(trial_idx) + step + (17 if 'pruned' in kind else 0))
             idx = torch.randperm(n, generator=g)[:max_per]
             states = states[idx]
-        pieces.append(states)
+        if is_beam_training_kind and step >= min_step:
+            pieces.append(states)
+        fallback_pieces.append(states)
 
+    if not pieces:
+        pieces = fallback_pieces
     if not pieces:
         raise RuntimeError('No beam snapshot states were collected. Check snapshot_every / snapshot_store settings.')
 
@@ -1784,9 +1857,9 @@ for trial_idx in range(N_TRIALS):
     setup_t0 = now()
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     n = CFG['n_permutations_length']
-    L, R, X = get_LRX_moves(n)
-    dict_generators = {'L': L, 'R': R, 'X': X}
-    list_generators = [L, R, X]
+    I, K, S = get_koltsov3_generators(n, k=int(CFG.get('koltsov3_k', 0)))
+    dict_generators = {'I': I, 'K': K, 'S': S}
+    list_generators = [I, K, S]
     dtype_generators = torch.int64
     tensor_generators = torch.tensor(list_generators, device=device, dtype=dtype_generators)
 
@@ -1798,23 +1871,17 @@ for trial_idx in range(N_TRIALS):
     dtype_for_hash = torch.int64
     vec_hasher = torch.randint(-max_int, max_int + 1, size=(state_size,), device=device, dtype=dtype_for_hash)
 
-    # Notebook uses dtype_generators here; random_walks converts to dtype internally.
-    state_destination = torch.arange(len(list_generators[0]), device=device, dtype=dtype_generators)
+    state_destination = torch.arange(len(list_generators[0]), device=device, dtype=dtype)
 
-    # Longest LRX permutation / solve state.
-    p = np.arange(n)
-    p[0], p[1] = p[1], p[0]
-    i = 2
-    while i < n - i + 1:
-        p[i], p[n - i + 1] = p[n - i + 1], p[i]
-        i += 1
-    permutation_longest = torch.tensor(p, dtype=dtype, device=device)
-    state_start = permutation_longest
+    # Michael's Koltsov3 hard start / conjectured longest state.
+    state_start = torch.tensor(get_koltsov3_conjectured_longest(n), dtype=dtype, device=device)
 
     criterion = nn.MSELoss()
 
     setup_time = elapsed(setup_t0)
     print('device:', device)
+    print('generator_family:', CFG.get('generator_family'), 'koltsov3_k:', CFG.get('koltsov3_k'))
+    print('dict_generators:', {name: gen.tolist() for name, gen in dict_generators.items()})
     print('tensor_generators.shape:', tensor_generators.shape)
     print('state_destination:', state_destination)
     print('state_start:', state_start)
@@ -1853,6 +1920,7 @@ for trial_idx in range(N_TRIALS):
         state_destination, vec_hasher, dtype, device, CFG, trial_idx,
         bfs_states=None,
         bfs_distances=None,
+        mdqn_epoch_seed_base=mdqn_seed,
     )
 
     # -------------------------------------------------------------------------
@@ -1963,6 +2031,7 @@ for trial_idx in range(N_TRIALS):
         state_destination, vec_hasher, dtype, device, CFG, trial_idx,
         bfs_states=bfs_anchor_states,
         bfs_distances=bfs_anchor_distances,
+        mdqn_epoch_seed_base=mdqn_seed,
     )
 
     # Pass 1 beam search: path length is the main metric.
@@ -2341,15 +2410,15 @@ if _trial_rows:
             summary[f"summary/{prefix}_max_path_length"] = float(np.max(arr))
             summary[f"summary/{prefix}_ci95_halfwidth_normal"] = float(1.96 * summary[f"summary/{prefix}_sem_path_length"]) if arr.size > 1 else 0.0
 
-with open("trial_summary_paired_seed_baseline_bfs_anchor_residual_beamaware.json", "w") as f:
+with open("koltsov3_trial_summary_paired_seed_baseline_bfs_anchor_residual_beamaware.json", "w") as f:
     json.dump(summary, f, indent=2)
 
 if _trial_rows:
-    pd.DataFrame(_trial_rows).to_csv("trial_results_paired_seed_baseline_bfs_anchor_residual_beamaware.csv", index=False)
+    pd.DataFrame(_trial_rows).to_csv("koltsov3_trial_results_paired_seed_baseline_bfs_anchor_residual_beamaware.csv", index=False)
 
 print("\nAll trials complete!")
 print(summary)
 if _trial_rows:
     print(pd.DataFrame(_trial_rows).to_string(index=False))
-print("Saved aggregate summary to trial_summary_paired_seed_baseline_bfs_anchor_residual_beamaware.json")
-print("Saved per-trial results to trial_results_paired_seed_baseline_bfs_anchor_residual_beamaware.csv")
+print("Saved aggregate summary to koltsov3_trial_summary_paired_seed_baseline_bfs_anchor_residual_beamaware.json")
+print("Saved per-trial results to koltsov3_trial_results_paired_seed_baseline_bfs_anchor_residual_beamaware.csv")
