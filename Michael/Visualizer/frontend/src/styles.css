@@ -1,0 +1,815 @@
+:root {
+  color-scheme: light;
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background: #f4f6f3;
+  color: #1d1b18;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+.app-frame {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  min-height: 100vh;
+  background: #f4f6f3;
+}
+
+.topbar {
+  display: grid;
+  grid-template-columns: minmax(260px, 330px) minmax(0, 1fr);
+  align-items: center;
+  gap: 18px;
+  min-height: 72px;
+  padding: 12px 18px;
+  border-bottom: 1px solid #d8ded2;
+  background: rgba(251, 252, 248, 0.96);
+}
+
+.tabbar {
+  display: inline-flex;
+  justify-self: start;
+  gap: 6px;
+  padding: 4px;
+  border: 1px solid #d8ded2;
+  border-radius: 8px;
+  background: #edf2ed;
+}
+
+.tab-button {
+  min-width: 118px;
+  background: transparent;
+  color: #4c453d;
+}
+
+.tab-button:hover:not(:disabled) {
+  background: #dfe8df;
+}
+
+.tab-button.active,
+.tab-button[aria-selected="true"] {
+  background: #21312d;
+  color: #fffaf2;
+}
+
+.tab-shell {
+  min-height: 0;
+}
+
+.explorer-shell,
+.challenge-shell {
+  display: grid;
+}
+
+.explorer-shell {
+  grid-template-columns: minmax(280px, 330px) minmax(420px, 1fr);
+}
+
+.challenge-shell {
+  grid-template-rows: auto minmax(0, 1fr);
+  min-height: calc(100vh - 72px);
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px;
+  background: rgba(251, 252, 248, 0.94);
+  overflow-y: auto;
+}
+
+.explorer-panel {
+  border-right: 1px solid #d8ded2;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 48px;
+}
+
+.mark {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: #1e8c82;
+  color: #fffaf2;
+  font-weight: 800;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: 20px;
+  line-height: 1.1;
+}
+
+h2 {
+  font-size: 14px;
+}
+
+p {
+  color: #756d60;
+  font-size: 12px;
+}
+
+.controls,
+.explorer-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+label {
+  display: grid;
+  gap: 5px;
+  color: #6f665a;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+input,
+select {
+  width: 100%;
+  height: 36px;
+  border: 1px solid #ccd5ca;
+  border-radius: 7px;
+  background: #fffefd;
+  color: #1d1b18;
+  padding: 0 10px;
+  outline: none;
+}
+
+input:focus,
+select:focus,
+button:focus-visible {
+  border-color: #1e8c82;
+  box-shadow: 0 0 0 3px rgba(30, 140, 130, 0.18);
+}
+
+.inline {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+button {
+  min-height: 36px;
+  border: 0;
+  border-radius: 7px;
+  background: #21312d;
+  color: #fffaf2;
+  padding: 0 12px;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  background: #2e443f;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+}
+
+.wide {
+  width: 100%;
+  background: #d36f1f;
+}
+
+.wide:hover:not(:disabled) {
+  background: #b85d17;
+}
+
+.primary-view {
+  background: #1e8c82;
+}
+
+.primary-view:hover:not(:disabled) {
+  background: #176f68;
+}
+
+.challenge-setup {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  padding: 10px 12px;
+  border-bottom: 1px solid #d8ded2;
+  background: #fbfcf8;
+}
+
+.challenge-setup-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(106px, 1fr));
+  gap: 8px;
+  align-items: end;
+  min-width: 0;
+}
+
+.challenge-setup-grid label {
+  min-width: 0;
+}
+
+.setup-button {
+  align-self: end;
+  min-width: 0;
+}
+
+.danger-button {
+  background: #9f3b33;
+}
+
+.danger-button:hover:not(:disabled) {
+  background: #7c2923;
+}
+
+.challenge-objective {
+  display: grid;
+  grid-template-columns: minmax(260px, 1.15fr) minmax(360px, 2fr);
+  gap: 10px;
+  align-items: stretch;
+  min-width: 0;
+}
+
+.goal-card,
+.challenge-state-cards > div,
+.shortest-card {
+  min-width: 0;
+  border: 1px solid #d8ded2;
+  border-radius: 8px;
+  background: #fffefd;
+}
+
+.goal-card {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: 4px;
+  padding: 12px 14px;
+  border-color: rgba(30, 140, 130, 0.42);
+  background: #f2fbf7;
+}
+
+.goal-card span,
+.challenge-state-cards span,
+.shortest-card span {
+  color: #61594e;
+  font-size: 11px;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.goal-card strong {
+  min-width: 0;
+  color: #103d37;
+  font-size: 32px;
+  line-height: 1.05;
+  overflow-wrap: anywhere;
+}
+
+.goal-card small {
+  min-width: 0;
+  color: #5e695f;
+  font-size: 12px;
+  font-weight: 750;
+  overflow-wrap: anywhere;
+}
+
+.challenge-state-cards {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+  min-width: 0;
+}
+
+.challenge-state-cards > div,
+.shortest-card {
+  display: grid;
+  gap: 4px;
+  align-content: center;
+  padding: 9px 10px;
+}
+
+.challenge-state-cards strong,
+.shortest-card strong {
+  min-width: 0;
+  color: #1d1b18;
+  font-size: 14px;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+
+.challenge-state-cards > .score-card {
+  border-color: rgba(211, 111, 31, 0.55);
+  background: #fff7ee;
+}
+
+.challenge-state-cards > .score-card strong {
+  color: #9f3b33;
+  font-size: 28px;
+  line-height: 1;
+}
+
+.shortest-card {
+  grid-column: 1 / -1;
+  border-color: rgba(211, 111, 31, 0.46);
+  background: #fff7ee;
+}
+
+.challenge-board {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  min-width: 0;
+  min-height: 0;
+  background: #11100f;
+}
+
+.challenge-lane {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  min-width: 0;
+  min-height: 0;
+  border-right: 1px solid rgba(255, 250, 242, 0.14);
+}
+
+.challenge-lane:last-child {
+  border-right: 0;
+}
+
+.challenge-lane-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-width: 0;
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(255, 250, 242, 0.14);
+  background: #181715;
+}
+
+.challenge-lane-head h2 {
+  color: #fffaf2;
+}
+
+.challenge-lane-head p {
+  min-width: 0;
+  max-width: min(36vw, 420px);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow-wrap: anywhere;
+  color: #cfc7b8;
+  line-height: 1.2;
+}
+
+.lane-badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+  min-width: 0;
+}
+
+.lane-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  min-width: 0;
+}
+
+.legal-move-strip {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 5px;
+  max-width: min(38vw, 420px);
+  min-width: 0;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.stats span,
+.panel-badge,
+.lane-badges span,
+.path-readout span {
+  min-width: 0;
+  border: 1px solid #d8ded2;
+  border-radius: 7px;
+  padding: 7px 8px;
+  color: #61594e;
+  background: #edf2ed;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lane-badges span {
+  border-color: rgba(255, 250, 242, 0.16);
+  background: rgba(255, 250, 242, 0.08);
+  color: #fffaf2;
+}
+
+.legal-move-strip span {
+  min-width: 30px;
+  border: 1px solid rgba(92, 230, 199, 0.52);
+  border-radius: 7px;
+  padding: 5px 7px;
+  background: rgba(92, 230, 199, 0.18);
+  color: #eafff9;
+  font-size: 12px;
+  font-weight: 850;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.legal-move-strip .legal-move-title {
+  min-width: 0;
+  border-color: rgba(255, 250, 242, 0.16);
+  background: rgba(255, 250, 242, 0.08);
+  color: #cfc7b8;
+}
+
+.panel-badge {
+  display: inline-block;
+}
+
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.section-head select {
+  width: 110px;
+}
+
+.perm-grid {
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: 6px 8px;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #d8ded2;
+  border-radius: 8px;
+  background: #fffefd;
+}
+
+.perm-grid span {
+  color: #756d60;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.perm-grid strong,
+.path-readout strong {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-size: 13px;
+}
+
+.link-button {
+  background: transparent;
+  color: #9f3b33;
+  min-height: 28px;
+  padding: 0 4px;
+}
+
+.link-button:hover:not(:disabled) {
+  background: transparent;
+  color: #6d211b;
+}
+
+.path-readout {
+  display: grid;
+  gap: 7px;
+  padding: 10px;
+  border: 1px solid #d8ded2;
+  border-radius: 8px;
+  background: #fffefd;
+}
+
+.selected-path {
+  grid-template-columns: 72px minmax(0, 1fr);
+  align-items: center;
+}
+
+.selected-path strong {
+  color: #1d1b18;
+}
+
+.stage {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  background: #11100f;
+}
+
+.explorer-stage {
+  min-height: calc(100vh - 72px);
+}
+
+.challenge-stage {
+  min-height: 0;
+}
+
+.game-empty {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  color: #fffaf2;
+  font-weight: 850;
+  pointer-events: none;
+}
+
+.canvas-wrap {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.is-clickable canvas {
+  cursor: crosshair;
+}
+
+.legal-move-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.goal-marker-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.legal-move-overlay marker path {
+  fill: #5ce6c7;
+}
+
+.legal-edge-path {
+  fill: none;
+  stroke: #5ce6c7;
+  stroke-width: 4.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 8px rgba(92, 230, 199, 0.9));
+}
+
+.legal-source-halo,
+.legal-target-halo {
+  fill: rgba(92, 230, 199, 0.12);
+  stroke: #5ce6c7;
+  stroke-width: 2;
+}
+
+.legal-source-halo {
+  stroke-width: 3;
+  filter: drop-shadow(0 0 10px rgba(92, 230, 199, 0.8));
+}
+
+.legal-edge-label-bg {
+  fill: rgba(12, 35, 31, 0.92);
+  stroke: rgba(92, 230, 199, 0.9);
+  stroke-width: 1;
+}
+
+.legal-edge-label {
+  fill: #eafff9;
+  font-size: 12px;
+  font-weight: 850;
+  text-anchor: middle;
+}
+
+.goal-marker-pulse {
+  fill: rgba(255, 82, 54, 0.14);
+  stroke: rgba(255, 130, 64, 0.52);
+  stroke-width: 2;
+  filter: drop-shadow(0 0 13px rgba(255, 82, 54, 0.85));
+}
+
+.goal-marker-ring {
+  fill: rgba(255, 82, 54, 0.2);
+  stroke: #ff5a36;
+  stroke-width: 3;
+}
+
+.goal-marker-cross {
+  stroke: #ffb25f;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.goal-marker-label-bg {
+  fill: rgba(44, 17, 11, 0.94);
+  stroke: rgba(255, 178, 95, 0.9);
+  stroke-width: 1;
+}
+
+.goal-marker-label {
+  fill: #fff5e8;
+  font-size: 12px;
+  font-weight: 900;
+  text-anchor: middle;
+}
+
+.empty-canvas,
+.canvas-hud,
+.tooltip,
+.error-strip,
+.busy-strip {
+  position: absolute;
+  z-index: 2;
+}
+
+.empty-canvas {
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #fffaf2;
+  font-weight: 800;
+}
+
+.canvas-hud {
+  top: 14px;
+  left: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.canvas-hud span,
+.busy-strip,
+.error-strip {
+  border: 1px solid rgba(255, 250, 242, 0.16);
+  border-radius: 7px;
+  background: rgba(17, 16, 15, 0.72);
+  color: #fffaf2;
+  padding: 8px 10px;
+  font-size: 12px;
+  font-weight: 750;
+  backdrop-filter: blur(10px);
+}
+
+.tooltip {
+  pointer-events: none;
+  display: grid;
+  gap: 2px;
+  min-width: 84px;
+  max-width: min(280px, 70vw);
+  border: 1px solid rgba(255, 250, 242, 0.16);
+  border-radius: 8px;
+  background: rgba(255, 252, 247, 0.95);
+  color: #1d1b18;
+  padding: 8px 9px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
+}
+
+.tooltip strong {
+  overflow-wrap: anywhere;
+}
+
+.tooltip span {
+  color: #756d60;
+  font-size: 12px;
+}
+
+.error-strip {
+  right: 14px;
+  bottom: 14px;
+  max-width: min(720px, calc(100% - 28px));
+  background: rgba(119, 31, 26, 0.88);
+  overflow-wrap: anywhere;
+}
+
+.busy-strip {
+  right: 14px;
+  top: 14px;
+}
+
+@media (max-width: 1080px) {
+  .topbar,
+  .explorer-shell,
+  .challenge-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .panel {
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 1px solid #d8ded2;
+    max-height: 52vh;
+  }
+
+  .challenge-board {
+    grid-template-columns: 1fr;
+  }
+
+  .challenge-objective {
+    grid-template-columns: 1fr;
+  }
+
+  .challenge-state-cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .challenge-lane {
+    min-height: 520px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(255, 250, 242, 0.14);
+  }
+
+  .stage {
+    min-height: 520px;
+  }
+
+  .explorer-stage,
+  .challenge-stage {
+    min-height: 520px;
+  }
+}
+
+@media (max-width: 520px) {
+  .panel {
+    padding: 14px;
+  }
+
+  .inline,
+  .stats,
+  .challenge-setup-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .challenge-lane-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .challenge-lane-head p {
+    max-width: calc(100vw - 28px);
+  }
+
+  .goal-card strong {
+    font-size: 26px;
+  }
+
+  .challenge-state-cards > .score-card strong {
+    font-size: 24px;
+  }
+
+  .challenge-state-cards {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .lane-side,
+  .lane-badges,
+  .legal-move-strip {
+    align-items: flex-start;
+    justify-content: flex-start;
+    max-width: calc(100vw - 28px);
+  }
+}
